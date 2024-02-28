@@ -8,10 +8,10 @@ As SoCo is a new project beginning in Semester 1, 2024. There is currently no co
 
 ## Table of Contents
 
-[Team Members and Roles](##Team-Members-and-Roles)
-[Statement of Work](##Statement-of-Work)
-[Meeting Minutes](##Meeting-Minutes)
-[Acknowledgements](##Acknowledgements)
+[Team Members and Roles](##Team-Members-and-Roles)\
+[Statement of Work](##Statement-of-Work)\
+[Meeting Minutes](##Meeting-Minutes)\
+[Acknowledgements](##Acknowledgements)\
 
 
 ## Team Members and Roles
@@ -31,7 +31,7 @@ As SoCo is a new project beginning in Semester 1, 2024. There is currently no co
 
 ## Statement of Work
 
-[Statement of Work](www.google.com)
+[Statement of Work](www.google.com)\
 *^^^  Add link to this!!! ^^^*
 
 To provide a summary of the above document, the project has the following deliverables based on their priorities.
@@ -53,11 +53,11 @@ To provide a summary of the above document, the project has the following delive
 - [Client Meetings](www.google.com)
 - [Team Meetings](www.google.com)
 - [Tutorial Meetings](www.google.com)
-
+\
 *^^^ Add some links to the folders containing these respects files ^^^*
 
 ## Acknowledgements
 
 Appreciation for the Lecturers, Convenors, Examiners, Tutors, and Speakers for the Australian National University course COMP3500 - Software Engineering Project, and its respective parallel courses being run. Thanks for everything you are doing to help us through our journey in Computer Science.
-
+\
 *Insert some special acknowledgements here (e.g., tutors, shadow teams, etc. ).*
