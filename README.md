@@ -20,7 +20,7 @@ As SoCo is a new project beginning in Semester 1, 2024. There is currently no co
 |--|--|--| -- |
 | u7498708 | Edward Nivison | COMP3500 | - |
 | u1234567 | Alex Boxall | COMP3500 | - |
-| u1234567 | Hexuan Meng | COMP6 | - |
+| u1234567 | Hexuan Meng | COMP8715 | - |
 | u1234567 | Filip Mazur | COMP3500 | - |
 | u1234567 | Matthew Cawley | COMP3500 | - |
 | u7556970 | Rachel Cao | COMP3500 | - |
