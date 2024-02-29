@@ -23,7 +23,7 @@ As SoCo is a new project beginning in Semester 1, 2024. There is currently no co
 | u1234567 | Hexuan Meng | COMP6 | - |
 | u1234567 | Filip Mazur | COMP3500 | - |
 | u1234567 | Matthew Cawley | COMP3500 | - |
-| u1234567 | Rachel Cao | COMP3500 | - |
+| u7556970 | Rachel Cao | COMP3500 | - |
 | u1234567 | Sineeha Kodwani | COMP3500 | - |
 |  |  |  |  |
 | u7498708 | Belinda Bergin | - | Client |
