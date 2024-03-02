@@ -32,7 +32,6 @@ As SoCo is a new project beginning in Semester 1, 2024. There is currently no co
 ## Statement of Work
 
 [Statement of Work](https://drive.google.com/file/d/1USw2ds48Q9YWry7tf1vOvsdxDs4dL790/view?usp=sharing)\
-\
 
 To summarise recently completed work and the planned next steps:
 
