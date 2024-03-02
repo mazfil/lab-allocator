@@ -10,52 +10,54 @@ As SoCo is a new project beginning in Semester 1, 2024. There is currently no co
 
 [Team Members and Roles](##Team-Members-and-Roles)\
 [Statement of Work](##Statement-of-Work)\
+[Technical Reports](##Technical-Reports)\
 [Meeting Minutes](##Meeting-Minutes)\
 [Acknowledgements](##Acknowledgements)
-
 
 ## Team Members and Roles
 
 | UID | Name | Course | Role |
 |--|--|--| -- |
-| u7498708 | Edward Nivison | COMP3500 | - |
-| u1234567 | Alex Boxall | COMP3500 | - |
-| u1234567 | Hexuan Meng | COMP8715 | - |
-| u1234567 | Filip Mazur | COMP3500 | - |
-| u1234567 | Matthew Cawley | COMP3500 | - |
-| u7556970 | Rachel Cao | COMP3500 | - |
-| u1234567 | Sineeha Kodwani | COMP3500 | - |
+| u7498708 | Edward Nivison | COMP3500 | Project Manager |
+| u7468248 | Alex Boxall | COMP3500 | Backend Designer |
+| u7605165 | Hexuan Meng | COMP8715 | Backend and Testing |
+| u6934917 | Filip Mazur | COMP3500 | Spokesperson |
+| u7313113 | Matthew Cawley | COMP3500 | Developer |
+| u7556970 | Rachel Cao | COMP3500 | Backend and Admin |
+| u7230574 | Sineeha Kodwani | COMP3500 | Deputy Spokesperson |
 |  |  |  |  |
 | u7498708 | Belinda Bergin | - | Client |
 
 
 ## Statement of Work
 
-[Statement of Work](www.google.com)\
+[Statement of Work](https://drive.google.com/file/d/1USw2ds48Q9YWry7tf1vOvsdxDs4dL790/view?usp=sharing)\
 \
-*^^^  Add link to this!!! ^^^*
 
-To provide a summary of the above document, the project has the following deliverables based on their priorities.
+To summarise recently completed work and the planned next steps:
 
-### Top Priority Features
+### Recently Finished Work
 
--
--
--
+- Week 2 (26/2 - 3/3)
+  - Wrote v1 of the Statement of Work
+  - Created and set up GitHub repository
 
-### Optional Features
+### Planned Work
 
-- 
-- 
-- 
+- Backend to decide on a codebase to use
+- Frontend to research frontend solutions 
+
+## Technical Reports
+
+[Technical Reports](https://github.com/mazfil/lab-allocator/tree/main/docs/technical-reports)
+\
 
 ## Meeting Minutes
 
-- [Client Meetings](www.google.com)
-- [Team Meetings](www.google.com)
-- [Tutorial Meetings](www.google.com)\
+- [Client Meetings](https://github.com/mazfil/lab-allocator/tree/main/docs/meetings/client-meetings)
+- [Team Meetings](https://github.com/mazfil/lab-allocator/tree/main/docs/meetings/team-meetings)
+- [Tutorial Meetings](https://github.com/mazfil/lab-allocator/tree/main/docs/meetings/tutorial-meetings)\
 \
-*^^^ Add some links to the folders containing these respects files ^^^*
 
 ## Acknowledgements
 
