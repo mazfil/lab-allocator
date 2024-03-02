@@ -31,7 +31,7 @@ As SoCo is a new project beginning in Semester 1, 2024. There is currently no co
 
 ## Statement of Work
 
-[Statement of Work](https://drive.google.com/file/d/1USw2ds48Q9YWry7tf1vOvsdxDs4dL790/view?usp=sharing)\
+[Statement of Work](https://drive.google.com/file/d/1USw2ds48Q9YWry7tf1vOvsdxDs4dL790/view?usp=sharing)
 
 To summarise recently completed work and the planned next steps:
 
@@ -49,14 +49,12 @@ To summarise recently completed work and the planned next steps:
 ## Technical Reports
 
 [Technical Reports](https://github.com/mazfil/lab-allocator/tree/main/docs/technical-reports)
-\
 
 ## Meeting Minutes
 
 - [Client Meetings](https://github.com/mazfil/lab-allocator/tree/main/docs/meetings/client-meetings)
 - [Team Meetings](https://github.com/mazfil/lab-allocator/tree/main/docs/meetings/team-meetings)
-- [Tutorial Meetings](https://github.com/mazfil/lab-allocator/tree/main/docs/meetings/tutorial-meetings)\
-\
+- [Tutorial Meetings](https://github.com/mazfil/lab-allocator/tree/main/docs/meetings/tutorial-meetings)
 
 ## Acknowledgements
 
