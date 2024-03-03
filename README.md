@@ -85,11 +85,11 @@ As SoCo is a new project beginning in Semester 1, 2024. There is currently no co
 
 ## Project Resources
 
-## Risk Management
+### Risk Management
 
 Risk management involves identifying potential risks that could threaten the success of a project, assessing their likelihood and potential impact, and planning strategies to mitigate or avoid them. For the "School of Computing (SoCo) Resource Maximisation Planning System for Labs" project at the Australian National University (ANU), a structured approach to risk management is essential given the project's complexity and the diverse needs of its stakeholders. Here's a detailed risk management plan:
 
-## 1. Risk Identification
+1. **Risk Identification**
 
 - **Technical Challenges**: Development complexities related to scheduling algorithms and user interfaces.
 - **Stakeholder Engagement**: Effective communication and engagement with all project stakeholders.
@@ -101,7 +101,7 @@ Risk management involves identifying potential risks that could threaten the suc
 - **Timeline Delays**: Potential delays impacting project milestones and delivery.
 - **Scalability and Performance**: System's ability to accommodate growth and maintain efficiency.
 
-## 2. Risk Assessment
+2. **Risk Assessment**
 
 - **Technical Challenges**: High likelihood; High impact.
 - **Stakeholder Engagement**: Medium likelihood; High impact.
@@ -113,7 +113,7 @@ Risk management involves identifying potential risks that could threaten the suc
 - **Timeline Delays**: High likelihood; High impact.
 - **Scalability and Performance**: Medium likelihood; High impact.
 
-## 3. Risk Mitigation Strategies
+3. **Risk Mitigation Strategies**
 
 - **Technical Challenges**: Engage expert developers, conduct extensive testing, and implement phased rollouts.
 - **Stakeholder Engagement**: Maintain regular updates, establish clear communication channels, and involve stakeholders in key decisions.
@@ -125,11 +125,11 @@ Risk management involves identifying potential risks that could threaten the suc
 - **Timeline Delays**: Adopt an Agile methodology to enhance adaptability and manage delays effectively.
 - **Scalability and Performance**: Design with scalability in mind, conduct performance stress tests.
 
-## 4. Monitoring and Review
+4. **Monitoring and Review**
 
 A structured schedule will be implemented for ongoing risk monitoring, assessment of emerging risks, and evaluation of mitigation strategies. This will involve regular check-ins with the project team and stakeholders to ensure active and effective risk management throughout the project's lifecycle.
 
-## Project costs
+### Project costs
 
 The only expected costs for the project would be for the hardware for the server (i.e. a computer). During development/prototyping a student’s computer could be used, and the final system is expected to run on computers provided by the School of Computing / university at no cost. There should be no need for domain name registration as the system is expected to run on the internal university network.
 
