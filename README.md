@@ -116,10 +116,10 @@ The IP of the solution will remain the property of the students in the group, so
 
 ## Client's Vision and objectives
 
-- Efficiency: To develop a system capable of creating the most efficient lab schedules, maximising the use of available resources.
-- Flexibility: To accommodate a wide range of constraints and course requirements, ensuring the system's applicability across various teaching periods and evolving academic needs.
-- Usability: To provide a user-friendly interface that allows staff to input constraints, view schedules, and make adjustments as needed.
-- Scalability: To ensure the system can handle an increasing number of courses, labs, and constraints without a decrease in performance.
+- **Efficiency**: To develop a system capable of creating the most efficient lab schedules, maximising the use of available resources.
+- **Flexibility**: To accommodate a wide range of constraints and course requirements, ensuring the system's applicability across various teaching periods and evolving academic needs.
+- **Usability**: To provide a user-friendly interface that allows staff to input constraints, view schedules, and make adjustments as needed.
+- **Scalability**: To ensure the system can handle an increasing number of courses, labs, and constraints without a decrease in performance.
 
 ## Stakeholder Analysis
 
