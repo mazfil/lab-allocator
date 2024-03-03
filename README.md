@@ -112,6 +112,15 @@ As SoCo is a new project beginning in Semester 1, 2024. There is currently no co
 
 ## Stakeholder Analysis
 
+| Stakeholder | Reason | 
+|--|--|
+| Client | They are commissioning the system so that it can serve their needs in allocating labs to classes. | 
+| School of Computing administrative staff | They may be using the system after it is complete to enter data about course enrolments, lab sizes, etc. |
+| Course convenors | Need to provide information to the system/School about tutor numbers, and may also have other requirements that affect scheduling | 
+| Students | Effective scheduling of classes has a number of benefits to students: Leads to fewer clashes, meaning students can attend more classes ; Ensures the tutor to student ratio is maintained, so students get enough support during classes. |
+| Tutors | Effective scheduling of classes ensures that tutor to student ratios are not exceeded, making it easier for tutors to teach. |
+| Other users of the buildings in scope | Effective scheduling means less room times are taken up by labs, allowing others to use the rooms for other purposes. |
+
 ## Technical Reports
 
 [Technical Reports](https://github.com/mazfil/lab-allocator/tree/main/docs/technical-reports)
