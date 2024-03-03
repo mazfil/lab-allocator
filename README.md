@@ -87,6 +87,41 @@ As SoCo is a new project beginning in Semester 1, 2024. There is currently no co
 
 ## Risk Management
 
+Risk management involves identifying potential risks that could threaten the success of a project, assessing their likelihood and potential impact, and planning strategies to mitigate or avoid them. For the "School of Computing (SoCo) Resource Maximisation Planning System for Labs" project at the Australian National University (ANU), a structured approach to risk management is essential given the project's complexity and the diverse needs of its stakeholders. Here's a detailed risk management plan:
+
+1. Risk Identification
+Technical Challenges: Developing a system that can efficiently handle complex scheduling algorithms and a user-friendly interface.
+Stakeholder Engagement: Ensuring continuous and effective communication with all stakeholders, including faculty, administrative staff, and potentially students.
+Data Accuracy and Completeness: Relying on accurate, comprehensive data regarding course enrollments, lab capacities, and specific requirements.
+Integration with Existing Systems: Ensuring the new system can integrate smoothly with existing ANU systems for student information, room booking, etc.
+User Adoption: Encouraging users to transition to and adopt the new system, overcoming resistance to change.
+Regulatory and Policy Compliance: Adhering to all relevant ANU policies and regulations, including those related to privacy and data security.
+Budget and Resource Constraints: Staying within budget and ensuring adequate resources are available throughout the project.
+Timeline Delays: Managing potential delays in project milestones due to unforeseen challenges.
+Scalability and Performance: Ensuring the system can scale to accommodate future growth and maintain performance.
+2. Risk Assessment
+Technical Challenges: High likelihood due to the complexity of scheduling algorithms; high impact as it directly affects project success.
+Stakeholder Engagement: Medium likelihood as engagement can vary; high impact as stakeholder buy-in is crucial.
+Data Accuracy and Completeness: High likelihood due to potential data entry errors or incomplete data; high impact as it affects scheduling accuracy.
+Integration with Existing Systems: Medium likelihood as integration can be complex; medium impact depending on the extent of required integration.
+User Adoption: High likelihood due to natural resistance to change; high impact as the system's success depends on user adoption.
+Regulatory and Policy Compliance: Low likelihood with proper planning; high impact due to potential legal and reputational consequences.
+Budget and Resource Constraints: Medium likelihood due to potential unforeseen expenses; medium impact as it could limit project scope.
+Timeline Delays: High likelihood as projects of this nature often face delays; high impact as it affects stakeholder satisfaction and project momentum.
+Scalability and Performance: Medium likelihood due to technical challenges; high impact as it affects long-term usability.
+3. Risk Mitigation Strategies
+Technical Challenges: Engage experienced developers, conduct thorough testing, and consider phased rollouts to manage complexities.
+Stakeholder Engagement: Regular update meetings, clear communication channels, and involving stakeholders in the development process to ensure their needs are met.
+Data Accuracy and Completeness: Implement data validation checks, regular audits, and encourage users to report discrepancies.
+Integration with Existing Systems: Early collaboration with IT departments to understand integration points and requirements.
+User Adoption: Provide comprehensive training, support, and clear documentation to ease the transition to the new system.
+Regulatory and Policy Compliance: Regular reviews of ANU policies and legal requirements, and incorporate compliance checks into the development process.
+Budget and Resource Constraints: Maintain a contingency fund for unforeseen expenses and regularly review resource allocations.
+Timeline Delays: Implement a flexible project management approach, such as Agile, to accommodate changes and delays more easily.
+Scalability and Performance: Design the system with scalability in mind from the outset and conduct stress testing to identify performance bottlenecks early.
+4. Monitoring and Review
+Establish a regular schedule for monitoring risks, assessing new risks as they emerge, and reviewing the effectiveness of mitigation strategies. This should involve regular meetings with the project team and stakeholders to ensure risks are actively managed throughout the project lifecycle.
+
 ## Project costs
 
 The only expected costs for the project would be for the hardware for the server (i.e. a computer). During development/prototyping a student’s computer could be used, and the final system is expected to run on computers provided by the School of Computing / university at no cost. There should be no need for domain name registration as the system is expected to run on the internal university network.
