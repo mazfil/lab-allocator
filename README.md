@@ -25,26 +25,43 @@ As SoCo is a new project beginning in Semester 1, 2024. There is currently no co
 | u7313113 | Matthew Cawley | COMP3500 | Developer |
 | u7556970 | Rachel Cao | COMP3500 | Backend and Admin |
 | u7230574 | Sineeha Kodwani | COMP3500 | Deputy Spokesperson |
-|  |  |  |  |
-| u7498708 | Belinda Bergin | - | Client |
 
 
 ## Statement of Work
 
-[Statement of Work](https://drive.google.com/file/d/1USw2ds48Q9YWry7tf1vOvsdxDs4dL790/view?usp=sharing)
+[Statement of Work](https://drive.google.com/file/d/1USw2ds48Q9YWry7tf1vOvsdxDs4dL790/view?usp=sharing) \
+\
+*^^^Add a link to the statement of work in GitHub^^^*
 
-To summarise recently completed work and the planned next steps:
+## Project Deliverables
+
+The Project's deliverables can be found in.... TO BE COMPLETED.
+
+## Technical constraints
+
+### Reliability
+
+### Security
+
+### Safety
+
+## Project Resources
+
+## Risk Management
+
+## Project costs
+
+## Project NDA and IP status
+
+## Problematisation Analysis
+
+### Project Client Map
+
+## Client's Vision and objectives
+
+## Stakeholder Analysis
 
 ### Recently Finished Work
-
-- Week 2 (26/2 - 3/3)
-  - Wrote v1 of the Statement of Work
-  - Created and set up GitHub repository
-
-### Planned Work
-
-- Backend to decide on a codebase to use
-- Frontend to research frontend solutions 
 
 ## Technical Reports
 
