@@ -8,19 +8,19 @@ As SoCo is a new project beginning in Semester 1, 2024. There is currently no co
 
 ## Table of Contents
 
-- [Team Members and Roles](https://github.com/mazfil/lab-allocator/blob/main/README.md#team-members-and-roles)\
-- [Statement of Work](https://github.com/mazfil/lab-allocator/blob/main/README.md#statement-of-work)\
-- [Project Deliverables](https://github.com/mazfil/lab-allocator/blob/main/README.md#project-deliverables)\
-- [Technical Constraints](https://github.com/mazfil/lab-allocator/blob/main/README.md#technical-constraints)\
-- [Project Resources](https://github.com/mazfil/lab-allocator/blob/main/README.md#project-resources)\
-- [Risk Management](https://github.com/mazfil/lab-allocator/blob/main/README.md#risk-management)\
-- [Project Costs](https://github.com/mazfil/lab-allocator/blob/main/README.md#project-costs)\
-- [Project NDA and IP status](https://github.com/mazfil/lab-allocator/blob/main/README.md#project-nda-and-ip-status)\
-- [Problematisation Analysis](https://github.com/mazfil/lab-allocator/blob/main/README.md#problematisation-analysis)\
-- [Client's Vision and objectives](https://github.com/mazfil/lab-allocator/blob/main/README.md#clients-vision-and-objectives)\
-- [Stakeholder Analysis](https://github.com/mazfil/lab-allocator/blob/main/README.md#clients-vision-and-objectives)\
-- [Technical Reports](https://github.com/mazfil/lab-allocator/blob/main/README.md#technical-reports)\
-- [Meeting Minutes](https://github.com/mazfil/lab-allocator/blob/main/README.md#meeting-minutes)\
+- [Team Members and Roles](https://github.com/mazfil/lab-allocator/blob/main/README.md#team-members-and-roles)
+- [Statement of Work](https://github.com/mazfil/lab-allocator/blob/main/README.md#statement-of-work)
+- [Project Deliverables](https://github.com/mazfil/lab-allocator/blob/main/README.md#project-deliverables)
+- [Technical Constraints](https://github.com/mazfil/lab-allocator/blob/main/README.md#technical-constraints)
+- [Project Resources](https://github.com/mazfil/lab-allocator/blob/main/README.md#project-resources)
+- [Risk Management](https://github.com/mazfil/lab-allocator/blob/main/README.md#risk-management)
+- [Project Costs](https://github.com/mazfil/lab-allocator/blob/main/README.md#project-costs)
+- [Project NDA and IP status](https://github.com/mazfil/lab-allocator/blob/main/README.md#project-nda-and-ip-status)
+- [Problematisation Analysis](https://github.com/mazfil/lab-allocator/blob/main/README.md#problematisation-analysis)
+- [Client's Vision and objectives](https://github.com/mazfil/lab-allocator/blob/main/README.md#clients-vision-and-objectives)
+- [Stakeholder Analysis](https://github.com/mazfil/lab-allocator/blob/main/README.md#clients-vision-and-objectives)
+- [Technical Reports](https://github.com/mazfil/lab-allocator/blob/main/README.md#technical-reports)
+- [Meeting Minutes](https://github.com/mazfil/lab-allocator/blob/main/README.md#meeting-minutes)
 - [Acknowledgements](https://github.com/mazfil/lab-allocator/blob/main/README.md#acknowledgements)
 
 ## Team Members and Roles
