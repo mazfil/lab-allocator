@@ -57,7 +57,7 @@ As SoCo is a new project beginning in Semester 1, 2024. There is currently no co
 | week 9 | Establish an API linking UI and database |
 | week 10 | Construct the allocation system |
 | week 11 | Testing |
-| week 11 | Testing |
+| week 12 | Testing |
 
 ## Technical constraints
 
