@@ -102,13 +102,24 @@ As SoCo is a new project beginning in Semester 1, 2024. There is currently no co
 
 ## Project costs
 
+The only expected costs for the project would be for the hardware for the server (i.e. a computer). During development/prototyping a student’s computer could be used, and the final system is expected to run on computers provided by the School of Computing / university at no cost. There should be no need for domain name registration as the system is expected to run on the internal university network.
+
+The other resources required is data about labs, rooms and enrollments, which have been provided by the client.
+
 ## Project NDA and IP status
+
+The IP of the solution will remain the property of the students in the group, so long as the School of Computing is able to continue to use and modify the software freely.
 
 ## Problematisation Analysis
 
 ### Project Client Map
 
 ## Client's Vision and objectives
+
+- Efficiency: To develop a system capable of creating the most efficient lab schedules, maximising the use of available resources.
+- Flexibility: To accommodate a wide range of constraints and course requirements, ensuring the system's applicability across various teaching periods and evolving academic needs.
+- Usability: To provide a user-friendly interface that allows staff to input constraints, view schedules, and make adjustments as needed.
+- Scalability: To ensure the system can handle an increasing number of courses, labs, and constraints without a decrease in performance.
 
 ## Stakeholder Analysis
 
