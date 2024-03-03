@@ -41,9 +41,25 @@ The Project's deliverables can be found in.... TO BE COMPLETED.
 
 ### Reliability
 
+- Fault Tolerance: In case of the server going down, client devices shutting down, and other cases. The program should have a save point every so often it can revert back to. This could be as simple as saving the point of time it is at somewhere and replacing it every so often.
+- Error Handing: There should be specific case errors written when developing this application so the user/developer can understand what is being done incorrectly and doesn't leave them clueless as to why the program is not working.
+- Data Integrity: There should not be changes to the data directly unless it is explicitly asked by the end-user (and even so with confirmation). The data should be changed via copying it, not changing it directly at the source.
+- Monitoring and Logging: There should be a method of monitoring and logging functionalities to track system performance, identify issues proactively and faciliatate troubleshooting.
+
 ### Security
 
+- Access Control: There should be a hierarchy of who can access certain parts of the program, and this should include any sensitive data and functionalities within the application.
+- Data Encryption: Utilize encryption techniques to protect sensitive data from un-authorized tampering.
+- Authentication and Authorization: Implement secure authentication mechanisms to verify the identities of users and grant appropriate permissions based on their roles.
+- Secure Communication: Ensure that data exchanged between the application and external systems is transmitted securely over encrypted channels, such as HTTPS or other secure formats.
+
 ### Safety
+
+- Code Review and Testing: Conduct thorough code reviews and testing to identify and address security vulnerabilities, bugs, and logic errors that could potentially compromise the safety and reliability of the application. This may involve manual code reviews, automated static code analysis, and dynamic application security testing (DAST).
+- Data Privacy and Protection: Implement measures to safeguard sensitive data collected and processed during the development process, such as personally identifiable information (PII) and confidential project docuemtns. This may include data anonymization, encryption, and access controls to protect against data breaches and un-authorized access.
+- Version Control and Change Management: Utilize versioning control and change management, for example using pull requests when changes are made with a code review in place to ensure whatever the new addition is, is not going to compromise safety.
+- Dependency Management: Regularly review and update dependencies (e.g., libraries, frameworks, third-party components) used in the application to address security vulnerabilies and ensure compatibility with security patches and updates released by vendors.
+- Documentation and Training: Provide comprehensive documentation and training materials to developers and other stakeholders on secure development practices, security guidelines, and incident response procedures to promote awareness and adherence to safety and security best practices throughout the development lifecycle.
 
 ## Project Resources
 
@@ -60,8 +76,6 @@ The Project's deliverables can be found in.... TO BE COMPLETED.
 ## Client's Vision and objectives
 
 ## Stakeholder Analysis
-
-### Recently Finished Work
 
 ## Technical Reports
 
