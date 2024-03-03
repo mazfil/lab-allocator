@@ -44,33 +44,20 @@ As SoCo is a new project beginning in Semester 1, 2024. There is currently no co
 
 ## Project Deliverables
 
-### week 1 
-- Formation of the team
-### week 2
-- Draw up the first version of statement of work
-- Assignment of group member roles
-### week 3
-- Design the backend codebase
-### week 4
-- Database construction 
-- Draft on the second version of statement of work
-### week 5 
-- Database construction 
-- Design the user interface 
-### week 6
-- Database construction 
-- Design the logical function of UI
-### week 7
-- Database construction 
-- Design and implement the algorithm of backend
-### week 8
-- Implement UI
-### week 9
-- Establish an API linking UI and database
-### week 10
-- Construct the allocation system
-### week 11 - week 12
-- Testing
+| Period | Milestone | 
+|--|--|
+| week 1 | Formation of the team |
+| week 2 | raw up the first version of statement of work; Assignment of group member roles |
+| week 3 | Design the backend codebase |
+| week 4 | Database construction; Draft on the second version of statement of work |
+| week 5 | Database construction; Design the user interface |
+| week 6 | Database construction; Design the logical function of UI |
+| week 7 | Database construction; Design and implement the algorithm of backend |
+| week 8 | Implement UI |
+| week 9 | Establish an API linking UI and database |
+| week 10 | Construct the allocation system |
+| week 11 | Testing |
+| week 12 | Testing |
 
 ## Technical constraints
 
