@@ -112,7 +112,7 @@ The IP of the solution will remain the property of the students in the group, so
 
 ## Problematisation Analysis
 
-### Project Client Map
+[Problematisation Analysis](https://github.com/mazfil/lab-allocator/tree/main/docs/problematisation-analysis)
 
 ## Client's Vision and objectives
 
