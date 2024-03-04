@@ -43,7 +43,7 @@ As SoCo is a new project beginning in Semester 1, 2024. There is currently no co
 | Period | Milestone | 
 |--|--|
 | week 1 | Formation of the team |
-| week 2 | raw up the first version of statement of work; Assignment of group member roles |
+| week 2 | Draw up the first version of statement of work; Assignment of group member roles |
 | week 3 | Design the backend codebase |
 | week 4 | Database construction; Draft on the second version of statement of work |
 | week 5 | Database construction; Design the user interface |
