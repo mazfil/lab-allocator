@@ -45,7 +45,7 @@ As SoCo is a new project beginning in Semester 1, 2024. There is currently no co
 | week 1 | Formation of the team |
 | week 2 | Draw up the first version of statement of work; Assignment of group member roles |
 | week 3 | Design the backend codebase |
-| week 4 | Database construction; Draft on the second version of statement of work |
+| week 4 | Database construction; Backend design; Draft on the second version of statement of work |
 | week 5 | Database construction; Design the user interface |
 | week 6 | Database construction; Design the logical function of UI |
 | week 7 | Database construction; Design and implement the algorithm of backend |
@@ -78,6 +78,10 @@ As SoCo is a new project beginning in Semester 1, 2024. There is currently no co
 - **Version Control and Change Management**: Utilize versioning control and change management, for example using pull requests when changes are made with a code review in place to ensure whatever the new addition is, is not going to compromise safety.
 - **Dependency Management**: Regularly review and update dependencies (e.g., libraries, frameworks, third-party components) used in the application to address security vulnerabilies and ensure compatibility with security patches and updates released by vendors.
 - **Documentation and Training**: Provide comprehensive documentation and training materials to developers and other stakeholders on secure development practices, security guidelines, and incident response procedures to promote awareness and adherence to safety and security best practices throughout the development lifecycle.
+
+### Other
+
+- **Computiational Complexity**: Scheduling and timetabling is a computationally complex problem - as the number of classes and constraints increases, it takes exponentially more time to find an optimal solution. For the number of classes the system is required to schedule, it is infeasible to test all combinations of schedules. The system will need to use a more efficient approach to find a solution that is as close to optimal as possible in a reasonable time. 
 
 ## Project Resources
 
