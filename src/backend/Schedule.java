@@ -42,6 +42,9 @@ public class Schedule {
      * @return The fitness value (should be non-negative).
      */
     int getFitness() {
+        /*
+         * TODO:
+         */
         return 0;
     }
 }
