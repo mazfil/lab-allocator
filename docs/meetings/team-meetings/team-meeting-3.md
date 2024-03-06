@@ -2,15 +2,15 @@
 
 *Meeting Minutes by Edward Nivison*
 
-## Attendance (0/7):
+## Attendance (7/7):
 
-- [] Alex Boxall
-- [] Hexuan Meng
-- [] Filip Mazur
-- [] Edward Nivison
-- [] Rachel Cao
-- [] Sineeha Kodwani
-- [] Matthew Cawley
+- [X] Alex Boxall
+- [X] Hexuan Meng
+- [X] Filip Mazur
+- [X] Edward Nivison
+- [X] Rachel Cao
+- [X] Sineeha Kodwani
+- [X] Matthew Cawley
 
 ## Agenda:
 
@@ -21,8 +21,15 @@ We can then designate someone or a group of members to organise the tasks page t
 
 ## Content from the meeting
 
-*Enter content from the meeting here*
+We worked on the presentation and what we would cover in the presentation. As well as working on our individual speeches and practiced to make sure we were in time.
+
+We discussed how to use the projects tab in GitHub and will be setup to reflect the roadmap and features for the coming semester.
+
+Below are the links to the presentation and speeches.
+
+[Canva Presentation](https://www.canva.com/design/DAF-msIMp9w/NZ4hKyk_-IFKfNf41MPwKw/edit)
+[Edward and Rachel's Speech + notes *will need permission to view*](https://docs.google.com/document/d/1wAqQrHdYigx1JuhPu2s08gmMl0OfHEZbPMLS9Rtg3JY/edit)
 
 ## Future Meetings
 
-*Enter future meeting notes here*
+For future meetings we should be looking at resolving/reflecting on the feedback we receive in the tutorial session today. This means that we will have to redefine certain aspects of the project as well.
