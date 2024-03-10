@@ -39,7 +39,7 @@ We're looking to achieve
 - **Usability**: To provide a user-friendly interface that allows staff to input constraints, view schedules, and make adjustments as needed.
 - **Scalability**: To ensure the system can handle an increasing number of courses, labs, and constraints without a decrease in performance.
 
-### Loose Role Allocation
+### Loose Role Schedule.Allocation
 |Student|Role(s)|
 |-------|-------|
 |Filip|(Frontend / UIUX Design / Project Manager / Admin / Testing) / Spokesperson|

@@ -38,9 +38,9 @@ N114 - 26 students
 N115/6 - 61 students
 
 This does not limit classes to being of this size but can instead be +- 5 or so students for (I believe) 2000 level courses and above. This is due to attendance rates never being 100%.
-(e.g., Room N111 can have 30 - 34 students to allow having 2 tutors, even though there theoretically isn't the space for 30 - 34 students).
+(e.g., Rooms.Room N111 can have 30 - 34 students to allow having 2 tutors, even though there theoretically isn't the space for 30 - 34 students).
 
-Course code
+Courses.Course code
 
 Student predicted enrollment has a big play in how labs are assigned.
 
@@ -51,13 +51,13 @@ Tutorials must run between the hours of 8am to 8pm (not before or after those ti
 Number of tutors.
 ### A possible database structure for courses.
 
-| Course Code | Course Level | Predicted Enrollment | Tutorial Length | Tutors Available | Special Conditions | Block-out times |
+| Courses.Course Code | Courses.Course Level | Predicted Enrollment | Tutorial Length | Tutors Available | Special Conditions | Block-out times |
 | -- | -- | -- | -- | -- | -- |  -- |
 | COMP1100 | 1000 | 500 | 2.0 | 30 | After Lectures | Mon 12pm-2pm |
 | COMP1110 | 1000 | 500 | 2.0 | 30 | Projectors | Mon 2pm-4pm |
 
 To explain this table that I have created.
-Course Code, Course Level, Predicted Enrollment, Tutorial Length, Tutors Available are pretty self explanatory, with the tutors and courses usually not exceeding an amount of workload in a day (e.g., no more than two sessions consecutively (just as an example, not definitive)).
+Courses.Course Code, Courses.Course Level, Predicted Enrollment, Tutorial Length, Tutors Available are pretty self explanatory, with the tutors and courses usually not exceeding an amount of workload in a day (e.g., no more than two sessions consecutively (just as an example, not definitive)).
 
 Special Cases is going to be a segment of the database where if a Lecturer/Convenor requests the tutorials have something in particular, whether that be that the labs are after the lectures, whether the room has a big enough projector/screen to show slides, and anything else that might be of special request that requires a specific room and/or time slot.
 

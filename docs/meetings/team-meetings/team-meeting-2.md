@@ -39,7 +39,7 @@ Get a start on coding...
 - Will need to ensure that we invite Belinda to the tutorial - spokespeople can do that
 - Do we need weekly meetings? Not necessary but should have regular meetings - at least fortnightly, recommended weekly
 - Could also talk through the stakeholder analysis / constraints?
-- Allocation of slides done on Google Docs
+- Schedule.Allocation of slides done on Google Docs
 - Need to also discuss how we manage the repository e.g. what our folder structure looks like
 - Good to have visuals on the slide instead of a heap of texts
 - Need to submit 4 things by Friday about the team, shadow team, contribution and feedback
