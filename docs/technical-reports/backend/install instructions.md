@@ -1,7 +1,7 @@
 # Backend Setup and Install
 
 Basic information:
-- Ja va project without external build system (at least for now)
+- Java project without external build system (at least for now)
 - IntelliJ for IDE (although others could work)
 - OpenJDK 21.0.2, language level 20
 
