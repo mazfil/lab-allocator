@@ -7,10 +7,22 @@ public class Time {
         Wednesday,
         Thursday,
         Friday,
-        Irrelevant,
+        Irrelevant;
+
+        public int getIndex() {
+            return switch (this) {
+                case Monday -> 0;
+                case Tuesday -> 1;
+                case Wednesday -> 2;
+                case Thursday -> 3;
+                case Friday -> 4;
+                case Irrelevant -> throw new RuntimeException("Time object not assigned to a given day!");
+            };
+        }
     }
 
     static public final int NUM_TIME_INDICES = (20 - 8) * 2;
+    static public final int NUM_DAYS = 5;
 
     private final int timeIndex;
     private final Day day;

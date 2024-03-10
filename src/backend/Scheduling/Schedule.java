@@ -1,8 +1,7 @@
-package Schedule;
+package Scheduling;
 
 import Courses.Course;
 import Courses.CourseTable;
-import Rooms.Room;
 import Rooms.RoomTable;
 import Util.Time;
 

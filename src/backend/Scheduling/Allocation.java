@@ -1,4 +1,4 @@
-package Schedule;
+package Scheduling;
 
 import Courses.Course;
 

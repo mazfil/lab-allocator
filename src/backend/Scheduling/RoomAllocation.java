@@ -1,4 +1,4 @@
-package Schedule;
+package Scheduling;
 
 import Courses.Course;
 import Rooms.Room;
@@ -13,10 +13,15 @@ import java.util.List;
  */
 public class RoomAllocation {
     Room room;
-    Allocation[] timeAllocations = new Allocation[Time.NUM_TIME_INDICES];
+    Allocation[][] timeAllocations;
 
     public RoomAllocation(Room room) {
         this.room = room;
+
+        timeAllocations = new Allocation[Time.NUM_DAYS][];
+        for (int i = 0; i < Time.NUM_DAYS; ++i) {
+            timeAllocations[i] = new Allocation[Time.NUM_TIME_INDICES];
+        }
     }
 
     public int getMaxLabsPerTutorRatio(Course course) {
@@ -28,7 +33,7 @@ public class RoomAllocation {
     }
 
     public void addAllocation(Time time, Allocation allocation) {
-        timeAllocations[time.getIndex()] = allocation;
+        timeAllocations[time.getDay().getIndex()][time.getIndex()] = allocation;
         /*
          * TODO: probably need to mark further times where the lab is still running...
          */
