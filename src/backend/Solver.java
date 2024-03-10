@@ -6,7 +6,7 @@ import java.util.Random;
 public class Solver {
     final static int NUM_GENERATIONS = 30;
 
-    final static int POPULATION_SIZE = 100;
+    final static int POPULATION_SIZE = 10000;
 
     /**
      * The number of solutions that are eligible for combining into the next generation. Solutions not
