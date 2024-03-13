@@ -2,17 +2,27 @@ package Courses;
 
 import Util.Time;
 
+import java.util.List;
+
 public class Course {
+    class Lecture {
+        Time startTime;
+
+        /**
+         * Rounded up to nearest multiple of 30 minutes.
+         */
+        int lengthMinutes;
+    }
+
     int numLabs;
     int labLengthMinutes;
-    Time lectureTime;
+
+    int numStudents;
+    int numTutors;
+
+    List<Lecture> lectures;
     int tutorRatio;
     int id;
-
-    /**
-     * Rounded up to nearest multiple of 30 minutes.
-     */
-    int lectureLengthMinutes;
 
     boolean requiresLabComputers;
     boolean requiresProjectors;
