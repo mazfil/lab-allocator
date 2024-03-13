@@ -4,6 +4,6 @@
 
 | Decision | Status | Stakeholders | Outcome | Due Date | Owner |
 |----------|--------|--------------|---------|----------|-------|
-| Example Decision | <span style="background-color: #ffff00; padding: 5px; border-radius: 10px;">IN PROGRESS</span> | Stakeholder 1, Stakeholder 2 | Outcome of the decision | YYYY-MM-DD | John Doe |
-| Another Decision | <span style="background-color: #00ff00; padding: 5px; border-radius: 10px;">DECIDED</span> | Stakeholder 3, Stakeholder 4 | Outcome of the decision | YYYY-MM-DD | Jane Smith |
-| Yet Another Decision | <span style="background-color: #808080; padding: 5px; border-radius: 10px;">NOT STARTED</span> | Stakeholder 2, Stakeholder 5 | Outcome of the decision | YYYY-MM-DD | Sam Johnson |
+| Example Decision | ![IN PROGRESS](https://via.placeholder.com/100/FFFF00/000000?text=IN+PROGRESS) | Stakeholder 1, Stakeholder 2 | Outcome of the decision | YYYY-MM-DD | John Doe |
+| Another Decision | ![DECIDED](https://via.placeholder.com/100/00FF00/000000?text=DECIDED) | Stakeholder 3, Stakeholder 4 | Outcome of the decision | YYYY-MM-DD | Jane Smith |
+| Yet Another Decision | ![NOT STARTED](https://via.placeholder.com/100/808080/000000?text=NOT+STARTED) | Stakeholder 2, Stakeholder 5 | Outcome of the decision | YYYY-MM-DD | Sam Johnson |
