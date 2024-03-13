@@ -28,8 +28,8 @@ Talks on licence as well for the project.
 
 ## Content from the meeting
 
-*Enter content from the meeting here*
+
 
 ## Future Meetings
 
-*Enter future meeting notes here*
+
