@@ -1,6 +1,4 @@
-**[DELETE ME]: Reminder to replace all square brackets with respective information, including the removal of the square brackets.**
-
-# [type] Meeting #[Number]- DD/MM/2024
+# Client Meeting #2- 13/02/2024
 
 *Meeting Minutes by [Name]*
 
@@ -16,7 +14,7 @@
 
 ## Agenda:
 
-*Enter agenda here*
+Front end requirements and who specifically in the admin team will use them (contact details)
 
 ## Content from the meeting
 
