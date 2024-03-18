@@ -46,13 +46,13 @@ public class Course {
         this.id = id;
 
         /*
-         * TODO: need to initialise object
+         * TODO: need to initialise object properly, e.g. from file or database
          */
 
         this.tutorRatio = 23;
         this.numStudents = (8 - id) * 55;
         this.labLengthMinutes = id % 3 == 0 ? 120 : 90;
-        this.numTutors = 12;
+        this.numTutors = 3 + numStudents / 75;
     }
 
     @Override

@@ -37,7 +37,18 @@ public class Schedule {
         Course course = CourseTable.getInstance().getCourseFromId(courseId);
         int spacesAvailable = 0;
         while (spacesAvailable < course.getNumberOfStudents()) {
+            int timeout = 0;
             while (true) {
+                if (++timeout > 10000) {
+                    System.out.print(
+                            """
+                            Uh-oh, it looks like it might be impossible to satisfy the given constraints.
+                            This may be because there are not enough tutors for the amount of students,
+                            forcing a very large number of labs to be required.
+                            """);
+
+                    throw new RuntimeException("constraints seem impossible to resolve");
+                }
                 int roomId = rng.nextInt(RoomTable.getInstance().totalNumberOfRooms());
                 Room room = RoomTable.getInstance().getRoomFromId(roomId);
                 List<Time> times = roomAllocations[roomId].findFreeTimeOfLength(course.getLengthInMinutes());
@@ -130,7 +141,20 @@ public class Schedule {
      */
     public int getFitness() {
         /*
-         * TODO:
+         * TODO: things that could be considered here are:
+         *  - tutor workload (how many back-to-back tutorials?)
+         *  - gaps in the day for e.g. drop ins to happen, or for people to study (but not too many!)
+         *  - having classes spread throughout the week for variety (e.g. ideally on all days)
+         *  - having most classes during e.g. 10am-4pm
+         *  - having options for early and late classes for people who, e.g. might have commitments during the day
+         *  - room utilisation
+         *  - the number of labs of the same class that runs at the same time
+         *      -> generally may want to minimise to increase options for students
+         *      -> might *not* want to for really popular times though
+         *  - the number of other labs for other classes that run at that time (i.e. minimise clashes)
+         *  - having back-to-back labs in the same room (e.g. to save tutors with back-to-back classes walking)
+         *  - convener preferences
+         *  - even utilisation of all rooms?
          */
         return 0;
     }
