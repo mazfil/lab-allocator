@@ -72,12 +72,4 @@ public class Time {
     public Day getDay() {
         return day;
     }
-
-    public Time adjustedBy(int minutes) {
-        if (minutes % 30 != 0) {
-            throw new RuntimeException("CourseTime cannot be created on a non-multiple of 30 minutes!");
-        }
-        int indexChange = (minutes / 30);
-        return new Time(this.day, this.timeIndex + indexChange);
-    }
 }

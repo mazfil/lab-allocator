@@ -32,7 +32,7 @@ public class CourseTable {
 
     public void print() {
         for (Course course: courses) {
-            System.out.printf("%s: students = %d, tutors = %d (ratio 1:%d)\n",
+            System.out.printf("%s: students = %d, tutors = %d (required ratio 1:%d)\n",
                     course.toString(),
                     course.getNumberOfStudents(),
                     course.getNumberOfTutors(),

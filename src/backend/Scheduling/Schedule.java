@@ -21,8 +21,9 @@ public class Schedule {
      * However, as an example for how you can generate them yourself from a human-readable
      * format:
      *      allocations[RoomTable.getInstance().getRoomFromName("HN1.24")][new Time(8, 30).getIndex()]
-     * A null entry means nothing is scheduled at that time.
-     * TODO: work out how to do 'continuing entries' properly... use sentinel value? subclassing might be overkill...
+     * A null entry means nothing is scheduled at that time. All classes go for at least an hour,
+     * so further 30 minute chunks will be set to an allocation with the course, but with the student
+     * count set to zero.
      */
     RoomAllocation[] roomAllocations;
 
@@ -43,8 +44,8 @@ public class Schedule {
                     System.out.print(
                             """
                             Uh-oh, it looks like it might be impossible to satisfy the given constraints.
-                            This may be because there are not enough tutors for the amount of students,
-                            forcing a very large number of labs to be required.
+                            This may be because there are too few tutors for the amount of students, meaning
+                            lots of labs are required - but they don't all fit!
                             """);
 
                     throw new RuntimeException("constraints seem impossible to resolve");
@@ -55,6 +56,7 @@ public class Schedule {
                 if (times.isEmpty()) {
                     continue;
                 }
+                // TODO: remove any times that clash with lectures
                 Time time = times.get(rng.nextInt(times.size()));
                 int count = Math.min(course.getMaximumClassSize(), room.getMaxCapacity());
                 roomAllocations[roomId].addAllocation(time, new Allocation(course, count));
@@ -65,14 +67,14 @@ public class Schedule {
     }
 
     public void print() {
-        System.out.printf("SCHEDULE: \n");
+        System.out.print("SCHEDULE: \n");
 
         for (int day = 0; day < Time.NUM_DAYS; ++day) {
             System.out.printf("\n%14s", "");
             for (int i = 0; i < RoomTable.getInstance().totalNumberOfRooms(); ++i) {
                 System.out.printf("%-14s ", RoomTable.getInstance().getRoomNameFromId(i));
             }
-            System.out.printf("\n");
+            System.out.print("\n");
 
             for (int time = 0; time < Time.NUM_TIME_INDICES; ++time) {
                 System.out.printf("%-7s %02d%02d: ",
@@ -84,17 +86,17 @@ public class Schedule {
                 for (int i = 0; i < RoomTable.getInstance().totalNumberOfRooms(); ++i) {
                     Allocation allocation = roomAllocations[i].getAllocations()[day][time];
                     if (allocation == null) {
-                        System.out.printf("---            ");
+                        System.out.print("---            ");
                     } else if (allocation.getCount() == 0) {
                         System.out.printf("%-8s       ", allocation.getCourse());
                     } else {
                         System.out.printf("%-8s:%-3d   ", allocation.getCourse(), allocation.getCount());
                     }
                 }
-                System.out.printf("\n");
+                System.out.print("\n");
             }
         }
-        System.out.printf("\n");
+        System.out.print("\n");
     }
 
     /**

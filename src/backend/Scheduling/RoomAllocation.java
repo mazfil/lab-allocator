@@ -32,24 +32,12 @@ public class RoomAllocation {
         return room;
     }
 
-    public int getMaxLabsPerTutorRatio(Course course) {
-        /*
-         * Add `course.getTutorRatio() - 1` to cause it to 'round up' the calculation of
-         * `room.getMaxCapacity() / course.getTutorRatio()`
-         */
-        return (room.getMaxCapacity() + course.getTutorRatio() - 1) / course.getTutorRatio();
-    }
-
     public void addAllocation(Time time, Allocation allocation) {
         int labLengthChunks = allocation.getCourse().getLengthInMinutes() / 30;
         timeAllocations[time.getDay().getIndex()][time.getIndex()] = allocation;
         for (int i = 1; i < labLengthChunks; ++i) {
             timeAllocations[time.getDay().getIndex()][time.getIndex() + i] = new Allocation(allocation.getCourse(), 0);
         }
-
-        /*
-         * TODO: probably need to mark further times where the lab is still running...
-         */
     }
 
     List<Time> findFreeTimeOfLength(int minutes) {
