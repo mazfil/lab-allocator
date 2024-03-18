@@ -14,8 +14,12 @@ public class CourseTable {
          */
 
         /*
-         * TODO: initialise `courses`
+         * TODO: remove this later
          */
+        courses = new Course[3];
+        for (int i = 0; i < 3; ++i) {
+            courses[i] = new Course(i);
+        }
     }
 
     public int getTotalNumberOfCourses() {
@@ -26,11 +30,39 @@ public class CourseTable {
         return courses[id];
     }
 
+    public void print() {
+        for (Course course: courses) {
+            System.out.printf("%s: students = %d, tutors = %d (ratio 1:%d)\n",
+                    course.toString(),
+                    course.getNumberOfStudents(),
+                    course.getNumberOfTutors(),
+                    course.getTutorRatio()
+            );
+        }
+    }
+
+    public String getCourseCodeFromId(int id) {
+        if (id == 0) {
+            return "COMP1100";
+        } else if (id == 1) {
+            return "COMP2100";
+        } else {
+            return "COMP2300";
+        }
+    }
+
     public int getCourseIdFromCode(String courseCode) {
         /*
-         * TODO: !
+         * TODO: implement this properly!
          */
-        throw new RuntimeException("Not implemented!");
+
+        if (courseCode.equals("COMP1100")) {
+            return 0;
+        } else if (courseCode.equals("COMP2100")) {
+            return 1;
+        } else {
+            return 2;
+        }
     }
 
     static public CourseTable getInstance() {

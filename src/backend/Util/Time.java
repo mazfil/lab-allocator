@@ -9,6 +9,17 @@ public class Time {
         Friday,
         Irrelevant;
 
+        public static Day fromIndex(int index) {
+            return switch (index) {
+                case 0 -> Monday;
+                case 1 -> Tuesday;
+                case 2 -> Wednesday;
+                case 3 -> Thursday;
+                case 4 -> Friday;
+                default -> Irrelevant;
+            };
+        }
+
         public int getIndex() {
             return switch (this) {
                 case Monday -> 0;

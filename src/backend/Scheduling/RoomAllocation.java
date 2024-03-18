@@ -24,6 +24,14 @@ public class RoomAllocation {
         }
     }
 
+    public Allocation[][] getAllocations() {
+        return timeAllocations;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
     public int getMaxLabsPerTutorRatio(Course course) {
         /*
          * Add `course.getTutorRatio() - 1` to cause it to 'round up' the calculation of
@@ -44,6 +52,26 @@ public class RoomAllocation {
             throw new RuntimeException("minutes % 30 != 0");
         }
 
-        return new ArrayList<>();
+        ArrayList<Time> times = new ArrayList<>();
+
+        int chunks = minutes / 30;
+
+        for (int day = 0; day < Time.NUM_DAYS; ++day) {
+            // TODO: ensure not off by one here
+            boolean free = true;
+            for (int time = 0; time < Time.NUM_TIME_INDICES - chunks; ++time) {
+                for (int i = 0; i < chunks; ++i) {
+                    if (timeAllocations[day][time + i] != null) {
+                        free = false;
+                        break;
+                    }
+                }
+                if (free) {
+                    times.add(new Time(Time.Day.fromIndex(day), time));
+                }
+            }
+        }
+
+        return times;
     }
 }

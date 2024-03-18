@@ -14,8 +14,13 @@ public class RoomTable {
          */
 
         /*
-         * TODO: initialise `rooms`
+         * TODO: remove this later.
          */
+
+        rooms = new Room[2];
+        for (int i = 0; i < 2; ++i) {
+            rooms[i] = new Room(i, (i + 1) * 30);
+        }
     }
 
     public int totalNumberOfRooms() {
@@ -26,11 +31,23 @@ public class RoomTable {
         return rooms[id];
     }
 
+    public String getRoomNameFromId(int id) {
+        if (id == 0) {
+            return "HN1.23";
+        } else {
+            return "N114";
+        }
+    }
+
     public Room getRoomFromName(String name) {
         /*
-         * TODO: !
+         * TODO: fix this later.
          */
-        return null;
+        if (name.equals("HN1.23")) {
+            return rooms[0];
+        } else {
+            return rooms[1];
+        }
     }
 
     static public RoomTable getInstance() {

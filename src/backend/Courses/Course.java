@@ -14,25 +14,28 @@ public class Course {
         int lengthMinutes;
     }
 
-    int numLabs;
-    int labLengthMinutes;
+    List<Lecture> lectures;
 
+    int labLengthMinutes;
     int numStudents;
     int numTutors;
-
-    List<Lecture> lectures;
     int tutorRatio;
     int id;
 
-    boolean requiresLabComputers;
-    boolean requiresProjectors;
+    public int getMaximumClassSize() {
+        return Math.min(numStudents, numTutors * tutorRatio);
+    }
+
+    public int getNumberOfStudents() {
+        return numStudents;
+    }
+
+    public int getNumberOfTutors() {
+        return numTutors;
+    }
 
     public int getTutorRatio() {
         return tutorRatio;
-    }
-
-    public int getNumberOfLabs() {
-        return numLabs;
     }
 
     public int getLengthInMinutes() {
@@ -45,5 +48,15 @@ public class Course {
         /*
          * TODO: need to initialise object
          */
+
+        this.tutorRatio = 23;
+        this.numStudents = (id + 1) * 70;
+        this.labLengthMinutes = 120;
+        this.numTutors = 6;
+    }
+
+    @Override
+    public String toString() {
+        return CourseTable.getInstance().getCourseCodeFromId(id);
     }
 }

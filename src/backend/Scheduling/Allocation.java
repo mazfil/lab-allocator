@@ -15,7 +15,7 @@ public class Allocation {
     }
 
     /**
-     * The number of labs to run at the same time in the room.
+     * The number of students that are scheduled in this room.
      */
     private int count;
     public int getCount() {
