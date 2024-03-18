@@ -41,7 +41,12 @@ public class RoomAllocation {
     }
 
     public void addAllocation(Time time, Allocation allocation) {
+        int labLengthChunks = allocation.getCourse().getLengthInMinutes() / 30;
         timeAllocations[time.getDay().getIndex()][time.getIndex()] = allocation;
+        for (int i = 1; i < labLengthChunks; ++i) {
+            timeAllocations[time.getDay().getIndex()][time.getIndex() + i] = new Allocation(allocation.getCourse(), 0);
+        }
+
         /*
          * TODO: probably need to mark further times where the lab is still running...
          */
@@ -58,8 +63,8 @@ public class RoomAllocation {
 
         for (int day = 0; day < Time.NUM_DAYS; ++day) {
             // TODO: ensure not off by one here
-            boolean free = true;
             for (int time = 0; time < Time.NUM_TIME_INDICES - chunks; ++time) {
+                boolean free = true;
                 for (int i = 0; i < chunks; ++i) {
                     if (timeAllocations[day][time + i] != null) {
                         free = false;

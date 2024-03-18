@@ -54,13 +54,15 @@ public class Schedule {
     }
 
     public void print() {
-        System.out.printf("SCHEDULE: \n%14s", "");
-        for (int i = 0; i < RoomTable.getInstance().totalNumberOfRooms(); ++i) {
-            System.out.printf("%-12s ", RoomTable.getInstance().getRoomNameFromId(i));
-        }
-        System.out.printf("\n");
+        System.out.printf("SCHEDULE: \n");
 
         for (int day = 0; day < Time.NUM_DAYS; ++day) {
+            System.out.printf("\n%14s", "");
+            for (int i = 0; i < RoomTable.getInstance().totalNumberOfRooms(); ++i) {
+                System.out.printf("%-14s ", RoomTable.getInstance().getRoomNameFromId(i));
+            }
+            System.out.printf("\n");
+
             for (int time = 0; time < Time.NUM_TIME_INDICES; ++time) {
                 System.out.printf("%-7s %02d%02d: ",
                         time == 0 ? Time.Day.fromIndex(day).toString().substring(0, 3).toUpperCase() : "",
@@ -71,39 +73,17 @@ public class Schedule {
                 for (int i = 0; i < RoomTable.getInstance().totalNumberOfRooms(); ++i) {
                     Allocation allocation = roomAllocations[i].getAllocations()[day][time];
                     if (allocation == null) {
-                        System.out.printf("---          ");
+                        System.out.printf("---            ");
+                    } else if (allocation.getCount() == 0) {
+                        System.out.printf("%-8s       ", allocation.getCourse());
                     } else {
-                        System.out.printf("%-8s:%-3d ", allocation.getCourse().toString(), allocation.getCount());
+                        System.out.printf("%-8s:%-3d   ", allocation.getCourse(), allocation.getCount());
                     }
                 }
                 System.out.printf("\n");
             }
-            System.out.printf("\n");
         }
-
-        /*
-        System.out.printf("               M 0800   M 0830   M 0900   \n");
-        for (RoomAllocation allocation: roomAllocations) {
-            System.out.printf("Room %-8s: %s\n", allocation.getRoom().toString(), allocation.toString());
-        }
-        */
-
-        /*
-        StringBuilder sb = new StringBuilder();
-
-        for (int day = 0; day < Time.NUM_DAYS; ++day) {
-            for (int time = 0; time < Time.NUM_TIME_INDICES; ++time) {
-                Allocation allocation = timeAllocations[day][time];
-                if (allocation == null) {
-                    sb.append("---      ");
-                } else {
-                    sb.append(String.format("%-8s " , allocation.getCourse().toString()));
-                }
-            }
-        }
-
-        return sb.toString();
-         */
+        System.out.printf("\n");
     }
 
     /**

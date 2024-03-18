@@ -50,9 +50,9 @@ public class Course {
          */
 
         this.tutorRatio = 23;
-        this.numStudents = (id + 1) * 70;
-        this.labLengthMinutes = 120;
-        this.numTutors = 6;
+        this.numStudents = (8 - id) * 55;
+        this.labLengthMinutes = id % 3 == 0 ? 120 : 90;
+        this.numTutors = 12;
     }
 
     @Override

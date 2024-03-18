@@ -16,8 +16,8 @@ public class CourseTable {
         /*
          * TODO: remove this later
          */
-        courses = new Course[3];
-        for (int i = 0; i < 3; ++i) {
+        courses = new Course[6];
+        for (int i = 0; i < 6; ++i) {
             courses[i] = new Course(i);
         }
     }
@@ -42,27 +42,10 @@ public class CourseTable {
     }
 
     public String getCourseCodeFromId(int id) {
-        if (id == 0) {
-            return "COMP1100";
-        } else if (id == 1) {
-            return "COMP2100";
-        } else {
-            return "COMP2300";
-        }
-    }
-
-    public int getCourseIdFromCode(String courseCode) {
-        /*
-         * TODO: implement this properly!
-         */
-
-        if (courseCode.equals("COMP1100")) {
-            return 0;
-        } else if (courseCode.equals("COMP2100")) {
-            return 1;
-        } else {
-            return 2;
-        }
+        return new String[] {
+                "COMP1100", "COMP1110", "COMP2100", "COMP2120",
+                "COMP2400", "COMP3600"
+        }[id];
     }
 
     static public CourseTable getInstance() {

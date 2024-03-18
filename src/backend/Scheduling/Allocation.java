@@ -16,6 +16,9 @@ public class Allocation {
 
     /**
      * The number of students that are scheduled in this room.
+     *
+     * IMPORTANT: if this value is zero, then this just means it's a placeholder for a
+     * course that runs across multiple 30-minute blocks.
      */
     private int count;
     public int getCount() {

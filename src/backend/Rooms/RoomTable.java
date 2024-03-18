@@ -10,17 +10,19 @@ public class RoomTable {
 
     private RoomTable() {
         /*
-         * TODO: here is where we would load in the data from the disk, database, etc.
+         * TODO: later on we might want this to be loaded from disk/database, etc.
          */
 
-        /*
-         * TODO: remove this later.
-         */
-
-        rooms = new Room[2];
-        for (int i = 0; i < 2; ++i) {
-            rooms[i] = new Room(i, (i + 1) * 30);
-        }
+        rooms = new Room[]{
+            new Room(0, 40, "HN1.23"),
+            new Room(1, 40, "HN1.24"),
+            new Room(2, 23, "N109"),
+            new Room(3, 29, "N111"),
+            new Room(4, 26, "N112"),
+            new Room(5, 26, "N113"),
+            new Room(6, 26, "N114"),
+            new Room(7, 61, "N115/6"),
+        };
     }
 
     public int totalNumberOfRooms() {
@@ -32,22 +34,7 @@ public class RoomTable {
     }
 
     public String getRoomNameFromId(int id) {
-        if (id == 0) {
-            return "HN1.23";
-        } else {
-            return "N114";
-        }
-    }
-
-    public Room getRoomFromName(String name) {
-        /*
-         * TODO: fix this later.
-         */
-        if (name.equals("HN1.23")) {
-            return rooms[0];
-        } else {
-            return rooms[1];
-        }
+        return rooms[id].toString();
     }
 
     static public RoomTable getInstance() {
