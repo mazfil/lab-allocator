@@ -50,8 +50,7 @@ public class RoomAllocation {
         int chunks = minutes / 30;
 
         for (int day = 0; day < Time.NUM_DAYS; ++day) {
-            // TODO: ensure not off by one here
-            for (int time = 0; time < Time.NUM_TIME_INDICES - chunks; ++time) {
+            for (int time = 0; time < Time.NUM_TIME_INDICES - chunks + 1; ++time) {
                 boolean free = true;
                 for (int i = 0; i < chunks; ++i) {
                     if (timeAllocations[day][time + i] != null) {
