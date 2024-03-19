@@ -61,7 +61,24 @@
   - Person who used to do it left the position, so she's doing it for Semester 2 this year
   - Doesn't seem like there's anyone else to talk to within the admin staff
   - Don't know if they will refill the position 
-- 
+
+- Statement of work update with frontend and schedule
+  - Roles also on github
+- Including reflection stuff into github
+- Add prototype onto Github
+- Firebase decision log
+  - See decision log template
+    - Figma into markdown
+    - Starting the actual front end design (html, css)
+- Database Schema for outputs for audit 2
+- Filip will create a communication log with belinda for github
+
+- for reflection
+    - We made our projects
+    - We aer implementing decision logs
+    - We could say that now we have the information we can begin development, because we we're a new project. We worked well to gather the information required to start the development.
+    - Now working with MS teams better, keeping more organised 
+
 
 ## Future Meetings
 
