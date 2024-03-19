@@ -14,7 +14,9 @@
 
 ## Agenda:
 
-- Any questions for Lena and Suzanne (SoCo Admin)?
+- Any questions for (SoCo Admin)?
+- Front end interface thoughts, should we start rough development?
+- Audit 2 and SoW doscussion
 
 ## Content from the meeting
 
