@@ -43,7 +43,7 @@ public class CourseTable {
 
     public String getCourseCodeFromId(int id) {
         return new String[] {
-                "COMP1100", "COMP1110", "COMP2100", "COMP2120",
+                "COMP1100", "COMP1140", "COMP2100", "COMP2120",
                 "COMP2400", "COMP3600"
         }[id];
     }

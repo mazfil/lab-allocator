@@ -97,6 +97,8 @@ public class Schedule {
             }
         }
         System.out.print("\n");
+        System.out.printf("UTILISATION (TRY TO MINIMISE THIS!): %.2f%%\n", getUtilisation() * 100);
+        System.out.printf("FITNESS: %d\n", getFitness());
     }
 
     /**
@@ -136,6 +138,23 @@ public class Schedule {
          */
     }
 
+    public double getUtilisation() {
+        int totalSlots = Time.NUM_DAYS * Time.NUM_TIME_INDICES * RoomTable.getInstance().totalNumberOfRooms();
+        int totalUsed = 0;
+
+        for (RoomAllocation allocation: roomAllocations) {
+            for (int day = 0; day < Time.NUM_DAYS; ++day) {
+                for (int time = 0; time < Time.NUM_TIME_INDICES; ++time) {
+                    if (allocation.getAllocations()[day][time] != null) {
+                        totalUsed++;
+                    }
+                }
+            }
+        }
+
+        return (double) totalUsed / (double) totalSlots;
+    }
+
     /**
      * Calculates the fitness value for the current schedule. The fitness value should be
      * deterministic, and higher values indicate a better schedule.
@@ -158,6 +177,6 @@ public class Schedule {
          *  - convener preferences
          *  - even utilisation of all rooms?
          */
-        return 0;
+        return (int) (10000.0 / getUtilisation());
     }
 }
