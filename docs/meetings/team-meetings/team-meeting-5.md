@@ -54,6 +54,7 @@
     - We will only really be expecting one person to be using it at a time
   - Storing the backend's results and rollback/undo
   - Could also have adjustable parameters for the backend, for e.g. prioritising certain parts of the evaluation
+- Need to validate the data on upload 
 - Questions for SoCo
   - Contact details that we got from Belinda don't seem to be the ones that are actually collecting the data.
   - Belinda seems to be compiling the course data and sorting out labs from there
