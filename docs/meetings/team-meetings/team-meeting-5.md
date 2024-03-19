@@ -1,4 +1,4 @@
-# Team Meeting #4 12/03/2024
+# Team Meeting #4 19/03/2024
 
 *Meeting Minutes by Filip*
 
@@ -18,6 +18,7 @@
 - Any questions for (SoCo Admin)?
 - Front end interface thoughts, should we start rough development?
 - Audit 2 and SoW doscussion
+- Go over projet charter
 
 ## Content from the meeting
 
