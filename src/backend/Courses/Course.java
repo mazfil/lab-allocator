@@ -16,6 +16,8 @@ public class Course {
 
     List<Lecture> lectures;
 
+    String courseCode;
+
     int labLengthMinutes;
     int numStudents;
     int numTutors;
@@ -42,14 +44,20 @@ public class Course {
         return labLengthMinutes;
     }
 
-    Course(int id) {
+    Course(int id, String courseCode) {
         this.id = id;
+        this.courseCode = courseCode;
+        this.tutorRatio = switch (courseCode.charAt(4)) {
+            case '1' -> 15;
+            case '2' -> 23;
+            default  -> 26;
+        };
 
         /*
          * TODO: need to initialise object properly, e.g. from file or database
          */
 
-        this.tutorRatio = 23;
+
         this.numStudents = (8 - id) * 55;
         this.labLengthMinutes = id % 3 == 0 ? 120 : 90;
         this.numTutors = 3 + numStudents / 75;
@@ -57,6 +65,6 @@ public class Course {
 
     @Override
     public String toString() {
-        return CourseTable.getInstance().getCourseCodeFromId(id);
+        return courseCode;
     }
 }

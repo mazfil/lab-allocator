@@ -170,7 +170,7 @@ public class Schedule {
          *  - having classes spread throughout the week for variety (e.g. ideally on all days)
          *  - having most classes during e.g. 10am-4pm
          *  - having options for early and late classes for people who, e.g. might have commitments during the day
-         *  - room utilisation
+         *  - room utilisation (already taken care of in the 'freeSpace' variable)
          *  - the number of labs of the same class that runs at the same time
          *      -> generally may want to minimise to increase options for students
          *      -> might *not* want to for really popular times though

@@ -13,12 +13,14 @@ public class CourseTable {
          * TODO: here is where we would load in the data from the disk, database, etc.
          */
 
-        /*
-         * TODO: remove this later
-         */
-        courses = new Course[6];
-        for (int i = 0; i < 6; ++i) {
-            courses[i] = new Course(i);
+        String[] courseCodes = new String[] {
+                "COMP1100", "COMP1140", "COMP2100", "COMP2120",
+                "COMP2400", "COMP3600"
+        };
+
+        courses = new Course[courseCodes.length];
+        for (int i = 0; i < courses.length; ++i) {
+            courses[i] = new Course(i, courseCodes[i]);
         }
     }
 
@@ -39,13 +41,6 @@ public class CourseTable {
                     course.getTutorRatio()
             );
         }
-    }
-
-    public String getCourseCodeFromId(int id) {
-        return new String[] {
-                "COMP1100", "COMP1140", "COMP2100", "COMP2120",
-                "COMP2400", "COMP3600"
-        }[id];
     }
 
     static public CourseTable getInstance() {
