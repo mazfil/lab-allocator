@@ -97,7 +97,7 @@ public class Schedule {
             }
         }
         System.out.print("\n");
-        System.out.printf("UTILISATION (TRY TO MINIMISE THIS!): %.2f%%\n", getUtilisation() * 100);
+        System.out.printf("FREE SPACE: %.2f%%\n", getPercentageFree() * 100);
         System.out.printf("FITNESS: %d\n", getFitness());
     }
 
@@ -138,7 +138,7 @@ public class Schedule {
          */
     }
 
-    public double getUtilisation() {
+    public double getPercentageFree() {
         int totalSlots = Time.NUM_DAYS * Time.NUM_TIME_INDICES * RoomTable.getInstance().totalNumberOfRooms();
         int totalUsed = 0;
 
@@ -152,7 +152,7 @@ public class Schedule {
             }
         }
 
-        return (double) totalUsed / (double) totalSlots;
+        return 1 - (double) totalUsed / (double) totalSlots;
     }
 
     /**
@@ -161,6 +161,8 @@ public class Schedule {
      * @return The fitness value (should be non-negative).
      */
     public int getFitness() {
+        double freeSpace = getPercentageFree();
+
         /*
          * TODO: things that could be considered here are:
          *  - tutor workload (how many back-to-back tutorials?)
@@ -177,6 +179,10 @@ public class Schedule {
          *  - convener preferences
          *  - even utilisation of all rooms?
          */
-        return (int) (10000.0 / getUtilisation());
+
+        return (int) (
+                freeSpace * 10000
+                /* TODO: more things go in here later on... */
+        );
     }
 }
