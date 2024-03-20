@@ -6,27 +6,22 @@ import Rooms.Room;
 import Rooms.RoomTable;
 import Util.Time;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
 public class Schedule {
-    /*
-     * TODO: some data fields
-     */
-
     /**
      * The allocations of labs to rooms and times in this particular schedule.
-     * Should be accessed as follows: allocations[roomId][timeIndex].courseId = ...;
-     * Internally, most the program should already be using roomId and timeIndexes.
-     * However, as an example for how you can generate them yourself from a human-readable
-     * format:
-     *      allocations[RoomTable.getInstance().getRoomFromName("HN1.24")][new Time(8, 30).getIndex()]
-     * A null entry means nothing is scheduled at that time. All classes go for at least an hour,
-     * so further 30 minute chunks will be set to an allocation with the course, but with the student
-     * count set to zero.
+     * Each entry in the array refers to a different room, and they are in index order.
      */
     RoomAllocation[] roomAllocations;
 
+    /**
+     * Initialises the `roomAllocations` array by creating each of the objects within it.
+     * Must be called before using the rest of the object.
+     */
     private void initialiseAllocationArray() {
         roomAllocations = new RoomAllocation[RoomTable.getInstance().totalNumberOfRooms()];
         for (int i = 0; i < roomAllocations.length; ++i) {
@@ -34,38 +29,60 @@ public class Schedule {
         }
     }
 
-    private void placeCourseRandomly(Random rng, int courseId) {
-        Course course = CourseTable.getInstance().getCourseFromId(courseId);
-        int spacesAvailable = 0;
-        while (spacesAvailable < course.getNumberOfStudents()) {
-            int timeout = 0;
-            while (true) {
-                if (++timeout > 10000) {
-                    System.out.print(
-                            """
-                            Uh-oh, it looks like it might be impossible to satisfy the given constraints.
-                            This may be because there are too few tutors for the amount of students, meaning
-                            lots of labs are required - but they don't all fit!
-                            """);
+    /**
+     * Places a lab for a course in a random room. If it is impossible for place a lab in any
+     * room, it throws a RuntimeException.
+     *
+     * @param rng A random number generator.
+     * @param course The course which should get a single lab placed
+     * @return The number of students who were allocated to that lab.
+     */
+    private int placeLabRandomly(Random rng, Course course) {
+        /*
+         * We want to randomly allocate it to a room, but rooms might be too full to fit the lab.
+         * Generate all room ids, and then we'll go through them randomly until we find one that
+         * fits the lab.
+         *
+         * If we go through all of them and can't find space, then we can't fit the constraints.
+         */
+        List<Integer> shuffled = new ArrayList<>();
+        for (int i = 0; i < RoomTable.getInstance().totalNumberOfRooms(); ++i) {
+            shuffled.add(i);
+        }
+        Collections.shuffle(shuffled);
 
-                    throw new RuntimeException("constraints seem impossible to resolve");
-                }
-                int roomId = rng.nextInt(RoomTable.getInstance().totalNumberOfRooms());
-                Room room = RoomTable.getInstance().getRoomFromId(roomId);
-                List<Time> times = roomAllocations[roomId].findFreeTimeOfLength(course.getLengthInMinutes());
-                if (times.isEmpty()) {
-                    continue;
-                }
-                // TODO: remove any times that clash with lectures
+        while (!shuffled.isEmpty()) {
+            int roomId = shuffled.remove(0);
+            Room room = RoomTable.getInstance().getRoomFromId(roomId);
+            List<Time> times = roomAllocations[roomId].findFreeTimeOfLength(course.getLengthInMinutes());
+
+            /*
+             * TODO: remove any times that clash with lectures
+             */
+
+            if (!times.isEmpty()) {
                 Time time = times.get(rng.nextInt(times.size()));
                 int count = Math.min(course.getMaximumClassSize(), room.getMaxCapacity());
                 roomAllocations[roomId].addAllocation(time, new Allocation(course, count));
-                spacesAvailable += count;
-                break;
+                return count;
             }
+        }
+
+        throw new RuntimeException("constraints seem impossible to resolve");
+    }
+
+    private void placeCourseRandomly(Random rng, int courseId) {
+        Course course = CourseTable.getInstance().getCourseFromId(courseId);
+
+        int spacesAvailable = 0;
+        while (spacesAvailable < course.getNumberOfStudents()) {
+            spacesAvailable += placeLabRandomly(rng, course);
         }
     }
 
+    /**
+     * Prints out a schedule to the console for debugging purposes.
+     */
     public void print() {
         System.out.print("SCHEDULE: \n");
 
@@ -138,6 +155,14 @@ public class Schedule {
          */
     }
 
+    /**
+     * Calculates the percentage of time that is free across all rooms. This is given by the number of
+     * half-hour blocks taken up by labs (across all rooms), divided by the total number of half-hour
+     * blocks (across all rooms).
+     *
+     * @return The percentage free as a value from 0 to 1, where 0 is all half-hour blocks across the school
+     * are used, and 1 being that nothing is scheduled.
+     */
     public double getPercentageFree() {
         int totalSlots = Time.NUM_DAYS * Time.NUM_TIME_INDICES * RoomTable.getInstance().totalNumberOfRooms();
         int totalUsed = 0;
@@ -152,12 +177,17 @@ public class Schedule {
             }
         }
 
+        /*
+         * The `totalUsed / totalSlots` calculation gives the percentage of time used,
+         * but we need to negate it to get free time.
+         */
         return 1 - (double) totalUsed / (double) totalSlots;
     }
 
     /**
      * Calculates the fitness value for the current schedule. The fitness value should be
      * deterministic, and higher values indicate a better schedule.
+     *
      * @return The fitness value (should be non-negative).
      */
     public int getFitness() {
@@ -177,6 +207,7 @@ public class Schedule {
          *  - the number of other labs for other classes that run at that time (i.e. minimise clashes)
          *  - having back-to-back labs in the same room (e.g. to save tutors with back-to-back classes walking)
          *  - convener preferences
+         *  - at least one room free in each time slot
          *  - even utilisation of all rooms?
          */
 

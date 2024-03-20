@@ -6,7 +6,7 @@ package Rooms;
  */
 public class RoomTable {
     static private RoomTable instance = null;
-    private Room[] rooms;
+    private final Room[] rooms;
 
     private RoomTable() {
         /*

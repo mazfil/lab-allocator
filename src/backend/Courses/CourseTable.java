@@ -6,7 +6,7 @@ package Courses;
  */
 public class CourseTable {
     static private CourseTable instance = null;
-    private Course[] courses;
+    private final Course[] courses;
 
     private CourseTable() {
         /*

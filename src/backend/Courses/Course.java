@@ -57,7 +57,6 @@ public class Course {
          * TODO: need to initialise object properly, e.g. from file or database
          */
 
-
         this.numStudents = (8 - id) * 55;
         this.labLengthMinutes = id % 3 == 0 ? 120 : 90;
         this.numTutors = 3 + numStudents / 75;
