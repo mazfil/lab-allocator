@@ -70,6 +70,8 @@ int getLevel() {
 }
 ```
 
+Do not use `@author` annotations. Contributions can be seen via Git, and `@author` comments tend to get outdated, and discourage collective code ownership.
+
 ## In-Code Comments
 Comments should be added where necessary to add additional information about *why* the code is doing something. Comments should not explain the *what*, this should be evident from the code (try to use https://en.wikipedia.org/wiki/Self-documenting_code).
 
