@@ -62,9 +62,7 @@ public class Schedule {
 
             if (!times.isEmpty()) {
                 Time time = times.get(rng.nextInt(times.size()));
-                int count = Math.min(course.getMaximumClassSize(), room.getMaxCapacity());
-                roomAllocations[roomId].addAllocation(time, new Allocation(course, count));
-                return count;
+                return roomAllocations[roomId].addAllocation(time, course).getCount();
             }
         }
 
@@ -74,9 +72,9 @@ public class Schedule {
     private void placeCourseRandomly(Random rng, int courseId) {
         Course course = CourseTable.getInstance().getCourseFromId(courseId);
 
-        int spacesAvailable = 0;
-        while (spacesAvailable < course.getNumberOfStudents()) {
-            spacesAvailable += placeLabRandomly(rng, course);
+        int seatsMadeAvailableSoFar = 0;
+        while (seatsMadeAvailableSoFar < course.getNumberOfStudents()) {
+            seatsMadeAvailableSoFar += placeLabRandomly(rng, course);
         }
     }
 
@@ -104,7 +102,7 @@ public class Schedule {
                     Allocation allocation = roomAllocations[i].getAllocations()[day][time];
                     if (allocation == null) {
                         System.out.print("---            ");
-                    } else if (allocation.getCount() == 0) {
+                    } else if (allocation.isContinuation()) {
                         System.out.printf("%-8s       ", allocation.getCourse());
                     } else {
                         System.out.printf("%-8s:%-3d   ", allocation.getCourse(), allocation.getCount());

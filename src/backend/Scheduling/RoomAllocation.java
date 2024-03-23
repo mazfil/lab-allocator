@@ -1,5 +1,6 @@
 package Scheduling;
 
+import Courses.Course;
 import Rooms.Room;
 import Util.Time;
 
@@ -53,19 +54,24 @@ public class RoomAllocation {
      * Allocates a class to this room allocation.
      *
      * @param time The time where the class should go. The day should be set (i.e. not `Day.Irrelevant`).
-     * @param allocation The class to be allocated, and the number of students to allocate.
+     * @param course The class to be allocated.
+     * @return The allocation for the first 30 minute block of the lab
      */
-    public void addAllocation(Time time, Allocation allocation) {
-        int labLengthChunks = allocation.getCourse().getLengthInMinutes() / 30;
-        timeAllocations[time.getDay().getIndex()][time.getIndex()] = allocation;
+    public Allocation addAllocation(Time time, Course course) {
+        int labLengthChunks = course.getLengthInMinutes() / 30;
+        int count = Math.min(course.getMaximumClassSize(), room.getMaxCapacity());
+        Allocation initialAllocation = new Allocation(course, count, false);
+        timeAllocations[time.getDay().getIndex()][time.getIndex()] = initialAllocation;
 
         /*
          * Nearly all classes take up more than half an hour, and so we need to block out
          * any further 30-minute chunks.
          */
         for (int i = 1; i < labLengthChunks; ++i) {
-            timeAllocations[time.getDay().getIndex()][time.getIndex() + i] = new Allocation(allocation.getCourse(), 0);
+            timeAllocations[time.getDay().getIndex()][time.getIndex() + i] = new Allocation(course, count, true);
         }
+
+        return initialAllocation;
     }
 
     /**

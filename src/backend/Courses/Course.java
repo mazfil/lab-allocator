@@ -25,7 +25,7 @@ public class Course {
     int id;
 
     public int getMaximumClassSize() {
-        return Math.min(numStudents, numTutors * tutorRatio);
+        return numTutors * tutorRatio;
     }
 
     public int getNumberOfStudents() {

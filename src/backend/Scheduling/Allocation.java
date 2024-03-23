@@ -15,18 +15,24 @@ public class Allocation {
     }
 
     /**
-     * The number of students that are scheduled in this room.
-     *
-     * IMPORTANT: if this value is zero, then this just means it's a placeholder for a
-     * course that runs across multiple 30-minute blocks.
+     * The number of seats that students can use in this room allocation.
+     * This is constrained by the physical number of seats, and tutor ratios.
      */
     private final int count;
     public int getCount() {
         return count;
     }
 
-    Allocation(Course course, int count) {
+    /**
+     * Used to indicate that this is part of an allocation that is longer than
+     * 30 minutes - this will be set for all but the first entry.
+     */
+    private boolean continuation;
+    public boolean isContinuation() {return continuation;}
+
+    Allocation(Course course, int count, boolean continuation) {
         this.course = course;
         this.count = count;
+        this.continuation = continuation;
     }
 }
