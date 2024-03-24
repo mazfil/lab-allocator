@@ -24,6 +24,10 @@ public class Course {
     int tutorRatio;
     int id;
 
+    public int getId() {
+        return id;
+    }
+
     public int getMaximumClassSize() {
         return numTutors * tutorRatio;
     }

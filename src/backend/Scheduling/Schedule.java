@@ -137,10 +137,74 @@ public class Schedule {
      */
     public Schedule(Schedule a, Schedule b) {
         initialiseAllocationArray();
+        Random random = new Random();
+        int coursesNumber = CourseTable.getInstance().getTotalNumberOfCourses();
+        int[] availableSeats = new int[coursesNumber];
+        List<AllocationWithRoomAndTime> allAllocationsA = convertScheduleToList(a);
+        List<AllocationWithRoomAndTime> allAllocationsB = convertScheduleToList(b);
+        while (!allAllocationsA.isEmpty() || !allAllocationsB.isEmpty()) {
+            copyAllocationRandomly(allAllocationsA, availableSeats, random);
+            copyAllocationRandomly(allAllocationsB, availableSeats, random);
+        }
+        for (int i = 0; i < coursesNumber; ++i) {
+            Course course = CourseTable.getInstance().getCourseFromId(i);
+            int enrolledStudents = course.getNumberOfStudents();
+            while (availableSeats[i] < enrolledStudents) {
+                availableSeats[i] += placeLabRandomly(random, course);
+            }
+        }
+    }
 
-        /*
-         * TODO: do a crossover operation...
-         */
+    /**
+     * Helper method for crossover function that copy an allocation from a list of AllocationWithRoomAndTime
+     * to the current Schedule randomly.
+     * The availableSeats is an array of the number of available seats for each course,
+     * which avoids adding allocations for a course more than necessary.
+     * Do not use this method elsewhere.
+     */
+    private void copyAllocationRandomly(List<AllocationWithRoomAndTime> allAllocations, int[] availableSeats, Random random) {
+        if (!allAllocations.isEmpty()) {
+            int randomNumber = random.nextInt(allAllocations.size());
+            AllocationWithRoomAndTime allocation = allAllocations.remove(randomNumber);
+            RoomAllocation roomAllocation = roomAllocations[allocation.getRoom().getId()];
+            Time time = allocation.getTime();
+            Course course = allocation.getCourse();
+            int length = course.getLengthInMinutes();
+            if (roomAllocation.isTimeAndLengthFree(time, length)) {
+                if (availableSeats[course.getId()] < course.getNumberOfStudents()) {
+                    /*
+                     * TODO: Add a condition that avoids adding an allocation
+                     *  that happens at the same time as the lecture
+                     */
+                    availableSeats[course.getId()] += roomAllocation.addAllocation(time, course).getCount();
+                }
+            }
+        }
+    }
+
+    /**
+     * Helper method for crossover function that converts a Schedule to a list of AllocationWithRoomAndTime.
+     * It returns a list of AllocationWithRoomAndTime that contains
+     * all allocations of a schedule (excluding continuing allocation).
+     */
+    private List<AllocationWithRoomAndTime> convertScheduleToList(Schedule schedule) {
+        List<AllocationWithRoomAndTime> allAllocations = new ArrayList<>();
+        for (int roomId = 0; roomId < RoomTable.getInstance().totalNumberOfRooms(); ++roomId) {
+            Room room = RoomTable.getInstance().getRoomFromId(roomId);
+            for (int dayIndex = 0; dayIndex < Time.NUM_DAYS; ++dayIndex) {
+                for (int timeIndex = 0; timeIndex < Time.NUM_TIME_INDICES; ++timeIndex) {
+                    Time.Day day = Time.Day.fromIndex(dayIndex);
+                    Time time = new Time(day, timeIndex);
+                    Allocation allocation = schedule.roomAllocations[roomId].getAllocations()[dayIndex][timeIndex];
+                    if (allocation != null && !allocation.isContinuation()) {
+                        Course course = allocation.getCourse();
+                        int count = allocation.getCount();
+                        allAllocations.add(new AllocationWithRoomAndTime(course, count, false, room, time));
+                    }
+                }
+            }
+        }
+        return allAllocations;
     }
 
     /**

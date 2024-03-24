@@ -107,4 +107,28 @@ public class RoomAllocation {
 
         return times;
     }
+
+    /**
+     * Given a start time and length in minutes, return if that period is free.
+     *
+     * @param time The start time of a lab
+     * @param minutes The length of the lab
+     * @return If the duration is free
+     */
+    public boolean isTimeAndLengthFree(Time time, int minutes) {
+        if (minutes % 30 != 0) {
+            throw new RuntimeException("minutes % 30 != 0");
+        }
+        int chunks = minutes / 30;
+        boolean free = true;
+        int day = time.getDay().getIndex();
+        int timeIndex = time.getIndex();
+        for (int i = 0; i < chunks; ++i) {
+            if (timeAllocations[day][timeIndex + i] != null) {
+                free = false;
+                break;
+            }
+        }
+        return free;
+    }
 }
