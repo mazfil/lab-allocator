@@ -140,8 +140,8 @@ public class Schedule {
         Random random = new Random();
         int coursesNumber = CourseTable.getInstance().getTotalNumberOfCourses();
         int[] availableSeats = new int[coursesNumber];
-        List<AllocationWithRoomAndTime> allAllocationsA = convertScheduleToList(a);
-        List<AllocationWithRoomAndTime> allAllocationsB = convertScheduleToList(b);
+        List<AllocationWithRoomAndTime> allAllocationsA = a.convertScheduleToList();
+        List<AllocationWithRoomAndTime> allAllocationsB = b.convertScheduleToList();
         while (!allAllocationsA.isEmpty() || !allAllocationsB.isEmpty()) {
             copyAllocationRandomly(allAllocationsA, availableSeats, random);
             copyAllocationRandomly(allAllocationsB, availableSeats, random);
@@ -187,7 +187,7 @@ public class Schedule {
      * It returns a list of AllocationWithRoomAndTime that contains
      * all allocations of a schedule (excluding continuing allocation).
      */
-    private List<AllocationWithRoomAndTime> convertScheduleToList(Schedule schedule) {
+    private List<AllocationWithRoomAndTime> convertScheduleToList() {
         List<AllocationWithRoomAndTime> allAllocations = new ArrayList<>();
         for (int roomId = 0; roomId < RoomTable.getInstance().totalNumberOfRooms(); ++roomId) {
             Room room = RoomTable.getInstance().getRoomFromId(roomId);
@@ -195,7 +195,7 @@ public class Schedule {
                 for (int timeIndex = 0; timeIndex < Time.NUM_TIME_INDICES; ++timeIndex) {
                     Time.Day day = Time.Day.fromIndex(dayIndex);
                     Time time = new Time(day, timeIndex);
-                    Allocation allocation = schedule.roomAllocations[roomId].getAllocations()[dayIndex][timeIndex];
+                    Allocation allocation = roomAllocations[roomId].getAllocations()[dayIndex][timeIndex];
                     if (allocation != null && !allocation.isContinuation()) {
                         Course course = allocation.getCourse();
                         int count = allocation.getCount();
@@ -212,9 +212,25 @@ public class Schedule {
      * This is used to try to explore different solutions and find slight improvements.
      */
     public void mutate() {
+        Random random = new Random();
+        List<AllocationWithRoomAndTime> allAllocations = convertScheduleToList();
+        int randomNumber = random.nextInt(allAllocations.size());
+        AllocationWithRoomAndTime allocation = allAllocations.get(randomNumber);
+        int roomId = allocation.getRoom().getId();
+        Time startTime = allocation.getTime();
+        Course course = allocation.getCourse();
+        roomAllocations[roomId].removeAllocation(startTime);
+
+        List<Time> times = roomAllocations[roomId].findFreeTimeOfLength(course.getLengthInMinutes());
+
         /*
-         * TODO:
+         * TODO: remove any times that clash with lectures
          */
+
+        if (!times.isEmpty()) {
+            Time time = times.get(random.nextInt(times.size()));
+            roomAllocations[roomId].addAllocation(time, course);
+        }
     }
 
     /**
