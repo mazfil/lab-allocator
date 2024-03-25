@@ -14,7 +14,6 @@ function App() {
           REMOVE PLACEHOLDER UPON LOGO APPROVAL FROM BRANDING
   */}
           <div className='LOGO-PLACEHOLDER'>
-            <i class="bi bi-shield"></i>
             <h1>LOGO PENDING APPROVAL</h1>
           </div>
           <h1>SoCo Lab Allocation System</h1>

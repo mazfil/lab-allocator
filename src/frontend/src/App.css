@@ -4,11 +4,7 @@
 /* REMOVE WHEN LOGO APPROVED */
 .LOGO-PLACEHOLDER{
   color: red;
-  display: flex;
-  align-items: center;
-}
-i{
-  font-size: 10em;
+  text-align: center;
 }
 /* ^^^^^^^^^^^^^^^^^^^^^^^^^ */
 
