@@ -2,6 +2,7 @@ package Courses;
 
 import Util.Time;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Course {
@@ -14,6 +15,10 @@ public class Course {
          */
         int chunk = (int) Math.ceil((double) lengthMinutes / 30);
         List<Time> lectureTime = initializeTime(startTime, chunk);
+    }
+
+    public Course(List<Lecture> lectures) {
+        this.lectures = lectures;
     }
 
     /**
@@ -91,14 +96,18 @@ public class Course {
      * Add all lecture time chunks to a list
      */
 
-    public List<Time> lecturesTimeList(List<Lecture> lectures){
-        List<Time> lecsTime = null;
-        for (Lecture lec : lectures){
-            lecsTime.addAll(lec.lectureTime);
+    public List<Time> lecturesTimeList(List<Lecture> lectures) {
+        List<Time> lecsTime = new ArrayList<>();
+        if (lectures != null) {
+            for (Lecture lec : lectures) {
+                lecsTime.addAll(lec.lectureTime);
+            }
+
+        }else {
+            System.out.println("Error: Lectures list is null.");
         }
         return lecsTime;
     }
-
 
 
     @Override
