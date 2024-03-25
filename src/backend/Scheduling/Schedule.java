@@ -6,10 +6,7 @@ import Rooms.Room;
 import Rooms.RoomTable;
 import Util.Time;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Schedule {
     /**
@@ -55,10 +52,8 @@ public class Schedule {
             int roomId = shuffled.remove(0);
             Room room = RoomTable.getInstance().getRoomFromId(roomId);
             List<Time> times = roomAllocations[roomId].findFreeTimeOfLength(course.getLengthInMinutes());
-
-            /*
-             * TODO: remove any times that clash with lectures
-             */
+            List<Time> lecsTimes = course.lecturesTimeList(course.getLectures());
+            times.removeAll(new HashSet<>(lecsTimes));
 
             if (!times.isEmpty()) {
                 Time time = times.get(rng.nextInt(times.size()));

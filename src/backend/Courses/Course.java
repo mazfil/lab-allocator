@@ -6,12 +6,28 @@ import java.util.List;
 
 public class Course {
     class Lecture {
+        // need to import lecture data
         Time startTime;
-
+        int lengthMinutes;
         /**
          * Rounded up to nearest multiple of 30 minutes.
          */
-        int lengthMinutes;
+        int chunk = (int) Math.ceil((double) lengthMinutes / 30);
+        List<Time> lectureTime = initializeTime(startTime, chunk);
+    }
+
+    /**
+     * Add all lecture time chunks to a list
+     */
+
+    public List<Time> initializeTime(Time starttime, int chunk){
+        List<Time> lectureTime = null;
+        int i;
+        for (i = 0; i < chunk; i++){
+            Time cur = new Time(starttime.getDay(),starttime.getIndex()+i);
+            lectureTime.add(cur);
+        }
+        return lectureTime;
     }
 
     List<Lecture> lectures;
@@ -23,6 +39,8 @@ public class Course {
     int numTutors;
     int tutorRatio;
     int id;
+
+
 
     public int getId() {
         return id;
@@ -48,6 +66,9 @@ public class Course {
         return labLengthMinutes;
     }
 
+
+    public List<Lecture> getLectures() { return lectures; }
+
     Course(int id, String courseCode) {
         this.id = id;
         this.courseCode = courseCode;
@@ -65,6 +86,20 @@ public class Course {
         this.labLengthMinutes = id % 3 == 0 ? 120 : 90;
         this.numTutors = 3 + numStudents / 75;
     }
+
+    /**
+     * Add all lecture time chunks to a list
+     */
+
+    public List<Time> lecturesTimeList(List<Lecture> lectures){
+        List<Time> lecsTime = null;
+        for (Lecture lec : lectures){
+            lecsTime.addAll(lec.lectureTime);
+        }
+        return lecsTime;
+    }
+
+
 
     @Override
     public String toString() {
