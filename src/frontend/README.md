@@ -7,7 +7,8 @@ Check that they are sucessefuly installed with `node -v` & `npm -v`.
 
 ### Dependencies
 Make sure your have all of these dependencies installed if youre running the React App.\
-`npm i react-router-dom`
+`npm i react-router-dom`\
+`npm i firebase`
 
 ### Running the App!
 To run the interface, in terminal, simply cd to the frontend directory `lab-allocator/src/frontend/`.
