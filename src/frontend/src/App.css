@@ -1,38 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans&display=swap');
+@import "bootstrap-icons/font/bootstrap-icons.css";
+
+/* REMOVE WHEN LOGO APPROVED */
+.LOGO-PLACEHOLDER{
+  color: red;
+  text-align: center;
+}
+/* ^^^^^^^^^^^^^^^^^^^^^^^^^ */
+
+
+
+:root{
+  --black: #000000;
+  --dark-grey-1: #0D0D0D;
+  --dark-grey-2: #191919;
+  --white: #FFFFFF;
+  --light-grey-1: #E6E6E6;
+  --light-grey-2: #F2F2F2;
+  --gold: #BE830E;
+  --gold-tint: #F5EDDE;
+
+}
+
 .App {
+  display: flex;
+  height: 100vh;
+}
+
+.dashboard{
+  display: block;
+  height: fit-content;
+  width: fit-content;
+  margin: auto;
+}
+
+.main-logo{
+  width: 80%;
+  padding-left: 10%;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.line-break{
+  background-color: var(--dark-grey-2);
+  height: 1px;
+  margin: 5%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.controls{
+  width: fit-content;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.main-controls{
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 2em;
+  background-color: var(--gold-tint);
+  border-radius: 16px;
 }
 
-.App-link {
-  color: #61dafb;
+.main-controls button{
+  width: 256px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+.data-mgmt{
+  display: block;
+  width: fit-content;
+  padding-right: 32px;
+}
+
+.data-mgmt > button{
+  display: block;
+  width: fit-content;
+}
+
+#upload-data{
+  padding-bottom: 32px;
+}
+
+.timetable-mgmt{
+  display: flex;
+}
+
+.app-mgmt{
+  display: flex;
+  justify-content: space-between;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  padding-left: 2em;
+  padding-right: 2em;
+  background-color: var(--gold-tint);
+  border-radius: 16px;
+}
+
+button{
+  background-color: var(--gold);
+  font-family: public Sans; 
+  border: 2px solid var(--gold);
+  border-radius: 16px;
+  transition: ease;
+  transition-duration: 0.3s;
+}
+
+button:hover{
+  background-color: var(--gold-tint);
+}
+
+.main-controls button{
+  font-size: 2em;
+  padding: 0.5em;
+}
+.app-mgmt button{
+  padding: 0.5em;
+  width: 128px;
+  font-size: 1em;
+}
+#help-supp{
+  width: 192px;
+}
+.control-gap{
+  height: 2em;
 }
