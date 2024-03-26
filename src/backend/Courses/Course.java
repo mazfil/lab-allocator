@@ -10,30 +10,25 @@ public class Course {
         // need to import lecture data
         Time startTime;
         int lengthMinutes;
-        /**
-         * Rounded up to nearest multiple of 30 minutes.
-         */
-        int chunk = (int) Math.ceil((double) lengthMinutes / 30);
-        List<Time> lectureTime = initializeTime(startTime, chunk);
-    }
 
-    public Course(List<Lecture> lectures) {
-        this.lectures = lectures;
-    }
 
-    /**
-     * Add all lecture time chunks to a list
-     */
-
-    public List<Time> initializeTime(Time starttime, int chunk){
-        List<Time> lectureTime = null;
-        int i;
-        for (i = 0; i < chunk; i++){
-            Time cur = new Time(starttime.getDay(),starttime.getIndex()+i);
-            lectureTime.add(cur);
+        public Lecture(Time startTime, int lengthMinutes) {
+            this.startTime = startTime;
+            this.lengthMinutes = lengthMinutes;
         }
-        return lectureTime;
+
+        public List<Time> initializeTime(){
+            int chunk = (int) Math.ceil((double) this.lengthMinutes / 30);
+            List<Time> lectureTime = null;
+            int i;
+            for (i = 0; i < chunk; i++){
+                Time cur = new Time(this.startTime.getDay(),this.startTime.getIndex()+i);
+                lectureTime.add(cur);
+            }
+            return lectureTime;
+        }
     }
+
 
     List<Lecture> lectures;
 
@@ -71,7 +66,6 @@ public class Course {
         return labLengthMinutes;
     }
 
-
     public List<Lecture> getLectures() { return lectures; }
 
     Course(int id, String courseCode) {
@@ -86,23 +80,23 @@ public class Course {
         /*
          * TODO: need to initialise object properly, e.g. from file or database
          */
-
         this.numStudents = (8 - id) * 55;
         this.labLengthMinutes = id % 3 == 0 ? 120 : 90;
         this.numTutors = 3 + numStudents / 75;
+
     }
 
     /**
      * Add all lecture time chunks to a list
      */
 
-    public List<Time> lecturesTimeList(List<Lecture> lectures) {
+    public List<Time> lecturesTimeList() {
         List<Time> lecsTime = new ArrayList<>();
+        List<Lecture> lectures = getLectures();
         if (lectures != null) {
             for (Lecture lec : lectures) {
-                lecsTime.addAll(lec.lectureTime);
+                lecsTime.addAll(lec.initializeTime());
             }
-
         }else {
             System.out.println("Error: Lectures list is null.");
         }

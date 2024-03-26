@@ -52,7 +52,7 @@ public class Schedule {
             int roomId = shuffled.remove(0);
             Room room = RoomTable.getInstance().getRoomFromId(roomId);
             List<Time> times = roomAllocations[roomId].findFreeTimeOfLength(course.getLengthInMinutes());
-            List<Time> lecsTimes = course.lecturesTimeList(course.getLectures());
+            List<Time> lecsTimes = course.lecturesTimeList();
             times.removeAll(new HashSet<>(lecsTimes));
 
             if (!times.isEmpty()) {
