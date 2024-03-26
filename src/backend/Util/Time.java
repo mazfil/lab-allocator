@@ -9,6 +9,17 @@ public class Time {
         Friday,
         Irrelevant;
 
+        public static Day fromIndex(int index) {
+            return switch (index) {
+                case 0 -> Monday;
+                case 1 -> Tuesday;
+                case 2 -> Wednesday;
+                case 3 -> Thursday;
+                case 4 -> Friday;
+                default -> Irrelevant;
+            };
+        }
+
         public int getIndex() {
             return switch (this) {
                 case Monday -> 0;
@@ -60,13 +71,5 @@ public class Time {
 
     public Day getDay() {
         return day;
-    }
-
-    public Time adjustedBy(int minutes) {
-        if (minutes % 30 != 0) {
-            throw new RuntimeException("CourseTime cannot be created on a non-multiple of 30 minutes!");
-        }
-        int indexChange = (minutes / 30);
-        return new Time(this.day, this.timeIndex + indexChange);
     }
 }

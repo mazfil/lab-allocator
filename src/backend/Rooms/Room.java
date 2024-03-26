@@ -1,13 +1,22 @@
 package Rooms;
 
 public class Room {
-    boolean hasProjector;
-    boolean hasLabComputers;
     int maxCapacity;
+    int id;
+    String name;
 
     public int getMaxCapacity() {
         return maxCapacity;
     }
 
-    // TODO: ...
+    Room(int id, int maxCapacity, String name) {
+        this.id = id;
+        this.maxCapacity = maxCapacity;
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s (%d)", name, maxCapacity);
+    }
 }

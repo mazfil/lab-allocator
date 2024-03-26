@@ -6,16 +6,22 @@ package Courses;
  */
 public class CourseTable {
     static private CourseTable instance = null;
-    private Course[] courses;
+    private final Course[] courses;
 
     private CourseTable() {
         /*
          * TODO: here is where we would load in the data from the disk, database, etc.
          */
 
-        /*
-         * TODO: initialise `courses`
-         */
+        String[] courseCodes = new String[] {
+                "COMP1100", "COMP1140", "COMP2100", "COMP2120",
+                "COMP2400", "COMP3600"
+        };
+
+        courses = new Course[courseCodes.length];
+        for (int i = 0; i < courses.length; ++i) {
+            courses[i] = new Course(i, courseCodes[i]);
+        }
     }
 
     public int getTotalNumberOfCourses() {
@@ -26,11 +32,15 @@ public class CourseTable {
         return courses[id];
     }
 
-    public int getCourseIdFromCode(String courseCode) {
-        /*
-         * TODO: !
-         */
-        throw new RuntimeException("Not implemented!");
+    public void print() {
+        for (Course course: courses) {
+            System.out.printf("%s: students = %d, tutors = %d (required ratio 1:%d)\n",
+                    course.toString(),
+                    course.getNumberOfStudents(),
+                    course.getNumberOfTutors(),
+                    course.getTutorRatio()
+            );
+        }
     }
 
     static public CourseTable getInstance() {

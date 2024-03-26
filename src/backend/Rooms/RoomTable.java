@@ -6,16 +6,23 @@ package Rooms;
  */
 public class RoomTable {
     static private RoomTable instance = null;
-    private Room[] rooms;
+    private final Room[] rooms;
 
     private RoomTable() {
         /*
-         * TODO: here is where we would load in the data from the disk, database, etc.
+         * TODO: later on we might want this to be loaded from disk/database, etc.
          */
 
-        /*
-         * TODO: initialise `rooms`
-         */
+        rooms = new Room[]{
+            new Room(0, 40, "HN1.23"),      /* Make Room! */
+            new Room(1, 40, "HN1.24"),      /* Make Room! */
+            new Room(2, 23, "N109"),
+            new Room(3, 29, "N111"),
+            new Room(4, 26, "N112"),
+            new Room(5, 26, "N113"),
+            new Room(6, 26, "N114"),
+            new Room(7, 61, "N115/6"),
+        };
     }
 
     public int totalNumberOfRooms() {
@@ -26,11 +33,8 @@ public class RoomTable {
         return rooms[id];
     }
 
-    public Room getRoomFromName(String name) {
-        /*
-         * TODO: !
-         */
-        return null;
+    public String getRoomNameFromId(int id) {
+        return rooms[id].toString();
     }
 
     static public RoomTable getInstance() {
