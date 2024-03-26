@@ -3,7 +3,9 @@ package Courses;
 import Util.Time;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Course {
     class Lecture {
@@ -11,21 +13,9 @@ public class Course {
         Time startTime;
         int lengthMinutes;
 
-
         public Lecture(Time startTime, int lengthMinutes) {
             this.startTime = startTime;
-            this.lengthMinutes = lengthMinutes;
-        }
-
-        public List<Time> initializeTime(){
-            int chunk = (int) Math.ceil((double) this.lengthMinutes / 30);
-            List<Time> lectureTime = null;
-            int i;
-            for (i = 0; i < chunk; i++){
-                Time cur = new Time(this.startTime.getDay(),this.startTime.getIndex()+i);
-                lectureTime.add(cur);
-            }
-            return lectureTime;
+            this.lengthMinutes = lengthMinutes % 30 == 0 ? lengthMinutes : (lengthMinutes / 30 + 1) * 30;
         }
     }
 
@@ -66,8 +56,6 @@ public class Course {
         return labLengthMinutes;
     }
 
-    public List<Lecture> getLectures() { return lectures; }
-
     Course(int id, String courseCode) {
         this.id = id;
         this.courseCode = courseCode;
@@ -83,24 +71,25 @@ public class Course {
         this.numStudents = (8 - id) * 55;
         this.labLengthMinutes = id % 3 == 0 ? 120 : 90;
         this.numTutors = 3 + numStudents / 75;
+        this.lectures = new ArrayList<>();
 
     }
 
     /**
-     * Add all lecture time chunks to a list
+     * Return all starting times for a lab that may overlap with the lectures
      */
 
-    public List<Time> lecturesTimeList() {
-        List<Time> lecsTime = new ArrayList<>();
-        List<Lecture> lectures = getLectures();
-        if (lectures != null) {
-            for (Lecture lec : lectures) {
-                lecsTime.addAll(lec.initializeTime());
+    public Set<Time> timesOverlapWithLectures() {
+        Set<Time> lecturesTime = new HashSet<>();
+        for (Lecture lec : lectures) {
+            int lectureChunk = lec.lengthMinutes / 30;
+            int labChunk = labLengthMinutes / 30;
+            for (int i = 1 - labChunk; i < lectureChunk; i++){
+                Time time = new Time(lec.startTime.getDay(),lec.startTime.getIndex() + i);
+                lecturesTime.add(time);
             }
-        }else {
-            System.out.println("Error: Lectures list is null.");
         }
-        return lecsTime;
+        return lecturesTime;
     }
 
 

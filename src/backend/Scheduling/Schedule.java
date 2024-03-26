@@ -52,9 +52,7 @@ public class Schedule {
             int roomId = shuffled.remove(0);
             Room room = RoomTable.getInstance().getRoomFromId(roomId);
             List<Time> times = roomAllocations[roomId].findFreeTimeOfLength(course.getLengthInMinutes());
-            List<Time> lecsTimes = course.lecturesTimeList();
-            times.removeAll(new HashSet<>(lecsTimes));
-
+            times.removeAll(course.timesOverlapWithLectures());
             if (!times.isEmpty()) {
                 Time time = times.get(rng.nextInt(times.size()));
                 return roomAllocations[roomId].addAllocation(time, course).getCount();
@@ -166,11 +164,10 @@ public class Schedule {
             Course course = allocation.getCourse();
             int length = course.getLengthInMinutes();
             if (roomAllocation.isTimeAndLengthFree(time, length)) {
+                if (course.timesOverlapWithLectures().contains(time)) {
+                    return;
+                }
                 if (availableSeats[course.getId()] < course.getNumberOfStudents()) {
-                    /*
-                     * TODO: Add a condition that avoids adding an allocation
-                     *  that happens at the same time as the lecture
-                     */
                     availableSeats[course.getId()] += roomAllocation.addAllocation(time, course).getCount();
                 }
             }
@@ -178,7 +175,8 @@ public class Schedule {
     }
 
     /**
-     * Helper method for crossover function that converts a Schedule to a list of AllocationWithRoomAndTime.
+     * Helper method for crossover and mutation function
+     * Converts a Schedule to a list of AllocationWithRoomAndTime.
      * It returns a list of AllocationWithRoomAndTime that contains
      * all allocations of a schedule (excluding continuing allocation).
      */
@@ -208,24 +206,23 @@ public class Schedule {
      */
     public void mutate() {
         Random random = new Random();
+        moveLabRandomly(random);
+    }
+
+    /**
+     * Helper method for mutation function
+     * Move a random lab to another time in the same room.
+     */
+    public void moveLabRandomly(Random random) {
         List<AllocationWithRoomAndTime> allAllocations = convertScheduleToList();
-        int randomNumber = random.nextInt(allAllocations.size());
-        AllocationWithRoomAndTime allocation = allAllocations.get(randomNumber);
+        AllocationWithRoomAndTime allocation = allAllocations.get(random.nextInt(allAllocations.size()));
         int roomId = allocation.getRoom().getId();
-        Time startTime = allocation.getTime();
         Course course = allocation.getCourse();
-        roomAllocations[roomId].removeAllocation(startTime);
-
+        roomAllocations[roomId].removeAllocation(allocation.getTime());
         List<Time> times = roomAllocations[roomId].findFreeTimeOfLength(course.getLengthInMinutes());
-
-        /*
-         * TODO: remove any times that clash with lectures
-         */
-
-        if (!times.isEmpty()) {
-            Time time = times.get(random.nextInt(times.size()));
-            roomAllocations[roomId].addAllocation(time, course);
-        }
+        times.removeAll(course.timesOverlapWithLectures());
+        Time time = times.get(random.nextInt(times.size()));
+        roomAllocations[roomId].addAllocation(time, course);
     }
 
     /**
