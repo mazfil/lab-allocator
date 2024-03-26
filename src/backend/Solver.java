@@ -1,4 +1,7 @@
 
+import Courses.CourseTable;
+import Scheduling.Schedule;
+
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Random;
@@ -38,13 +41,17 @@ public class Solver {
     }
 
     Schedule solve() {
+        System.out.printf("Generating the initial population...\n");
         Schedule[] population = generateRandomPopulation();
         Random rng = new Random();
+
+        population[0].print();
+        CourseTable.getInstance().print();
 
         int generation = 0;
         int highestFitness = 0;
         while (generation++ < NUM_GENERATIONS) {
-            System.out.printf("Starting generation %d... best has %d\n", generation, highestFitness);
+            //System.out.printf("Starting generation %d... best has %d\n", generation, highestFitness);
             Schedule[] newPopulation = new Schedule[POPULATION_SIZE];
 
             /*
