@@ -19,7 +19,7 @@ This is achieved with different views that address different requirements. Adjus
 
 Sometimes it will be required to see a calendar where courses can be moved. This will include the ability to filter and edit what data is being presented.
 
-![](https://github.com/mazfil/lab-allocator/blob/main/docs/ui/select-cal-courses.gif)
+![](https://github.com/mazfil/lab-allocator/blob/main/docs/ui/select-cal-course.gif)
 
 In the case of courses being adjusted, location clashes may occur. It is important that the user is notified of these clashes so that they can be addressed. The purpose of the project will make addressing these occurences easier and more accessible by providing more information that clients currently cannot easily obtain.
 
