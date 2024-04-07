@@ -1,24 +1,39 @@
 import {Component} from 'react';
 import UploadData from '../overlays/UploadData';
 import {createRef, useState} from 'react';
+import NavBar from '../components/nav/NavBar';
 
 function Dashboard(props){
-  const [dropBoxVisibility, setVisibility] = useState(true)
+  const [dropBoxVisibility, setVisibility] = useState(false)
+  const navigate = props.navigate;
 
   const toggleDropBox = () => {
+    console.log("toggles")
     setVisibility(!dropBoxVisibility);
   }
+
+  const handleFile = (file) => {
+    console.log(file);
+    setVisibility(false);
+    var fileReader = new FileReader();
+    fileReader.onloadend = fileReader.result;
+    console.log(fileReader.readAsText(file[0]));
+  }
+
 
   return(
     <div className='dashboard'>
       {dropBoxVisibility ? 
         <div>
           <div className='file-drop-box-overlay' onClick={toggleDropBox} />
-          <UploadData/> 
+          <UploadData handleFile={handleFile}></UploadData>
+          
         </div>
         
         : null
         }
+        
+
         
         <div className='main-logo'>
              <img src={process.env.PUBLIC_URL + '/ANU Primary Horizontal GoldBlack.svg'} alt='ANU Logo with Gold Crest and the words Australian National University ' />

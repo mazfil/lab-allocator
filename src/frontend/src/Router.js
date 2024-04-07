@@ -16,8 +16,8 @@ export const Router = () => {
         <Routes>
             {/*<Route path='/' element={<Login />} />*/}
             <Route path='/' element={<Dashboard navigate={navigate}/>} />
-            <Route path='/Manage-Data' element={<ManageData />}/>
-            <Route path='/Manage-Timetable' element={<ManageTimetable />}/>
+            <Route path='/Manage-Data' element={<ManageData navigate={navigate} tab={'manage-data'}/>}/>
+            <Route path='/Manage-Timetable' element={<ManageTimetable navigate={navigate} tab={'manage-timetable'}/>}/>
             <Route path='/About' element={<About />}/>
             <Route path='/Support' element={<Support />}/>
         </Routes>

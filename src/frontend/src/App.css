@@ -27,6 +27,7 @@
   height: 100vh;
 }
 
+
 .dashboard{
   display: block;
   height: fit-content;
@@ -142,16 +143,17 @@ button:hover{
   display: inline;
   justify-content: center;
   background-color: var(--white);
-  width: fit-content;
-  height: fit-content;
+  width: 384px;
+  height: 128px;
   padding: 32px;
   border-radius: 16px;
   border-style: dashed;
   border-color: var(--gold);
+  transition: 5s;
 }
 
-.submitted-files{
-  display: flex;
+.file-container{
+  display: inline;
   margin: auto;
   justify-content: center;
   width: 100%;
@@ -159,12 +161,15 @@ button:hover{
   text-align: center;
 }
 
-.submitted-files > h3{
-  height: 100%;
+.file-contents, .dropbox-title{
   display: flex;
   margin-top: auto;
   margin-bottom: auto;
-  padding: 16px;
   justify-content: center;
   text-align: center;
+}
+
+.file-contents, h2{
+  margin: auto 0 auto 0;
+  padding-left: 8px;
 }
