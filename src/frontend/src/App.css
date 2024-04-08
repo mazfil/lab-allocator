@@ -174,13 +174,43 @@ button:hover{
   padding-left: 8px;
 }
 
-.data-table{
+.manage-data-page{
   display: flex;
   width: 100%;
   height: 100%;
 }
 
+.manage-data-content{
+  margin: auto;
+}
+
+.data-table, .edit-data{
+  margin: auto;
+}
+
 table{
-  margin-left: auto;
-  margin-right: auto;
+  margin: auto;
+  height: fit-content;
+}
+
+table, th, td{
+  border: 1px solid;
+  border-collapse: collapse;
+  padding: 8px;
+}
+
+form{
+  display: flex;
+}
+
+fieldset{
+  width: fit-content;
+}
+
+input{
+  display: flex;
+}
+
+#lab_days{
+  display: inline;
 }
