@@ -1,4 +1,5 @@
 import {Component} from 'react';
+import NavBar from '../components/nav/NavBar';
 
 export default class ManageTimetable extends Component{
     constructor(props){
@@ -6,8 +7,8 @@ export default class ManageTimetable extends Component{
     }
     render(){
         return(
+            <NavBar navigate={this.props.navigate} tab={'manage-timetable'}></NavBar>
             // TODO: Code for Timetable Management Page
-            <p>Manage Timetable</p>
         )
     }
 }

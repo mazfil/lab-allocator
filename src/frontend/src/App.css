@@ -27,6 +27,7 @@
   height: 100vh;
 }
 
+
 .dashboard{
   display: block;
   height: fit-content;
@@ -119,4 +120,56 @@ button:hover{
 }
 .control-gap{
   height: 2em;
+}
+
+
+.file-drop-box-overlay, .file-drop-box{
+  position: absolute;
+  display: flex;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+}
+
+.file-drop-box-overlay{
+  width: 100vw;
+  height: 100vh;
+  background-color: #000000c0;
+}
+
+.file-drop-box{
+  margin: auto;
+  display: inline;
+  justify-content: center;
+  background-color: var(--white);
+  width: 384px;
+  height: 128px;
+  padding: 32px;
+  border-radius: 16px;
+  border-style: dashed;
+  border-color: var(--gold);
+  transition: 5s;
+}
+
+.file-container{
+  display: inline;
+  margin: auto;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.file-contents, .dropbox-title{
+  display: flex;
+  margin-top: auto;
+  margin-bottom: auto;
+  justify-content: center;
+  text-align: center;
+}
+
+.file-contents, h2{
+  margin: auto 0 auto 0;
+  padding-left: 8px;
 }
