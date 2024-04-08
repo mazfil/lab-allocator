@@ -1,2 +1,4 @@
 /.idea/
 /out/
+/src/backend/build/
+/src/backend/.gradle/
