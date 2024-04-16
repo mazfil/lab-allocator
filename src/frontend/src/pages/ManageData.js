@@ -1,7 +1,6 @@
 import NavBar from '../components/nav/NavBar';
 import { useState } from 'react';
 import {collection, getDocs} from 'firebase/firestore'
-import {db} from '../firebase';
 import { useEffect } from 'react';
 function ManageData(props){
 
@@ -10,10 +9,11 @@ function ManageData(props){
     
 
     const fetchPost = async () => {
-        await getDocs(collection(db, "course_data"))
+        await getDocs(collection(props.db, "course_data"))
             .then((querySnapshot)=>{               
                 const newData = querySnapshot.docs.map((doc) => ({...doc.data(), id: doc.id}));
                 setCourseData(newData);
+                console.log(newData);
             })
     }
 
