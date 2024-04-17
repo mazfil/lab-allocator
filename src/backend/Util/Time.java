@@ -1,4 +1,7 @@
+
 package Util;
+
+import java.util.Objects;
 
 public class Time {
     public enum Day {
@@ -50,7 +53,7 @@ public class Time {
         if (minute % 30 != 0) {
             throw new RuntimeException("CourseTime cannot be created on a non-multiple of 30 minutes!");
         }
-        if (hour < 8 || hour >= 20) {
+        if (hour < 8 ||  hour >= 20) {
             throw new RuntimeException("CourseTime out of range! (past 8pm or before 8am!)");
         }
         this.day = day;
@@ -71,5 +74,18 @@ public class Time {
 
     public Day getDay() {
         return day;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Time time = (Time) o;
+        return timeIndex == time.timeIndex && day == time.day;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(timeIndex, day);
     }
 }
