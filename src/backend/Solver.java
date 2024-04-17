@@ -50,7 +50,7 @@ public class Solver {
         int generation = 0;
         int highestFitness = 0;
         while (generation++ < NUM_GENERATIONS) {
-            //System.out.printf("Starting generation %d... best has %d\n", generation, highestFitness);
+            System.out.printf("Starting generation %d... best has %d\n", generation, highestFitness);
             Schedule[] newPopulation = new Schedule[POPULATION_SIZE];
 
             /*
@@ -84,6 +84,8 @@ public class Solver {
         }
 
         Arrays.sort(population, Comparator.comparingInt(Schedule::getFitness));
+        population[population.length - 1].print();
+
         return population[population.length - 1];
     }
 }
