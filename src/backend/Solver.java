@@ -1,4 +1,3 @@
-
 import Courses.CourseTable;
 import Scheduling.Schedule;
 
