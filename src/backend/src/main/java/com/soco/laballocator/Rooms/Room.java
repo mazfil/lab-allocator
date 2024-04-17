@@ -9,6 +9,10 @@ public class Room {
         return maxCapacity;
     }
 
+    public int getId() {
+        return id;
+    }
+
     Room(int id, int maxCapacity, String name) {
         this.id = id;
         this.maxCapacity = maxCapacity;
