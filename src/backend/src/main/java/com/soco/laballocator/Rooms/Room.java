@@ -1,4 +1,4 @@
-package Rooms;
+package com.soco.laballocator.Rooms;
 
 public class Room {
     int maxCapacity;

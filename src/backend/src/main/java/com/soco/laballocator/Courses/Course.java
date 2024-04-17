@@ -1,6 +1,6 @@
-package Courses;
+package com.soco.laballocator.Courses;
 
-import Util.Time;
+import com.soco.laballocator.Util.Time;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -29,8 +29,6 @@ public class Course {
     int numTutors;
     int tutorRatio;
     int id;
-
-
 
     public int getId() {
         return id;
@@ -68,6 +66,7 @@ public class Course {
         /*
          * TODO: need to initialise object properly, e.g. from file or database
          */
+
         this.numStudents = (8 - id) * 55;
         this.labLengthMinutes = id % 3 == 0 ? 120 : 90;
         this.numTutors = 3 + numStudents / 75;

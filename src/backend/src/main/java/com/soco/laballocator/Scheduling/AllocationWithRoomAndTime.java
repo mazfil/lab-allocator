@@ -1,8 +1,8 @@
-package Scheduling;
+package com.soco.laballocator.Scheduling;
 
-import Courses.Course;
-import Rooms.Room;
-import Util.Time;
+import com.soco.laballocator.Courses.Course;
+import com.soco.laballocator.Rooms.Room;
+import com.soco.laballocator.Util.Time;
 
 /**
  * This class is a workaround for implementing the crossover method more easily by

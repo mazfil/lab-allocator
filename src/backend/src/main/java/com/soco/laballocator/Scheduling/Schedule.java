@@ -1,10 +1,10 @@
-package Scheduling;
+package com.soco.laballocator.Scheduling;
 
-import Courses.Course;
-import Courses.CourseTable;
-import Rooms.Room;
-import Rooms.RoomTable;
-import Util.Time;
+import com.soco.laballocator.Courses.Course;
+import com.soco.laballocator.Courses.CourseTable;
+import com.soco.laballocator.Rooms.Room;
+import com.soco.laballocator.Rooms.RoomTable;
+import com.soco.laballocator.Util.Time;
 
 import java.util.*;
 

@@ -1,5 +1,4 @@
-
-package Util;
+package com.soco.laballocator.Util;
 
 import java.util.Objects;
 
@@ -53,7 +52,7 @@ public class Time {
         if (minute % 30 != 0) {
             throw new RuntimeException("CourseTime cannot be created on a non-multiple of 30 minutes!");
         }
-        if (hour < 8 ||  hour >= 20) {
+        if (hour < 8 || hour >= 20) {
             throw new RuntimeException("CourseTime out of range! (past 8pm or before 8am!)");
         }
         this.day = day;
