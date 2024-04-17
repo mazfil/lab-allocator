@@ -1,5 +1,7 @@
 package com.soco.laballocator.Util;
 
+import java.util.Objects;
+
 public class Time {
     public enum Day {
         Monday,
@@ -71,5 +73,18 @@ public class Time {
 
     public Day getDay() {
         return day;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Time time = (Time) o;
+        return timeIndex == time.timeIndex && day == time.day;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(timeIndex, day);
     }
 }

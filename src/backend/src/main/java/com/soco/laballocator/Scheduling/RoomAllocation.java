@@ -76,6 +76,25 @@ public class RoomAllocation {
     }
 
     /**
+     * Remove a lab in this room which starts at the given time.
+     *
+     * @param startTime The start time of an existing lab
+     */
+    public void removeAllocation(Time startTime) {
+        int day = startTime.getDay().getIndex();
+        int time = startTime.getIndex();
+        if (timeAllocations[day][time] == null || timeAllocations[day][time].isContinuation()) {
+            throw new RuntimeException("To remove a lab, must give the start time of an existing lab");
+        }
+        timeAllocations[day][time] = null;
+        int i = 1;
+        while (time + i < Time.NUM_TIME_INDICES && timeAllocations[day][time + i] != null && timeAllocations[day][time + i].isContinuation()) {
+            timeAllocations[day][time + i] = null;
+            i++;
+        }
+    }
+
+    /**
      * Produces a list of all the times throughout the week where a lab of a given length could
      * be scheduled in this room without clashing with anything else.
      *
@@ -125,7 +144,7 @@ public class RoomAllocation {
         int day = time.getDay().getIndex();
         int timeIndex = time.getIndex();
         for (int i = 0; i < chunks; ++i) {
-            if (timeAllocations[day][timeIndex + i] != null) {
+            if (timeIndex + i >= Time.NUM_TIME_INDICES || timeAllocations[day][timeIndex + i] != null) {
                 free = false;
                 break;
             }

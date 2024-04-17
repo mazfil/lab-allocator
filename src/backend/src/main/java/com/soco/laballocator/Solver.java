@@ -8,15 +8,15 @@ import java.util.Comparator;
 import java.util.Random;
 
 public class Solver {
-    final static int NUM_GENERATIONS = 10;
+    final static int NUM_GENERATIONS = 30;
 
-    final static int POPULATION_SIZE = 5000;
+    final static int POPULATION_SIZE = 10000;
 
     /**
      * The number of solutions that are eligible for combining into the next generation. Solutions not
      * in the mating pool get discarded.
      */
-    final static int MATING_POOL_SIZE = (POPULATION_SIZE / 20);
+    final static int MATING_POOL_SIZE = (POPULATION_SIZE / 10);
 
     /**
      * The number of solutions that get copied directly across to the next generation without needing
@@ -86,7 +86,6 @@ public class Solver {
         }
 
         Arrays.sort(population, Comparator.comparingInt(Schedule::getFitness));
-
         population[population.length - 1].print();
 
         return population[population.length - 1];
