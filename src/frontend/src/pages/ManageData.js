@@ -2,19 +2,14 @@ import NavBar from '../components/nav/NavBar';
 import { useState } from 'react';
 import {collection, getDocs} from 'firebase/firestore'
 import { useEffect } from 'react';
+import * as helpers from "../utils/helperFunctions.js";
+
 function ManageData(props){
 
     const [course_data, setCourseData] = useState([]);
 
-    
-
     const fetchPost = async () => {
-        await getDocs(collection(props.db, "course_data"))
-            .then((querySnapshot)=>{               
-                const newData = querySnapshot.docs.map((doc) => ({...doc.data(), id: doc.id}));
-                setCourseData(newData);
-                console.log(newData);
-            })
+        setCourseData(await helpers.getData("course_data"))
     }
 
     useEffect(() => {fetchPost();}, [])

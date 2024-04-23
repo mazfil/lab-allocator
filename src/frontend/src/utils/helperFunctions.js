@@ -1,4 +1,6 @@
 import { doc, setDoc } from "firebase/firestore";
+import {collection, getDocs} from 'firebase/firestore'
+import {database} from '../firebase';
 
 /**
  * Creates class objects from csv file uploads to firebase.
@@ -95,4 +97,16 @@ export async function uploadCourseData(course_data, db){
     delete course[course_code]
     setDoc(doc(db, "course_data", course_code), course);
   });
+}
+
+/**
+ * Returns the data of the specified document in the database
+ * @param {String} document
+ * @returns Array of Data
+ */
+export async function getData(document){
+  return await getDocs(collection(database, document))
+            .then((querySnapshot)=>{               
+                return querySnapshot.docs.map((doc) => ({...doc.data(), id: doc.id}));
+            })
 }
