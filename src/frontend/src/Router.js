@@ -8,6 +8,7 @@ import Support from './pages/Support';
 //import Login from './pages/Login'
 //import UploadData from './overlays/UploadData';
 //import Status from './overlays/Status';
+import {database} from './firebase';
 
 export const Router = () => {
     const navigate = useNavigate();
@@ -15,8 +16,8 @@ export const Router = () => {
     return(
         <Routes>
             {/*<Route path='/' element={<Login />} />*/}
-            <Route path='/' element={<Dashboard navigate={navigate}/>} />
-            <Route path='/Manage-Data' element={<ManageData navigate={navigate} tab={'manage-data'}/>}/>
+            <Route path='/' element={<Dashboard navigate={navigate} db={database}/>} />
+            <Route path='/Manage-Data' element={<ManageData navigate={navigate} tab={'manage-data'} db={database}/>}/>
             <Route path='/Manage-Timetable' element={<ManageTimetable navigate={navigate} tab={'manage-timetable'}/>}/>
             <Route path='/About' element={<About />}/>
             <Route path='/Support' element={<Support />}/>
