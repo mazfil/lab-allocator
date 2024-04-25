@@ -15,6 +15,39 @@ public class Schedule {
      */
     RoomAllocation[] roomAllocations;
 
+
+    public record Weighting(double off, double low, double med, double high, double def) {}
+
+    /**
+     * A preference for a fitness function that describes how much weighting it should be given
+     * @param name name of the preference
+     * @param weighting record with predefined values for off, low, med, high, and default
+     * @param preference which of the predefined values is currently being used (between 0 and 4, select like an array)
+     */
+    public record Preference(String name, Weighting weighting, int preference) {}
+
+    Preference[] preferences = new Preference[]{
+        new Preference ("freeSpace", new Weighting(0, 0.5, 1, 2, 1), 4),
+        new Preference ("betweenTimes", new Weighting(0, 0.5, 1, 2, 1), 4),
+        new Preference ("earlyOpts", new Weighting(0, 0.5, 1, 2, 1), 4),
+        new Preference ("lateOpts", new Weighting(0, 0.5, 1, 2, 1), 4),
+        new Preference ("dateVariance", new Weighting(0, 0.5, 1, 2, 1), 4),
+        new Preference ("roomVariance", new Weighting(0, 0.5, 1, 2, 1), 4),
+        new Preference ("reduceDupes", new Weighting(0, 0.5, 1, 2, 1), 4),
+        new Preference ("reduceClashes", new Weighting(0, 0.5, 1, 2, 1), 4),
+        new Preference ("repeatLabsSameRoom", new Weighting(0, 0.5, 1, 2, 1), 4),
+        new Preference ("alwaysFreeRoom", new Weighting(0, 0.5, 1, 2, 1), 4),
+    };
+
+    //variables used for the fitness functions, which the user will eventually set
+    public int startTimePreference = 4; //10am
+    public int endTimePreference = 16; //4pm
+    public int desiredPercentBetween = 70;
+    public int beforeTimePreference = 4;
+    public int desiredPercentBefore = 15;
+    public int afterTimePreference = 16;
+    public int desiredPercentAfter = 15;
+
     /**
      * Initialises the `roomAllocations` array by creating each of the objects within it.
      * Must be called before using the rest of the object.
@@ -105,7 +138,12 @@ public class Schedule {
             }
         }
         System.out.print("\n");
-        System.out.printf("FREE SPACE: %.2f%%\n", getPercentageFree() * 100);
+        System.out.printf("FREE SPACE: %.2f\n", getPercentageFree());
+        System.out.printf("TIMES WITHIN: %.2f\n", aimForPercentWithin(startTimePreference, endTimePreference, desiredPercentBetween));
+        System.out.printf("TIMES BEFORE: %.2f\n", aimForPercentBeforeTime(desiredPercentBefore, beforeTimePreference));
+        System.out.printf("TIMES AFTER: %.2f\n", aimForPercentAfterTime(desiredPercentAfter, afterTimePreference));
+        System.out.printf("DATE VARIANCE: %.2f\n", getDateVariance());
+        System.out.printf("ROOM VARIANCE: %.2f\n", getRoomVariance());
         System.out.printf("FITNESS: %d\n", getFitness());
     }
 
@@ -226,12 +264,51 @@ public class Schedule {
     }
 
     /**
+     * Calculates the fitness value for the current schedule. The fitness value should be
+     * deterministic, and higher values indicate a better schedule. Each of the functions
+     * that contribute to the fitness output a value between 0 and 1000, and are multiplied
+     * by the modifiers in 'preferences'.
+     *
+     * @return The fitness value (should be non-negative).
+     */
+    public int getFitness() {
+
+        double fitness = 0;
+        fitness += getPercentageFree()*getModifier(preferences[0]);
+        fitness += aimForPercentWithin(startTimePreference, endTimePreference, desiredPercentBetween)*getModifier(preferences[1]);
+        fitness += aimForPercentBeforeTime(desiredPercentBefore, beforeTimePreference)*getModifier(preferences[2]);
+        fitness += aimForPercentAfterTime(desiredPercentAfter, afterTimePreference)*getModifier(preferences[3]);
+        fitness += getDateVariance()*getModifier(preferences[4]);
+        fitness += getRoomVariance()*getModifier(preferences[5]);
+        return (int)fitness;
+
+        /*
+         * TODO: things that could be considered here are:
+         *  - room utilisation (done)
+         *  - having most classes between certain times (done)
+         *  - having some classes before a certain time (done)
+         *  - having some classes after a certain time (done)
+         *  - variance throughout days for each class (done)
+         *  - variance throughout rooms for each day (done)
+         *  - tutor workload (how many back-to-back tutorials?)
+         *  - gaps in the day for e.g. drop ins to happen, or for people to study (but not too many!)
+         *  - the number of labs of the same class that runs at the same time
+         *      -> generally may want to minimise to increase options for students
+         *      -> might *not* want to for really popular times though
+         *  - the number of other labs for other classes that run at that time (i.e. minimise clashes)
+         *  - having back-to-back labs in the same room (e.g. to save tutors with back-to-back classes walking)
+         *  - convener preferences
+         *  - at least one room free in each time slot
+         */
+    }
+
+    /**
      * Calculates the percentage of time that is free across all rooms. This is given by the number of
      * half-hour blocks taken up by labs (across all rooms), divided by the total number of half-hour
      * blocks (across all rooms).
      *
-     * @return The percentage free as a value from 0 to 1, where 0 is all half-hour blocks across the school
-     * are used, and 1 being that nothing is scheduled.
+     * @return The percentage free as a value from 0 to 1000, where 0 is all half-hour blocks across the school
+     * are used, and 1000 being that nothing is scheduled.
      */
     public double getPercentageFree() {
         int totalSlots = Time.NUM_DAYS * Time.NUM_TIME_INDICES * RoomTable.getInstance().totalNumberOfRooms();
@@ -251,40 +328,192 @@ public class Schedule {
          * The `totalUsed / totalSlots` calculation gives the percentage of time used,
          * but we need to negate it to get free time.
          */
-        return 1 - (double) totalUsed / (double) totalSlots;
+        return (1 - (double) totalUsed / (double) totalSlots)*1000;
     }
 
     /**
-     * Calculates the fitness value for the current schedule. The fitness value should be
-     * deterministic, and higher values indicate a better schedule.
-     *
-     * @return The fitness value (should be non-negative).
+     * Returns the variety of the timetable in terms of how "spread out" each
+     * course's tuts are among the days of the week.
+     * @return A double between 0 and 1000. Values closer to 1000 mean that
+     * the timetable has low variety (and is spread out well).
      */
-    public int getFitness() {
-        double freeSpace = getPercentageFree();
+    public double getDateVariance(){
+        double fitness = 0;
+        int numCourses = CourseTable.getInstance().getTotalNumberOfCourses();
+        double blocksUsed[][] = new double[numCourses][Time.NUM_DAYS];
+        //make an array that contains, for each course, how many tuts it has on each day
+        for(RoomAllocation ra : roomAllocations){
+            for(int day = 0; day < Time.NUM_DAYS; day++){
+                for(int time = 0; time < Time.NUM_TIME_INDICES; time++){
+                    if(ra.timeAllocations[day][time] != null) {
+                        Allocation a = ra.timeAllocations[day][time];
+                        int courseID = a.getCourse().getId();
+                        blocksUsed[courseID][day]++;
+                    }
+                }
+            }
+        }
+        //calculate the variance between days of each course
+        for (int i = 0; i < numCourses; i++){
+            double var = variance(blocksUsed[i]);
+            //we want the variance to be low (because then there are a good amount of tuts on all days)
+            //use 1/sqrt(variance+1), and scale based on the number of courses
+            fitness += 1000*Math.pow(var+1, -0.5)/(double)numCourses;
+        }
+        return fitness;
+    }
 
-        /*
-         * TODO: things that could be considered here are:
-         *  - tutor workload (how many back-to-back tutorials?)
-         *  - gaps in the day for e.g. drop ins to happen, or for people to study (but not too many!)
-         *  - having classes spread throughout the week for variety (e.g. ideally on all days)
-         *  - having most classes during e.g. 10am-4pm
-         *  - having options for early and late classes for people who, e.g. might have commitments during the day
-         *  - room utilisation (already taken care of in the 'freeSpace' variable)
-         *  - the number of labs of the same class that runs at the same time
-         *      -> generally may want to minimise to increase options for students
-         *      -> might *not* want to for really popular times though
-         *  - the number of other labs for other classes that run at that time (i.e. minimise clashes)
-         *  - having back-to-back labs in the same room (e.g. to save tutors with back-to-back classes walking)
-         *  - convener preferences
-         *  - at least one room free in each time slot
-         *  - even utilisation of all rooms?
-         */
+    /**
+     * Returns the variety of the timetable in terms of how "spread out" the
+     * tuts are in each room, on each day.
+     * @return A double between 0 and 1000. Values closer to 1000 mean that
+     * the timetable has low variety (and is spread out well).
+     */
+    public double getRoomVariance(){
+        double fitness = 0;
+        int numRooms = RoomTable.getInstance().totalNumberOfRooms();
+        double timesRoomsUsed[][] = new double[Time.NUM_DAYS][numRooms];
+        //make an array that contains, for each room, how many tuts it has on each day
+        for(RoomAllocation ra : roomAllocations){
+            int roomID = ra.getRoom().getId();
+            for(int day = 0; day < Time.NUM_DAYS; day++){
+                for(int time = 0; time < Time.NUM_TIME_INDICES; time++){
+                    if(ra.timeAllocations[day][time] != null) {
+                        timesRoomsUsed[day][roomID]++;
+                    }
+                }
+            }
+        }
+        //calculate the variance between rooms of each day
+        for (int i = 0; i < Time.NUM_DAYS; i++){
+            double var = variance(timesRoomsUsed[i]);
+            //we want the variance to be low (because then there are a good amount of tuts on all days)
+            //use 1/sqrt(variance+1), and scale based on the number of courses
+            fitness += 1000*Math.pow(var+1, -0.5)/(double)Time.NUM_DAYS;
+        }
+        return fitness;
+    }
 
-        return (int) (
-                freeSpace * 10000
-                /* TODO: more things go in here later on... */
-        );
+    /**
+     * Returns a value between 0 and 1000 representing how close the timetable
+     * is to having a specific percent of classes before a specific time.
+     * @param desiredPercent the desired percent of classes before a time
+     * @param start the time the classes should be after (inclusive)
+     * @param end the time the classes should be before (inclusive)
+     * @return The return value is a curve such that, the close the actual
+     * percent of classes is to the desired percent, the more rapidly it approaches 1000.
+     */
+
+    public double aimForPercentWithin(int start, int end, double desiredPercent){
+        double totalTuts = 0;
+        double totalWithin = 0;
+        for (RoomAllocation allocation: roomAllocations) {
+            for (int day = 0; day < Time.NUM_DAYS; ++day) {
+                for (int time = 0; time < Time.NUM_TIME_INDICES; ++time) {
+                    if (allocation.getAllocations()[day][time] != null) {
+                        totalTuts++;
+                        if(time <= end && time >= start){
+                            totalWithin++;
+                        }
+                    }
+                }
+            }
+        }
+        //diff = difference between desired and actual percentage (abs)
+        //return 1/sqrt(diff/2+1), to get a nice curve
+        double diff = Math.abs(desiredPercent -(totalWithin/totalTuts*100));
+        return 1000*Math.pow(diff/2+1, -0.5);
+    }
+
+    /**
+     * Returns a value between 0 and 1000 representing how close the timetable
+     * is to having a specific percent of classes before a specific time.
+     * @param desiredPercent the desired percent of classes before a time
+     * @param before the time the classes should be before (inclusive)
+     * @return The return value is a curve such that, the close the actual
+     * percent of classes is to the desired percent, the more rapidly it approaches 1000.
+     */
+    public double aimForPercentBeforeTime(double desiredPercent, int before){
+        double totalTuts = 0;
+        double totalBefore = 0;
+        for (RoomAllocation allocation: roomAllocations) {
+            for (int day = 0; day < Time.NUM_DAYS; ++day) {
+                for (int time = 0; time < Time.NUM_TIME_INDICES; ++time) {
+                    if (allocation.getAllocations()[day][time] != null) {
+                        totalTuts++;
+                        if(time <= before){
+                            totalBefore++;
+                        }
+                    }
+                }
+            }
+        }
+        //diff = difference between desired and actual percentage (abs)
+        //return 1/sqrt(diff/2+1), to get a nice curve
+        double diff = Math.abs(desiredPercent-(totalBefore/totalTuts*100));
+        return 1000*Math.pow(diff/2+1, -0.5);
+    }
+
+    /**
+     * Returns a value between 0 and 1000 representing how close the timetable
+     * is to having a specific percent of classes before a specific time.
+     * @param desiredPercent the desired percent of classes before a time
+     * @param after the time the classes should be before (inclusive)
+     * @return The return value is a curve such that, the close the actual
+     * percent of classes is to the desired percent, the more rapidly it approaches 1000.
+     */
+    public double aimForPercentAfterTime(double desiredPercent, int after){
+        double totalTuts = 0;
+        double totalAfter = 0;
+        for (RoomAllocation ra: roomAllocations) {
+            for (int day = 0; day < Time.NUM_DAYS; ++day) {
+                for (int time = 0; time < Time.NUM_TIME_INDICES; ++time) {
+                    if (ra.timeAllocations[day][time] != null) {
+                        totalTuts++;
+                        if(time >= after){
+                            totalAfter++;
+                        }
+                    }
+                }
+            }
+        }
+        //diff = difference between desired and actual percentage (abs)
+        //return 1/sqrt(diff/2+1), to get a nice curve
+        double diff = Math.abs(desiredPercent-(totalAfter/totalTuts*100));
+        return 1000*Math.pow(diff/2+1, -0.5);
+    }
+
+    public double getModifier(Preference pref){
+        return switch (pref.preference) {
+            case 0 -> pref.weighting.off;
+            case 1 -> pref.weighting.low;
+            case 2 -> pref.weighting.med;
+            case 3 -> pref.weighting.high;
+            case 4 -> pref.weighting.def;
+            default -> throw new RuntimeException("invalid value for preference");
+        };
+    }
+
+    //some maths helper functions, not sure if they should be in another class
+
+    public double sum(double[] array){
+        double sum = 0;
+        for(double d : array){
+            sum += d;
+        }
+        return sum;
+    }
+
+    public double mean(double[] array){
+        return sum(array)/array.length;
+    }
+
+    public double variance(double[] array){
+        double mean = mean(array);
+        for(int i = 0; i < array.length; i++){
+            array[i] = Math.pow((array[i]-mean), 2);
+        }
+        return sum(array)/array.length;
     }
 }
 
