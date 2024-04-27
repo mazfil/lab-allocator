@@ -214,3 +214,8 @@ input{
 #lab_days{
   display: inline;
 }
+
+.manageTimetable{
+  width: 100vw;
+  height: 100vh;
+}

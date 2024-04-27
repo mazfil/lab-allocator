@@ -1,5 +1,5 @@
-import { doc, setDoc } from "firebase/firestore";
-import {collection, getDocs} from 'firebase/firestore'
+import { doc, setDoc, where } from "firebase/firestore";
+import {collection, getDocs, query} from 'firebase/firestore'
 import {database} from '../firebase';
 
 /**
@@ -109,4 +109,53 @@ export async function getData(document){
             .then((querySnapshot)=>{               
                 return querySnapshot.docs.map((doc) => ({...doc.data(), id: doc.id}));
             })
+}
+
+export function createRoomObject(){
+  let roomObject = [];
+  for(let i = 8; i < 20; i++){
+    roomObject.push({})
+    roomObject.push({ })
+  }
+  return roomObject;
+}
+
+function dayToNum(day){
+  switch (day){
+    case "Mon":
+      return "1";
+    case "Tue":
+      return "2";
+    case "Wed":
+      return "3";
+    case "Thur":
+      return "4";
+    case "Fri":
+      return "5";
+  }
+}
+
+/**
+ * 
+ * @returns Object with an array of tutorials in each room organised by their time
+ */
+export async function getRoomTimetables(){
+  const timetable = await getData("timetable/"+(await getData("timetable"))[0].id+"/tutorials");
+  const calendarData = [];
+
+  timetable.forEach(tutorial => {
+    calendarData.push({
+      start: "2024-01-01",
+      end: "2024-30-12",
+      startTime: tutorial.time+":00:00",
+      endTime: (tutorial.time + (tutorial.length / 60)) + ":00:00",
+      daysOfWeek: dayToNum(tutorial.day),
+      title: tutorial.id,
+      editable: true,
+      overlap: true
+    })
+  });
+
+  console.log(calendarData)
+  return calendarData;
 }
