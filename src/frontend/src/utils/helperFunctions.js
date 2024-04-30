@@ -1,7 +1,7 @@
 import { doc, setDoc, where } from "firebase/firestore";
 import {collection, getDocs, query} from 'firebase/firestore'
 import {database} from '../firebase';
-import data from "../sampletimetable.json"
+import data from "../propersampledata.json"
 
 
 /**
@@ -207,7 +207,7 @@ function createClass(room, tutorial){
   const time = (tutorial.time)
   var start_time;
   var end_time;
-  if(["COMP1100", "COMP2120", "COMP4600", "COMP2310"].includes(tutorial.code)){
+  if(["COMP1100"  , "COMP2120", "COMP4600", "COMP2310"].includes(tutorial.code)){
     if(time % 2){
       start_time = Math.floor((tutorial.time/2) + 8) + ":30:00"
       end_time = Math.floor((tutorial.time/2) + 10) + ":30:00" 

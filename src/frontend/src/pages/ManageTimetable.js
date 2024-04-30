@@ -37,6 +37,7 @@ function ManageTimetable(props){
 
     const fetchPost = async () => {
         initData(await helpers.getRoomTimetables());
+
     }
 
     useEffect(() => {fetchPost();}, [])
