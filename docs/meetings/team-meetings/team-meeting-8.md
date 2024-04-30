@@ -1,8 +1,8 @@
 # Team Meeting #8 - 30/04/2024
 
-*Meeting Minutes by [Name]*
+*Meeting Minutes by Edward Nivison*
 
-## Attendance ([Attendance]/7):
+## Attendance (7/7):
 
 - [X] Alex Boxall
 - [X] Hexuan Meng
