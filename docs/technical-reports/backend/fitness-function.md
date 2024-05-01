@@ -4,15 +4,15 @@
  
  1. `freeSpace` - the percentage of timeblocks where no tutorial is scheduled.
  2. `betweenTimes` - aims to get a certain percentage of classes between two times, all variables defined by the user:
-     a. `startTimePreference`
-     b. `endTimePreference`
-     c. `desiredTimeBetween`
+   a. `startTimePreference`
+   b. `endTimePreference`
+   c. `desiredTimeBetween`
 3. `earlyOpts` - aims to get a certain percentage of classes before a certain time, variables defined by the user:
-     a. `beforeTimePreference`
-     b. `desiredPercentBefore`
+   a. `beforeTimePreference`
+   b. `desiredPercentBefore`
 4. `lateOpts` - aims to get a certain percentage of classes after a certain time, variables defined by the user:
-     a. `afterTimePreference`
-     b. `desiredPercentAfter`
+   a. `afterTimePreference`
+   b. `desiredPercentAfter`
 5. `dateVariance` - the variance in the number of classes per day, done for each class and averaged
 6. `roomVariance` - the variance in the number of classes per room, done for each day and averaged
 7. `reduceDupes` - the percentage of classes that are NOT dupes
