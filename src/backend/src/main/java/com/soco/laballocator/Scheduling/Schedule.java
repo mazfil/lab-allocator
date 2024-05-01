@@ -14,10 +14,10 @@ public class Schedule {
      * Each entry in the array refers to a different room, and they are in index order.
      */
     RoomAllocation[] roomAllocations;
+    int numCourses = RoomTable.getInstance().totalNumberOfRooms();
 
 
     public record Weighting(double off, double low, double med, double high, double def) {}
-
     /**
      * A preference for a fitness function that describes how much weighting it should be given
      * @param name name of the preference
@@ -34,9 +34,8 @@ public class Schedule {
         new Preference ("dateVariance", new Weighting(0, 0.5, 1, 2, 1), 4),
         new Preference ("roomVariance", new Weighting(0, 0.5, 1, 2, 1), 4),
         new Preference ("reduceDupes", new Weighting(0, 0.5, 1, 2, 1), 4),
-        new Preference ("reduceClashes", new Weighting(0, 0.5, 1, 2, 1), 4),
-        new Preference ("repeatLabsSameRoom", new Weighting(0, 0.5, 1, 2, 1), 4),
         new Preference ("alwaysFreeRoom", new Weighting(0, 0.5, 1, 2, 1), 4),
+        new Preference ("repeatLabsSameRoom", new Weighting(0, 0.5, 1, 2, 1), 4)
     };
 
     //variables used for the fitness functions, which the user will eventually set
@@ -53,7 +52,7 @@ public class Schedule {
      * Must be called before using the rest of the object.
      */
     private void initialiseAllocationArray() {
-        roomAllocations = new RoomAllocation[RoomTable.getInstance().totalNumberOfRooms()];
+        roomAllocations = new RoomAllocation[numCourses];
         for (int i = 0; i < roomAllocations.length; ++i) {
             roomAllocations[i] = new RoomAllocation(RoomTable.getInstance().getRoomFromId(i));
         }
@@ -76,7 +75,7 @@ public class Schedule {
          * If we go through all of them and can't find space, then we can't fit the constraints.
          */
         List<Integer> shuffled = new ArrayList<>();
-        for (int i = 0; i < RoomTable.getInstance().totalNumberOfRooms(); ++i) {
+        for (int i = 0; i < numCourses; ++i) {
             shuffled.add(i);
         }
         Collections.shuffle(shuffled);
@@ -112,7 +111,7 @@ public class Schedule {
 
         for (int day = 0; day < Time.NUM_DAYS; ++day) {
             System.out.printf("\n%14s", "");
-            for (int i = 0; i < RoomTable.getInstance().totalNumberOfRooms(); ++i) {
+            for (int i = 0; i < numCourses; ++i) {
                 System.out.printf("%-14s ", RoomTable.getInstance().getRoomNameFromId(i));
             }
             System.out.print("\n");
@@ -124,7 +123,7 @@ public class Schedule {
                         (time % 2) * 30
                 );
 
-                for (int i = 0; i < RoomTable.getInstance().totalNumberOfRooms(); ++i) {
+                for (int i = 0; i < numCourses; ++i) {
                     Allocation allocation = roomAllocations[i].getAllocations()[day][time];
                     if (allocation == null) {
                         System.out.print("---            ");
@@ -144,6 +143,9 @@ public class Schedule {
         System.out.printf("TIMES AFTER: %.2f\n", aimForPercentAfterTime(desiredPercentAfter, afterTimePreference));
         System.out.printf("DATE VARIANCE: %.2f\n", getDateVariance());
         System.out.printf("ROOM VARIANCE: %.2f\n", getRoomVariance());
+        System.out.printf("AVOID DUPES: %.2f\n", 1000 - getPercentDupes());
+        System.out.printf("ALWAYS FREE ROOM: %.2f\n", alwaysRoomFree());
+        System.out.printf("REPEAT LABS SAME ROOM: %.2f\n", repeatLabsSameRoom());
         System.out.printf("FITNESS: %d\n", getFitness());
     }
 
@@ -220,7 +222,7 @@ public class Schedule {
      */
     private List<AllocationWithRoomAndTime> convertScheduleToList() {
         List<AllocationWithRoomAndTime> allAllocations = new ArrayList<>();
-        for (int roomId = 0; roomId < RoomTable.getInstance().totalNumberOfRooms(); ++roomId) {
+        for (int roomId = 0; roomId < numCourses; ++roomId) {
             Room room = RoomTable.getInstance().getRoomFromId(roomId);
             for (int dayIndex = 0; dayIndex < Time.NUM_DAYS; ++dayIndex) {
                 for (int timeIndex = 0; timeIndex < Time.NUM_TIME_INDICES; ++timeIndex) {
@@ -280,6 +282,9 @@ public class Schedule {
         fitness += aimForPercentAfterTime(desiredPercentAfter, afterTimePreference)*getModifier(preferences[3]);
         fitness += getDateVariance()*getModifier(preferences[4]);
         fitness += getRoomVariance()*getModifier(preferences[5]);
+        fitness += 1000 - (getPercentDupes()*getModifier(preferences[6]));
+        fitness += alwaysRoomFree()*getModifier(preferences[7]);
+        fitness += repeatLabsSameRoom()*getModifier(preferences[8]);
         return (int)fitness;
 
         /*
@@ -290,15 +295,15 @@ public class Schedule {
          *  - having some classes after a certain time (done)
          *  - variance throughout days for each class (done)
          *  - variance throughout rooms for each day (done)
-         *  - tutor workload (how many back-to-back tutorials?)
-         *  - gaps in the day for e.g. drop ins to happen, or for people to study (but not too many!)
-         *  - the number of labs of the same class that runs at the same time
+         *  - the number of labs of the same class that runs at the same time (done)
          *      -> generally may want to minimise to increase options for students
          *      -> might *not* want to for really popular times though
+         *  - always have a room free (done)
+         *  - tutor workload (how many back-to-back tutorials?)
+         *  - gaps in the day for e.g. drop ins to happen, or for people to study (but not too many!)         *
          *  - the number of other labs for other classes that run at that time (i.e. minimise clashes)
          *  - having back-to-back labs in the same room (e.g. to save tutors with back-to-back classes walking)
          *  - convener preferences
-         *  - at least one room free in each time slot
          */
     }
 
@@ -311,7 +316,7 @@ public class Schedule {
      * are used, and 1000 being that nothing is scheduled.
      */
     public double getPercentageFree() {
-        int totalSlots = Time.NUM_DAYS * Time.NUM_TIME_INDICES * RoomTable.getInstance().totalNumberOfRooms();
+        int totalSlots = Time.NUM_DAYS * Time.NUM_TIME_INDICES * numCourses;
         int totalUsed = 0;
 
         for (RoomAllocation allocation: roomAllocations) {
@@ -371,7 +376,7 @@ public class Schedule {
      */
     public double getRoomVariance(){
         double fitness = 0;
-        int numRooms = RoomTable.getInstance().totalNumberOfRooms();
+        int numRooms = numCourses;
         double timesRoomsUsed[][] = new double[Time.NUM_DAYS][numRooms];
         //make an array that contains, for each room, how many tuts it has on each day
         for(RoomAllocation ra : roomAllocations){
@@ -481,6 +486,115 @@ public class Schedule {
         //return 1/sqrt(diff/2+1), to get a nice curve
         double diff = Math.abs(desiredPercent-(totalAfter/totalTuts*100));
         return 1000*Math.pow(diff/2+1, -0.5);
+    }
+
+    /**
+     * Returns the percentage of timeblocks that are a duplicate of another timeblock
+     * (that is, the same time and the same class) as a value between 0 and 1000.
+     * The first of such timeblocks is not considered a duplicate - e.g. if there
+     * are 3 timeblocks with the same time and class, 2 of them are considered
+     * duplicates.
+     */
+    public double getPercentDupes(){
+        double totalBlocks = 0;
+        double dupeBlocks = 0;
+        int numRooms = numCourses;
+        for(int day = 0; day < Time.NUM_DAYS; day++){
+            for(int time = 0; time < Time.NUM_TIME_INDICES; time++){
+                // for each timeblock (day + time), go through each room and see what tuts there are.
+                // if there are any duplicate courses, increment dupeBlocks.
+                boolean[] tutExists = new boolean[numRooms];
+                for(int room = 0; room < numRooms; room++){
+                    Allocation a = roomAllocations[room].timeAllocations[day][time];
+                    if(a != null){
+                        totalBlocks++;
+                        int courseID = a.getCourse().getId();
+                        if(tutExists[courseID] == false){
+                            tutExists[courseID] = true;
+                        }else{
+                            dupeBlocks++;
+                        }
+                    }
+                }
+            }
+        }
+        return dupeBlocks/totalBlocks*1000;
+    }
+
+    /**
+     * Returns the percent of the time that there is at least one free room,
+     * as a value between 0 and 1000.
+     */
+    public double alwaysRoomFree(){
+        double numTimeblocks = Time.NUM_DAYS*Time.NUM_TIME_INDICES;
+        double numTimeblocksFreeRoom = 0;
+        for(int day = 0; day < Time.NUM_DAYS; day++){
+            for(int time = 0; time < Time.NUM_TIME_INDICES; time++){
+                for(int room = 0; room < numCourses; room++){
+                    if(roomAllocations[room].timeAllocations[day][time] == null){
+                        numTimeblocksFreeRoom++;
+                        break;
+                    }
+                }
+            }
+        }
+        return numTimeblocksFreeRoom/numTimeblocks*1000;
+    }
+
+    /**
+     * Returns the percentage of repeating labs that occur in the same room,
+     * as a value between 0 and 1000.
+     */
+
+    public double repeatLabsSameRoom() {
+        double repeatingLabsSameRoom = 0;
+        for (int room = 0; room < RoomTable.getInstance().totalNumberOfRooms(); room++) {
+            for (int day = 0; day < Time.NUM_DAYS; day++) {
+                int prevCourseID = 0;
+                int curCourseID = 0;
+                for (int time = 0; time < Time.NUM_TIME_INDICES; time++) {
+                    Allocation a = roomAllocations[room].timeAllocations[day][time];
+                    if (a != null) {
+                        curCourseID = a.getCourse().getId();
+                        //if 'a' is the start of a lab, and it is the same as the prev lab, it is repeating same room
+                        if (!a.isContinuation() && curCourseID == prevCourseID) {
+                            repeatingLabsSameRoom++;
+                        }
+                    }
+                    prevCourseID = curCourseID;
+                }
+            }
+        }
+        return repeatingLabsSameRoom / numberOfRepeatLabs() * 1000;
+    }
+
+    /**
+     * Returns the number of repeated labs in the timetable. A repeated lab
+     * is when a lab for a course is immediately followed by another lab
+     * for that course, in any room.
+     */
+
+    public double numberOfRepeatLabs(){
+        double repeatingLabs = 0;
+        boolean hadLab[] = new boolean[numCourses];
+        boolean hasLab[] = new boolean[numCourses];
+        for(int day = 0; day < Time.NUM_DAYS; day++){
+            for(int time = 0; time < Time.NUM_TIME_INDICES; time++){
+                for(int room = 0; room < RoomTable.getInstance().totalNumberOfRooms(); room++){
+                    Allocation a = roomAllocations[room].timeAllocations[day][time];
+                    if(a != null){
+                        int courseID = a.getCourse().getId();
+                        //if 'a' is the start of a lab, that course had a lab before, and it isn't the start of the day, it is repeating
+                        if(!a.isContinuation() && hadLab[courseID] && time != 0){
+                            repeatingLabs++;
+                        }
+                        hasLab[courseID] = true;
+                    }
+                }
+                hadLab = hasLab;
+            }
+        }
+        return repeatingLabs;
     }
 
     public double getModifier(Preference pref){
