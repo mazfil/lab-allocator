@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import * as helpers from "../utils/helperFunctions.js";
 import FullCalendar from '@fullcalendar/react';
 import timeGridPlugin from '@fullcalendar/timegrid'
+import interactionPlugin from '@fullcalendar/interaction'
 
 function ManageTimetable(props){
     const [filteredTimetable, setFilteredData] = useState([]);
@@ -15,7 +16,6 @@ function ManageTimetable(props){
     const initData = async (t) => {
         setTimetable(t)
         filterData(t);
-        
     }
 
     const filterData = async (t) => {
@@ -37,7 +37,6 @@ function ManageTimetable(props){
 
     const fetchPost = async () => {
         initData(await helpers.getRoomTimetables());
-
     }
 
     useEffect(() => {fetchPost();}, [])
@@ -47,7 +46,7 @@ function ManageTimetable(props){
             <NavBar navigate={props.navigate} tab={'manage-data'}></NavBar>
             <div className='timetable-calendar'>
                 <FullCalendar
-                plugins={[ timeGridPlugin ]}
+                plugins={[ timeGridPlugin, interactionPlugin ]}
                 initialView="timeGridWeek"
                 weekends={false}
                 slotMinTime={"08:00:00"}
@@ -71,6 +70,9 @@ function ManageTimetable(props){
                     end: '' // will normally be on the right. if RTL, will be on the left
                 }}
                 events={filteredTimetable}
+                editable={true}
+                eventDrop={function(event){console.log(event.event._def)}}
+                eventClick={function(event){}}
                 />
             </div>
 
