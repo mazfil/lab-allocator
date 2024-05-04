@@ -160,11 +160,9 @@ export async function getRoomTimetables(){
         colour = '#333333'
     }
     tutorial.backgroundColor = colour;
-    tutorial.eventStartEditable = true;
+    tutorial.durationEditable = false
     tutorial.borderColor = "#000000"
   });
-  console.log(timetable)
   return timetable;
 }
-
 

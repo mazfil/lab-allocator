@@ -1,7 +1,5 @@
-import {Component} from 'react';
 import NavBar from '../components/nav/NavBar';
 import { useState } from 'react';
-import {collection, getDocs, get} from 'firebase/firestore'
 import { useEffect } from 'react';
 import * as helpers from "../utils/helperFunctions.js";
 import FullCalendar from '@fullcalendar/react';
@@ -13,15 +11,11 @@ function ManageTimetable(props){
     const [timetable, setTimetable] = useState([]);
     const [activeView, setView] = useState(['HN1.23', 'HN1.24', 'N109', 'N111', 'N112', 'N113', 'N114', 'N115/6'])
 
-    const initData = async (t) => {
+    const updateData = async (t) => {
         setTimetable(t)
-        filterData(t);
+        setFilteredData(t.filter((tut) => activeView.includes(tut.location)))
     }
 
-    const filterData = async (t) => {
-        const filteredData = t.filter((tut) => activeView.includes(tut.location))
-        setFilteredData(filteredData)
-    }
 
     const toggleView = (room) => {
         var viewable = activeView;
@@ -32,11 +26,19 @@ function ManageTimetable(props){
             viewable.push(room)
         }
         setView(viewable)
-        filterData(timetable);
+        updateData(timetable);
+    }
+
+    const updateTutorial = async (tutorial) => {
+        var editedTutorial = await timetable.find((tuts) => tuts.id == tutorial.event.id)
+        editedTutorial.startTime = tutorial.event.start.getHours() + ":" + (tutorial.event.start.getMinutes() == 0 ? "00" : "30")
+        editedTutorial.endTime = tutorial.event.end.getHours() + ":" + (tutorial.event.end.getMinutes() == 0 ? "00" : "30")
+        editedTutorial.daysOfWeek = tutorial.event.start.getDay().toString()
+        updateData(timetable)
     }
 
     const fetchPost = async () => {
-        initData(await helpers.getRoomTimetables());
+        updateData(await helpers.getRoomTimetables());
     }
 
     useEffect(() => {fetchPost();}, [])
@@ -53,6 +55,7 @@ function ManageTimetable(props){
                 slotMaxTime={"21:00:00"}
                 initialDate={"2024-01-01"}
                 dayHeaderFormat={{ weekday: 'short' }}
+                height={"auto"}
                 customButtons={
                     { 
                         HN123: {text: 'HN1.23', click: function() { toggleView("HN1.23") }},
@@ -69,13 +72,13 @@ function ManageTimetable(props){
                     center: 'HN123 HN124 N109 N111 N112 N113 N114 N1156',
                     end: '' // will normally be on the right. if RTL, will be on the left
                 }}
+                
                 events={filteredTimetable}
-                editable={true}
-                eventDrop={function(event){console.log(event.event._def)}}
+                eventDrop={function(event){updateTutorial(event)}}
                 eventClick={function(event){}}
+                eventOverlap={function(still, moving){return !(still._def.extendedProps.location === moving._def.extendedProps.location)}}
                 />
             </div>
-
         </div>
     );
 }
