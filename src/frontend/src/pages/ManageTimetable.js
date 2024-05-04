@@ -44,6 +44,7 @@ function ManageTimetable(props){
 
     return(
         <div className='manageTimetable'>
+            <NavBar navigate={props.navigate} tab={'manage-data'}></NavBar>
             <div className='timetable-calendar'>
                 <FullCalendar
                 plugins={[ timeGridPlugin ]}

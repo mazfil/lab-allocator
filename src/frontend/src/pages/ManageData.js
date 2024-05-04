@@ -96,6 +96,12 @@ function ManageData(props){
                         
 
                     </form>
+
+                    
+                </div>
+                <div className='course-data-buttons'>
+                <button className='save-course-data'>Save Course Data</button>
+                <button className='clear-course-data'>Clear</button>
                 </div>
                 <div className='data-table'>
                 <table>

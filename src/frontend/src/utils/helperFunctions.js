@@ -1,7 +1,7 @@
-import { doc, setDoc, where } from "firebase/firestore";
-import {collection, getDocs, query} from 'firebase/firestore'
+import { doc, setDoc } from "firebase/firestore";
+import {collection, getDocs } from 'firebase/firestore'
 import {database} from '../firebase';
-import data from "../propersampledata.json"
+import { parse } from 'papaparse';
 
 
 /**
@@ -10,96 +10,96 @@ import data from "../propersampledata.json"
  * @param {database ref} db 
  * @returns 
  */
-export async function readFileData(file, db){
-    const reader = new FileReader();
-    reader.readAsText(file);
-    reader.onload = function(event) {
-      var lines=reader.result.toString().split("\n");
-      var result = [];
-      var headers=lines[0].split(",");
-      headers[headers.length - 1] = headers[headers.length - 1].slice(0, -1); 
-      
-      for(var i=1;i<lines.length;i++){
-          var obj = {};
-          var currentline=lines[i].split(",");
-          for(var j=0;j<headers.length;j++){
-              obj[headers[j]] = currentline[j];
-          }
-          result.push(obj);
+export async function readFileData(file){
+  const parseOptions = {
+    header: true,
+    dynamicTyping: true,
+    transform: (value, header) => {return convertData(value, header)}
+  }
+
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    // Remove the excel header so header is replaced with code friendly header.
+    var lines = reader.result.split("\n");
+    lines.splice(0, 1);
+    var course_data = parse(lines.join("\n"), parseOptions).data
+
+    // Nests the lectures and tutorial preferences in the course object
+    // uploads course object to firebase.
+    course_data.forEach(course => {
+      if(course.course_code == null){
+        return;
       }
 
-      result.pop();
-      
-
-      result.forEach(course => {
-        if(course.course_code != null){
-          course.time_range = course.time_range.split(" ").map(Number);
-          course.days = course.days.split(" ")
-          course.lectures = course.lectures.split(" ")
-          course.lectures[course.lectures.length -1] = course.lectures[course.lectures.length -1].slice(0, -1);
-          
-          for(let i = 0; i < course.lectures.length; i++){
-            var lec = course.lectures.splice(0, 3);
-            lec[1] = parseInt(lec[1])
-            lec[2] = parseInt(lec[2])
-            course.lectures.push(lec)
-
-          }
-          course.after_lecture = course.after_lecture === 'TRUE';
-          course.byod = course.byod === 'TRUE';
-          course.mix_cohorts = course.mix_cohorts === 'TRUE';
-          course.projector = course.projector === 'TRUE';
-          course.course_size = parseInt(course.course_size)
-          course.cohorts = parseInt(course.cohorts)
-          course.duration = parseInt(course.duration)
-          course.tutors = parseInt(course.tutors)
-
-          course.lab_preferences = {}
-          moveToNestedElement(course, 'lab_preferences', 'after_lecture', course.after_lecture)
-          moveToNestedElement(course, 'lab_preferences', 'byod', course.byod)
-          moveToNestedElement(course, 'lab_preferences', 'days', course.days)
-          moveToNestedElement(course, 'lab_preferences', 'duration', course.duration)
-          moveToNestedElement(course, 'lab_preferences', 'projector', course.projector)
-          moveToNestedElement(course, 'lab_preferences', 'time_range', course.time_range)
-          
-          course.lectures = Object.assign({}, course.lectures)
-          
-
-        }
-        
+      // Nests lectures
+      course.lectures = {};
+      ["lec_1", "lec_2", "lec_3", "lec_4"]
+      .forEach(lecture => {
+        if (course[lecture] != null) { course.lectures[lecture] = course[lecture] }
+        delete course[lecture]
       });
 
-    uploadCourseData(result, db)
-    return (result)
-    }
-    return null;
+      // Nests Tutorial Preferences
+      course.tutorial_properties = {};
+      ["after_lecture", "byod", "projector", "tut_days", "tut_duration", "tut_end_time", "tut_start_time"]
+      .forEach(property => {
+        course.tutorial_properties[property] = course[property]
+        delete course[property]
+      });
+
+      uploadCourse(course);
+    });
+  }
+
+  reader.readAsText(file);
+  return;
 }
+
 
 /**
- * Moves object parameter from main object to nested object within the main object
- * @param {Object} mainObject 
- * @param {Object} nestedObject 
- * @param {Key} key 
- * @param {Value} value 
+ * Uploads single course element to firebase
+ * @param {Object} course - Object that is uploaded to course_data document
  */
-export function moveToNestedElement(mainObject, nestedObject, key, value){
-  mainObject[nestedObject][key] = value;
-  delete mainObject[key]
-
+async function uploadCourse(course){
+  const course_code = course.course_code;
+  delete course[course_code]
+  await setDoc(doc(database, "course_data_testing", course_code), course);
 }
+
 
 /**
- * Uplaods course data to firestore.
- * @param {Array<Object>} course_data 
- * @param {database ref} db 
+ * Returns csv spreadsheet data as usable variable types.
+ * @param {Value} value - The variable that is converted
+ * @param {String} header - Header of the variable being converted
+ * @returns Converted Variable
  */
-export async function uploadCourseData(course_data, db){
-  await course_data.forEach(course => {
-    const course_code = course.course_code;
-    delete course[course_code]
-    setDoc(doc(db, "course_data", course_code), course);
-  });
+function convertData(value, header){
+  if (value === ""){
+    return null
+  }
+  switch (value) {
+    case "Yes":
+      return true;
+    case "No":
+      return false;
+    default:
+      break;
+  }
+
+  switch (header) {
+    case "tut_days":
+      return value.split(';');
+    case "lec_1":
+    case "lec_2":
+    case "lec_3":
+    case "lec_4":
+      var lec = value.split(";");
+      return({ day: lec[0], time: Number(lec[1]), duration: Number(lec[2]) })
+    default:
+      return value;
+  }
 }
+
 
 /**
  * Returns the data of the specified document in the database
@@ -122,21 +122,6 @@ export function createRoomObject(){
   return roomObject;
 }
 
-function dayToNum(day){
-  switch (day){
-    case "Mon":
-      return "1";
-    case "Tue":
-      return "2";
-    case "Wed":
-      return "3";
-    case "Thur":
-      return "4";
-    case "Fri":
-      return "5";
-  }
-}
-
 
 /**
  * 
@@ -153,7 +138,7 @@ export async function getRoomTimetables(){
       case("HN1.24"):
         colour = "#f46a9b";
         break;
-      case("HN109"):
+      case("N109"):
         colour = "#ef9b20";
         break;
       case("N111"):
@@ -171,6 +156,8 @@ export async function getRoomTimetables(){
       case("N115/6"):
         colour = "#b33dc6";
         break;
+      default:
+        colour = '#333333'
     }
     tutorial.backgroundColor = colour;
   });
@@ -179,58 +166,3 @@ export async function getRoomTimetables(){
 }
 
 
-
-
-
-
-
-// ------------------------------------------------
-// DONT CALL BELOW FOR ANYTHING - THIS IS ONLY USED TO UPLOAD SAMPLE DATA TO FIREBASE
-//
-export function uploadSampleData(){
-  const sampleData = data;
-  let i = 0;
-  sampleData.rooms.forEach(room => {
-    i = 0
-    room.allocations.forEach(tut => {
-      i++
-      const code = tut.code + "_" + i
-      setDoc(doc(database, "timetable/dev_sample_data/tutorials", code), createClass(room.room.split(' ')[0], tut));
-
-
-    })
-  });
-
-}
-
-function createClass(room, tutorial){
-  const time = (tutorial.time)
-  var start_time;
-  var end_time;
-  if(["COMP1100"  , "COMP2120", "COMP4600", "COMP2310"].includes(tutorial.code)){
-    if(time % 2){
-      start_time = Math.floor((tutorial.time/2) + 8) + ":30:00"
-      end_time = Math.floor((tutorial.time/2) + 10) + ":30:00" 
-    }else{
-      start_time = (tutorial.time/2 + 8) + ":00:00"
-      end_time = (tutorial.time/2 + 10) + ":00:00" 
-    }
-  }else{
-    if(time % 2){
-      start_time = Math.floor((tutorial.time/2) + 8) + ":30:00"
-      end_time = Math.floor((tutorial.time/2) + 10) + ":00:00" 
-    }else{
-      start_time = (tutorial.time/2 + 8) + ":00:00"
-      end_time = (tutorial.time/2 + 9) + ":30:00" 
-    }
-  }
-  return({
-    startTime: start_time,
-    endTime: end_time,
-    daysOfWeek: (tutorial.day + 1).toString(),
-    title: tutorial.code,
-    editable: true,
-    overlap: true,
-    location: room,
-  })
-}
