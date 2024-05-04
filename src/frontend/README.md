@@ -9,7 +9,8 @@ Check that they are sucessefuly installed with `node -v` & `npm -v`.
 Make sure your have all of these dependencies installed if youre running the React App.\
 `npm i react-router-dom`\
 `npm i firebase`\
-`npm i @fullcalendar/react @fullcalendar/core @fullcalendar/daygrid @fullcalendar/timegrid`
+`npm i @fullcalendar/react @fullcalendar/core @fullcalendar/daygrid @fullcalendar/timegrid @fullcalendar/interaction`
+`npm i react-papaparse papaparse`
 
 ### Running the App!
 To run the interface, in terminal, simply `cd` to the frontend directory `lab-allocator/src/frontend/`.
