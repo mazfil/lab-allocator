@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import * as helpers from "../utils/helperFunctions.js";
+import { usePapaParse } from 'react-papaparse';
 
 
 function Dashboard(props){
@@ -7,23 +8,30 @@ function Dashboard(props){
 
   // Hides or Shows the drop box data input.
   const toggleDropBox = () => {
-    console.log("toggles")
     setVisibility(!dropBoxVisibility);
+  }
+
+  // Prevents the upload data panel from closing when clicking 
+  const stopDBClose = (event) => {
+    event.stopPropagation();
   }
 
   //Takes file input and sends to helper functions, uploads course data.
   const handleFile = () => {
-    helpers.readFileData(document.getElementById("df").files[0], props.db)
-    setVisibility(!dropBoxVisibility);
+    helpers.readFileData(document.getElementById("df").files[0])
+    toggleDropBox();
   }
 
   return(
     <div className='dashboard'>
       {dropBoxVisibility ? 
-        <div className='file-drop-box-overlay'>
-          <div className='file-drop-box'>
-            <input type="file" id="df" accept='.csv' webkitdirectory></input>
-            <button onClick={handleFile}>upload</button>
+        <div className='file-drop-box-overlay' onClick={toggleDropBox}>
+          <div className='file-drop-box' onClick={stopDBClose}>
+            <div className='file-input'>
+              <input type="file" id="df" accept='.csv'></input>
+              <a className='template-link' href={process.env.PUBLIC_URL + '/Course_Data_Excel_Template.xlsx'} ><p>Download Excel Template File Here</p></a>
+              <button onClick={handleFile}>Upload</button>
+            </div>
           </div>
         </div>
         : null
@@ -56,6 +64,7 @@ function Dashboard(props){
             <button type="button">Status</button>
           </div>
         </div> 
+        
         
         
     </div>
