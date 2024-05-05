@@ -99,8 +99,6 @@ public class Solver {
 
     public static void main(String[] args) {
         Schedule solution = new Solver().solve();
-        solution.writeJSON("/Users/alex/Desktop/Uni/COMP3500/data/test.json");
-
         FirebaseConnection fb = new FirebaseConnection();
         fb.uploadSchedule(solution);
     }

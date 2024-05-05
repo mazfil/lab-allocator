@@ -26,7 +26,9 @@ public class FirebaseConnection {
 
         FileInputStream serviceAccount = null;
         try {
-            serviceAccount = new FileInputStream("/Users/alex/Desktop/Uni/COMP3500/soco-lab-allocator-firebase-adminsdk-47s5x-29bbde27c5.json");
+            String privateKeyFile = System.getProperty("user.home") + "/soco-lab-allocator-firebase-adminsdk-47s5x-29bbde27c5.json";
+            System.out.printf("SECRET KEY IS AT %s\n", privateKeyFile);
+            serviceAccount = new FileInputStream(privateKeyFile);
             FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
                     .build();
