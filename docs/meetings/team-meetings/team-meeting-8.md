@@ -42,3 +42,5 @@ Main Decisions made:
 - Proof read any scripts and create video for upload on friday.
 - Revise any design decisions on poster.
 - Re-iterate any necessary items to be completed before audit 3 week.
+
+- Talk about the handover process, summary is in the landing page. But should be a proper document that entails everything there is to know about the process and how to pick it up.
