@@ -112,7 +112,7 @@ public class FirebaseConnection {
             put("borderColor", "#000000");
             put("durationEditable", false);
             put("editable", true);
-            put("overlap", "true");
+            put("overlap", true);
         }};
         db.collection("timetable").document("backend-test-data").collection("tutorials").document(lab).set(addMap);
     }
