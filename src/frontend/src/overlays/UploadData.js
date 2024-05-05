@@ -1,6 +1,7 @@
 import {Component} from 'react';
 import Dropzone, {useDropzone, FileWithPath} from 'react-dropzone';
 import {useState} from 'react';
+import csvToJSON from './helperFunctions'
 
 const UploadData = (props) => {
     const [fileVisibility, setFileVisibility] = useState(false)
@@ -9,10 +10,11 @@ const UploadData = (props) => {
         setFileVisibility(!fileVisibility);
     }
 
+
     
     const {getRootProps, getInputProps} = useDropzone({
         accept: {'text/csv': []},
-        onDrop: acceptedFiles => {console.log(acceptedFiles.FileWithPath); props.handleFile(acceptedFiles);},
+        onDrop: acceptedFiles => {console.log(acceptedFiles.FileWithPath); props.handleFile(acceptedFiles)},
         // CALL API HERE
     });
 
