@@ -165,7 +165,17 @@ The IP of the solution will remain the property of the students in the group, so
 
 ## Handover process
 
-**Detail here**
+As a starting project in Semester 1, 2024 we do not have an existing codebase or project to work from. So to allow the next generation of developers for this project, we will have a detailed explanation of the project, the backend, the frontend,
+and how the logic and algorithm provides the solution to the problem that our client at the School of Computing wants solved.
+
+As a project, we are coding using Java for the backend, Springboot to talk to the server, Firebase as our "current" file server (we are looking into more long term plans with a physical server on-campus), and React as our coding language for the frontend.
+We plan to integrate all the above using an api to interface with the backend and to run the backend and server on the same device in the long run.
+
+As for developing, you can find the relevant setup process in the docs/technical-reports folder on how to setup your IDE/environment in the way that our development team has done so.
+
+There will be sufficient communication during a handover process between the prior team and the upcoming members to make sure that they understand and can reach out if there are any misunderstandings with the project.
+
+However we plan to minimise as much confusion as possible with relevant comments in the code, documentation on the github repository, and FAQs if we get a sufficient amount of common mistakes that take place.
 
 ## Technical Reports
 
