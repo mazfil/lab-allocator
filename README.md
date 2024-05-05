@@ -17,7 +17,9 @@ As SoCo is a new project beginning in Semester 1, 2024. There is currently no co
 - [Problematisation Analysis](https://github.com/mazfil/lab-allocator/blob/main/README.md#problematisation-analysis)
 - [Client's Vision and objectives](https://github.com/mazfil/lab-allocator/blob/main/README.md#clients-vision-and-objectives)
 - [Stakeholder Analysis](https://github.com/mazfil/lab-allocator/blob/main/README.md#clients-vision-and-objectives)
+- [Handover Process](https://github.com/mazfil/lab-allocator/blob/main/README.md#handover-process)
 - [Technical Reports](https://github.com/mazfil/lab-allocator/blob/main/README.md#technical-reports)
+- [Logs](https://github.com/mazfil/lab-allocator/blob/main/README.md#logs)
 - [Meeting Minutes](https://github.com/mazfil/lab-allocator/blob/main/README.md#meeting-minutes)
 - [Acknowledgements](https://github.com/mazfil/lab-allocator/blob/main/README.md#acknowledgements)
 
@@ -161,9 +163,24 @@ The IP of the solution will remain the property of the students in the group, so
 | Tutors | Effective scheduling of classes ensures that tutor to student ratios are not exceeded, making it easier for tutors to teach. |
 | Other users of the buildings in scope | Effective scheduling means less room times are taken up by labs, allowing others to use the rooms for other purposes. |
 
+## Handover process
+
+**Detail here**
+
 ## Technical Reports
 
 [Technical Reports](https://github.com/mazfil/lab-allocator/tree/main/docs/technical-reports)
+
+## Logs
+
+We have been keeping a majority of our decisions in the decisions logs but also inside of each meeting.
+Reflections are kept in their relevant logs.
+Communication with the client is consistent (when the client is available) with regular meetings and communication through email and team messages.
+
+[Decision Logs](https://github.com/mazfil/lab-allocator/tree/main/docs/meetings)
+[Audit Reflection Log](https://github.com/mazfil/lab-allocator/blob/main/docs/audit-reflection.md)
+[Reflection Log](https://github.com/mazfil/lab-allocator/blob/main/docs/reflection-log.md)
+[Client Communication Log](https://github.com/mazfil/lab-allocator/blob/main/docs/client-communication-log.md)
 
 ## Meeting Minutes
 
