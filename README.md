@@ -17,7 +17,9 @@ As SoCo is a new project beginning in Semester 1, 2024. There is currently no co
 - [Problematisation Analysis](https://github.com/mazfil/lab-allocator/blob/main/README.md#problematisation-analysis)
 - [Client's Vision and objectives](https://github.com/mazfil/lab-allocator/blob/main/README.md#clients-vision-and-objectives)
 - [Stakeholder Analysis](https://github.com/mazfil/lab-allocator/blob/main/README.md#clients-vision-and-objectives)
+- [Handover Process](https://github.com/mazfil/lab-allocator/blob/main/README.md#handover-process)
 - [Technical Reports](https://github.com/mazfil/lab-allocator/blob/main/README.md#technical-reports)
+- [Logs](https://github.com/mazfil/lab-allocator/blob/main/README.md#logs)
 - [Meeting Minutes](https://github.com/mazfil/lab-allocator/blob/main/README.md#meeting-minutes)
 - [Acknowledgements](https://github.com/mazfil/lab-allocator/blob/main/README.md#acknowledgements)
 
@@ -161,9 +163,37 @@ The IP of the solution will remain the property of the students in the group, so
 | Tutors | Effective scheduling of classes ensures that tutor to student ratios are not exceeded, making it easier for tutors to teach. |
 | Other users of the buildings in scope | Effective scheduling means less room times are taken up by labs, allowing others to use the rooms for other purposes. |
 
+## Handover process
+
+As a starting project in Semester 1, 2024 we do not have an existing codebase or project to work from. So to allow the next generation of developers for this project, we will have a detailed explanation of the project, the backend, the frontend,
+and how the logic and algorithm provides the solution to the problem that our client at the School of Computing wants solved.
+
+As a project, we are coding using Java for the backend, Springboot to talk to the server, Firebase as our "current" file server (we are looking into more long term plans with a physical server on-campus), and React as our coding language for the frontend.
+We plan to integrate all the above using an api to interface with the backend and to run the backend and server on the same device in the long run.
+
+As for developing, you can find the relevant setup process in the docs/technical-reports folder on how to setup your IDE/environment in the way that our development team has done so.
+
+There will be sufficient communication during a handover process between the prior team and the upcoming members to make sure that they understand and can reach out if there are any misunderstandings with the project.
+
+However we plan to minimise as much confusion as possible with relevant comments in the code, documentation on the github repository, and FAQs if we get a sufficient amount of common mistakes that take place.
+
 ## Technical Reports
 
 [Technical Reports](https://github.com/mazfil/lab-allocator/tree/main/docs/technical-reports)
+
+## Logs
+
+We have been keeping a majority of our decisions in the decisions logs but also inside of each meeting.
+Reflections are kept in their relevant logs.
+Communication with the client is consistent (when the client is available) with regular meetings and communication through email and team messages.
+
+[Decision Logs](https://github.com/mazfil/lab-allocator/tree/main/docs/meetings)
+
+[Audit Reflection Log](https://github.com/mazfil/lab-allocator/blob/main/docs/audit-reflection.md)
+
+[Reflection Log](https://github.com/mazfil/lab-allocator/blob/main/docs/reflection-log.md)
+
+[Client Communication Log](https://github.com/mazfil/lab-allocator/blob/main/docs/client-communication-log.md)
 
 ## Meeting Minutes
 

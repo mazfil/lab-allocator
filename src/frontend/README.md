@@ -12,9 +12,11 @@ Make sure your have all of these dependencies installed if youre running the Rea
 `npm i @fullcalendar/react @fullcalendar/core @fullcalendar/daygrid @fullcalendar/timegrid @fullcalendar/interaction`
 `npm i react-papaparse papaparse`
 
+
 ### Running the App!
 To run the interface, in terminal, simply `cd` to the frontend directory `lab-allocator/src/frontend/`.
 Run `npm install`.
 Finally, run `npm start`.
 
 You should now be able to use the frontend interface in your browser through `localhost:3000`.
+
