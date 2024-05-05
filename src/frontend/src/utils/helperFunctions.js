@@ -1,8 +1,7 @@
 import { doc, setDoc } from "firebase/firestore";
-import {collection, getDocs } from 'firebase/firestore'
+import {collection, getDocs, Timestamp } from 'firebase/firestore'
 import {database} from '../firebase';
 import { parse } from 'papaparse';
-
 
 /**
  * Creates class objects from csv file uploads to firebase.
@@ -113,24 +112,15 @@ export async function getData(document){
             })
 }
 
-export function createRoomObject(){
-  let roomObject = [];
-  for(let i = 8; i < 20; i++){
-    roomObject.push({})
-    roomObject.push({ })
-  }
-  return roomObject;
-}
-
 
 /**
- * 
+ * Creates the array of tutorials for display on the fullcalendar
  * @returns Object with an array of tutorials in each room organised by their time
  */
 export async function getRoomTimetables(){
   const timetable = await getData("timetable/"+(((await getData("timetable")).sort((a, b) => (a.created.seconds >= b.created.seconds) ? 1 : -1)))[0].id+"/tutorials");
   timetable.forEach(tutorial => {
-    var colour;
+    /*var colour;
     switch(tutorial.location){
       case("HN1.23"):
         colour = "#ea5545";
@@ -158,11 +148,24 @@ export async function getRoomTimetables(){
         break;
       default:
         colour = '#333333'
-    }
-    tutorial.backgroundColor = colour;
+    }*/
+    tutorial.backgroundColor = "#585868";
     tutorial.durationEditable = false
     tutorial.borderColor = "#000000"
   });
   return timetable;
 }
 
+/**
+ * Uploads new timetable to firebase with timestamp
+ * @param {Array of Objects} timetable 
+ */
+export async function saveTimetable(timetable){
+  const time = Date.now()
+  const loc = "timetable/" + time  
+  timetable.forEach(tutorial => {
+    setDoc(doc(database, loc + "/tutorials", tutorial.id), tutorial);
+  });
+  const timetableRef = doc(database, "timetable", time.toString());
+  setDoc(timetableRef, {created: Timestamp.now()}, {merge: true});
+}

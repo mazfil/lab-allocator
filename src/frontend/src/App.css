@@ -286,3 +286,17 @@ form{
   margin-top: 100px;
 
 }
+
+.course-filter{
+  margin: 8px auto 32px auto;
+  justify-content: center;
+  text-align: center;
+}
+
+.timetable-save {
+  display: flex;
+  margin-right: 32px;
+  margin-left: auto;
+  font-size: 1.5em;
+  padding: 8px;
+}

@@ -10,12 +10,25 @@ function ManageTimetable(props){
     const [filteredTimetable, setFilteredData] = useState([]);
     const [timetable, setTimetable] = useState([]);
     const [activeView, setView] = useState(['HN1.23', 'HN1.24', 'N109', 'N111', 'N112', 'N113', 'N114', 'N115/6'])
+    const [activeCourse, setCourseFilter] = useState(["All"])
+    const [courseList, setCourseList] = useState(["All"])
 
-    const updateData = async (t) => {
-        setTimetable(t)
-        setFilteredData(t.filter((tut) => activeView.includes(tut.location)))
+    const updateData = async (data, course) => {
+        if(course != "All"){
+            setFilteredData(data.filter((tut) => activeView.includes(tut.location)).filter((tut) => tut.title == course))
+        }else{
+            setFilteredData(data.filter((tut) => activeView.includes(tut.location)))
+        }
     }
 
+    const saveTimetable = async () => {
+        helpers.saveTimetable(timetable)
+    }
+
+    const filterByCourse = async (e) => {
+        await setCourseFilter(e.target.value);
+        updateData(timetable, e.target.value)
+    }
 
     const toggleView = (room) => {
         var viewable = activeView;
@@ -26,7 +39,7 @@ function ManageTimetable(props){
             viewable.push(room)
         }
         setView(viewable)
-        updateData(timetable);
+        updateData(timetable, activeCourse);
     }
 
     const updateTutorial = async (tutorial) => {
@@ -34,11 +47,18 @@ function ManageTimetable(props){
         editedTutorial.startTime = tutorial.event.start.getHours() + ":" + (tutorial.event.start.getMinutes() == 0 ? "00" : "30")
         editedTutorial.endTime = tutorial.event.end.getHours() + ":" + (tutorial.event.end.getMinutes() == 0 ? "00" : "30")
         editedTutorial.daysOfWeek = tutorial.event.start.getDay().toString()
-        updateData(timetable)
+        updateData(timetable, activeCourse)
+    }
+
+    const initData = async (data) => {
+        setTimetable(data)
+        setCourseList(["All", ...new Set(data.map(item => item.title))].slice(0, -1))
+        updateData(data, activeCourse)
+        console.log(data)
     }
 
     const fetchPost = async () => {
-        updateData(await helpers.getRoomTimetables());
+        const data = await helpers.getRoomTimetables().then(data => initData(data));
     }
 
     useEffect(() => {fetchPost();}, [])
@@ -46,7 +66,18 @@ function ManageTimetable(props){
     return(
         <div className='manageTimetable'>
             <NavBar navigate={props.navigate} tab={'manage-data'}></NavBar>
+
+
             <div className='timetable-calendar'>
+                <div className='course-filter'>
+                    <label for="course-filter">Filter By Course</label>
+                    <select id="filter-by-course" onChange={filterByCourse}>
+                        {courseList.map((code) => (
+                            <option value={code}>{code}</option>
+                        ))}
+                    </select>
+                </div>
+            
                 <FullCalendar
                 plugins={[ timeGridPlugin, interactionPlugin ]}
                 initialView="timeGridWeek"
@@ -72,15 +103,15 @@ function ManageTimetable(props){
                     center: 'HN123 HN124 N109 N111 N112 N113 N114 N1156',
                     end: '' // will normally be on the right. if RTL, will be on the left
                 }}
-                
+                allDaySlot={false}
                 events={filteredTimetable}
                 eventDrop={function(event){updateTutorial(event)}}
                 eventClick={function(event){}}
                 eventOverlap={function(still, moving){return !(still._def.extendedProps.location === moving._def.extendedProps.location)}}
                 />
             </div>
+            <button className='timetable-save' onClick={saveTimetable}>Save<i class="bi bi-floppy2-fill"></i></button>
         </div>
     );
 }
 export default ManageTimetable;
-
