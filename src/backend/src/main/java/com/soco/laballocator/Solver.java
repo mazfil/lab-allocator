@@ -1,6 +1,7 @@
 package com.soco.laballocator;
 
 import com.soco.laballocator.Courses.CourseTable;
+import com.soco.laballocator.Firebase.FirebaseConnection;
 import com.soco.laballocator.Scheduling.Schedule;
 
 import java.util.Arrays;
@@ -8,7 +9,7 @@ import java.util.Comparator;
 import java.util.Random;
 
 public class Solver {
-    final static int NUM_GENERATIONS = 30;
+    final static int NUM_GENERATIONS = 20;
 
     final static int POPULATION_SIZE = 10000;
 
@@ -50,18 +51,23 @@ public class Solver {
         CourseTable.getInstance().print();
 
         int generation = 0;
+        int totalGen = 0;
         int highestFitness = 0;
         while (generation++ < NUM_GENERATIONS) {
-            System.out.printf("Starting generation %d... best has %d\n", generation, highestFitness);
+
+
             Schedule[] newPopulation = new Schedule[POPULATION_SIZE];
 
             /*
              * Perform the fitness function on all elements and sort low to high based on that.
              */
             Arrays.sort(population, Comparator.comparingInt(Schedule::getFitness));
+            System.out.printf("\033[2J");
+            System.out.printf("\n\n\n\nStarting generation %d... best has %d\n", ++totalGen, highestFitness);
 
             if (population[population.length - 1].getFitness() > highestFitness) {
                 highestFitness = population[population.length - 1].getFitness();
+                //generation = 0;
             }
 
             /*
@@ -89,5 +95,11 @@ public class Solver {
         population[population.length - 1].print();
 
         return population[population.length - 1];
+    }
+
+    public static void main(String[] args) {
+        Schedule solution = new Solver().solve();
+        FirebaseConnection fb = new FirebaseConnection();
+        fb.uploadSchedule(solution);
     }
 }

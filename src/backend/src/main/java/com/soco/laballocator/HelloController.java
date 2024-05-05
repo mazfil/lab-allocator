@@ -1,5 +1,6 @@
 package com.soco.laballocator;
 
+import com.soco.laballocator.Firebase.FirebaseConnection;
 import com.soco.laballocator.Scheduling.Schedule;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -58,6 +59,8 @@ public class HelloController {
             Solver solver = new Solver();
             try {
                 Schedule schedule = solver.solve();
+                FirebaseConnection fb = new FirebaseConnection();
+                fb.uploadSchedule(schedule);
                 schedule.print();
                 serverResult = schedule;
                 status = "Ready";

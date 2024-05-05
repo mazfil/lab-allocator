@@ -1,28 +1,27 @@
 package com.soco.laballocator.Courses;
 
+import com.soco.laballocator.Firebase.FirebaseConnection;
+
+import java.util.List;
+
 /**
  * Stores a static table of information about all of the courses.
  * Can be used to look up courses via their course code.
  */
 public class CourseTable {
     static private CourseTable instance = null;
-    private final Course[] courses;
+    private Course[] courses;
+
+    // To be called by fb.loadCourses();
+    public void initCourses(List<Course> c) {
+        courses = new Course[c.size()];
+        for (int i = 0; i < courses.length; ++i) {
+            courses[i] = c.get(i);
+        }
+    }
 
     private CourseTable() {
-        /*
-         * TODO: here is where we would load in the data from the disk, database, etc.
-         */
 
-        String[] courseCodes = new String[] {
-                "COMP1100", "COMP1140", "COMP2100", "COMP2120",
-                "COMP2400", "COMP3600", "COMP4600", "COMP4550",
-                "COMP2300", "COMP2310",
-        };
-
-        courses = new Course[courseCodes.length];
-        for (int i = 0; i < courses.length; ++i) {
-            courses[i] = new Course(i, courseCodes[i]);
-        }
     }
 
     public int getTotalNumberOfCourses() {
@@ -47,7 +46,9 @@ public class CourseTable {
     static public CourseTable getInstance() {
         if (instance == null) {
             instance = new CourseTable();
+            new FirebaseConnection().loadCourses(); // here to prevent recursion
         }
+
         return instance;
     }
 }

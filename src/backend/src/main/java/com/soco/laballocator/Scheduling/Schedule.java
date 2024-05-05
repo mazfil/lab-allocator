@@ -6,6 +6,8 @@ import com.soco.laballocator.Rooms.Room;
 import com.soco.laballocator.Rooms.RoomTable;
 import com.soco.laballocator.Util.Time;
 
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class Schedule {
@@ -13,9 +15,9 @@ public class Schedule {
      * The allocations of labs to rooms and times in this particular schedule.
      * Each entry in the array refers to a different room, and they are in index order.
      */
+
     RoomAllocation[] roomAllocations;
     int numCourses = RoomTable.getInstance().totalNumberOfRooms();
-
 
     public record Weighting(double off, double low, double med, double high, double def) {}
     /**
@@ -629,5 +631,84 @@ public class Schedule {
         }
         return sum(array)/array.length;
     }
-}
 
+    public double getModifier(Preference pref){
+        return switch (pref.preference) {
+            case 0 -> pref.weighting.off;
+            case 1 -> pref.weighting.low;
+            case 2 -> pref.weighting.med;
+            case 3 -> pref.weighting.high;
+            case 4 -> pref.weighting.def;
+            default -> throw new RuntimeException("invalid value for preference");
+        };
+    }
+
+    //some maths helper functions, not sure if they should be in another class
+
+    public double sum(double[] array){
+        double sum = 0;
+        for(double d : array){
+            sum += d;
+        }
+        return sum;
+    }
+
+    public double mean(double[] array){
+        return sum(array)/array.length;
+    }
+
+    public double variance(double[] array){
+        double mean = mean(array);
+        for(int i = 0; i < array.length; i++){
+            array[i] = Math.pow((array[i]-mean), 2);
+        }
+        return sum(array)/array.length;
+    }
+
+    public void writeJSON(String filename) {
+        try {
+            PrintWriter writer = new PrintWriter(filename, StandardCharsets.UTF_8);
+            writer.printf("{\"rooms\":[");
+            for (int i = 0; i < RoomTable.getInstance().totalNumberOfRooms(); ++i) {
+                if (i != 0) writer.printf(",");
+                writer.printf("{\"room\": \"%s\",\"allocations\":[", RoomTable.getInstance().getRoomFromId(i).toString());
+                boolean first = true;
+                for (int day = 0; day < Time.NUM_DAYS; ++day) {
+                    for (int time = 0; time < Time.NUM_TIME_INDICES; ++time) {
+                        Allocation allocation = roomAllocations[i].getAllocations()[day][time];
+                        if (allocation != null && !allocation.isContinuation()) {
+                            if (!first) {
+                                writer.printf(",");
+                            }
+                            first = false;
+                            writer.printf("{\"day\": %d, \"time\": %d, \"students\": %d, \"code\": \"%s\"}", day, time, allocation.getCount(), allocation.getCourse());
+                        }
+                    }
+                }
+                writer.printf("]}\n");
+            }
+            writer.printf("]}\n");
+            writer.close();
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void printCSV() {
+        for (int i = 0; i < RoomTable.getInstance().totalNumberOfRooms(); ++i) {
+            System.out.printf("%s,", RoomTable.getInstance().getRoomFromId(i).toString());
+            for (int day = 0; day < Time.NUM_DAYS; ++day) {
+                for (int time = 0; time < Time.NUM_TIME_INDICES; ++time) {
+                    Allocation allocation = roomAllocations[i].getAllocations()[day][time];
+                    if (allocation == null) {
+                        System.out.print("null,0,false,");
+                    } else {
+                        System.out.printf("%s,%d,%s,", allocation.getCourse(), allocation.getCount(), allocation.isContinuation() ? "true" : "false");
+                    }
+                }
+            }
+            System.out.printf("\n");
+        }
+    }
+}
