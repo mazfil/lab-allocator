@@ -14,6 +14,7 @@ import com.soco.laballocator.Scheduling.Schedule;
 import com.soco.laballocator.Util.Time;
 
 import java.io.*;
+import java.time.Instant;
 import java.util.*;
 
 public class FirebaseConnection {
@@ -99,7 +100,9 @@ public class FirebaseConnection {
         return String.format("%d:%02d:00", hour, min);
     }
 
-    public void uploadAllocation(String code, String lab, Allocation alloc, String roomName, int day, int startTime) {
+    public void uploadAllocation(long time, Date date, String code, String lab, Allocation alloc, String roomName, int day, int startTime) {
+        System.out.printf("The time is: %d\n", Instant.now().getEpochSecond());
+
         Map<String, Object> addMap = new HashMap<>() {{
             put("daysOfWeek", String.valueOf(day));
             put("startTime", timeToDatabaseFormat(startTime));
@@ -114,13 +117,21 @@ public class FirebaseConnection {
             put("editable", true);
             put("overlap", true);
         }};
-        db.collection("timetable").document("backend-test-data").collection("tutorials").document(lab).set(addMap);
+
+        Map<String, Object> createdField = new HashMap<>() {{
+            put("created", date);
+        }};
+        db.collection("timetable").document(String.valueOf(time)).create(createdField);
+        db.collection("timetable").document(String.valueOf(time)).collection("tutorials").document(lab).set(addMap);
     }
 
     public void uploadSchedule(Schedule result) {
-        clearPreviousResults();
+        //clearPreviousResults();
 
         HashMap<String, Integer> labCounts = new HashMap<>();
+
+        Date date = new Date();
+        long milliseconds = System.currentTimeMillis();
 
         for (int room = 0; room < RoomTable.getInstance().totalNumberOfRooms(); ++room) {
             RoomAllocation ra = result.roomAllocations[room];
@@ -135,6 +146,8 @@ public class FirebaseConnection {
                         }
                         labCounts.put(code, labNum);
                         uploadAllocation(
+                                milliseconds,
+                                date,
                                 code,
                                 String.format("%s_%d", code, labNum),
                                 alloc,
