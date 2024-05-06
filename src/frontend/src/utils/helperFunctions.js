@@ -62,7 +62,7 @@ export async function readFileData(file){
 async function uploadCourse(course){
   const course_code = course.course_code;
   delete course[course_code]
-  await setDoc(doc(database, "course_data_testing", course_code), course);
+  await setDoc(doc(database, "course_data", course_code), course);
 }
 
 
@@ -118,7 +118,7 @@ export async function getData(document){
  * @returns Object with an array of tutorials in each room organised by their time
  */
 export async function getRoomTimetables(){
-  const timetable = await getData("timetable/"+(((await getData("timetable")).sort((a, b) => (a.created.seconds >= b.created.seconds) ? 1 : -1)))[0].id+"/tutorials");
+  const timetable = await getData("timetable/"+(((await getData("timetable")).sort((a, b) => (a.created.seconds <= b.created.seconds) ? 1 : -1)))[0].id+"/tutorials");
   timetable.forEach(tutorial => {
     /*var colour;
     switch(tutorial.location){

@@ -17,8 +17,8 @@ function Dashboard(props){
   }
 
   //Takes file input and sends to helper functions, uploads course data.
-  const handleFile = () => {
-    helpers.readFileData(document.getElementById("df").files[0])
+  const handleFile = async () => {
+    const hf = await helpers.readFileData(document.getElementById("df").files[0]).then(startBackend)
     toggleDropBox();
   }
 
@@ -65,7 +65,7 @@ function Dashboard(props){
           <div className='app-mgmt'>
             <button type="button" onClick={() =>this.props.navigate('About')}>About</button>
             <button type="button" id='help-supp' onClick={() =>this.props.navigate('Support')}>Help & Support</button>
-            <button type="button" onClick={startBackend}>Status</button>
+            <button type="button">Status</button>
           </div>
         </div> 
         
