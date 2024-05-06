@@ -498,6 +498,8 @@ public class Schedule {
      * duplicates.
      */
     public double getPercentDupes(){
+        return 1000;
+        /*
         double totalBlocks = 0;
         double dupeBlocks = 0;
         int numRooms = numCourses;
@@ -520,7 +522,7 @@ public class Schedule {
                 }
             }
         }
-        return dupeBlocks/totalBlocks*1000;
+        return dupeBlocks/totalBlocks*1000;*/
     }
 
     /**
@@ -567,7 +569,7 @@ public class Schedule {
                 }
             }
         }
-        return repeatingLabsSameRoom / numberOfRepeatLabs() * 1000;
+        return (repeatingLabsSameRoom + 1) / (numberOfRepeatLabs() + 1) * 1000;
     }
 
     /**
@@ -577,6 +579,8 @@ public class Schedule {
      */
 
     public double numberOfRepeatLabs(){
+        return 1000;
+        /*
         double repeatingLabs = 0;
         boolean hadLab[] = new boolean[numCourses];
         boolean hasLab[] = new boolean[numCourses];
@@ -596,7 +600,7 @@ public class Schedule {
                 hadLab = hasLab;
             }
         }
-        return repeatingLabs;
+        return repeatingLabs;*/
     }
 
     //some maths helper functions, not sure if they should be in another class
