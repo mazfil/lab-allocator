@@ -16,7 +16,7 @@ public class Schedule {
      * Each entry in the array refers to a different room, and they are in index order.
      */
 
-    RoomAllocation[] roomAllocations;
+    public RoomAllocation[] roomAllocations;
     int numCourses = RoomTable.getInstance().totalNumberOfRooms();
 
     public record Weighting(double off, double low, double med, double high, double def) {}
@@ -599,17 +599,6 @@ public class Schedule {
         return repeatingLabs;
     }
 
-    public double getModifier(Preference pref){
-        return switch (pref.preference) {
-            case 0 -> pref.weighting.off;
-            case 1 -> pref.weighting.low;
-            case 2 -> pref.weighting.med;
-            case 3 -> pref.weighting.high;
-            case 4 -> pref.weighting.def;
-            default -> throw new RuntimeException("invalid value for preference");
-        };
-    }
-
     //some maths helper functions, not sure if they should be in another class
 
     public double sum(double[] array){
@@ -641,28 +630,6 @@ public class Schedule {
             case 4 -> pref.weighting.def;
             default -> throw new RuntimeException("invalid value for preference");
         };
-    }
-
-    //some maths helper functions, not sure if they should be in another class
-
-    public double sum(double[] array){
-        double sum = 0;
-        for(double d : array){
-            sum += d;
-        }
-        return sum;
-    }
-
-    public double mean(double[] array){
-        return sum(array)/array.length;
-    }
-
-    public double variance(double[] array){
-        double mean = mean(array);
-        for(int i = 0; i < array.length; i++){
-            array[i] = Math.pow((array[i]-mean), 2);
-        }
-        return sum(array)/array.length;
     }
 
     public void writeJSON(String filename) {
