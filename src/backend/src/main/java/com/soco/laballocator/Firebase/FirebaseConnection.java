@@ -96,7 +96,7 @@ public class FirebaseConnection {
     public String timeToDatabaseFormat(int i) {
         int hour = i / 2 + 8;
         int min = (i % 2) * 30;
-        return String.format("%d:02%d:00", hour, min);
+        return String.format("%d:%02d:00", hour, min);
     }
 
     public void uploadAllocation(String code, String lab, Allocation alloc, String roomName, int day, int startTime) {
