@@ -22,6 +22,10 @@ function Dashboard(props){
     toggleDropBox();
   }
 
+  const startBackend = () => {
+    fetch("http://localhost:8080/start", {method: "GET"})
+  }
+
   return(
     <div className='dashboard'>
       {dropBoxVisibility ? 
@@ -61,7 +65,7 @@ function Dashboard(props){
           <div className='app-mgmt'>
             <button type="button" onClick={() =>this.props.navigate('About')}>About</button>
             <button type="button" id='help-supp' onClick={() =>this.props.navigate('Support')}>Help & Support</button>
-            <button type="button">Status</button>
+            <button type="button" onClick={startBackend}>Status</button>
           </div>
         </div> 
         
