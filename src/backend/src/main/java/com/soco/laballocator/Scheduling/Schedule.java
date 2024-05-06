@@ -171,21 +171,30 @@ public class Schedule {
      * @param b The second parent
      */
     public Schedule(Schedule a, Schedule b) {
-        initialiseAllocationArray();
         Random random = new Random();
-        int coursesNumber = CourseTable.getInstance().getTotalNumberOfCourses();
-        int[] availableSeats = new int[coursesNumber];
-        List<AllocationWithRoomAndTime> allAllocationsA = a.convertScheduleToList();
-        List<AllocationWithRoomAndTime> allAllocationsB = b.convertScheduleToList();
-        while (!allAllocationsA.isEmpty() || !allAllocationsB.isEmpty()) {
-            copyAllocationRandomly(allAllocationsA, availableSeats, random);
-            copyAllocationRandomly(allAllocationsB, availableSeats, random);
-        }
-        for (int i = 0; i < coursesNumber; ++i) {
-            Course course = CourseTable.getInstance().getCourseFromId(i);
-            int enrolledStudents = course.getNumberOfStudents();
-            while (availableSeats[i] < enrolledStudents) {
-                availableSeats[i] += placeLabRandomly(random, course);
+
+        while (true) {
+            try {
+                initialiseAllocationArray();
+                int coursesNumber = CourseTable.getInstance().getTotalNumberOfCourses();
+                int[] availableSeats = new int[coursesNumber];
+                List<AllocationWithRoomAndTime> allAllocationsA = a.convertScheduleToList();
+                List<AllocationWithRoomAndTime> allAllocationsB = b.convertScheduleToList();
+                while (!allAllocationsA.isEmpty() || !allAllocationsB.isEmpty()) {
+                    copyAllocationRandomly(allAllocationsA, availableSeats, random);
+                    copyAllocationRandomly(allAllocationsB, availableSeats, random);
+                }
+                for (int i = 0; i < coursesNumber; ++i) {
+                    Course course = CourseTable.getInstance().getCourseFromId(i);
+                    int enrolledStudents = course.getNumberOfStudents();
+                    while (availableSeats[i] < enrolledStudents) {
+                        availableSeats[i] += placeLabRandomly(random, course);
+                    }
+                }
+                break;
+
+            } catch (Exception ignored) {
+
             }
         }
     }
