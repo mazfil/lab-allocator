@@ -2,6 +2,7 @@ package com.soco.laballocator;
 
 import com.soco.laballocator.Firebase.FirebaseConnection;
 import com.soco.laballocator.Scheduling.Schedule;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,6 +16,7 @@ public class HelloController {
     String status = "Ready";
 
     @GetMapping("/")
+    @CrossOrigin
     public String index() {
         System.out.print("THE SERVER SERVED THE HOMEPAGE.\n");
         return "<a href='/start'>Click here to start allocating...</a>";
@@ -23,6 +25,7 @@ public class HelloController {
     Schedule serverResult = null;
 
     @GetMapping("/res")
+    @CrossOrigin
     public String results() {
         if (serverResult == null) {
             return """
@@ -46,11 +49,13 @@ public class HelloController {
     }
 
     @GetMapping("/status")
+    @CrossOrigin
     public String getStatus() {
         return status;
     }
 
     @GetMapping("/start")
+    @CrossOrigin
     public String start() {
         serverResult = null;
 
