@@ -31,5 +31,3 @@ Talks on licence as well for the project.
 
 
 ## Future Meetings
-
-

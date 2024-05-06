@@ -1,4 +1,3 @@
-
 # Contribution Process
 
 ## Branches
