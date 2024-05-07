@@ -15,15 +15,15 @@ import {database} from './firebase';
 export const Router = () => {
     const navigate = useNavigate();
     
-    return(
+    return( null
+        /*
         <Routes>
-            {/*<Route path='/' element={<Login />} />*/}
             <Route path='/' element={<Dashboard navigate={navigate} db={database}/>} />
-            <Route path='/Dashboard' element={<Login navigate={navigate} />} />
+            <Route path='/Login' element={<Login navigate={navigate} />} />
             <Route path='/Manage-Data' element={<ManageData navigate={navigate} tab={'manage-data'} db={database}/>}/>
             <Route path='/Manage-Timetable' element={<ManageTimetable navigate={navigate} tab={'manage-timetable'}/>}/>
             <Route path='/About' element={<About />}/>
             <Route path='/Support' element={<Support />}/>
-        </Routes>
+       </Routes>*/
     )
 }

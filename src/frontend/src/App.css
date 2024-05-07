@@ -1,15 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Public+Sans&display=swap');
 @import "bootstrap-icons/font/bootstrap-icons.css";
 
-/* REMOVE WHEN LOGO APPROVED */
-.LOGO-PLACEHOLDER{
-  color: red;
-  text-align: center;
-}
-/* ^^^^^^^^^^^^^^^^^^^^^^^^^ */
-
-
-
 :root{
   --black: #000000;
   --dark-grey-1: #0D0D0D;
@@ -55,7 +46,7 @@
   display: flex;
   padding: 2em;
   background-color: var(--gold-tint);
-  border-radius: 16px;
+  border-radius: 28px;
 }
 
 .main-controls button{
@@ -90,7 +81,7 @@
   padding-left: 2em;
   padding-right: 2em;
   background-color: var(--gold-tint);
-  border-radius: 16px;
+  border-radius: 28px;
 }
 
 button{
@@ -299,4 +290,77 @@ form{
   margin-left: auto;
   font-size: 1.5em;
   padding: 8px;
+}
+
+/* START - LOGIN PAGE */
+
+.login-page{
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.login-logo{
+  width: 64px;
+  margin-bottom: 32px;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.login-form > h2 {
+  margin-bottom: 16px;
+  width: fit-content;
+}
+
+.login-form{
+  display: inline;
+  font-size: 1.2;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+  background-color: var(--gold-tint);
+  padding: 16px;
+  border-radius: 16px;
+}
+
+.email-field > input, .password-field > input {
+  margin-top: 4px;
+  width: 100%;
+  padding: 4px;
+  box-sizing: border-box;
+}
+
+.login-buttons{
+  padding: 16px;
+  display: flex;
+}
+
+.login-buttons > button{
+  width: 128px;
+  margin: 8px;
+  height: 32px;
+}
+
+
+
+.email-field, .password-field{
+  margin-bottom: 16px;
+}
+
+
+
+
+
+/* END   - LOGIN PAGE */
+
+.logout {
+  position: absolute;
+  font-size: 1.2em;
+  right: 16px;
+  top: 16px;
+}
+
+.logout > i {
+  margin-right: 8px;
 }

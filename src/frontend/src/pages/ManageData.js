@@ -3,8 +3,10 @@ import { useState } from 'react';
 import {collection, getDocs} from 'firebase/firestore'
 import { useEffect } from 'react';
 import * as helpers from "../utils/helperFunctions.js";
+import { useNavigate } from 'react-router';
 
 function ManageData(props){
+    const navigate = useNavigate();
 
     const [course_data, setCourseData] = useState([]);
 

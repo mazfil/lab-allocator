@@ -87,6 +87,11 @@ function ManageTimetable(props){
                 initialDate={"2024-01-01"}
                 dayHeaderFormat={{ weekday: 'short' }}
                 height={"auto"}
+                headerToolbar={{
+                    start: '', // will normally be on the left. if RTL, will be on the right
+                    center: 'HN123 HN124 N109 N111 N112 N113 N114 N1156',
+                    end: '' // will normally be on the right. if RTL, will be on the left
+                }}
                 customButtons={
                     { 
                         HN123: {text: 'HN1.23', click: function() { toggleView("HN1.23") }},
@@ -98,11 +103,7 @@ function ManageTimetable(props){
                         N114: {text: 'N114', click: function() { toggleView("N114") }},
                         N1156: {text: 'N115/6', click: function() { toggleView("N115/6") }},
                     }}
-                headerToolbar={{
-                    start: '', // will normally be on the left. if RTL, will be on the right
-                    center: 'HN123 HN124 N109 N111 N112 N113 N114 N1156',
-                    end: '' // will normally be on the right. if RTL, will be on the left
-                }}
+                
                 allDaySlot={false}
                 events={filteredTimetable}
                 eventDrop={function(event){updateTutorial(event)}}

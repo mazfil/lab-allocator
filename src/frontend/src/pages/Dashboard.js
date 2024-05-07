@@ -1,10 +1,14 @@
 import {useState} from 'react';
 import * as helpers from "../utils/helperFunctions.js";
 import { usePapaParse } from 'react-papaparse';
+import {useAuth} from "../hooks/useAuth.js"
+import { getAuth } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 
 function Dashboard(props){
   const [dropBoxVisibility, setVisibility] = useState(false);
+  const navigate = useNavigate();
 
   // Hides or Shows the drop box data input.
   const toggleDropBox = () => {
@@ -26,8 +30,17 @@ function Dashboard(props){
     fetch("http://localhost:8080/start", {method: "GET"})
   }
 
+  const { logout } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+  };
+
+  console.log(getAuth())  
+
   return(
-    <div className='dashboard'>
+    <div className='dashboard' >
+      <button className='logout'onClick={handleLogout}><i class="bi bi-box-arrow-left"></i>Sign Out</button>
       {dropBoxVisibility ? 
         <div className='file-drop-box-overlay' onClick={toggleDropBox}>
           <div className='file-drop-box' onClick={stopDBClose}>
@@ -54,18 +67,18 @@ function Dashboard(props){
                 <button type="button" onClick={toggleDropBox}>Upload Data</button>
               </div>
               <div>
-                <button type="button" onClick={() =>props.navigate('Manage-Data')}>Manage Data</button>
+                <button type="button" onClick={() =>navigate('Manage-Data')}>Manage Data</button>
               </div>
             </div>
             <div className='timetable-mgmt'>
-              <button type="button" onClick={() =>props.navigate('Manage-Timetable')}>Manage Timetable</button> 
+              <button type="button" onClick={() =>navigate('Manage-Timetable')}>Manage Timetable</button> 
             </div>
           </div>
           <div className='control-gap'></div>
           <div className='app-mgmt'>
-            <button type="button" onClick={() =>this.props.navigate('About')}>About</button>
-            <button type="button" id='help-supp' onClick={() =>this.props.navigate('Support')}>Help & Support</button>
-            <button type="button">Status</button>
+            <button type="button" onClick={() =>navigate('About')}>About</button>
+            <button type="button" id='help-supp' onClick={() =>navigate('Support')}>Help & Support</button>
+            <button type="button" >Status</button>
           </div>
         </div> 
         
