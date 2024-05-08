@@ -188,6 +188,7 @@ Reflections are kept in their relevant logs.
 Communication with the client is consistent (when the client is available) with regular meetings and communication through email and team messages.
 
 [Decision Logs](https://github.com/mazfil/lab-allocator/tree/main/docs/meetings)
+
 [Decision Logs (Sheets)](https://github.com/mazfil/lab-allocator/blob/main/docs/Decision-Log.md)
 
 [Audit Reflection Log](https://github.com/mazfil/lab-allocator/blob/main/docs/audit-reflection.md)
