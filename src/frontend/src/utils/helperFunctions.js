@@ -3,6 +3,7 @@ import {collection, getDocs, Timestamp } from 'firebase/firestore'
 import {database} from '../firebase';
 import { parse } from 'papaparse';
 
+
 /**
  * Creates class objects from csv file uploads to firebase.
  * @param {csv} file 
@@ -168,4 +169,29 @@ export async function saveTimetable(timetable){
   });
   const timetableRef = doc(database, "timetable", time.toString());
   setDoc(timetableRef, {created: Timestamp.now()}, {merge: true});
+}
+
+export async function numToDay(data){
+  const result = data
+  result.forEach(course => {
+    switch(course.daysOfWeek ){
+      case "1":
+        course.day = "Monday"
+        break;
+      case "2":
+        course.day = "Tuesday"
+        break;
+      case "3":
+        course.day = "Wednesday"
+        break;
+      case "4":
+        course.day = "Thursday"
+        break;
+      case "5":
+        course.day = "Friday"
+        break;
+    }
+    
+  });
+  return result
 }
