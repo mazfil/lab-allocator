@@ -119,8 +119,10 @@ export async function getData(document){
  * @returns Object with an array of tutorials in each room organised by their time
  */
 export async function getRoomTimetables(){
-  const timetable = await getData("timetable/"+(((await getData("timetable")).sort((a, b) => (a.created.seconds <= b.created.seconds) ? 1 : -1)))[0].id+"/tutorials");
-  timetable.forEach(tutorial => {
+  var timetable = (((await getData("timetable")).sort((a, b) => (a.created.seconds <= b.created.seconds) ? 1 : -1)))[0];
+  const timetable_created = timetable.created.seconds
+  const timetable_data = await getData("timetable/"+timetable.id+"/tutorials");
+  timetable_data.forEach(tutorial => {
     /*var colour;
     switch(tutorial.location){
       case("HN1.23"):
@@ -154,8 +156,13 @@ export async function getRoomTimetables(){
     tutorial.durationEditable = false
     tutorial.borderColor = "#000000"
   });
-  return timetable;
+
+  console.log(Date.now())
+  console.log(timetable_created*1000)
+  
+  return [timetable_data, new Date(timetable_created*1000).toLocaleString()];
 }
+
 
 /**
  * Uploads new timetable to firebase with timestamp

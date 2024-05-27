@@ -301,3 +301,17 @@ form{
   padding: 8px;
   margin: 4px;
 }
+
+.manage-timetable-buttons{
+  width: 100%;
+  display: inline;
+}
+
+.created{
+  text-align: center;
+  margin-right: 8px;
+}
+
+.bottom-bar{
+  display: flex;
+}
