@@ -1,6 +1,6 @@
 # Team Meeting #1- 30/07/2024
 
-*Meeting Minutes by Edward Nivison*
+*Meeting Minutes by Edward Nivison, Alex Boxall*
 
 ## Attendance ([Attendance]/7):
 
