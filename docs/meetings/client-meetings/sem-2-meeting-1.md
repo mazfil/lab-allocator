@@ -1,0 +1,38 @@
+2/8/2024 11AM
+
+- Semester 1 2025 timetable for the school of computing is due mid-August (a few weeks)
+  - Get information about classes in August
+  - Could use the data for that semester as a trial for how the system works
+  - Things do change in between - can't finalise until lecture times are decided on
+    - Some tutorials may have to move to avoid lectures
+  - Draft timetable with central timetabling isn't due until Decemeber
+- By mid-August we wouldn't have a complete set up without us needing to use the system
+  - Can be provided with the data for that
+  - Data would all be provisional and not to be shared (although a lot of it can probably be guessed)
+  - Can probably get data provided around late-August
+    - Fits in with schedule having user testing being in weeks 5/6
+- Convenors have a separate form which they can fill out for when for personal/caring reasons cannot teach at certain times, we don't have access to this for privacy reasons
+  - Doesn't normally matter for tutorial scheduling
+- 27 teaching instances (e.g. COMP1100/COMP1130 are the same teaching instance) - will be less than this to schedule as they don't all do labs
+  - Probably around 15 of them need computer labs
+- About ~6000 individual students
+- Admin team contacts - same as last semester
+- Statement of work
+  - Success critiera
+    - Creating some documentation so it can used / worked on / updated in the future, etc. easily
+    - Both set up documentation, and e.g. user manuals
+    - Also document any limitations/restrictions with it so they know what the restrictions are and what can be expected of the system
+- Getting a prototype to Belinda
+  - Going to try to get a usable version by week 6
+  - Will be using Firebase still by then - from the teaching break onwards will try to move it to ANU server
+  - Have restrictions on software installed on ANU machines - can organise with SoCo a computer where it can be installed
+- Audit questions are very targetted to what has been delivered so far (even when that is not expected of a team)
+  - This semester should be much easier to deliver something by week 3
+  - Should think about what can be delivered by then, e.g. a demo
+- Running a demo
+- Meeting times
+  - Our team meetings will be 9-11am each Mondays
+  - Belinda to join 10am
+    - Will sometimes need to be online if not on campus
+    - May only need to be a short meeting depending on what's going on that week
+  
