@@ -40,22 +40,17 @@ As SoCo is a new project beginning in Semester 1, 2024. There is currently no co
 
 [Statement of Work](https://github.com/mazfil/lab-allocator/blob/main/docs/client-documents/Statement%20of%20work%205.c%20removed%20%201.pdf)
 
-## Project Deliverables
+## Project Schedule
 
-| Period | Milestone | 
+| Period | Tasks | 
 |--|--|
-| week 1 | Formation of the team |
-| week 2 | Draw up the first version of statement of work; Assignment of group member roles |
-| week 3 | Design the backend codebase |
-| week 4 | Database construction; Backend design; Draft on the second version of statement of work |
-| week 5 | Database construction; Design the user interface |
-| week 6 | Database construction; Design the logical function of UI |
-| week 7 | Database construction; Design and implement the algorithm of backend |
-| week 8 | Implement UI |
-| week 9 | Establish an API linking UI and database |
-| week 10 | Construct the allocation system |
-| week 11 | Testing |
-| week 12 | Testing |
+| week 1 | Reflect on the project |
+| week 2 | Client meetings, draw up a new version of statement of work, update the landing page, clean up the GitHub issues, communicate with ANU IT about server and database, team charter |
+| week 3 | Clean up GitHub issues, create detailed documentation |
+| week 4 | Developers to work on getting database setup locally without Firebase |
+| week 5 | Developers to work on getting database setup locally without Firebase, client testing, user testing, user guide, manual and help tips |
+| week 6 | Development, user testing, **milestone**: have a database running on an ANU server |
+| week 7-12 | Developers will test the front end works with a database on ANU servers, adding miscellaneous improvements | 
 
 ## Technical constraints
 
