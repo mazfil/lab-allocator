@@ -35,4 +35,6 @@
   - Belinda to join 10am
     - Will sometimes need to be online if not on campus
     - May only need to be a short meeting depending on what's going on that week
+- Additional component of the fitness function to add: trying to run multiple classes of the same code at the same time - helps with cancelling classes with low attendance
+- A minute is an acceptable time for the program to run in - 10-15 minutes is too long, up to 3-5 is probably acecptable
   
