@@ -37,4 +37,12 @@
     - May only need to be a short meeting depending on what's going on that week
 - Additional component of the fitness function to add: trying to run multiple classes of the same code at the same time - helps with cancelling classes with low attendance
 - A minute is an acceptable time for the program to run in - 10-15 minutes is too long, up to 3-5 is probably acecptable
-  
+- Can add feature of locking class in place and then allowing it to re-run the algorithm afterwards - useful if a lot of manual rearrangements need to happen
+- Colouring the courses would be useful - try to find a palette that isn't so overwhelming
+  - We can give Belinda screenshots that she can then send to admin to see if they think it's useful or not
+  - Can give example of the bright coloured one, or a muted gradients one, etc.
+- Feedback on backend algorithm
+  - Belinda can check who can take a look at schedules to see if the ones we are generating are reasonable
+  - Can also compare to current or next semester's actual lab allocation
+- Thursday 1pm-2pm
+  - Only applies to convenors, so student classes still can and do run at this time - might be less though
