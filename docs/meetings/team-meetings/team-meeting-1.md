@@ -2,7 +2,7 @@
 
 *Meeting Minutes by Edward Nivison, Alex Boxall*
 
-## Attendance ([Attendance]/7):
+## Attendance (6/7):
 
 - [X] Alex Boxall
 - [X] Hexuan Meng
