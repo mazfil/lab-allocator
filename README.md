@@ -36,7 +36,7 @@ The end vision of the project will be to have a application that will adapt to n
 
 ## Statement of Work
 
-[Statement of Work](https://github.com/mazfil/lab-allocator/blob/main/docs/Statement%20of%20Work%20-%20Semester%202%202024%20-%20UNSIGNED.pdf)
+[Statement of Work](https://github.com/mazfil/lab-allocator/blob/main/docs/client-documents/Statement%20of%20Work%20-%20Semester%202%202024%20-%20UNSIGNED.pdf)
 
 ## Project Schedule
 
