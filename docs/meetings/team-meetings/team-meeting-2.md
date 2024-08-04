@@ -90,3 +90,5 @@
   - Frontend works already with HTTPS
   - Backend doesn't matter too much as will be running on the same server
   - Database will need to work with HTTPS as frontend code on client browser will need to access database separately (as frontend code accesses database)
+- Using MySQL
+  - Simpler to use and set up than PostgreSQL, and we don't need any of the more advanced features.
