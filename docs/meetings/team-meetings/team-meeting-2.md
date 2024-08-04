@@ -37,6 +37,7 @@
     - Updating the client log
     - Making a change to the front end to add the ability to change lab room
     - Tutor/shadow team communication
+    - Look into both MySQL and MongoDB to see if it is feasible for front end
   - Edward
     - Reflection log
     - Checklist for what to fill out when working
@@ -44,6 +45,7 @@
   - Alex
     - Writing documention for setting up the backend
     - Start looking at working on features on backend
+    - Look into both MySQL and MongoDB to see if it is feasible for back end
   - Matthew
     - Look at previous team charter and see if anything needs updating
     - Start looking at working on features on backend
@@ -74,6 +76,7 @@
   - Database should work using an SQL database
   - MySQL only needs one dependency in Javascript
   - Java has JDBC libraries for both
+  - Could also use MongoDB to reduce the amount of work that has to be done/rewritten
   
 ## Action items:
 - Move decision log items across from meeting minutes last week to decision log
@@ -90,5 +93,4 @@
   - Frontend works already with HTTPS
   - Backend doesn't matter too much as will be running on the same server
   - Database will need to work with HTTPS as frontend code on client browser will need to access database separately (as frontend code accesses database)
-- Using MySQL
-  - Simpler to use and set up than PostgreSQL, and we don't need any of the more advanced features.
+
