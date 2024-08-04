@@ -38,7 +38,7 @@ As SoCo is a new project beginning in Semester 1, 2024. There is currently no co
 
 ## Statement of Work
 
-[Statement of Work](https://github.com/mazfil/lab-allocator/blob/main/docs/Statement%20of%20Word%20-%20Semester%202%202024%20-%20UNSIGNED.pdf)
+[Statement of Work](https://github.com/mazfil/lab-allocator/blob/main/docs/Statement%20of%20Work%20-%20Semester%202%202024%20-%20UNSIGNED.pdf)
 
 ## Project Schedule
 
