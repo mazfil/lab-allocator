@@ -8,7 +8,7 @@
 - [X] Hexuan Meng
 - [X] Filip Mazur
 - [X] Edward Nivison
-- [] Rachel Cao
+- [ ] Rachel Cao
 - [X] Sineeha Kodwani
 - [X] Matthew Cawley
 
@@ -17,6 +17,7 @@
 - What work being done over this week
 - ANU server updates
 - Meeting of Belinda
+- Which database
 - Setting up computer?
 
 ## Content from the meeting
@@ -59,6 +60,7 @@
     - Backend should (?) support it but it will probably be running on the same server anyway
     - https tested to work
   - ANU team already has setup for certain databases - no Firebase
+    - PostgreSQL, MySQL, NoSQL, Redis
 - Setting up computer for development
   - Should get IntelliJ if doing backend development work
 - GitHub issues
@@ -67,8 +69,12 @@
   - Was already developed, Matthew to send to us so we can see if it still meets requirements
 - Meeting with Belinda
   - Need to give Belinda screenshots of the project to demonstrate progress
-  - Get the statement of work signed  
-
+  - Get the statement of work signed
+- Choice of database
+  - Database should work using an SQL database
+  - MySQL only needs one dependency in Javascript
+  - Java has JDBC libraries for both
+  
 ## Action items:
 - Move decision log items across from meeting minutes last week to decision log
 
