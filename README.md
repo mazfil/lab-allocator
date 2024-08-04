@@ -4,8 +4,6 @@ Our aim for this project is to create a resource allocation application for SoCo
 
 The end vision of the project will be to have a application that will adapt to new entries and create the best layout of courses in a given week based on the strict restrictions and constraints.
 
-As SoCo is a new project beginning in Semester 1, 2024. There is currently no content in the GitHub but will be structured and laid out as the project evolves.
-
 ## Table of Contents
 
 - [Team Members and Roles](https://github.com/mazfil/lab-allocator/blob/main/README.md#team-members-and-roles)
