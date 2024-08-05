@@ -16,7 +16,7 @@
 - Check everything ready for audit
 - What work being done over this week
 - ANU server updates
-- Meeting of Belinda
+- Meeting with Belinda
 - Which database
 - Setting up computer?
 
