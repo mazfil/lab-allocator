@@ -39,7 +39,8 @@ The end vision of the project will be to have a application that will adapt to n
 [Statement of Work](https://github.com/mazfil/lab-allocator/blob/main/docs/client-documents/Statement%20of%20Work%20-%20Semester%202%202024%20-%20UNSIGNED.pdf)
 
 ## Project Schedule
-[Roadmap of project for period semester 2 2024](https://github.com/mazfil/lab-allocator/blob/main/docs/Roadmap%20-%20S2%202024.png)
+
+![Roadmap of project for period semester 2 2024](https://github.com/mazfil/lab-allocator/blob/main/docs/Roadmap%20-%20S2%202024.png)
 
 ## Technical constraints
 
