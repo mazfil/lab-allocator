@@ -48,7 +48,25 @@
 > ### 22/03/2024 - *Email*
 > Client invited to participate in user research adn prototyping session.
 
+> ### 22/03/2024 - *Email*
+> Client invited to participate in user research adn prototyping session.
+>> #### 25/3/2024
+>> Prototyping session booked in with client.
 
+> ### 07/05/2024 - *Email*
+> Email to client discussing use of ANU Server for product.
+>> #### 08/07/2024
+>> Email received from client to SoCo facilities advising of using SoCo server for project
+
+> ### 30/05/2024 - *Email*
+> Discussions with client RE providing a version to client for testing
+
+> 02/08/2024 [Date] - *Email*
+> Draft SoW sent to client
+>> #### 05/08/2024
+>> Final SoW Sent to Client
+>>> #### 05/08/2024
+>>> Email from client stating draft SoW okay
 
 \
 \
