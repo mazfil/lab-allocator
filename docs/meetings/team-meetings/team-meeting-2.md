@@ -93,4 +93,5 @@
   - Frontend works already with HTTPS
   - Backend doesn't matter too much as will be running on the same server
   - Database will need to work with HTTPS as frontend code on client browser will need to access database separately (as frontend code accesses database)
+- Removed the "flow on effects" requirement from the statement of work - as on the front end you cannot drag classes to one that is already there
 
