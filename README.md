@@ -15,7 +15,7 @@ The end vision of the project will be to have a application that will adapt to n
 - [Problematisation Analysis](https://github.com/mazfil/lab-allocator/blob/main/README.md#problematisation-analysis)
 - [Client's Vision and objectives](https://github.com/mazfil/lab-allocator/blob/main/README.md#clients-vision-and-objectives)
 - [Stakeholder Analysis](https://github.com/mazfil/lab-allocator/blob/main/README.md#clients-vision-and-objectives)
-- [Handover Process / Development Checklist](https://github.com/mazfil/lab-allocator/blob/main/README.md#handover-process-/-Development-Checklist)
+- [Handover Process / Development Checklist](https://github.com/mazfil/lab-allocator?tab=readme-ov-file#handover-process--development-checklist)
 - [Technical Reports](https://github.com/mazfil/lab-allocator/blob/main/README.md#technical-reports)
 - [Logs](https://github.com/mazfil/lab-allocator/blob/main/README.md#logs)
 - [Meeting Minutes](https://github.com/mazfil/lab-allocator/blob/main/README.md#meeting-minutes)
