@@ -15,7 +15,7 @@ The end vision of the project will be to have a application that will adapt to n
 - [Problematisation Analysis](https://github.com/mazfil/lab-allocator/blob/main/README.md#problematisation-analysis)
 - [Client's Vision and objectives](https://github.com/mazfil/lab-allocator/blob/main/README.md#clients-vision-and-objectives)
 - [Stakeholder Analysis](https://github.com/mazfil/lab-allocator/blob/main/README.md#clients-vision-and-objectives)
-- [Handover Process](https://github.com/mazfil/lab-allocator/blob/main/README.md#handover-process)
+- [Handover Process / Development Checklist](https://github.com/mazfil/lab-allocator/blob/main/README.md#handover-process-/-Development-Checklist)
 - [Technical Reports](https://github.com/mazfil/lab-allocator/blob/main/README.md#technical-reports)
 - [Logs](https://github.com/mazfil/lab-allocator/blob/main/README.md#logs)
 - [Meeting Minutes](https://github.com/mazfil/lab-allocator/blob/main/README.md#meeting-minutes)
@@ -148,7 +148,7 @@ The IP of the solution will remain the property of the students in the group, so
 | Tutors | Effective scheduling of classes ensures that tutor to student ratios are not exceeded, making it easier for tutors to teach. |
 | Other users of the buildings in scope | Effective scheduling means less room times are taken up by labs, allowing others to use the rooms for other purposes. |
 
-## Handover process
+## Handover process / Development Checklist
 
 As a starting project in Semester 1, 2024 we do not have an existing codebase or project to work from. So to allow the next generation of developers for this project, we will have a detailed explanation of the project, the backend, the frontend,
 and how the logic and algorithm provides the solution to the problem that our client at the School of Computing wants solved.
@@ -161,6 +161,11 @@ As for developing, you can find the relevant setup process in the docs/technical
 There will be sufficient communication during a handover process between the prior team and the upcoming members to make sure that they understand and can reach out if there are any misunderstandings with the project.
 
 However we plan to minimise as much confusion as possible with relevant comments in the code, documentation on the github repository, and FAQs if we get a sufficient amount of common mistakes that take place.
+
+
+We have created a development checklist for how to manage GitHub issues, the github projects page, how to document decisions and reflections that are being made.
+
+[Development Checklist](https://github.com/mazfil/lab-allocator/blob/main/docs/development/development-checklist.md)
 
 ## Technical Reports
 
