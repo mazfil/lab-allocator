@@ -29,7 +29,12 @@ public class CourseTable {
     }
 
     public Course getCourseFromId(int id) {
-        return courses[id];
+        for (Course course : courses) {
+            if (course.getId() == id) {
+                return course;
+            }
+        }
+        throw new RuntimeException("No course has the give course id");
     }
 
     public void print() {
