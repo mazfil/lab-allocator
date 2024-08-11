@@ -15,6 +15,7 @@
 ## Agenda:
 
 - Reflect and feedback on the development checklist, anything missing, what should be changed, is it clear how we should be using the issues that have been created as well for the ease of documenting decisions and reflections.
+- Reflect on the audit feedback.
 
 ## Content from the meeting
 
