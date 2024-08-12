@@ -19,5 +19,8 @@ Steps:
 - Add a new Application configuration ![run backend 5.png](assets%2Frun%20backend%205.png)
 - Set the JDK version to 21, and select the Main class (in the default package) as the main file ![run backend 6.png](assets%2Frun%20backend%206.png)
 - Click OK
-- Can now click on the Run button to start the program ![run backend 7.png](assets%2Frun%20backend%207.png)
-- Currently (10 March 2024) you should see the following terminal output ![run backend 8.png](assets%2Frun%20backend%208.png)
+- Open a terminal window, and navigate to the `src/backend` folder
+- To run the project, enter `./gradlew bootRun` in the terminal
+- You should see something like this:
+<img width="1380" alt="image" src="https://github.com/user-attachments/assets/ece7300a-61f0-440c-ac85-a76ce86ec60e">
+- To run the allocator, go to `localhost:8080`
