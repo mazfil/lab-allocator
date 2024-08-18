@@ -64,7 +64,7 @@
   - The two frontend branches are still being used so will not be deleted at the moment
 - Shadow team document
   - Shadow team sent a week 3 fortnight report
-  - 
+  - Basically just a rundown and a reflection of what they did
 
 ## Action Items
 - Should expand more on the resources and costs section about the server
