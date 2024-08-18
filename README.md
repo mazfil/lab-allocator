@@ -10,6 +10,7 @@ The end vision of the project will be to have a application that will adapt to n
 - [Statement of Work](https://github.com/mazfil/lab-allocator/blob/main/README.md#statement-of-work)
 - [Team Charter](https://github.com/mazfil/lab-allocator/blob/main/README.md#team-charter)
 - [Project Deliverables](https://github.com/mazfil/lab-allocator/blob/main/README.md#project-deliverables)
+- [Project Output](https://github.com/mazfil/lab-allocator/blob/main/README.md#project-output)
 - [Technical Constraints](https://github.com/mazfil/lab-allocator/blob/main/README.md#technical-constraints)
 - [Project Resources](https://github.com/mazfil/lab-allocator/blob/main/README.md#project-resources)
 - [Project NDA and IP status](https://github.com/mazfil/lab-allocator/blob/main/README.md#project-nda-and-ip-status)
@@ -45,6 +46,10 @@ The end vision of the project will be to have a application that will adapt to n
 ## Project Schedule
 
 ![Roadmap of project for period semester 2 2024](https://github.com/mazfil/lab-allocator/blob/main/docs/Roadmap%20-%20S2%202024.png)
+
+## Project Output
+
+[Project output and descriptions on what is being done.](https://github.com/mazfil/lab-allocator/tree/main/docs/output)
 
 ## Technical constraints
 
