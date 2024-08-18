@@ -9,7 +9,7 @@ The end vision of the project will be to have a application that will adapt to n
 - [Team Members and Roles](https://github.com/mazfil/lab-allocator/blob/main/README.md#team-members-and-roles)
 - [Statement of Work](https://github.com/mazfil/lab-allocator/blob/main/README.md#statement-of-work)
 - [Team Charter](https://github.com/mazfil/lab-allocator/blob/main/README.md#team-charter)
-- [Project Deliverables](https://github.com/mazfil/lab-allocator/blob/main/README.md#project-deliverables)
+- [Project Schedule](https://github.com/mazfil/lab-allocator/blob/main/README.md#project-schedule)
 - [Project Output](https://github.com/mazfil/lab-allocator/blob/main/README.md#project-output)
 - [Technical Constraints](https://github.com/mazfil/lab-allocator/blob/main/README.md#technical-constraints)
 - [Project Resources](https://github.com/mazfil/lab-allocator/blob/main/README.md#project-resources)
