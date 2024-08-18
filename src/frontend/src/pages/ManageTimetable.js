@@ -69,8 +69,6 @@ function ManageTimetable(props){
 
     }
 
-    useEffect(() => {console.log("DICK"); setFilteredData(timetable)}, [timetable])
-
     const [changeRoomVisibility, setVisibility] = useState(false);
     const [pendingRoomChange, setPendingRoom] = useState([]);
 
@@ -90,11 +88,23 @@ function ManageTimetable(props){
     }
 
     const changeRoom = async (tutorial, room) => {
-        Object.assign(timetable.find((tut) => {return tut.id === tutorial.event.id}), {location: room, title: tutorial.event.id+"\n"+room})
-        await setTimetable(timetable)
-        await updateData(timetable, activeCourse);
-        await toggleChangeRoom();
-        pendingRoomChange.event.setProp('title', tutorial.event.id+"\n"+room)
+        var clash = false;
+        var potentialClashes = timetable.filter(otherTutorial => { return otherTutorial.location === room }).filter(otherTutorial => (otherTutorial.daysOfWeek = tutorial.event.daysOfWeek))
+        potentialClashes.forEach(potentialClash => {
+            if (!(tutorial.event.end <= potentialClash.start || potentialClash.end <= tutorial.event.start)){
+                clash = true;
+            }
+        });
+        if (!clash){
+            Object.assign(timetable.find((tut) => {return tut.id === tutorial.event.id}), {location: room, title: tutorial.event.id+"\n"+room})
+            await setTimetable(timetable)
+            await updateData(timetable, activeCourse);
+            await toggleChangeRoom();
+            pendingRoomChange.event.setProp('title', tutorial.event.id+"\n"+room)
+        }else{
+            console.log("ERROR CLASH")
+        }
+        
     }
 
     useEffect(() => {fetchPost();}, [])
