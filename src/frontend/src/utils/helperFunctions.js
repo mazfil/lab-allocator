@@ -155,6 +155,7 @@ export async function getRoomTimetables(){
     tutorial.backgroundColor = "#585868";
     tutorial.durationEditable = false
     tutorial.borderColor = "#000000"
+    tutorial.title = tutorial.id + "\n" + tutorial.location
   });
 
   console.log(Date.now())

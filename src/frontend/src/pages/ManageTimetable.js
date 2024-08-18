@@ -69,8 +69,35 @@ function ManageTimetable(props){
 
     }
 
-    useEffect(() => {fetchPost();}, [])
+    useEffect(() => {console.log("DICK"); setFilteredData(timetable)}, [timetable])
 
+    const [changeRoomVisibility, setVisibility] = useState(false);
+    const [pendingRoomChange, setPendingRoom] = useState([]);
+
+    // Hides or Shows the drop box data input.
+    const toggleChangeRoom = () => {
+        setVisibility(!changeRoomVisibility);
+    }
+
+    // Prevents the upload data panel from closing when clicking 
+    const stopCRClose = (event) => {
+        event.stopPropagation();
+    }
+
+    const triggerChangeRoom = (tutorial) =>{
+        setPendingRoom(tutorial)
+        toggleChangeRoom()
+    }
+
+    const changeRoom = async (tutorial, room) => {
+        Object.assign(timetable.find((tut) => {return tut.id === tutorial.event.id}), {location: room, title: tutorial.event.id+"\n"+room})
+        await setTimetable(timetable)
+        await updateData(timetable, activeCourse);
+        await toggleChangeRoom();
+        pendingRoomChange.event.setProp('title', tutorial.event.id+"\n"+room)
+    }
+
+    useEffect(() => {fetchPost();}, [])
     const downloadFile = async () => {
         const fileData = await helpers.numToDay(timetable).then(data => {
             var blob = new Blob([json2csv(data, {excludeKeys: ["backgroundColor", "durationEditable", "borderColor", "overlap", "editable", "daysOfWeek"]})], { type: "csv" });
@@ -90,6 +117,27 @@ function ManageTimetable(props){
 
     return(
         <div className='manageTimetable'>
+            {changeRoomVisibility ? 
+                <div className='change-room-overlay' onClick={toggleChangeRoom}>
+                    <div className='change-room' onClick={stopCRClose}>
+                        <p>Move {pendingRoomChange.event.id} to</p>
+                        <div className='change-room-buttons'>
+                            <button onClick={() => {changeRoom(pendingRoomChange, "HN1.23")}}>HN1.23</button>
+                            <button onClick={() => {changeRoom(pendingRoomChange, "HN1.24")}}>HN1.24</button>
+                            <button onClick={() => {changeRoom(pendingRoomChange, "N109")}}>N109</button>
+                            <button onClick={() => {changeRoom(pendingRoomChange, "N111")}}>N111</button>
+                            <button onClick={() => {changeRoom(pendingRoomChange, "N112")}}>N112</button>
+                            <button onClick={() => {changeRoom(pendingRoomChange, "N113")}}>N113</button>
+                            <button onClick={() => {changeRoom(pendingRoomChange, "N114")}}>N114</button>
+                            <button onClick={() => {changeRoom(pendingRoomChange, "N115/6")}}>N115/6</button>
+                        </div>
+                        
+                    </div>
+                </div>
+                : null
+            }
+
+
             <NavBar navigate={props.navigate} tab={'manage-data'}></NavBar>
 
 
@@ -133,7 +181,7 @@ function ManageTimetable(props){
                 allDaySlot={false}
                 events={filteredTimetable}
                 eventDrop={function(event){updateTutorial(event)}}
-                eventClick={function(event){}}
+                eventClick={function(event){triggerChangeRoom(event)}}
                 eventOverlap={function(still, moving){return !(still._def.extendedProps.location === moving._def.extendedProps.location)}}
                 />
             </div>

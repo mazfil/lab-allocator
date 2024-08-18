@@ -315,3 +315,34 @@ form{
 .bottom-bar{
   display: flex;
 }
+
+
+.change-room-overlay, .change-room{
+  z-index: 10000;
+  position: absolute;
+  display: flex;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+}
+
+.change-room-overlay{
+  width: 100vw;
+  height: 100vh;
+  background-color: #000000c0;
+}
+
+
+.change-room{
+  margin: auto;
+  display: flex;
+  background-color: var(--white);
+  width: 384px;
+  height: 128px;
+  padding: 32px;
+  border-radius: 16px;
+  border-style: dashed;
+  border-color: var(--gold);
+  transition: 5s;
+}
