@@ -65,6 +65,11 @@
 - Shadow team document
   - Shadow team sent a week 3 fortnight report
   - Basically just a rundown and a reflection of what they did
+ 
+## Decisions
+- Will try to get as many people in person as possible for the tutorial, so we can work on getting our audit presentation done. Will try to book in Hive so we have a quiet space to work
+- The two frontend branches are still being worked on so will remain on GitHub - make sure dev is pulled into them so they get the most up to date changes
+- Get testing with Belinda done on Friday so it can be done before the audit meeting next week
 
 ## Action Items
 - Should expand more on the resources and costs section about the server
