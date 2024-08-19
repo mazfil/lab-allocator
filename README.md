@@ -156,6 +156,9 @@ The IP of the solution will remain the property of the students in the group, so
 | Students | Effective scheduling of classes has a number of benefits to students: Leads to fewer clashes, meaning students can attend more classes ; Ensures the tutor to student ratio is maintained, so students get enough support during classes. |
 | Tutors | Effective scheduling of classes ensures that tutor to student ratios are not exceeded, making it easier for tutors to teach. |
 | Other users of the buildings in scope | Effective scheduling means less room times are taken up by labs, allowing others to use the rooms for other purposes. |
+|-|-|
+|Techlauncher Tutors| The tutors from Techlauncher have stakes in our project, for marking purposes, they also have the potential to provide feedback on development practices, and project output. |
+|Shadow Team| The shadow has stakes in the project for audits, from providing feedback to also being a potential user to test and receive feedback from. |
 
 ## Handover process / Development Checklist
 
