@@ -1,0 +1,20 @@
+- Statement of work
+  - Adding shadow team and tutors into the statement of work document
+  - We'll send a redlined copy to be approved after that's done for re-approval and signing
+- User testing
+  - We'll start contacting yourself and the other stakeholders this week
+  - Front end and back end works so should be able to get some user testing
+  - A few colour scheme mock ups have been done, so we'll get feedback on the preferred style, and then create a bunch more in that style
+  - We'll need to get the local database working before we can start doing user testing - the current one has upload/download limits and we'd hit the limit and need to stop
+  - Feedback collection: make sure everything's written down
+  - Preferred time for user testing:
+    - Probably better to get some of it done before the audit
+    - Don't mind when, but probably easier to do in person
+    - Not planning to be on campus next Monday
+    - This week on campus: Tues, Thur, Fri; next week: Tues - Fri
+    - Could organise something this Friday? Would not be final testing product but would be almost there
+- Received Excel document for data
+  - Yes
+  - Don't have other spreadsheet with data for us - only just gone out to convenors
+- Audit next week
+  - Wednesday 5-5:30pm works okay as an audit time
