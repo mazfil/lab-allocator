@@ -26,8 +26,9 @@ function ManageData(props) {
         timerange_from: "",
         timerange_till: "",
     });
-
     const [searchTerm, setSearchTerm] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    const [showDetails, setShowDetails] = useState({});
 
     const fetchPost = async () => {
         const querySnapshot = await getDocs(collection(db, "course_data"));
@@ -60,8 +61,29 @@ function ManageData(props) {
         }));
     };
 
+    const validateTutorialTime = () => {
+        const lectureStart = new Date(`01/01/2022 ${formData.lec_time}`);
+        const lectureEnd = new Date(lectureStart.getTime() + formData.lec_duration * 60 * 60 * 1000);
+
+        const tutorialStart = new Date(`01/01/2022 ${formData.timerange_from}`);
+        const tutorialEnd = new Date(`01/01/2022 ${formData.timerange_till}`);
+
+        if (tutorialStart < lectureEnd && tutorialEnd > lectureStart) {
+            setErrorMessage("The tutorial time cannot overlap with the lecture time.");
+            return false;
+        }
+
+        setErrorMessage('');
+        return true;
+    };
+
     const handleAddCourse = async (event) => {
         event.preventDefault();
+
+        if (!validateTutorialTime()) {
+            return;
+        }
+
         await addDoc(collection(db, "course_data"), formData);
         fetchPost();
         setFormFields({
@@ -103,6 +125,18 @@ function ManageData(props) {
         }
     };
 
+    const handleReset = () => {
+        setFilteredData(courseData);
+        setSearchTerm('');
+    };
+
+    const toggleMoreDetails = (id) => {
+        setShowDetails(prevState => ({
+            ...prevState,
+            [id]: !prevState[id]
+        }));
+    };
+
     return (
         <div className='manage-data-page'>
             <NavBar navigate={props.navigate} tab={'manage-data'}></NavBar>
@@ -135,14 +169,26 @@ function ManageData(props) {
                                 <select id="lec_time" name="lec_time" value={formData.lec_time} onChange={handleInputChange}>
                                     <option value="">Select a time</option>
                                     <option value="9:00 AM">9:00 AM</option>
+                                    <option value="9:30 AM">9:30 AM</option>
                                     <option value="10:00 AM">10:00 AM</option>
+                                    <option value="10:30 AM">10:30 AM</option>
                                     <option value="11:00 AM">11:00 AM</option>
+                                    <option value="11:30 AM">11:30 AM</option>
                                     <option value="12:00 PM">12:00 PM</option>
+                                    <option value="12:30 PM">12:30 PM</option>
                                     <option value="1:00 PM">1:00 PM</option>
+                                    <option value="1:30 PM">1:30 PM</option>
                                     <option value="2:00 PM">2:00 PM</option>
+                                    <option value="2:30 PM">2:30 PM</option>
                                     <option value="3:00 PM">3:00 PM</option>
+                                    <option value="3:30 PM">3:30 PM</option>
                                     <option value="4:00 PM">4:00 PM</option>
+                                    <option value="4:30 PM">4:30 PM</option>
                                     <option value="5:00 PM">5:00 PM</option>
+                                    <option value="5:30 PM">5:30 PM</option>
+                                    <option value="6:00 PM">6:00 PM</option>
+                                    <option value="6:30 PM">6:30 PM</option>
+                                    <option value="7:00 PM">7:00 PM</option>
                                 </select>
                             </label>
                             <label>Duration: 
@@ -186,59 +232,74 @@ function ManageData(props) {
                                     <select id="timerange_from" name="timerange_from" value={formData.timerange_from} onChange={handleInputChange}>
                                         <option value="">Select start time</option>
                                         <option value="9:00 AM">9:00 AM</option>
+                                        <option value="9:30 AM">9:30 AM</option>
                                         <option value="10:00 AM">10:00 AM</option>
+                                        <option value="10:30 AM">10:30 AM</option>
                                         <option value="11:00 AM">11:00 AM</option>
+                                        <option value="11:30 AM">11:30 AM</option>
                                         <option value="12:00 PM">12:00 PM</option>
+                                        <option value="12:30 PM">12:30 PM</option>
                                         <option value="1:00 PM">1:00 PM</option>
+                                        <option value="1:30 PM">1:30 PM</option>
                                         <option value="2:00 PM">2:00 PM</option>
+                                        <option value="2:30 PM">2:30 PM</option>
                                         <option value="3:00 PM">3:00 PM</option>
+                                        <option value="3:30 PM">3:30 PM</option>
                                         <option value="4:00 PM">4:00 PM</option>
+                                        <option value="4:30 PM">4:30 PM</option>
                                         <option value="5:00 PM">5:00 PM</option>
+                                        <option value="5:30 PM">5:30 PM</option>
+                                        <option value="6:00 PM">6:00 PM</option>
+                                        <option value="6:30 PM">6:30 PM</option>
+                                        <option value="7:00 PM">7:00 PM</option>
                                     </select>
                                 </label>
                                 <label>Till: 
                                     <select id="timerange_till" name="timerange_till" value={formData.timerange_till} onChange={handleInputChange}>
                                         <option value="">Select end time</option>
+                                        <option value="9:30 AM">9:30 AM</option>
                                         <option value="10:00 AM">10:00 AM</option>
+                                        <option value="10:30 AM">10:30 AM</option>
                                         <option value="11:00 AM">11:00 AM</option>
+                                        <option value="11:30 AM">11:30 AM</option>
                                         <option value="12:00 PM">12:00 PM</option>
+                                        <option value="12:30 PM">12:30 PM</option>
                                         <option value="1:00 PM">1:00 PM</option>
+                                        <option value="1:30 PM">1:30 PM</option>
                                         <option value="2:00 PM">2:00 PM</option>
+                                        <option value="2:30 PM">2:30 PM</option>
                                         <option value="3:00 PM">3:00 PM</option>
+                                        <option value="3:30 PM">3:30 PM</option>
                                         <option value="4:00 PM">4:00 PM</option>
+                                        <option value="4:30 PM">4:30 PM</option>
                                         <option value="5:00 PM">5:00 PM</option>
+                                        <option value="5:30 PM">5:30 PM</option>
                                         <option value="6:00 PM">6:00 PM</option>
+                                        <option value="6:30 PM">6:30 PM</option>
+                                        <option value="7:00 PM">7:00 PM</option>
                                     </select>
                                 </label>
                             </label>
                         </fieldset>
-                        <div className="button-container">
-                            <button type="submit" className='add-button'>Add</button>
-                        </div>
+
+                        {errorMessage && <p className="error-message">{errorMessage}</p>}
                     </form>
                 </div>
+                
                 <div className='search-bar'>
                     <label>Search by Course Code: <input type="text" value={searchTerm} onChange={handleSearchChange} /></label>
                     <button onClick={handleFilter} className='filter-button'>Filter</button>
+                    <button onClick={handleReset} className='reset-button'>Reset</button>
                 </div>
+
                 <div className='data-table'>
                     <table>
                         <thead>
                             <tr>
                                 <th>Course Code</th>
                                 <th>Course Size</th>
-                                <th>Cohorts</th>
-                                <th>Combining Cohorts</th>
-                                <th>Number of Tutors</th>
-                                <th>Number of Lectures</th>
-                                <th>Lecture Day</th>
-                                <th>Lecture Time</th>
-                                <th>Lecture Duration</th>
-                                <th>Lab After Lecture</th>
-                                <th>BYOD</th>
                                 <th>Lab Days</th>
                                 <th>Lab Duration</th>
-                                <th>Projector</th>
                                 <th>Time Range</th>
                                 <th>Actions</th>
                             </tr>
@@ -249,19 +310,28 @@ function ManageData(props) {
                                     <tr key={course.id}>
                                         <td>{course.course_code || ""}</td>
                                         <td>{course.course_size || ""}</td>
-                                        <td>{course.cohorts || ""}</td>
-                                        <td>{course.mix_cohorts ? course.mix_cohorts.toString() : "false"}</td>
-                                        <td>{course.tutors || ""}</td>
-                                        <td>{course.lecture_amount || ""}</td>
-                                        <td>{course.lec_day || ""}</td>
-                                        <td>{course.lec_time || ""}</td>
-                                        <td>{course.lec_duration || ""}</td>
-                                        <td>{course.after_lecture ? course.after_lecture.toString() : "false"}</td>
-                                        <td>{course.byod ? course.byod.toString() : "false"}</td>
                                         <td>{Array.isArray(course.lab_days) ? course.lab_days.join(', ') : ""}</td>
                                         <td>{course.lab_duration || ""}</td>
-                                        <td>{course.projector ? course.projector.toString() : "false"}</td>
                                         <td>{course.timerange_from && course.timerange_till ? `${course.timerange_from} - ${course.timerange_till}` : ""}</td>
+                                        <td className='action-column'>
+                                            <button className='more-button' onClick={() => toggleMoreDetails(course.id)}>
+                                                <i className="bi bi-three-dots"></i> More
+                                            </button>
+                                            {showDetails[course.id] && (
+                                                <div className='more-details'>
+                                                    <p>Cohorts: {course.cohorts || ""}</p>
+                                                    <p>Combining Cohorts: {course.mix_cohorts ? "Yes" : "No"}</p>
+                                                    <p>Number of Tutors: {course.tutors || ""}</p>
+                                                    <p>Lecture Amount: {course.lecture_amount || ""}</p>
+                                                    <p>Lecture Day: {course.lec_day || ""}</p>
+                                                    <p>Lecture Time: {course.lec_time || ""}</p>
+                                                    <p>Lecture Duration: {course.lec_duration || ""}</p>
+                                                    <p>After Lecture: {course.after_lecture ? "Yes" : "No"}</p>
+                                                    <p>BYOD: {course.byod ? "Yes" : "No"}</p>
+                                                    <p>Projector: {course.projector ? "Yes" : "No"}</p>
+                                                </div>
+                                            )}
+                                        </td>
                                         <td className='action-column'>
                                             <button className='delete-button' onClick={() => handleDeleteCourse(course.id)}>
                                                 <i className="bi bi-trash"></i> Delete
@@ -272,6 +342,10 @@ function ManageData(props) {
                             })}
                         </tbody>
                     </table>
+                </div>
+
+                <div className="button-container-bottom">
+                    <button type="submit" className='add-button' onClick={handleAddCourse}>Add Course</button>
                 </div>
             </div>
         </div>

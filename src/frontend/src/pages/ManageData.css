@@ -77,9 +77,8 @@
     margin-right: 10px;
 }
 
-/* Add button styling */
 .add-button {
-    padding: 12px 28px;
+    padding: 100px 100px;
     background-color: #007bff;
     color: white;
     border: none;
@@ -89,9 +88,6 @@
     font-weight: bold;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -228,4 +224,196 @@
     display: flex;
     justify-content: flex-end;
     margin-top: 20px;
+}
+
+/* Add this to give uniform padding and border spacing */
+.manage-data-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.edit-data, .data-table {
+    width: 80%;
+    margin: 20px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    background-color: #fff;
+}
+
+.edit-data form, .data-table table {
+    width: 100%;
+}
+
+.edit-data label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+fieldset {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+/* Style the table headers */
+.data-table table thead th {
+    background-color: #f4f4f4;
+    padding: 10px;
+    text-align: left;
+    border-bottom: 2px solid #ddd;
+}
+
+/* Style the table rows */
+.data-table table tbody td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Add styling to buttons */
+.button-container, .search-bar, .action-column button {
+    margin-top: 15px;
+    display: inline-block;
+}
+
+.add-button, .filter-button, .delete-button {
+    padding: 10px 15px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.delete-button {
+    background-color: #dc3545;
+}
+
+.delete-button i {
+    margin-right: 5px;
+}
+
+/* Add spacing between the labels and inputs */
+.edit-data label input, .edit-data label select {
+    width: calc(100% - 20px);
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+/* Add styling for the more details dropdown */
+.more-button {
+    background-color: transparent;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+}
+
+.more-details {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Hide by default, display when activated */
+.more-details p {
+    margin: 5px 0;
+}
+
+/* Adjusted search bar spacing */
+.search-bar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.search-bar label {
+    font-size: 14px;
+    color: #555;
+    margin-right: 10px;
+}
+
+.search-bar input {
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+    font-size: 14px;
+    margin-right: 10px; /* Added margin to separate from filter button */
+}
+
+/* Filter button styling */
+.filter-button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 10px; /* Added margin to separate from reset button */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+
+/* Reset button styling */
+.reset-button {
+    padding: 10px 20px;
+    background-color: #ffc107;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+
+.reset-button:hover {
+    background-color: #e0a800;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Add button positioned near the table */
+.button-container {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 20px;
+}
+
+.add-button {
+    padding: 12px 28px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+}
+
+.add-button:hover {
+    background-color: #0056b3;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+.error-message {
+    color: red;
+    margin-top: 10px;
+    font-size: 14px;
 }
