@@ -5,6 +5,9 @@ import * as helpers from "../utils/helperFunctions.js";
 import FullCalendar from '@fullcalendar/react';
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
+import { mkConfig, generateCsv, download } from "export-to-csv";
+import { json2csv } from 'json-2-csv';
+import { create } from '@mui/material/styles/createTransitions.js';
 
 function ManageTimetable(props){
     const [filteredTimetable, setFilteredData] = useState([]);
@@ -12,6 +15,8 @@ function ManageTimetable(props){
     const [activeView, setView] = useState(['HN1.23', 'HN1.24', 'N109', 'N111', 'N112', 'N113', 'N114', 'N115/6'])
     const [activeCourse, setCourseFilter] = useState(["All"])
     const [courseList, setCourseList] = useState(["All"])
+    const csvConfig = mkConfig({ useKeysAsHeaders: true });
+    const [createdTime, setTime] = useState(0);
 
     const updateData = async (data, course) => {
         if(course != "All"){
@@ -54,14 +59,34 @@ function ManageTimetable(props){
         setTimetable(data)
         setCourseList(["All", ...new Set(data.map(item => item.title))].slice(0, -1))
         updateData(data, activeCourse)
-        console.log(data)
     }
 
     const fetchPost = async () => {
-        const data = await helpers.getRoomTimetables().then(data => initData(data));
+        const data = await helpers.getRoomTimetables()
+        setTime(data[1])
+        initData(data[0])
+        
+
     }
 
     useEffect(() => {fetchPost();}, [])
+
+    const downloadFile = async () => {
+        const fileData = await helpers.numToDay(timetable).then(data => {
+            var blob = new Blob([json2csv(data, {excludeKeys: ["backgroundColor", "durationEditable", "borderColor", "overlap", "editable", "daysOfWeek"]})], { type: "csv" });
+            var a = document.createElement('a');
+            a.download = "timetable.csv";
+            a.href = URL.createObjectURL(blob);
+            a.dataset.downloadurl = ["csv", a.download, a.href].join(':');
+            a.style.display = "none";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            setTimeout(function() { URL.revokeObjectURL(a.href); }, 1500);
+        })
+
+
+    }
 
     return(
         <div className='manageTimetable'>
@@ -76,7 +101,9 @@ function ManageTimetable(props){
                             <option value={code}>{code}</option>
                         ))}
                     </select>
+                    
                 </div>
+                
             
                 <FullCalendar
                 plugins={[ timeGridPlugin, interactionPlugin ]}
@@ -110,7 +137,15 @@ function ManageTimetable(props){
                 eventOverlap={function(still, moving){return !(still._def.extendedProps.location === moving._def.extendedProps.location)}}
                 />
             </div>
-            <button className='timetable-save' onClick={saveTimetable}>Save<i class="bi bi-floppy2-fill"></i></button>
+            <div className='bottom-bar'>
+                <div className='manage-timetable-buttons'>
+                    <button className='timetable-save' onClick={saveTimetable}>Save</button>
+                    <button className='timetable-save' onClick={downloadFile}>Download</button>
+                </div>
+                <p className='created'><b>Timetable Created</b> {createdTime}</p>
+            </div>
+            
+            
         </div>
     );
 }

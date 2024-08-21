@@ -299,4 +299,19 @@ form{
   margin-left: auto;
   font-size: 1.5em;
   padding: 8px;
+  margin: 4px;
+}
+
+.manage-timetable-buttons{
+  width: 100%;
+  display: inline;
+}
+
+.created{
+  text-align: center;
+  margin-right: 8px;
+}
+
+.bottom-bar{
+  display: flex;
 }

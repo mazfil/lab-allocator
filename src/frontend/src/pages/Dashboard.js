@@ -17,9 +17,13 @@ function Dashboard(props){
   }
 
   //Takes file input and sends to helper functions, uploads course data.
-  const handleFile = () => {
-    helpers.readFileData(document.getElementById("df").files[0])
+  const handleFile = async () => {
+    const hf = await helpers.readFileData(document.getElementById("df").files[0]).then(startBackend)
     toggleDropBox();
+  }
+
+  const startBackend = () => {
+    fetch("http://localhost:8080/start", {method: "GET"})
   }
 
   return(

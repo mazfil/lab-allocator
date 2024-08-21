@@ -3,6 +3,7 @@ import {collection, getDocs, Timestamp } from 'firebase/firestore'
 import {database} from '../firebase';
 import { parse } from 'papaparse';
 
+
 /**
  * Creates class objects from csv file uploads to firebase.
  * @param {csv} file 
@@ -62,7 +63,7 @@ export async function readFileData(file){
 async function uploadCourse(course){
   const course_code = course.course_code;
   delete course[course_code]
-  await setDoc(doc(database, "course_data_testing", course_code), course);
+  await setDoc(doc(database, "course_data", course_code), course);
 }
 
 
@@ -118,8 +119,10 @@ export async function getData(document){
  * @returns Object with an array of tutorials in each room organised by their time
  */
 export async function getRoomTimetables(){
-  const timetable = await getData("timetable/"+(((await getData("timetable")).sort((a, b) => (a.created.seconds >= b.created.seconds) ? 1 : -1)))[0].id+"/tutorials");
-  timetable.forEach(tutorial => {
+  var timetable = (((await getData("timetable")).sort((a, b) => (a.created.seconds <= b.created.seconds) ? 1 : -1)))[0];
+  const timetable_created = timetable.created.seconds
+  const timetable_data = await getData("timetable/"+timetable.id+"/tutorials");
+  timetable_data.forEach(tutorial => {
     /*var colour;
     switch(tutorial.location){
       case("HN1.23"):
@@ -153,8 +156,13 @@ export async function getRoomTimetables(){
     tutorial.durationEditable = false
     tutorial.borderColor = "#000000"
   });
-  return timetable;
+
+  console.log(Date.now())
+  console.log(timetable_created*1000)
+  
+  return [timetable_data, new Date(timetable_created*1000).toLocaleString()];
 }
+
 
 /**
  * Uploads new timetable to firebase with timestamp
@@ -168,4 +176,29 @@ export async function saveTimetable(timetable){
   });
   const timetableRef = doc(database, "timetable", time.toString());
   setDoc(timetableRef, {created: Timestamp.now()}, {merge: true});
+}
+
+export async function numToDay(data){
+  const result = data
+  result.forEach(course => {
+    switch(course.daysOfWeek ){
+      case "1":
+        course.day = "Monday"
+        break;
+      case "2":
+        course.day = "Tuesday"
+        break;
+      case "3":
+        course.day = "Wednesday"
+        break;
+      case "4":
+        course.day = "Thursday"
+        break;
+      case "5":
+        course.day = "Friday"
+        break;
+    }
+    
+  });
+  return result
 }

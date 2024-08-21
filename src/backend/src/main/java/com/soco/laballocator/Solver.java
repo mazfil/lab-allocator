@@ -9,9 +9,9 @@ import java.util.Comparator;
 import java.util.Random;
 
 public class Solver {
-    final static int NUM_GENERATIONS = 20;
+    final static int NUM_GENERATIONS = 5;   // TODO: only 5 for debugging, should be 20+
 
-    final static int POPULATION_SIZE = 10000;
+    final static int POPULATION_SIZE = 5000;
 
     /**
      * The number of solutions that are eligible for combining into the next generation. Solutions not
@@ -62,8 +62,7 @@ public class Solver {
              * Perform the fitness function on all elements and sort low to high based on that.
              */
             Arrays.sort(population, Comparator.comparingInt(Schedule::getFitness));
-            System.out.printf("\033[2J");
-            System.out.printf("\n\n\n\nStarting generation %d... best has %d\n", ++totalGen, highestFitness);
+            System.out.printf("\n\n\nStarting generation %d... best has %d\n", ++totalGen, highestFitness);
 
             if (population[population.length - 1].getFitness() > highestFitness) {
                 highestFitness = population[population.length - 1].getFitness();
