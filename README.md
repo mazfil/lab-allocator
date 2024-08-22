@@ -189,6 +189,14 @@ We have been keeping a majority of our decisions in the decisions logs but also 
 Reflections are kept in their relevant logs.
 Communication with the client is consistent (when the client is available) with regular meetings and communication through email and team messages.
 
+**IMPORTANT NOTICE**
+Over the course of the semester, we have reflected on how we process and deliver our decisions and reflections.
+We have opted to keep the same structure from the previous semester, with the additions of a few new rules
+and implementations. This includes:
+
+- A new method of reporting any decisions through a GitHub Issue. You can reference this issue through commits, comments, pull requests, etc. This is so we can make the process of decision making easier and more appealing to do. We still will import all the decisions formally through to the decision log, but think of this as an intermediary stage of the decision making process. See issue #93
+- A new method of reporting any reflections and actions in regards to the reflections through a GitHub Issue. This is so you can reference the issue in any commits, comments, pull requests, etc. This is so we can make the process of reflections easier and more convenient for our project members to complete. Think of this as an intermediary stage of the reflection process. We make sure that we reflection and create new issues in regards to any feedback and comments we receive from fellow project members, client, stakeholders, shadow team, and tutors. See issue #92
+
 [Decision Logs](https://github.com/mazfil/lab-allocator/tree/main/docs/meetings)
 
 [Decision Logs (Sheets)](https://github.com/mazfil/lab-allocator/blob/main/docs/Decision-Log.md)
