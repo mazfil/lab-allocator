@@ -20,7 +20,7 @@ function ManageTimetable(props){
 
     const updateData = async (data, course) => {
         if(course != "All"){
-            setFilteredData(data.filter((tut) => activeView.includes(tut.location)).filter((tut) => tut.title == course))
+            setFilteredData(data.filter((tut) => activeView.includes(tut.location)).filter((tut) => tut.title.includes(course)))
         }else{
             setFilteredData(data.filter((tut) => activeView.includes(tut.location)))
         }
@@ -57,7 +57,7 @@ function ManageTimetable(props){
 
     const initData = async (data) => {
         setTimetable(data)
-        setCourseList(["All", ...new Set(data.map(item => item.title))].slice(0, -1))
+        setCourseList(["All", ...new Set(data.map(item => item.title.substring(0, item.title.indexOf('_'))))].slice(0, -1))
         updateData(data, activeCourse)
     }
 
