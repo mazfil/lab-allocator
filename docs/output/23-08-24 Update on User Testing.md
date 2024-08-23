@@ -4,7 +4,7 @@ Here are the different colour schemes.
 
 ![CS1-Dull Distinct](https://github.com/mazfil/lab-allocator/blob/main/docs/output/assets/CS1-Dull-Distinct.png?raw=true)
 
-![CS2-Bright Distinct](../assets/CS2%20-%20Bright%20Distinct.png)
+![CS2-Bright Distinct](https://github.com/mazfil/lab-allocator/blob/main/docs/output/assets/CS2%20-%20Bright%20Distinct.png)
 
 ![CS3-Pastel](../assets/CS3%20-%20-Pastel.png)
 
