@@ -34,3 +34,23 @@ Belinda, Filip, Edward, Alex
   - Specify cohorts as number of cohorts
   - Need to start from 8am-8pm
   - 
+
+Meeting minutes from Edward.
+- We can remove the COMP from the course codes. but still keep the information if it is needed. Find some way doing that.
+- When you are on the manage table or where you are editing the timetable, there should be a message say did you mean to save the timetable, because you lose your progress if you go to dashboard with a changed timetable.
+- Add the possibility for a one off tutorial to be added.
+- We are still with the attitude of having a "every week is the same" attitude.
+- We would prefer to have a button to run the algorithm, rather than it running automatically.
+- More refined detail on how the algorithm generates the calendar. Show the fitness function in an easy to view method, the rankings, and how the algorithms prioritises different schedules.
+- If I want to move a bigger class from a big classroom to a smaller classroom, will it tell me if the room is too small for the class. And to have a warning that it won't fit, but to also have an override if you know that only smaller amount of students are actually turning up.
+- Future meeting we need to be able to run in about 15 minutes.
+
+User documentation:
+
+Just a few tool tips for things that are a bit more confusing or if it doesn't make sense exactly what the button would do.
+A wiki article would be the best thing to do. We should have FAQs, and the ability to search it. Hosted on the frontend? Add some buttons or help items on each page that will take you to the relevant page.
+
+A possible video for first time users?? Not necessary but a nice to have.
+
+Bugs found:
+- on save button.
