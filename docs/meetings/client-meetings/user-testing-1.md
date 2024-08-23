@@ -30,4 +30,7 @@ Belinda, Filip, Edward, Alex
   - The Microsoft Form just gives you the spreadsheet directly from the responses
 - User testing
   - We don't have documentation yet, so will do some testing to see how intuitive it is to use
+  - Can have up to 3 lectures per week
+  - Specify cohorts as number of cohorts
+  - Need to start from 8am-8pm
   - 
