@@ -125,6 +125,10 @@ Risk management involves identifying potential risks that could threaten the suc
 
 A structured schedule will be implemented for ongoing risk monitoring, assessment of emerging risks, and evaluation of mitigation strategies. This will involve regular check-ins with the project team and stakeholders to ensure active and effective risk management throughout the project's lifecycle.
 
+### Risk Register
+
+We have identified any potential risks from our reflections and have actioned on them as they are needed to be done. This is inclusive to things that have been asked of us, such as implementing LDAP authentication and ensuring that data is secure on the server and that only authorised personnel can have access to it. This is just one of the many items that we have identified and actioned on.
+
 ### Project costs
 
 The only expected costs for the project would be for the hardware for the server (i.e. a computer). During development/prototyping a student’s computer could be used, and the final system is expected to run on computers provided by the School of Computing / university at no cost. There should be no need for domain name registration as the system is expected to run on the internal university network.
