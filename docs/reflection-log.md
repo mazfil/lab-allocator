@@ -11,4 +11,4 @@ Reflections to be added to the google sheets above:
 ## Format
 |Date|Priority|Category|Feedback|Actions taken/needed|Source|Progress|Action|
 |-|-|-|-|-|-|-|-|
-|date|High/Medium/Low|Repository|Example feedback|Detailed explanation for action|Team|In-progress|Responsibility Party Action|
+|date|High/Medium/Low|Repository|Example feedback|Detailed explanation for action|Team|In-progress|Responsible Party Action|
