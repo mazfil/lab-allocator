@@ -10,14 +10,28 @@ import { json2csv } from 'json-2-csv';
 import { create } from '@mui/material/styles/createTransitions.js';
 
 function ManageTimetable(props){
+    // Tutorial data used by the calendar view. (applies filters to the timetable data)
     const [filteredTimetable, setFilteredData] = useState([]);
+
+    // Full tutorial data from database
     const [timetable, setTimetable] = useState([]);
+
+    // Determines which rooms are displayed at any time
     const [activeView, setView] = useState(['HN1.23', 'HN1.24', 'N109', 'N111', 'N112', 'N113', 'N114', 'N115/6'])
+
+    // Displays either a specific course or all courses
     const [activeCourse, setCourseFilter] = useState(["All"])
+
+    // The list of courses in the database
     const [courseList, setCourseList] = useState(["All"])
+
+    // config for downloading data
     const csvConfig = mkConfig({ useKeysAsHeaders: true });
+
+    // Time a specific timetable is created at when displayed
     const [createdTime, setTime] = useState(0);
 
+    // Filters the full course data based on rooms selected and which course has been selected
     const updateData = async (data, course) => {
         if(course != "All"){
             setFilteredData(data.filter((tut) => activeView.includes(tut.location)).filter((tut) => tut.title.includes(course)))
@@ -26,15 +40,18 @@ function ManageTimetable(props){
         }
     }
 
+    // Saves the timetable to database
     const saveTimetable = async () => {
         helpers.saveTimetable(timetable)
     }
 
+    // filters data based on which course is selected.
     const filterByCourse = async (e) => {
         await setCourseFilter(e.target.value);
         updateData(timetable, e.target.value)
     }
 
+    // Toggles the viewable rooms
     const toggleView = (room) => {
         var viewable = activeView;
         if(viewable.includes(room)){
@@ -47,6 +64,7 @@ function ManageTimetable(props){
         updateData(timetable, activeCourse);
     }
 
+    // updates a tutorial when dragged and dropped. Updates the time and day of tutorial.
     const updateTutorial = async (tutorial) => {
         var editedTutorial = await timetable.find((tuts) => tuts.id == tutorial.event.id)
         editedTutorial.startTime = tutorial.event.start.getHours() + ":" + (tutorial.event.start.getMinutes() == 0 ? "00" : "30")
@@ -55,44 +73,39 @@ function ManageTimetable(props){
         updateData(timetable, activeCourse)
     }
 
-    const initData = async (data) => {
-        setTimetable(data)
-        setCourseList(["All", ...new Set(data.map(item => item.title.substring(0, item.title.indexOf('_'))))].slice(0, -1))
-        updateData(data, activeCourse)
-    }
-
-    const fetchPost = async () => {
-        const data = await helpers.getRoomTimetables()
-        setTime(data[1])
-        initData(data[0])
-        
-
-    }
-
+    // Value for whether or not to render the room change overlay
     const [changeRoomVisibility, setVisibility] = useState(false);
+
+    // sets the tutorial which is being modified
     const [pendingRoomChange, setPendingRoom] = useState([]);
 
-    // Hides or Shows the drop box data input.
+    // Hides or Shows change room overlay
     const toggleChangeRoom = () => {
         setVisibility(!changeRoomVisibility);
     }
 
-    // Prevents the upload data panel from closing when clicking 
+    // Prevents the overlay panel from closing when clicking 
     const stopCRClose = (event) => {
         event.stopPropagation();
     }
 
+    // initiates the change of room event when a tutorial is clicked
     const triggerChangeRoom = (tutorial) =>{
         setPendingRoom(tutorial)
         toggleChangeRoom()
     }
 
+    // Changes the room for a tutorial after a room is selected on the changeRoom overlay
+    // TODO: fix the clash check, overwrites existing tutorials when the room is the same
     const changeRoom = async (tutorial, room) => {
         var clash = false;
-        var potentialClashes = timetable.filter(otherTutorial => { return otherTutorial.location === room }).filter(otherTutorial => (otherTutorial.daysOfWeek = tutorial.event.daysOfWeek))
+        var potentialClashes = timetable.filter(otherTutorial => { return otherTutorial.location == room }).filter(otherTutorial => (otherTutorial.daysOfWeek = tutorial.event.daysOfWeek))
         potentialClashes.forEach(potentialClash => {
+            console.log(tutorial.event)
+            console.log(potentialClash.location + " @ " + potentialClash.start + " - " + potentialClash.end)
             if (!(tutorial.event.end <= potentialClash.start || potentialClash.end <= tutorial.event.start)){
                 clash = true;
+                console.log("A CLASH")
             }
         });
         if (!clash){
@@ -104,10 +117,9 @@ function ManageTimetable(props){
         }else{
             console.log("ERROR CLASH")
         }
-        
     }
 
-    useEffect(() => {fetchPost();}, [])
+    // Downloads the course data as a CSV
     const downloadFile = async () => {
         const fileData = await helpers.numToDay(timetable).then(data => {
             var blob = new Blob([json2csv(data, {excludeKeys: ["backgroundColor", "durationEditable", "borderColor", "overlap", "editable", "daysOfWeek"]})], { type: "csv" });
@@ -121,12 +133,26 @@ function ManageTimetable(props){
             document.body.removeChild(a);
             setTimeout(function() { URL.revokeObjectURL(a.href); }, 1500);
         })
-
-
     }
+
+    // initData and fetchPost initialise the data when the page is opened.
+    const initData = async (data) => {
+        setTimetable(data)
+        setCourseList(["All", ...new Set(data.map(item => item.title.substring(0, item.title.indexOf('_'))))].slice(0, -1))
+        updateData(data, activeCourse)
+    }
+    const fetchPost = async () => {
+        const data = await helpers.getRoomTimetables()
+        setTime(data[1])
+        initData(data[0])
+    }
+    useEffect(() => {fetchPost();}, [])
+    
 
     return(
         <div className='manageTimetable'>
+            {/* This conditionall renders the room change overlay. When a tutorial is clicked, 
+                    the changeRoomVisibility is set to true and the overlay is displayed   */}
             {changeRoomVisibility ? 
                 <div className='change-room-overlay' onClick={toggleChangeRoom}>
                     <div className='change-room' onClick={stopCRClose}>
@@ -150,7 +176,8 @@ function ManageTimetable(props){
 
             <NavBar navigate={props.navigate} tab={'manage-data'}></NavBar>
 
-
+            {/* The filter which shows which course is displayed on the calendar
+                        Gets all individual course codes from the data       */}
             <div className='timetable-calendar'>
                 <div className='course-filter'>
                     <label for="course-filter">Filter By Course</label>
@@ -162,7 +189,7 @@ function ManageTimetable(props){
                     
                 </div>
                 
-            
+                {/* See https://fullcalendar.io/docs#toc for documentation of calendar view */}
                 <FullCalendar
                 plugins={[ timeGridPlugin, interactionPlugin ]}
                 initialView="timeGridWeek"
@@ -202,8 +229,6 @@ function ManageTimetable(props){
                 </div>
                 <p className='created'><b>Timetable Created</b> {createdTime}</p>
             </div>
-            
-            
         </div>
     );
 }
