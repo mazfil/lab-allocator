@@ -142,10 +142,10 @@ button:hover{
   background-color: #000000c0;
 }
 
+
 .file-drop-box{
   margin: auto;
-  display: inline;
-  justify-content: center;
+  display: flex;
   background-color: var(--white);
   width: 384px;
   height: 128px;
@@ -155,6 +155,32 @@ button:hover{
   border-color: var(--gold);
   transition: 5s;
 }
+
+.file-input{
+  width: 100%;
+  margin: auto;
+}
+.file-input > input{
+  padding-bottom: 32px;
+}
+
+.file-input > input, .file-input > button{
+  margin: auto;
+  margin-bottom: 8px;
+  font-size: 1.5em;
+  display: flex;
+}
+
+.template-link > p, .template-link{
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  width: 100%;
+  color: #222;
+  margin-bottom: 8px;
+}
+
 
 .file-container{
   display: inline;
@@ -217,4 +243,110 @@ input{
 
 #lab_days{
   display: inline;
+}
+
+.manageTimetable{
+  width: 100vw;
+  height: 100vh;
+}
+
+  .timetable-calendar{
+    width: 100%;
+    height: 80%;
+}
+
+
+.edit-data{
+  display: flex;
+  padding-bottom: 16px;
+}
+
+.course-data-buttons {
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  padding-bottom: 16px;
+}
+
+form{
+  margin: auto;
+}
+
+
+.save-course-data, .clear-course-data{
+  padding: 8px;
+  margin: 8px;
+  width: 156px;
+  font-size: 1em;
+}
+
+.clear-course-data{
+  background-color: #444444;
+  color: var(--white);
+  border-color: #222;
+}
+
+.timetable-calendar{
+  margin-top: 100px;
+
+}
+
+.course-filter{
+  margin: 8px auto 32px auto;
+  justify-content: center;
+  text-align: center;
+}
+
+.timetable-save {
+  display: flex;
+  margin-right: 32px;
+  margin-left: auto;
+  font-size: 1.5em;
+  padding: 8px;
+  margin: 4px;
+}
+
+.manage-timetable-buttons{
+  width: 100%;
+  display: inline;
+}
+
+.created{
+  text-align: center;
+  margin-right: 8px;
+}
+
+.bottom-bar{
+  display: flex;
+}
+
+
+.change-room-overlay, .change-room{
+  z-index: 10000;
+  position: absolute;
+  display: flex;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+}
+
+.change-room-overlay{
+  width: 100vw;
+  height: 100vh;
+  background-color: #000000c0;
+}
+
+
+.change-room{
+  margin: auto;
+  display: flex;
+  background-color: var(--white);
+  width: 384px;
+  height: 128px;
+  padding: 32px;
+  border-radius: 16px;
+  border-style: dashed;
+  border-color: var(--gold);
+  transition: 5s;
 }

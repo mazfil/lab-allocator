@@ -5,6 +5,7 @@ import { db } from '../firebase';
 import { useEffect } from 'react';
 import './ManageData.css';
 
+
 function ManageData(props) {
     const [courseData, setCourseData] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
@@ -284,6 +285,12 @@ function ManageData(props) {
 
                         {errorMessage && <p className="error-message">{errorMessage}</p>}
                     </form>
+
+                    
+                </div>
+                <div className='course-data-buttons'>
+                <button className='save-course-data'>Save Course Data</button>
+                <button className='clear-course-data'>Clear</button>
                 </div>
                 
                 <div className='search-bar'>
