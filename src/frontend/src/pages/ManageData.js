@@ -1,7 +1,7 @@
 import NavBar from '../components/nav/NavBar';
 import { useState } from 'react';
 import { collection, getDocs, addDoc, deleteDoc, doc } from 'firebase/firestore';
-import { db } from '../firebase';
+import { database } from '../firebase';
 import { useEffect } from 'react';
 import './ManageData.css';
 
@@ -32,7 +32,7 @@ function ManageData(props) {
     const [showDetails, setShowDetails] = useState({});
 
     const fetchPost = async () => {
-        const querySnapshot = await getDocs(collection(db, "course_data"));
+        const querySnapshot = await getDocs(collection(database, "course_data"));
         const newData = querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
         setCourseData(newData);
         setFilteredData(newData);
@@ -85,7 +85,7 @@ function ManageData(props) {
             return;
         }
 
-        await addDoc(collection(db, "course_data"), formData);
+        await addDoc(collection(database, "course_data"), formData);
         fetchPost();
         setFormFields({
             course_code: "",
@@ -108,7 +108,7 @@ function ManageData(props) {
     };
 
     const handleDeleteCourse = async (id) => {
-        await deleteDoc(doc(db, "course_data", id));
+        await deleteDoc(doc(database, "course_data", id));
         fetchPost();
     };
 
