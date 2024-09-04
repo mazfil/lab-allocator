@@ -5,11 +5,11 @@
 ## Attendance ([Attendance]/7):
 
 - [x] Alex Boxall
-- [] Hexuan Meng
+- [ ] Hexuan Meng
 - [x] Filip Mazur
-- [] Edward Nivison
-- [] Rachel Cao
-- [] Sineeha Kodwani
+- [ ] Edward Nivison
+- [ ] Rachel Cao
+- [ ] Sineeha Kodwani
 - [x] Matthew Cawley
 
 ## Agenda:
