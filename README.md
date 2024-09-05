@@ -49,6 +49,10 @@ The end vision of the project will be to have a application that will adapt to n
 
 ## Project Output
 
+You can find our project output in the link below. It details some of our major outputs for the project. However, the best place you can find what is being done is the GitHub ![Issues](https://github.com/mazfil/lab-allocator/issues?q=label%3A%22Sem+2%22) that are relevant.
+
+What we have majorly done is improving the backend to fit some new criteria the client has made evident to us. The frontend has been running user testing and improving the look and feel of the program. We have also been working with the School of Computing Facility Team to get a backend server running where we have been developing an on-campus database. We have been working on transferring from the firebase to the new database, and we have been making documentation for the user and the developer.
+
 [Project output and descriptions on what is being done.](https://github.com/mazfil/lab-allocator/tree/main/docs/output)
 
 ## Technical constraints
