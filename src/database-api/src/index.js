@@ -31,13 +31,13 @@ app.get("/api/data", async(req, res) => {
 
   try{
     if(collection == "course_data"){
-      data = await target ? Course.find({course_code: target}) : Course.find()
+      data = await target ? await Course.find({course_code: target}) : await Course.find()
     }else if (collection == "timetable_data"){
-      data = await target ? Timetable.find({created: target}) : Timetable.findOne().sort({created: -1})
+      data = await target ? await Timetable.find({created: target}) : await Timetable.findOne().sort({created: -1})
     }else{
       throw new Error ("No collection specified.");
     }
-    console.log("/api/data?collection" + collection + "&target=" + target + "/");
+    console.log("/api/data?collection=" + collection + "&target=" + target + "/");
     res.json(data);
   }catch(error){
     res.status(500).json({message: error.message});
