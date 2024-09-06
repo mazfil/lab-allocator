@@ -1,5 +1,7 @@
 // server/index.js
-const Model = require("./models/model");
+const Course = require("./models/CourseModel");
+const Timetable = require("./models/TimetableModel");
+
 const express = require("express");
 const mongoose = require("mongoose");
 
@@ -21,26 +23,21 @@ db.once('connected', () => {
   console.log("Connected to Database :-)");
 })
 
-app.get("/api/data/:collection?", async(req, res) => {
-/*    const collection = req.params.collection;
+app.get("/api/data", async(req, res) => {
 
-
-    MongoClient.connect(url, function(err, db) {
-      if (err) throw err;
-      var dbo = db.db("mydb");
-      var query = { address: "Park Lane 38" };
-      dbo.collection("customers").find(query).toArray(function(err, result) {
-      if (err) throw err;
-        console.log(result);
-        db.close();
-      });i
-    });
-*/
-  const collection = req.params.collection;
+  const collection = req.query("collection");
+  const target = req.query("target");
+  var data;
 
   try{
-    const data = await Model.find();
-    console.log(data);
+    if(collection == "course_data"){
+      data = await target ? Course.find({course_code: target}) : Course.find()
+    }else if (collection == "timetable_data"){
+      data = await target ? Timetable.find({created: target}) : Timetable.findOne().sort({created: -1})
+    }else{
+      throw new Error ("No collection specified.");
+    }
+    console.log("/api/data?collection" + collection + "&target=" + target + "/");
     res.json(data);
   }catch(error){
     res.status(500).json({message: error.message});
