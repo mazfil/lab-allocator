@@ -21,6 +21,7 @@ Weekly agenda items:
 - Go over any decisions and log them as completed, implemented, or not started, they should all have issues to them, and should show progress.
 
 Per meeting agenda:
+
 *Enter agenda here*
 
 ## Content from the meeting
