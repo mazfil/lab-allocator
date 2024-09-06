@@ -148,6 +148,7 @@ function ManageTimetable(props){
     }
     useEffect(() => {fetchPost();}, [])
     
+    console.log(fetch(helpers.queryDatabase("timetable_data"), {method: "GET"}))
 
     return(
         <div className='manageTimetable'>

@@ -26,6 +26,7 @@ function Dashboard(props){
     fetch("http://localhost:8080/start", {method: "GET"})
   }
 
+
   return(
     <div className='dashboard'>
       {dropBoxVisibility ? 
