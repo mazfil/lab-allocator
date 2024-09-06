@@ -47,6 +47,7 @@ Here is a checklist that you can use when developing in the project to show what
 	 - [ ] **Yes**, when committing make sure to reference your issue/s to show progress in that issue, and if needed updated its progress, discuss deadline changes, create new issues if your issue is too broad.
 	 - [ ] **No**, create an issue for your work, make sure that you reference or comment on any decisions that are being made in this issue as well as any reflections that are being made to feedback that has been given.
  - [ ] Make sure that when you are working that you are using a relevant branch that is up-to-date, check if your branch is behind its parent branch and make sure that when you make a pull-request to your parent branch, that you are not conflicting with the parent branch and break anything in it.
+ - [ ] Ensure that you have relevant labels on your issue, a new addition is the Sem 2 label, this is to show that the issue is opened and closed in Sem 2. Add this to each of your issues.
 
 These are the basics when working on the project, and how you can show your contribution in the repository. 
 
