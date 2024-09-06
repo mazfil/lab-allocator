@@ -16,6 +16,11 @@
 
 ## Agenda:
 
+Weekly agenda items:
+- Go over the reflection logs, and ensure that there are sufficient progress being made on them. Make some reference to the comment that they are relevant to in the issue to show progress.
+- Go over any decisions and log them as completed, implemented, or not started, they should all have issues to them, and should show progress.
+
+Per meeting agenda:
 *Enter agenda here*
 
 ## Content from the meeting
