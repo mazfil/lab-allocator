@@ -25,8 +25,8 @@ db.once('connected', () => {
 
 app.get("/api/data", async(req, res) => {
 
-  const collection = req.query("collection");
-  const target = req.query("target");
+  const collection = req.query.collection;
+  const target = req.query.target;
   var data;
 
   try{
