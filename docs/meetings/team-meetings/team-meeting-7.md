@@ -1,16 +1,14 @@
-**[DELETE ME]: Reminder to replace all square brackets with respective information, including the removal of the square brackets.**
+# Team Meeting #7- 09/09/2024
 
-# [type] Meeting #[Number]- DD/MM/2024
-
-*Meeting Minutes by [Name]*
+*Meeting Minutes by Edward*
 
 ## Attendance ([Attendance]/7):
 
 - [] Alex Boxall
 - [] Hexuan Meng
-- [] Filip Mazur
-- [] Edward Nivison
-- [] Rachel Cao
+- [X] Filip Mazur
+- [X] Edward Nivison
+- [X] Rachel Cao
 - [] Sineeha Kodwani
 - [] Matthew Cawley
 
