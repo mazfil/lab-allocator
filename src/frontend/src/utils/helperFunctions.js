@@ -2,6 +2,7 @@ import { doc, setDoc } from "firebase/firestore";
 import {collection, getDocs, Timestamp } from 'firebase/firestore'
 import {database} from '../firebase';
 import { parse } from 'papaparse';
+import { ObjectId } from "bson";
 
 
 /**
@@ -205,7 +206,7 @@ export async function numToDay(data){
 }
 
 //The base URL which you query the data from. The URL is then generated into a query in the queryDatabase function
-const databaseURL = "http://laballoc-dev.cecs.anu.edu.au:3001/api/data";
+const databaseURL = "http://laballoc-dev.cecs.anu.edu.au:3001/api/";
 
 
 /**
@@ -215,8 +216,31 @@ const databaseURL = "http://laballoc-dev.cecs.anu.edu.au:3001/api/data";
  * @returns 
  */
 export async function queryDatabase(collection, target){
-  const query = databaseURL + "?collection=" + collection + (target ? "&target=" + target : "")
+  const query = databaseURL + "data?collection=" + collection + (target ? "&target=" + target : "")
   return(await fetch(query, {mode: "cors", method: "GET"}).then((e) => e.json()).then((json) => {return(json)}))
+}
+
+export async function uploadToDatabase(collection, target, data){
+  const query = databaseURL + "upload?collection=course_data"
+  const request = {mode: "cors", method: "POST", headers: {'Content-Type':'application/json'}, body: JSON.stringify({
+    "after_lecture": true,
+    "byod": true,
+    "course_code": "COMP1100",
+    "course_size": 250,
+    "lab_days": [3,4,5],
+    "lab_duration": 2,
+    "lec_day": 1,
+    "lec_duration": 2,
+    "lec_time": 13,
+    "lecture_amount": 1,
+    "mix_cohorts": false,
+    "projector": true,
+    "timerange_from": 8,
+    "timerange_until": 20,
+    "tutors": 10
+  })}
+  console.log(request)
+  console.log(await fetch(query, request))
 }
 
 
