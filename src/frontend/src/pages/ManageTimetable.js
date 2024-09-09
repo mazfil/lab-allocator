@@ -141,14 +141,27 @@ function ManageTimetable(props){
         setCourseList(["All", ...new Set(data.map(item => item.title.substring(0, item.title.indexOf('_'))))].slice(0, -1))
         updateData(data, activeCourse)
     }
+
+    const print = async (t) => {
+        console.log(t)
+    }
     const fetchPost = async () => {
         const data = await helpers.getRoomTimetables()
+  
+
+
+        console.log(await helpers.queryDatabase("course_data"))
+
+
+
+
+
+
         setTime(data[1])
         initData(data[0])
     }
     useEffect(() => {fetchPost();}, [])
     
-    console.log(fetch(helpers.queryDatabase("timetable_data"), {method: "GET"}))
 
     return(
         <div className='manageTimetable'>

@@ -26,7 +26,6 @@ db.once('connected', () => {
 })
 
 app.get("/api/data", async(req, res) => {
-
   const collection = req.query.collection;
   const target = req.query.target;
   var data;
@@ -40,6 +39,8 @@ app.get("/api/data", async(req, res) => {
       throw new Error ("No collection specified.");
     }
     console.log("/api/data?collection=" + collection + "&target=" + target + "/");
+    console.log(data[0]);
+    res.setHeader('Content-Type', 'application/json');
     res.json(data);
   }catch(error){
     res.status(500).json({message: error.message});

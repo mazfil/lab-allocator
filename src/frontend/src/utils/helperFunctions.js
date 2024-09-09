@@ -208,5 +208,6 @@ const databaseURL = "http://laballoc-dev.cecs.anu.edu.au:3001/api/data";
 
 export async function queryDatabase(collection, target){
   const query = databaseURL + "?collection=" + collection + (target ? "&target=" + target : "")
-  return await fetch(query, {method: "GET"})
+  return(await fetch(query, {mode: "cors", method: "GET"}).then((e) => e.json()).then((json) => {return(json)}))
+
 }
