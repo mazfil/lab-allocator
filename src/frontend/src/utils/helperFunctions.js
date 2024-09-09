@@ -221,35 +221,17 @@ export async function queryDatabase(collection, target){
 }
 
 export async function uploadData(collection, target, data){
-  /*const query = databaseURL + "upload?collection=course_data&target=COMP1100&update=true"
-  const request = {mode: "cors", method: "POST", headers: {'Content-Type':'application/json'}, body: JSON.stringify({
-    "after_lecture": true,
-    "byod": false,
-    "course_code": "COMP1100",
-    "course_size": 250,
-    "lab_days": [3,4,5],
-    "lab_duration": 2,
-    "lec_day": 1,
-    "lec_duration": 2,
-    "lec_time": 13,
-    "lecture_amount": 1,
-    "mix_cohorts": false,
-    "projector": true,
-    "timerange_from": 8,
-    "timerange_until": 20,
-    "tutors": 10
-  })}
-  console.log(request)
-  console.log(await fetch(query, request))*/
+  const query = databaseURL + "upload?collection=" + collection + (target ? "&target=" + target : "")
+  return await fetch(query, {mode: "cors", method: "POST", headers: {'Content-Type':'application/json'}, body: data})
 }
 
 export async function updateData(collection, target, data){
-
+    //TO DO
 }
 
 
 export async function deleteData(collection, target){
-  
+    //TO DO
 }
 
 

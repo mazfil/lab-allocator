@@ -27,6 +27,10 @@ db.once('connected', () => {
   console.log("Connected to Database :-)");
 })
 
+
+/**
+ * Get Request - Returns the data from a specified collection, and a specific course or timetable if specified.
+ */
 app.get("/api/data", async(req, res) => {
   const collection = req.query.collection;
   const target = req.query.target;
@@ -43,43 +47,79 @@ app.get("/api/data", async(req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.json(data);
   }catch(error){
-    res.status(500).json({message: error.message});
+    res.status(400).json({message: error.message});
   }
 });
 
 
-// Post request for updating or uploading data
+/**
+ * Post Upload - Uploads data to the database
+ */
 app.post("/api/upload", async(req, res) => {
   const collection = req.query.collection;
-  const target = req.query.target;
+  const bulk = (req.query.collection ? true : false);
   const body = JSON.stringify(req.body);
-  const update = Boolean(req.query.update);
-
 
   try{
-    switch(collection){
-      case "timetable_data":
-        await Timetable.create(req.body)
-        break;
-      case "course_data":
-        console.log("Uploading Course");
-        if(update){
-          console.log("Updating Course");
-          await Course.findOneAndUpdate({course_code: body.course_code});
+    if(collection === "timetable_data"){
+        await Timetable.create(body);
+    }else if (collection === "course_data"){
+        if (bulk){
+            Course.insertMany(body);
         }else{
-          console.log("Creating new Course");
-          await Course.create(body)
+            Course.create(body);
         }
-        break;
+    }else{
+        throw new Error("No Collection specified");
     }
+    res.status(201)
   }catch(error){
-    res.status(500).json({message: error.message});
+    res.status(400).json({message: error.message});
   }
-
 });
 
-app.post("/api/update", async(req, res) => {});
-app.post("/api/delete", async(req, res) => {});
+/**
+ * Post Update - Updates existing data in the database, a target/identifier of the specific data needs to be provided
+ * to update as this function updates EXISTING data.
+ */
+app.post("/api/update", async(req, res) => {
+    const collection = req.query.collection;
+    const body = JSON.stringify(req.body);
+    const target = req.query.target;
+
+    try{
+        if(collection === "timetable_data"){
+            await Timetable.findOneAndUpdate({_id: target}, body);
+        }else if (collection === "course_data"){
+            await Course.findOneAndUpdate({_id: target}, body);
+        }else{
+            throw new Error("No Collection specified");
+        }
+        res.status(204)
+      }catch(error){
+        res.status(400).json({message: error.message});
+      }
+});
+
+/**
+ * Post Delete - Deletes a specified datapoint. A target must be specified for safefy.
+ */
+app.post("/api/delete", async(req, res) => {
+    const collection = req.query.collection;
+    const target = req.query.target;
+    try{
+        if(collection === "timetable_data"){
+            Timetable.delete({_id: target})
+        }else if (collection === "course_data"){
+            Course.delete({_id: target})
+        }else{
+            throw new Error("");
+        }
+        res.status(200)
+    }catch(error){
+        res.status(400).json({message: error.message});
+    }
+});
 
 
 
