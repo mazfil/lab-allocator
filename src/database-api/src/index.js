@@ -49,24 +49,23 @@ app.get("/api/data", async(req, res) => {
 app.post("/api/upload", async(req, res) => {
   const collection = req.query.collection;
   const target = req.query.target;
+  const body = JSON.stringify(req.body);
+  const update = Boolean(req.query.update);
 
 
   try{
     switch(collection){
       case "timetable_data":
-          await Timetable.create(req.body)
+        await Timetable.create(req.body)
         break;
       case "course_data":
-        // IF a target has been defined then we want to upload or update a single course
-        // if it has not been defined then we are uploading multiple course datapoints  
-        if (target){
-            await Course.find({course_code: target}).then(result => {
-            if (result){
-              Course.findOneAndUpdate({course_code: target}, req.body);
-            }else{
-              Course.create(req.body)
-            }
-          })
+        console.log("Uploading Course");
+        if(update){
+          console.log("Updating Course");
+          await Course.findOneAndUpdate({course_code: body.course_code});
+        }else{
+          console.log("Creating new Course");
+          await Course.create(body)
         }
         break;
     }
