@@ -9,6 +9,8 @@ import { mkConfig, generateCsv, download } from "export-to-csv";
 import { json2csv } from 'json-2-csv';
 import { create } from '@mui/material/styles/createTransitions.js';
 
+import fileData from "../TEMPDATA.json"
+
 function ManageTimetable(props){
     // Tutorial data used by the calendar view. (applies filters to the timetable data)
     const [filteredTimetable, setFilteredData] = useState([]);
@@ -66,7 +68,9 @@ function ManageTimetable(props){
 
     // updates a tutorial when dragged and dropped. Updates the time and day of tutorial.
     const updateTutorial = async (tutorial) => {
-        var editedTutorial = await timetable.find((tuts) => tuts.id == tutorial.event.id)
+        console.log(tutorial)
+        var editedTutorial = await timetable.find((tuts) => tuts._id == tutorial.event.title)
+        console.log(editedTutorial)
         editedTutorial.startTime = tutorial.event.start.getHours() + ":" + (tutorial.event.start.getMinutes() == 0 ? "00" : "30")
         editedTutorial.endTime = tutorial.event.end.getHours() + ":" + (tutorial.event.end.getMinutes() == 0 ? "00" : "30")
         editedTutorial.daysOfWeek = tutorial.event.start.getDay().toString()
@@ -154,20 +158,16 @@ function ManageTimetable(props){
     }
 
     const fetchPost = async () => {
-
-
-
-
-
-        //const data = await helpers.getRoomTimetables()
-        const data = await helpers.generateTimetable(await helpers.queryDatabase("timetable_data"))
+        // SWITCH ONCE READY TO USE DATABASE
+        //const data = await helpers.generateTimetable(await helpers.queryDatabase("timetable_data"))
+        const data = await helpers.generateTimetable(fileData)
         console.log(data)
         setTime(data.created)
         initData(data.timetable)
     }
     useEffect(() => {fetchPost();}, [])
     
-
+    console.log(filteredTimetable)
     return(
         <div className='manageTimetable'>
             {/* This conditionall renders the room change overlay. When a tutorial is clicked, 

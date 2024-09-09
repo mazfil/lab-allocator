@@ -26,9 +26,6 @@ function Dashboard(props){
     fetch("http://localhost:8080/start", {method: "GET"})
   }
 
-  const testFunction = () => { 
-    helpers.uploadToDatabase()
-  }
 
 
   return(
@@ -45,7 +42,6 @@ function Dashboard(props){
         </div>
         : null
         }
-        <button onClick={testFunction}>TEST</button>
         <div className='main-logo'>
              <img src={process.env.PUBLIC_URL + '/ANU Primary Horizontal GoldBlack.svg'} alt='ANU Logo with Gold Crest and the words Australian National University ' />
           <h1>SoCo Lab Allocation System</h1>

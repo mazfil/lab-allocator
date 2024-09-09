@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3001;
 
 const app = express();
 app.use(cors());
-app.use(espress.json())
+app.use(express.json())
 
 
 const DATABASE_URL = "mongodb://localhost:27017/laballocator";
@@ -47,6 +47,8 @@ app.get("/api/data", async(req, res) => {
   }
 });
 
+
+// Post request for updating or uploading data
 app.post("/api/upload", async(req, res) => {
   const collection = req.query.collection;
   const target = req.query.target;
@@ -75,6 +77,10 @@ app.post("/api/upload", async(req, res) => {
   }
 
 });
+
+app.post("/api/update", async(req, res) => {});
+app.post("/api/delete", async(req, res) => {});
+
 
 
 app.listen(PORT, () => {
