@@ -52,6 +52,11 @@ Per meeting agenda:
 - Focus on getting through the more important work - can implement less important things at the end if we have time
 - Should try to get everyone to one meeting at least once a month - haven't had perfect attendance for a lot of meetings
 
-## Future Meetings
 
-*Enter future meeting notes here*
+## Client Meeting Notes
+- Gave update on the fact that user testing is going to be delayed
+- With backend rankings - everyone who is using the system should have access to the documentation about how it allocates
+  - Everyone probably has their own ideas as to what a good allocation is, and so this documentation ensure we know that it is working
+- Yes, would be good to give agendas to Belinda before client meetings
+
+
