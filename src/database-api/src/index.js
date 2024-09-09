@@ -11,6 +11,7 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 app.use(cors());
 
+
 const DATABASE_URL = "mongodb://localhost:27017/laballocator";
 
 mongoose.connect(DATABASE_URL);
@@ -56,11 +57,17 @@ app.post("/api/upload", async(req, res) => {
           await Timetable.create(req.body)
         break;
       case "course_data":
-          if(await Course.find({_id: target})){
-            await Course.updateOne(req.body);
-          }else{
-            await Course.create(req.body)
-          }
+        // IF a target has been defined then we want to upload or update a single course
+        // if it has not been defined then we are uploading multiple course datapoints  
+        if (target){
+            await Course.find({course_code: target}).then(result => {
+            if (result){
+              Course.findOneAndUpdate({course_code: target}, req.body);
+            }else{
+              Course.create(req.body)
+            }
+          })
+        }
         break;
     }
   }catch(error){

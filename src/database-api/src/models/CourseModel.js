@@ -59,7 +59,7 @@ const courseSchema = new mongoose.Schema({
   },
   tutors: {
     required: true,
-    type: Boolean
+    type: Number
   }
 })
 
