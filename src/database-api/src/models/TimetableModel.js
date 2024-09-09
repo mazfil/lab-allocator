@@ -1,30 +1,19 @@
 const mongoose = require("mongoose");
 
 const timetableSchema = new mongoose.Schema({
-  daysOfWek: {
+  _id: {
+    required: true,
+    type: Number,
+  },
+  created: {
     required: true,
     type: String
   },
-  endTime: {
+  timetable: {
     required: true,
-    type: String 
-  },
-  id: {
-    required: true,
-    type: String 
-  },
-  location: {
-    required: true,
-    type: String
-  },
-  startTime: {
-    required: true,
-    type: String
-  },
-  title: {
-    required: true,
-    type: String
-  },
+    type: [Object]
+  }
+  
 })
 
 module.exports = mongoose.model('Timetable', timetableSchema)

@@ -38,10 +38,31 @@ app.get("/api/data", async(req, res) => {
     }else{
       throw new Error ("No collection specified.");
     }
-    console.log("/api/data?collection=" + collection + "&target=" + target + "/");
-    console.log(data[0]);
     res.setHeader('Content-Type', 'application/json');
     res.json(data);
+  }catch(error){
+    res.status(500).json({message: error.message});
+  }
+});
+
+app.post("/api/upload", async(req, res) => {
+  const collection = req.query.collection;
+  const target = req.query.target;
+
+
+  try{
+    switch(collection){
+      case "timetable_data":
+          await Timetable.create(req.body)
+        break;
+      case "course_data":
+          if(await Course.find({_id: target})){
+            await Course.updateOne(req.body);
+          }else{
+            await Course.create(req.body)
+          }
+        break;
+    }
   }catch(error){
     res.status(500).json({message: error.message});
   }

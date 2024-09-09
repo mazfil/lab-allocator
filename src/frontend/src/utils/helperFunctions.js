@@ -204,10 +204,45 @@ export async function numToDay(data){
   return result
 }
 
+//The base URL which you query the data from. The URL is then generated into a query in the queryDatabase function
 const databaseURL = "http://laballoc-dev.cecs.anu.edu.au:3001/api/data";
 
+
+/**
+ * Generates a request and then sends to the Database API to handle
+ * @param {String} collection the collection which is being queried (course_data or timetable_data)
+ * @param {String} target a specific document which should be fetched or modified
+ * @returns 
+ */
 export async function queryDatabase(collection, target){
   const query = databaseURL + "?collection=" + collection + (target ? "&target=" + target : "")
   return(await fetch(query, {mode: "cors", method: "GET"}).then((e) => e.json()).then((json) => {return(json)}))
+}
 
+
+const room_colours = {
+  HN123: "#beb2b4",
+  HN124: "#a899a4",
+  N109: "#928293",
+  N111: "#655071",
+  N112: "#514b63",
+  N113: "#3e4454",
+  N114: "#4c5669",
+  N1156: "#626e85"
+};
+
+
+export async function generateTimetable(raw_data){
+  var timetable_data = raw_data;
+  timetable_data.timetable.forEach(tutorial => {
+    tutorial.backgroundColor = room_colours[(tutorial.location).replace(".", "").replace("/", "")]
+    tutorial.borderColor = "#000000"
+    tutorial.durationEditable = false;
+    tutorial.editable = true;
+    tutorial.overlap = true;
+    tutorial.course_code = tutorial.title;
+    tutorial.title = tutorial._id
+  });
+
+  return(timetable_data)
 }

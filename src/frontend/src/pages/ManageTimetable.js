@@ -135,6 +135,17 @@ function ManageTimetable(props){
         })
     }
 
+    //-----------------------------------------------------------
+    // TEMP COMMENT TO DIFFERENTIATE NEW CODE FROM OLD CODE
+
+
+
+
+
+
+
+
+
     // initData and fetchPost initialise the data when the page is opened.
     const initData = async (data) => {
         setTimetable(data)
@@ -142,23 +153,17 @@ function ManageTimetable(props){
         updateData(data, activeCourse)
     }
 
-    const print = async (t) => {
-        console.log(t)
-    }
     const fetchPost = async () => {
-        const data = await helpers.getRoomTimetables()
-  
-
-
-        console.log(await helpers.queryDatabase("course_data"))
 
 
 
 
 
-
-        setTime(data[1])
-        initData(data[0])
+        //const data = await helpers.getRoomTimetables()
+        const data = await helpers.generateTimetable(await helpers.queryDatabase("timetable_data"))
+        console.log(data)
+        setTime(data.created)
+        initData(data.timetable)
     }
     useEffect(() => {fetchPost();}, [])
     
