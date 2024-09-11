@@ -126,8 +126,6 @@ public class FirebaseConnection {
     }
 
     public void uploadSchedule(Schedule result) {
-        //clearPreviousResults();
-
         HashMap<String, Integer> labCounts = new HashMap<>();
 
         Date date = new Date();
@@ -159,36 +157,5 @@ public class FirebaseConnection {
                 }
             }
         }
-
-        System.out.printf("DONE!\n");
-
-        /*
-        DocumentReference dr = db.collection("test-backend-result").document("sample_run").collection("tutorials").document("COMP1100_1");
-        dr.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirestoreException error) {
-                System.out.printf("That's probably good...? %s\n", value.get("course_size"));
-            }
-        });
-
-        clearPreviousResults();
-
-        Map<String, Object> addMap = new HashMap<>() {{
-            put("daysOfWeek", "3");
-            put("startTime", "15:30:00");
-            put("endTime", "17:30:00");
-            put("location", "N114");
-            put("id", "COMP1100_1");
-            put("title", "COMP1100");
-
-            put("backgroundColor", "#585868");
-            put("borderColor", "#000000");
-            put("durationEditable", false);
-            put("editable", true);
-            put("overlap", "true");
-        }};
-        db.collection("timetable").document("backend-test-data").collection("tutorials").document("COMP1100_3").set(addMap);
-        */
-
     }
 }
