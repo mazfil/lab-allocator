@@ -9,7 +9,7 @@ You will need to run the API with `npm start` if you are testing it as it is not
 If you are getting errors with npm/npx not existing when ssh'ed into the server, source my bashfile with `sudo source ~/../u6934917/.bashrc`. If that doesnt work, google.
 
 ## Get Requests
-`http://laballoc-dev.cecs.anu.edu.au:3001/api/update?collection=A&target=B`\
+`http://laballoc-dev.cecs.anu.edu.au:3001/api/data?collection=A&target=B`\
 `A` is either `course_data` or `timetable_data`.\
 `B` is the course code or timetable creation date (as an integer), whichever you want to get specifically.
 
