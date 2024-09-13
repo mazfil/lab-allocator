@@ -58,7 +58,7 @@ app.get("/api/data", async(req, res) => {
 app.post("/api/upload", async(req, res) => {
   const collection = req.query.collection;
   const bulk = (req.query.collection ? true : false);
-  const body = JSON.stringify(req.body);
+  const body = req.body;
 
   try{
     if(collection === "timetable_data"){
@@ -111,7 +111,11 @@ app.post("/api/delete", async(req, res) => {
         if(collection === "timetable_data"){
             Timetable.delete({_id: target})
         }else if (collection === "course_data"){
+          if(target === "ALL"){
+            Course.deleteMany({});
+          }else{
             Course.delete({_id: target})
+          }
         }else{
             throw new Error("");
         }
