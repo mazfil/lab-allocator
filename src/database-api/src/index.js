@@ -102,19 +102,19 @@ app.post("/api/update", async(req, res) => {
 });
 
 /**
- * Post Delete - Deletes a specified datapoint. A target must be specified for safefy.
+ * Post Delete - Deletes a specified datapoint.
  */
 app.post("/api/delete", async(req, res) => {
     const collection = req.query.collection;
     const target = req.query.target;
     try{
         if(collection === "timetable_data"){
-            Timetable.delete({_id: target})
+            await Timetable.delete({_id: target})
         }else if (collection === "course_data"){
           if(target === "ALL"){
-            Course.deleteMany({});
+            await Course.deleteMany({});
           }else{
-            Course.delete({_id: target})
+            await Course.delete({_id: target})
           }
         }else{
             throw new Error("");
