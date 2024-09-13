@@ -23,7 +23,7 @@ function Dashboard(props){
   }
 
   const startBackend = () => {
-    fetch("http://localhost:8080/start", {method: "GET"})
+    //fetch("http://llaballoc-dev.cecs.anu.edu.au:8080", {method: "GET"})
   }
 
 

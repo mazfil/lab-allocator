@@ -12,6 +12,7 @@ import { ObjectId } from "bson";
  * @returns 
  */
 export async function readFileData(file){
+  await deleteData("course_data", "ALL");
   const parseOptions = {
     header: true,
     dynamicTyping: true,
@@ -33,10 +34,10 @@ export async function readFileData(file){
       }
 
       // Nests lectures
-      course.lectures = {};
+      course.lectures = [];
       ["lec_1", "lec_2", "lec_3", "lec_4"]
       .forEach(lecture => {
-        if (course[lecture] != null) { course.lectures[lecture] = course[lecture] }
+        if (course[lecture] != null) { course.lectures.push(course[lecture]) }
         delete course[lecture]
       });
 
@@ -47,8 +48,7 @@ export async function readFileData(file){
         course.tutorial_properties[property] = course[property]
         delete course[property]
       });
-
-      uploadCourse(course);
+      uploadData("course_data", course.course_code, course)
     });
   }
 
@@ -64,6 +64,7 @@ export async function readFileData(file){
 async function uploadCourse(course){
   const course_code = course.course_code;
   delete course[course_code]
+  await fetch();
   await setDoc(doc(database, "course_data", course_code), course);
 }
 
@@ -222,16 +223,18 @@ export async function queryDatabase(collection, target){
 
 export async function uploadData(collection, target, data){
   const query = databaseURL + "upload?collection=" + collection + (target ? "&target=" + target : "")
-  return await fetch(query, {mode: "cors", method: "POST", headers: {'Content-Type':'application/json'}, body: data})
+  console.log(await fetch(query, {mode: "cors", method: "POST", headers: {'Content-Type':'application/json'}, body: JSON.stringify(data)}))
 }
 
 export async function updateData(collection, target, data){
-    //TO DO
+  const query = databaseURL + "update?collection=" + collection + (target ? "&target=" + target : "")
+  console.log(await fetch(query, {mode: "cors", method: "POST", headers: {'Content-Type':'application/json'}, body: JSON.stringify(data)}))
 }
 
 
 export async function deleteData(collection, target){
-    //TO DO
+  const query = databaseURL + "delete?collection=" + collection + (target ? "&target=" + target : "")
+  return(await fetch(query, {mode: "cors", method: "POST"}))
 }
 
 
