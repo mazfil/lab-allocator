@@ -25,15 +25,15 @@ The end vision of the project will be to have a application that will adapt to n
 
 ## Team Members and Roles
 
-| UID | Name | Courses.Course | Role |
-|--|--|--| -- |
-| u7498708 | Edward Nivison | COMP3500 | Project Manager |
-| u7468248 | Alex Boxall | COMP3500 | Backend Designer |
-| u7605165 | Hexuan Meng | COMP8715 | Backend and Testing |
-| u6934917 | Filip Mazur | COMP3500 | Spokesperson |
-| u7313113 | Matthew Cawley | COMP3500 | Developer |
-| u7556970 | Rachel Cao | COMP3500 | Backend and Admin |
-| u7230574 | Sineeha Kodwani | COMP3500 | Deputy Spokesperson |
+| UID | Name | Courses.Course | Role | Skills |
+|--|--|--| -- | -- |
+| u7498708 | Edward Nivison | COMP3500 | Project Manager | Documentation, Decisions, Reflections, User Documentation, Frontend support, Server support, User support. |
+| u7468248 | Alex Boxall | COMP3500 | Backend Designer | Backend development, Fitness Function, Backend Documentation, Database, Server. |
+| u7605165 | Hexuan Meng | COMP8715 | Backend and Testing | Backend development, Fitness Function. |
+| u6934917 | Filip Mazur | COMP3500 | Spokesperson | Frontend Development, Database API, User support. |
+| u7313113 | Matthew Cawley | COMP3500 | Developer | Backend Development, Database Development, User Documentation. |
+| u7556970 | Rachel Cao | COMP3500 | Backend and Admin | Decisions, Reflections, Frontend Support. |
+| u7230574 | Sineeha Kodwani | COMP3500 | Deputy Spokesperson | Frontend Development, User support. |
 
 
 ## Statement of Work
