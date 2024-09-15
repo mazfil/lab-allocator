@@ -1,7 +1,6 @@
 package com.soco.laballocator;
 
-import com.soco.laballocator.Firebase.FirebaseConnection;
-import com.soco.laballocator.Firebase.MongoConnection;
+import com.soco.laballocator.Connection.MongoConnection;
 import com.soco.laballocator.Scheduling.Schedule;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;

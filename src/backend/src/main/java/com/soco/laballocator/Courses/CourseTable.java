@@ -1,7 +1,6 @@
 package com.soco.laballocator.Courses;
 
-import com.soco.laballocator.Firebase.FirebaseConnection;
-import com.soco.laballocator.Firebase.MongoConnection;
+import com.soco.laballocator.Connection.MongoConnection;
 
 import java.util.List;
 

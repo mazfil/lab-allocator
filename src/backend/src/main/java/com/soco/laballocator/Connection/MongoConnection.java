@@ -1,8 +1,5 @@
-package com.soco.laballocator.Firebase;
+package com.soco.laballocator.Connection;
 
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoDatabase;
 import com.soco.laballocator.Courses.Course;
 import com.soco.laballocator.Courses.CourseTable;
 import com.soco.laballocator.Rooms.RoomTable;
@@ -15,12 +12,13 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.springframework.web.client.RestTemplate;
 
 import java.io.*;
 import java.net.URL;
 import java.util.*;
 import org.json.*;
+
+import static com.soco.laballocator.Util.Time.Day.*;
 
 public class MongoConnection {
 
@@ -40,12 +38,36 @@ public class MongoConnection {
 
                 int lab_minutes = (Integer) tut_properties.get("tut_duration");
 
+                ArrayList<Course.Lecture> lectures = new ArrayList<>();
+
+                JSONArray lecs = course.getJSONArray("lectures");
+                for (int j = 0; j < lecs.length(); ++j) {
+                    JSONObject lectureDetails = lecs.getJSONObject(j);
+                    int hour = lectureDetails.getInt("time");
+                    int minute = 0;
+                    int lengthMinutes = lectureDetails.getInt("duration") * 60;
+                    String dayStr = lectureDetails.getString("day");
+                    Time.Day day = switch (dayStr) {
+                        case "mon" -> Monday;
+                        case "tue" -> Tuesday;
+                        case "wed" -> Wednesday;
+                        case "thu" -> Thursday;
+                        case "fri" -> Friday;
+                        default -> throw new IllegalStateException("Unexpected value: " + dayStr);
+                    };
+
+                    lectures.add(new Course.Lecture(
+                        new Time(day, hour, minute), lengthMinutes
+                    ));
+                }
+
                 courses.add(new Course(
                         i,
                         course.get("course_code").toString(),
                         (Integer) course.get("est_size"),
                         (Integer) course.get("num_tutors"),
-                        lab_minutes
+                        lab_minutes,
+                        lectures
                 ));
             }
 

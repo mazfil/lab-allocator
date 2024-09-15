@@ -1,8 +1,7 @@
 package com.soco.laballocator;
 
 import com.soco.laballocator.Courses.CourseTable;
-import com.soco.laballocator.Firebase.FirebaseConnection;
-import com.soco.laballocator.Firebase.MongoConnection;
+import com.soco.laballocator.Connection.MongoConnection;
 import com.soco.laballocator.Scheduling.Schedule;
 
 import java.util.Arrays;

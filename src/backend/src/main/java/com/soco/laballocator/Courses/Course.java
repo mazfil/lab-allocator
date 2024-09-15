@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 public class Course {
-    class Lecture {
+    static public class Lecture {
         // need to import lecture data
         Time startTime;
         int lengthMinutes;
@@ -54,7 +54,7 @@ public class Course {
         return labLengthMinutes;
     }
 
-    public Course(int id, String courseCode, int numStudents, int numTutors, int labLengthMinutes) {
+    public Course(int id, String courseCode, int numStudents, int numTutors, int labLengthMinutes, ArrayList<Lecture> lectures) {
         this.id = id;
         this.courseCode = courseCode;
         this.tutorRatio = switch (courseCode.charAt(4)) {
@@ -66,7 +66,7 @@ public class Course {
         this.numStudents = numStudents;
         this.labLengthMinutes = labLengthMinutes;
         this.numTutors = numTutors;
-        this.lectures = new ArrayList<>();
+        this.lectures = lectures;
     }
 
     /**
