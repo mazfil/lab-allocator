@@ -83,13 +83,12 @@ public class Solver {
             }
         }
 
-        double avgStress = ((double) Schedule.scheduleGenerationNumAttempts) / Schedule.scheduleGenerationCount;
-        double maxStress = ((double) Schedule.scheduleGenerationMaxAttempts) / 10.0;
+        double avgAttempts = ((double) Schedule.scheduleGenerationNumAttempts) / Schedule.scheduleGenerationCount;
 
         String warningStr = "";
-        if (warnSlow || avgStress >= 0.01 || maxStress >= 0.2) {
+        if (warnSlow || avgAttempts >= 2.0) {
             warningStr += "WARNING: constraints are tight - expect slower performance and less optimal results\n";
-            warningStr += "    Average attempts before succeeding: %.1f\n".formatted(avgStress);
+            warningStr += "    Average attempts before succeeding: %.1f\n".formatted(avgAttempts);
             warningStr += "    Population generation took %.1f seconds.\n".formatted(
                     (System.currentTimeMillis() - startMs) / 1000.0f
             );
