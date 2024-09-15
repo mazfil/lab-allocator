@@ -37,6 +37,7 @@ public class Solver {
     Schedule[] generateRandomPopulation() {
         Schedule[] sch = new Schedule[POPULATION_SIZE];
         for (int i = 0; i < POPULATION_SIZE; ++i) {
+            System.out.printf("Generating %d/%d\n", i, POPULATION_SIZE);
             sch[i] = new Schedule();
         }
         return sch;

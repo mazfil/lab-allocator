@@ -82,6 +82,7 @@ public class Schedule {
         }
         Collections.shuffle(shuffled);
 
+        int timeout = 0;
         while (!shuffled.isEmpty()) {
             int roomId = shuffled.remove(0);
             Room room = RoomTable.getInstance().getRoomFromId(roomId);
@@ -155,12 +156,27 @@ public class Schedule {
      * Creates a new, random lab schedule.
      */
     public Schedule() {
-        initialiseAllocationArray();
+        final int MAX_ATTEMPTS = 50;
 
-        Random rng = new Random();
+        for (int attempt = 0; attempt < MAX_ATTEMPTS; ++attempt) {
+            try {
+                initialiseAllocationArray();
 
-        for (int i = 0; i < CourseTable.getInstance().getTotalNumberOfCourses(); ++i) {
-            placeCourseRandomly(rng, i);
+                Random rng = new Random();
+
+                for (int i = 0; i < CourseTable.getInstance().getTotalNumberOfCourses(); ++i) {
+                    placeCourseRandomly(rng, i);
+                }
+
+                break;
+
+            } catch (RuntimeException e) {
+                System.out.printf("That didn't work... %d\n", attempt);
+                if (attempt == MAX_ATTEMPTS - 1) {
+                    System.out.printf("constraints seem impossible to resolve\n");
+                    throw e;
+                }
+            }
         }
     }
 

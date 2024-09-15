@@ -84,6 +84,32 @@ public class MongoConnection {
                     ));
                 }
 
+                /*
+                 * We do a similar trick to get "tut_start_time" and "tut_end_time"
+                 * implemented without needing to change the rest of the backend.
+                 */
+                String startTime = tut_properties.getString("tut_start_time");
+                String endTime = tut_properties.getString("tut_end_time");
+                int startIndex = (Integer.parseInt(startTime.split(":")[0]) - 8) * 2 + (Integer.parseInt(startTime.split(":")[1]) / 30);
+                int endIndex = (Integer.parseInt(endTime.split(":")[0]) - 8) * 2 + (Integer.parseInt(endTime.split(":")[1]) / 30);
+
+                if (startIndex != 0) {
+                    System.out.printf("COURSE %s has start index %d\n", course.get("course_code").toString(), startIndex);
+                    for (int j = 0; j < Time.NUM_DAYS; ++j) {
+                        lectures.add(new Course.Lecture(
+                                new Time(Time.Day.values()[j], 8, 0), startIndex * 30
+                        ));
+                    }
+                }
+                if (endIndex != Time.NUM_TIME_INDICES) {
+                    System.out.printf("COURSE %s has end index %d\n", course.get("course_code").toString(), endIndex);
+                    for (int j = 0; j < Time.NUM_DAYS; ++j) {
+                        lectures.add(new Course.Lecture(
+                                new Time(Time.Day.values()[j], endIndex), (Time.NUM_TIME_INDICES - endIndex) * 30
+                        ));
+                    }
+                }
+
                 courses.add(new Course(
                         i,
                         course.get("course_code").toString(),
