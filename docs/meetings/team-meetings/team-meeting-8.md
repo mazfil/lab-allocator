@@ -14,10 +14,11 @@
 
 ## Agenda:
 
-- ( insert agenda items here)
 - `after_lecture` flag
-
-*Enter agenda here*
+- Follow-up on frontend tasks (manage data page, conflict overlap, documentation and api/database integration), colour scheme development
+- Manage data page using incorrect data format
+- User testing *minimum testing product*
+- Final data format / data for testing and next sem (ensuring system is designed for this input)
 
 ## Content from the meeting
 ...
