@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const timetableSchema = new mongoose.Schema({
-  daysOfWek: {
+  daysOfWeek: {
     required: true,
     type: String
   },
