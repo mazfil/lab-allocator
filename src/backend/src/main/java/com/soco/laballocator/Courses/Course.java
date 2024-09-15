@@ -79,8 +79,10 @@ public class Course {
             int lectureChunk = lec.lengthMinutes / 30;
             int labChunk = labLengthMinutes / 30;
             for (int i = 1 - labChunk; i < lectureChunk; i++){
-                Time time = new Time(lec.startTime.getDay(),lec.startTime.getIndex() + i);
-                lecturesTime.add(time);
+                int idx = lec.startTime.getIndex() + i;
+                if (idx < 0 || idx >= Time.NUM_TIME_INDICES) continue;
+                Time tm = new Time(lec.startTime.getDay(),idx);
+                lecturesTime.add(tm);
             }
         }
         return lecturesTime;
