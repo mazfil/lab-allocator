@@ -1,6 +1,7 @@
 package com.soco.laballocator.Courses;
 
 import com.soco.laballocator.Firebase.FirebaseConnection;
+import com.soco.laballocator.Firebase.MongoConnection;
 
 import java.util.List;
 
@@ -46,7 +47,8 @@ public class CourseTable {
     static public CourseTable getInstance() {
         if (instance == null) {
             instance = new CourseTable();
-            new FirebaseConnection().loadCourses(); // here to prevent recursion
+            System.out.printf("about to load mongo courses...\n");
+            new MongoConnection().loadCourses(); // here to prevent recursion
         }
 
         return instance;

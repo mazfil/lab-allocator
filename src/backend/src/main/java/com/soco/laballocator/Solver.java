@@ -2,6 +2,7 @@ package com.soco.laballocator;
 
 import com.soco.laballocator.Courses.CourseTable;
 import com.soco.laballocator.Firebase.FirebaseConnection;
+import com.soco.laballocator.Firebase.MongoConnection;
 import com.soco.laballocator.Scheduling.Schedule;
 
 import java.util.Arrays;
@@ -98,7 +99,7 @@ public class Solver {
 
     public static void main(String[] args) {
         Schedule solution = new Solver().solve();
-        FirebaseConnection fb = new FirebaseConnection();
+        MongoConnection fb = new MongoConnection();
         fb.uploadSchedule(solution);
     }
 }

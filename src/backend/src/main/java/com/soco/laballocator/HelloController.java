@@ -1,6 +1,7 @@
 package com.soco.laballocator;
 
 import com.soco.laballocator.Firebase.FirebaseConnection;
+import com.soco.laballocator.Firebase.MongoConnection;
 import com.soco.laballocator.Scheduling.Schedule;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -63,8 +64,11 @@ public class HelloController {
             status = "Running";
             Solver solver = new Solver();
             try {
+                System.out.printf("A\n");
                 Schedule schedule = solver.solve();
-                FirebaseConnection fb = new FirebaseConnection();
+                System.out.printf("B\n");
+                MongoConnection fb = new MongoConnection();
+                System.out.printf("C\n");
                 fb.uploadSchedule(schedule);
                 schedule.print();
                 serverResult = schedule;
