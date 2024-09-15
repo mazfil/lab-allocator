@@ -155,10 +155,20 @@ public class Schedule {
     /**
      * Creates a new, random lab schedule.
      */
+    public static long scheduleGenerationCount = 0;
+    public static long scheduleGenerationNumAttempts = 0;
+    public static long scheduleGenerationMaxAttempts   = 0;
+
     public Schedule() {
-        final int MAX_ATTEMPTS = 50;
+        final int MAX_ATTEMPTS = 100000;
+        scheduleGenerationCount++;
 
         for (int attempt = 0; attempt < MAX_ATTEMPTS; ++attempt) {
+            ++scheduleGenerationNumAttempts;
+            if (attempt > scheduleGenerationMaxAttempts) {
+                scheduleGenerationMaxAttempts = attempt;
+            }
+
             try {
                 initialiseAllocationArray();
 
@@ -171,9 +181,7 @@ public class Schedule {
                 break;
 
             } catch (RuntimeException e) {
-                System.out.printf("That didn't work... %d\n", attempt);
                 if (attempt == MAX_ATTEMPTS - 1) {
-                    System.out.printf("constraints seem impossible to resolve\n");
                     throw e;
                 }
             }
@@ -189,7 +197,10 @@ public class Schedule {
     public Schedule(Schedule a, Schedule b) {
         Random random = new Random();
 
-        while (true) {
+        for (int attempt = 0; attempt < 500; ++attempt) {
+            if (attempt > 100) {
+                System.out.printf("%d\n", attempt);
+            }
             try {
                 initialiseAllocationArray();
                 int coursesNumber = CourseTable.getInstance().getTotalNumberOfCourses();
@@ -213,6 +224,12 @@ public class Schedule {
 
             }
         }
+
+        /*
+         * In case we timeout
+         */
+        System.out.printf("Timeout in generating schedule...\n");
+        throw new RuntimeException("can't crossover");
     }
 
     /**
