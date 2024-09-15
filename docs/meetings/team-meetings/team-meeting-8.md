@@ -52,4 +52,17 @@
 - Colour scheme development
   - Filip will be working on it today - will be pretty similar to what we already had
   - Tweaks to make it more usable
-- 
+- User testing *minimum testing product*
+  - As soon as the manage data page is done and the room clash is working, it should be okay for testing
+  - There's a small thing with buttons that needs changing too
+  - Hoping to get the timetable ready by today - might be by Friday (change in the style + clash fix needed)
+  - Need to get manage data page done this week
+  - Will contact them once the frontend is finished - don't want to schedule something and then back out of it
+- Backend updates
+  - Now uses the MonogDB API
+  - Tries a bit harder when constraints are difficult to resolve
+  - Should add a new variable to the JSON it uploads that reports whether it succeeded, failed, or succeeded but was difficult to resolve so may be less optimal
+  - Now respects lecture times and tutorial time constraints
+- Meeting with Belinda?
+  - Filip just needs to check the data - can just send email or Teams message
+  - Nothing else, so won't meet today
