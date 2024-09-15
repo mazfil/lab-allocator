@@ -94,7 +94,7 @@ public class MongoConnection {
                         inner.append("""
                                 {
                                     "startTime": "%s",
-                                    "dasyOfWeek": "%s",
+                                    "daysOfWeek": "%s",
                                     "location": "%s",
                                     "title": "%s",
                                     "endTime": "%s",
