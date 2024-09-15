@@ -82,7 +82,6 @@ public class Schedule {
         }
         Collections.shuffle(shuffled);
 
-        int timeout = 0;
         while (!shuffled.isEmpty()) {
             int roomId = shuffled.remove(0);
             Room room = RoomTable.getInstance().getRoomFromId(roomId);
@@ -197,10 +196,7 @@ public class Schedule {
     public Schedule(Schedule a, Schedule b) {
         Random random = new Random();
 
-        for (int attempt = 0; attempt < 500; ++attempt) {
-            if (attempt > 100) {
-                System.out.printf("%d\n", attempt);
-            }
+        for (int attempt = 0; attempt < 10000; ++attempt) {
             try {
                 initialiseAllocationArray();
                 int coursesNumber = CourseTable.getInstance().getTotalNumberOfCourses();
