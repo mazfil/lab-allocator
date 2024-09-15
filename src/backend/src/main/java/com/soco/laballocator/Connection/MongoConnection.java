@@ -22,6 +22,17 @@ import static com.soco.laballocator.Util.Time.Day.*;
 
 public class MongoConnection {
 
+    private static Time.Day jsDayToInternal(String day) {
+        return switch (day) {
+            case "mon" -> Monday;
+            case "tue" -> Tuesday;
+            case "wed" -> Wednesday;
+            case "thu" -> Thursday;
+            case "fri" -> Friday;
+            default -> throw new IllegalStateException("Unexpected value: " + day);
+        };
+    }
+
     public void loadCourses() {
         List<Course> courses = new ArrayList<>();
 
@@ -47,17 +58,29 @@ public class MongoConnection {
                     int minute = 0;
                     int lengthMinutes = lectureDetails.getInt("duration") * 60;
                     String dayStr = lectureDetails.getString("day");
-                    Time.Day day = switch (dayStr) {
-                        case "mon" -> Monday;
-                        case "tue" -> Tuesday;
-                        case "wed" -> Wednesday;
-                        case "thu" -> Thursday;
-                        case "fri" -> Friday;
-                        default -> throw new IllegalStateException("Unexpected value: " + dayStr);
-                    };
+                    Time.Day day = jsDayToInternal(dayStr);
 
                     lectures.add(new Course.Lecture(
                         new Time(day, hour, minute), lengthMinutes
+                    ));
+                }
+
+                /*
+                 * There isn't explicit support for scheduling tutorials only on certain days.
+                 * A quite lazy way of fixing that is to just pretend all of the unavailable days
+                 * have an enormous all-day-long lecture on them, so nothing will be scheduled there.
+                 */
+                JSONArray tut_days = tut_properties.getJSONArray("tut_days");
+                Set<Time.Day> unavailable_days = new HashSet<>(List.of(new Time.Day[]{
+                        Monday, Tuesday, Wednesday, Thursday, Friday
+                }));
+                for (int j = 0; j < tut_days.length(); ++j) {
+                    unavailable_days.remove(jsDayToInternal(tut_days.getString(j)));
+                }
+                for (Time.Day day : unavailable_days) {
+                    System.out.printf("COURSE %s NOT AVAILABLE ON DAY %s\n", course.get("course_code").toString(), day.toString());
+                    lectures.add(new Course.Lecture(
+                            new Time(day, 8, 0), Time.NUM_TIME_INDICES * 30
                     ));
                 }
 
@@ -72,7 +95,7 @@ public class MongoConnection {
             }
 
         } catch (Exception e) {
-            System.out.printf("That's an error.\n");
+            System.out.printf("That's an error. %s\n", e.getMessage());
             throw new RuntimeException(e);
         }
 

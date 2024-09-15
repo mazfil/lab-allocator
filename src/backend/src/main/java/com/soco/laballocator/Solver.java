@@ -45,6 +45,7 @@ public class Solver {
     public Schedule solve() {
         System.out.printf("Generating the initial population...\n");
         Schedule[] population = generateRandomPopulation();
+        System.out.printf("Generated a random population...\n");
         Random rng = new Random();
 
         population[0].print();
@@ -54,7 +55,6 @@ public class Solver {
         int totalGen = 0;
         int highestFitness = 0;
         while (generation++ < NUM_GENERATIONS) {
-
 
             Schedule[] newPopulation = new Schedule[POPULATION_SIZE];
 
