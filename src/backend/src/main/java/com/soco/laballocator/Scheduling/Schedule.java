@@ -196,7 +196,7 @@ public class Schedule {
     public Schedule(Schedule a, Schedule b) {
         Random random = new Random();
 
-        for (int attempt = 0; attempt < 10000; ++attempt) {
+        for (int attempt = 0; attempt < 2000; ++attempt) {
             try {
                 initialiseAllocationArray();
                 int coursesNumber = CourseTable.getInstance().getTotalNumberOfCourses();
@@ -224,7 +224,6 @@ public class Schedule {
         /*
          * In case we timeout
          */
-        System.out.printf("Timeout in generating schedule...\n");
         throw new RuntimeException("can't crossover");
     }
 
