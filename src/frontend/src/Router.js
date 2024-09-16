@@ -7,6 +7,7 @@ import About from './pages/About';
 import Support from './pages/Support';
 import Login from './pages/Login'
 import Logs from './pages/Logs'
+import Wiki from './pages/Wiki'
 //import UploadData from './overlays/UploadData';
 //import Status from './overlays/Status';
 import {database} from './firebase';
@@ -26,6 +27,7 @@ export const Router = () => {
             <Route path='/About' element={<About />}/>
             <Route path='/Support' element={<Support />}/>
             <Route path='/Logs' element={<Logs />}/>
+            <Route path='/Wiki' element={<Wiki />}/>
         </Routes>
     )
 }
