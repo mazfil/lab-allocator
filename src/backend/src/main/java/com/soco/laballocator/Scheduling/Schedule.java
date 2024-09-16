@@ -29,15 +29,15 @@ public class Schedule {
     public record Preference(String name, Weighting weighting, int preference) {}
 
     Preference[] preferences = new Preference[]{
-        new Preference ("freeSpace", new Weighting(0, 0.5, 1, 2, 1), 4),
-        new Preference ("betweenTimes", new Weighting(0, 0.5, 1, 2, 1), 4),
-        new Preference ("earlyOpts", new Weighting(0, 0.5, 1, 2, 1), 4),
-        new Preference ("lateOpts", new Weighting(0, 0.5, 1, 2, 1), 4),
-        new Preference ("dateVariance", new Weighting(0, 0.5, 1, 2, 1), 4),
-        new Preference ("roomVariance", new Weighting(0, 0.5, 1, 2, 1), 4),
-        new Preference ("reduceDupes", new Weighting(0, 0.5, 1, 2, 1), 4),
-        new Preference ("alwaysFreeRoom", new Weighting(0, 0.5, 1, 2, 1), 4),
-        new Preference ("repeatLabsSameRoom", new Weighting(0, 0.5, 1, 2, 1), 4)
+        new Preference ("freeSpace",            new Weighting(0, 0.5, 1, 2, 1  ), 4),
+        new Preference ("betweenTimes",         new Weighting(0, 0.5, 1, 2, 1  ), 4),
+        new Preference ("earlyOpts",            new Weighting(0, 0.5, 1, 2, 1  ), 4),
+        new Preference ("lateOpts",             new Weighting(0, 0.5, 1, 2, 1  ), 4),
+        new Preference ("dateVariance",         new Weighting(0, 0.5, 1, 2, 1  ), 4),
+        new Preference ("roomVariance",         new Weighting(0, 0.5, 1, 2, 1  ), 4),
+        new Preference ("reduceDupes",          new Weighting(0, 0.5, 1, 2, 1  ), 4),
+        new Preference ("alwaysFreeRoom",       new Weighting(0, 0.5, 1, 2, 2  ), 4),       /* weight more heavily */
+        new Preference ("repeatLabsSameRoom",   new Weighting(0, 0.5, 1, 2, 1  ), 4)
     };
 
     //variables used for the fitness functions, which the user will eventually set
