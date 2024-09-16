@@ -207,7 +207,16 @@ function ManageTimetable(props){
                     </select>
                     
                 </div>
-                
+                <div className='tutorial-visibility'>
+                  <button onClick={() => toggleView("HN1.23")} style={activeView.includes("HN1.23") ? {backgroundColor: helpers.room_colours.HN123} : {backgroundColor: "#444444"}}>HN1.23</button>
+                  <button onClick={() => toggleView("HN1.24")} style={activeView.includes("HN1.24") ? {backgroundColor: helpers.room_colours.HN124} : {backgroundColor: "#444444"}}>HN1.24</button>
+                  <button onClick={() => toggleView("N109")} style={activeView.includes("N109") ? {backgroundColor: helpers.room_colours.N109} : {backgroundColor: "#444444"}}>N109</button>
+                  <button onClick={() => toggleView("N111")} style={activeView.includes("N111") ? {backgroundColor: helpers.room_colours.N111} : {backgroundColor: "#444444"}}>N111</button>
+                  <button onClick={() => toggleView("N112")} style={activeView.includes("N112") ? {backgroundColor: helpers.room_colours.N112} : {backgroundColor: "#444444"}}>N112</button>
+                  <button onClick={() => toggleView("N113")} style={activeView.includes("N113") ? {backgroundColor: helpers.room_colours.N113} : {backgroundColor: "#444444"}}>N113</button>
+                  <button onClick={() => toggleView("N114")} style={activeView.includes("N114") ? {backgroundColor: helpers.room_colours.N114} : {backgroundColor: "#444444"}}>N114</button>
+                  <button onClick={() => toggleView("N115/6")} style={activeView.includes("N115/6") ? {backgroundColor: helpers.room_colours.N1156} : {backgroundColor: "#444444"}}>N115/6</button>
+                </div>
                 {/* See https://fullcalendar.io/docs#toc for documentation of calendar view */}
                 <FullCalendar
                 plugins={[ timeGridPlugin, interactionPlugin ]}
@@ -218,20 +227,9 @@ function ManageTimetable(props){
                 initialDate={"2024-01-01"}
                 dayHeaderFormat={{ weekday: 'short' }}
                 height={"auto"}
-                customButtons={
-                    { 
-                        HN123: {text: 'HN1.23', click: function() { toggleView("HN1.23") }},
-                        HN124: {text: 'HN1.24', click: function() { toggleView("HN1.24") }},
-                        N109: {text: 'N109', click: function() { toggleView("N109") }},
-                        N111: {text: 'N111', click: function() { toggleView("N111") }},
-                        N112: {text: 'N112', click: function() { toggleView("N112") }},
-                        N113: {text: 'N113', click: function() { toggleView("N113") }},
-                        N114: {text: 'N114', click: function() { toggleView("N114") }},
-                        N1156: {text: 'N115/6', click: function() { toggleView("N115/6") }},
-                    }}
                 headerToolbar={{
                     start: '', // will normally be on the left. if RTL, will be on the right
-                    center: 'HN123 HN124 N109 N111 N112 N113 N114 N1156',
+                    center: '',
                     end: '' // will normally be on the right. if RTL, will be on the left
                 }}
                 allDaySlot={false}

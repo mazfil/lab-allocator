@@ -64,9 +64,9 @@ function Dashboard(props){
           </div>
           <div className='control-gap'></div>
           <div className='app-mgmt'>
-            <button type="button" onClick={() =>this.props.navigate('About')}>About</button>
-            <button type="button" id='help-supp' onClick={() =>this.props.navigate('Wiki')}>Help & Support</button>
-            <button type="button">Status</button>
+            <button type="button" onClick={() =>props.navigate('About')}>About</button>
+            <button type="button" id='help-supp' onClick={() =>props.navigate('Wiki')}>Help & Support</button>
+            <button type="button" onClick={() =>props.navigate('Logs')}>Logs</button>
           </div>
         </div> 
         

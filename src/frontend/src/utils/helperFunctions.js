@@ -207,7 +207,7 @@ export async function numToDay(data){
 }
 
 //The base URL which you query the data from. The URL is then generated into a query in the queryDatabase function
-const databaseURL = "http://laballoc-dev.cecs.anu.edu.au:3001/api/";
+const databaseURL = "http://laballoc-dev.cecs.anu.edu.au:3002/api/";
 
 
 /**
@@ -238,7 +238,7 @@ export async function deleteData(collection, target){
 }
 
 
-const room_colours = {
+export const room_colours = {
   HN123: "#beb2b4",
   HN124: "#a899a4",
   N109: "#928293",
@@ -274,7 +274,8 @@ export async function queryLogs(){
   return(await fetch(query, {mode: "cors", method: "GET"}).then((e) => e.json()).then((json) => {return(json)}))
 }
 
-export async function createLog(log){
+export async function createLog(log_type, log_message){
+  const log = {type: log_type, message: log_message}
   const query = databaseURL + "logs";
-  console.log(await fetch(query, {mode: "cors", method: "POST", headers: {'Content-Type':'application/json'}, body: JSON.stringify(data)}))
+  console.log(await fetch(query, {mode: "cors", method: "POST", headers: {'Content-Type':'application/json'}, body: JSON.stringify(log)}))
 }

@@ -306,6 +306,12 @@ form{
   margin: 4px;
 }
 
+.tutorial-visibility > button {
+  font-size: 18pt;
+  margin: 8pt;
+  width: 96pt;
+}
+
 .manage-timetable-buttons{
   width: 100%;
   display: inline;

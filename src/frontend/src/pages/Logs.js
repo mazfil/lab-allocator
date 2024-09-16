@@ -4,12 +4,13 @@ import * as helpers from "../utils/helperFunctions.js";
 
 
 function Logs(props){
-    const [logs, setLogs] = useState([]);
+  const [logs, setLogs] = useState([]);
 
-    const fetchPost = async () => {
-        setLogs(await helpers.queryLogs())
-    }
-useEffect(() => {fetchPost();}, [])
+  const fetchPost = async () => {
+    setLogs(await helpers.queryLogs())
+  }
+
+  useEffect(() => {fetchPost();}, [])
 
   return(
     <div className='logs'>
@@ -18,6 +19,7 @@ useEffect(() => {fetchPost();}, [])
                 <tr>
                     <th>Log Type</th>
                     <th>Message</th>
+                    <th>Date</th>
                 </tr>
                 
             </thead>
@@ -27,6 +29,7 @@ useEffect(() => {fetchPost();}, [])
                         <tr key={log._id}>
                             <td>{log.type}</td>
                             <td>{log.message}</td>
+                            <td>{(new Date(log.timestamp)).toString().substring(0, 24)}</td>
                         </tr>
                     )
                 })}
