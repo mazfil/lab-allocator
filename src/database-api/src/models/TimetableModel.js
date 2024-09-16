@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
-var tutorialSchema = new mongoose.Schema({
-  dasyOfWeek: {
+const tutorialSchema = new mongoose.Schema({
+  daysOfWeek: {
     required: true,
     type: String
   },
