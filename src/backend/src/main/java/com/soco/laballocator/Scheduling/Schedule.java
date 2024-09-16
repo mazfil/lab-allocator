@@ -217,7 +217,7 @@ public class Schedule {
                 return;
 
             } catch (Exception ignored) {
-                System.out.printf("FX: %s\n", ignored.getMessage());
+
             }
         }
 

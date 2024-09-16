@@ -9,7 +9,7 @@ import java.util.Comparator;
 import java.util.Random;
 
 public class Solver {
-    final static int NUM_GENERATIONS = 30;
+    final static int NUM_GENERATIONS = 20;
 
     final static int POPULATION_SIZE = 5000;
 
@@ -116,6 +116,7 @@ public class Solver {
         int generation = 0;
         int totalGen = 0;
         int highestFitness = 0;
+        System.out.printf("\n\n");
         while (generation++ < NUM_GENERATIONS) {
 
             Schedule[] newPopulation = new Schedule[POPULATION_SIZE];
@@ -124,14 +125,14 @@ public class Solver {
              * Perform the fitness function on all elements and sort low to high based on that.
              */
             Arrays.sort(population, Comparator.comparingInt(Schedule::getFitness));
-            System.out.printf("\n\n\nStarting generation %d... best has %d\n", ++totalGen, highestFitness);
+            System.out.printf("Starting generation %d... best has %d\n", ++totalGen, highestFitness);
 
             if (population[population.length - 1].getFitness() > highestFitness) {
                 highestFitness = population[population.length - 1].getFitness();
 
-                /* Keep it going for a bit longer if we make an improvement */
-                if (generation > 10) {
-                    generation -= 10;
+                /* Keep it going for a bit longer if we make an improvement, but not indefinitely */
+                if (generation > 10 && totalGen < 100) {
+                    generation -= (10 - totalGen / 10);
                 }
             }
 
