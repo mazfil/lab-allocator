@@ -1,17 +1,17 @@
 const mongoose = require("mongoose");
 
-const timetableSchema = new mongoose.Schema({
+const tutorialSchema = new mongoose.Schema({
   daysOfWeek: {
     required: true,
     type: String
   },
   endTime: {
     required: true,
-    type: String 
+    type: String
   },
   id: {
     required: true,
-    type: String 
+    type: String
   },
   location: {
     required: true,
@@ -25,6 +25,18 @@ const timetableSchema = new mongoose.Schema({
     required: true,
     type: String
   },
+  
+})
+
+const timetableSchema = new mongoose.Schema({
+  created: {
+    required: true,
+    type: String
+  },
+  timetable: {
+    required: true,
+    type: [tutorialSchema]
+  }
 })
 
 module.exports = mongoose.model('Timetable', timetableSchema)

@@ -2,6 +2,7 @@ import { doc, setDoc } from "firebase/firestore";
 import {collection, getDocs, Timestamp } from 'firebase/firestore'
 import {database} from '../firebase';
 import { parse } from 'papaparse';
+import { ObjectId } from "bson";
 
 
 /**
@@ -11,6 +12,7 @@ import { parse } from 'papaparse';
  * @returns 
  */
 export async function readFileData(file){
+  await deleteData("course_data", "ALL");
   const parseOptions = {
     header: true,
     dynamicTyping: true,
@@ -32,10 +34,10 @@ export async function readFileData(file){
       }
 
       // Nests lectures
-      course.lectures = {};
+      course.lectures = [];
       ["lec_1", "lec_2", "lec_3", "lec_4"]
       .forEach(lecture => {
-        if (course[lecture] != null) { course.lectures[lecture] = course[lecture] }
+        if (course[lecture] != null) { course.lectures.push(course[lecture]) }
         delete course[lecture]
       });
 
@@ -46,8 +48,7 @@ export async function readFileData(file){
         course.tutorial_properties[property] = course[property]
         delete course[property]
       });
-
-      uploadCourse(course);
+      uploadData("course_data", course.course_code, course)
     });
   }
 
@@ -63,6 +64,7 @@ export async function readFileData(file){
 async function uploadCourse(course){
   const course_code = course.course_code;
   delete course[course_code]
+  await fetch();
   await setDoc(doc(database, "course_data", course_code), course);
 }
 
@@ -204,9 +206,76 @@ export async function numToDay(data){
   return result
 }
 
-const databaseURL = "http://laballoc-dev.cecs.anu.edu.au:3001/api/data";
+//The base URL which you query the data from. The URL is then generated into a query in the queryDatabase function
+const databaseURL = "http://laballoc-dev.cecs.anu.edu.au:3002/api/";
 
+
+/**
+ * Generates a request and then sends to the Database API to handle
+ * @param {String} collection the collection which is being queried (course_data or timetable_data)
+ * @param {String} target a specific document which should be fetched or modified
+ * @returns 
+ */
 export async function queryDatabase(collection, target){
-  const query = databaseURL + "?collection=" + collection + (target ? "&target=" + target : "")
-  return await fetch(query, {method: "GET"})
+  const query = databaseURL + "data?collection=" + collection + (target ? "&target=" + target : "")
+  return(await fetch(query, {mode: "cors", method: "GET"}).then((e) => e.json()).then((json) => {return(json)}))
+}
+
+export async function uploadData(collection, target, data){
+  const query = databaseURL + "upload?collection=" + collection + (target ? "&target=" + target : "")
+  console.log(await fetch(query, {mode: "cors", method: "POST", headers: {'Content-Type':'application/json'}, body: JSON.stringify(data)}))
+}
+
+export async function updateData(collection, target, data){
+  const query = databaseURL + "update?collection=" + collection + (target ? "&target=" + target : "")
+  console.log(await fetch(query, {mode: "cors", method: "POST", headers: {'Content-Type':'application/json'}, body: JSON.stringify(data)}))
+}
+
+
+export async function deleteData(collection, target){
+  const query = databaseURL + "delete?collection=" + collection + (target ? "&target=" + target : "")
+  return(await fetch(query, {mode: "cors", method: "POST"}))
+}
+
+
+export const room_colours = {
+  HN123: "#beb2b4",
+  HN124: "#a899a4",
+  N109: "#928293",
+  N111: "#655071",
+  N112: "#514b63",
+  N113: "#3e4454",
+  N114: "#4c5669",
+  N1156: "#626e85"
+};
+
+
+export async function generateTimetable(raw_data){
+  var timetable_data = raw_data;
+  timetable_data.timetable.forEach(tutorial => {
+    tutorial.backgroundColor = room_colours[(tutorial.location).replace(".", "").replace("/", "")]
+    tutorial.borderColor = "#000000"
+    tutorial.durationEditable = false;
+    tutorial.editable = true;
+    tutorial.overlap = true;
+    tutorial.course_code = tutorial.title;
+    tutorial.title = tutorial._id
+  });
+
+  return(timetable_data)
+}
+
+
+
+
+
+export async function queryLogs(){
+  const query = databaseURL + "logs";
+  return(await fetch(query, {mode: "cors", method: "GET"}).then((e) => e.json()).then((json) => {return(json)}))
+}
+
+export async function createLog(log_type, log_message){
+  const log = {type: log_type, message: log_message}
+  const query = databaseURL + "logs";
+  console.log(await fetch(query, {mode: "cors", method: "POST", headers: {'Content-Type':'application/json'}, body: JSON.stringify(log)}))
 }

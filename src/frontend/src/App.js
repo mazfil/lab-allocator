@@ -3,7 +3,7 @@ import './App.css';
 import { Router } from './Router';
 const App = () => {
 
-  return (
+return (
       <div className="App"> 
         <Router />
       </div>

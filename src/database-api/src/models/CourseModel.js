@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const courseSchema = new mongoose.Schema({
+const tutorialSchema = new mongoose.Schema({
   after_lecture: {
     required: true,
     type: Boolean
@@ -9,57 +9,67 @@ const courseSchema = new mongoose.Schema({
     required: true,
     type: Boolean
   },
+  projector: {
+    required: true,
+    type: Boolean
+  },
+  tut_days: {
+    required: true,
+    type: [String]
+  },
+  tut_duration: {
+    required: true,
+    type: Number
+  },
+  tut_start_time: {
+    required: true,
+    type: String
+  },
+  tut_end_time: {
+    required: true,
+    type: String
+  }
+})
+
+const lectureSchema = new mongoose.Schema({
+  day: {
+    required: true,
+    type: String
+  },
+  duration: {
+    required: true,
+    type: Number
+  },
+  time: {
+    required: true,
+    type: Number
+  }
+})
+
+const courseSchema = new mongoose.Schema({
   course_code: {
     required: true,
     type: String
   },
-  course_size: {
+  est_size: {
     required: true,
     type: Number
   },
-  lab_days: {
+  lectures: {
     required: true,
-    type: [Number]
-  },
-  lab_duration: {
-    required: true,
-    type: Number
-  },
-  lec_day: {
-    required: true,
-    type: Number
-  },
-  lec_duration: {
-    required: true,
-    type: Number
-  },
-  lec_time: {
-    required: true,
-    type: Number
-  },
-  lecture_amount: {
-    required: true,
-    type: Number
+    type: [lectureSchema]
   },
   mix_cohorts: {
     required: true,
     type: Boolean
   },
-  projector: {
-    required: true,
-    type: Boolean
-  },
-  timerange_from: {
+  num_tutors: {
     required: true,
     type: Number
   },
-  timerange_until: {
+  tutorial_properties: {
     required: true,
-    type: Number
-  },
-  tutors: {
-    required: true,
-    type: Boolean
+    type: tutorialSchema
   }
 })
 
