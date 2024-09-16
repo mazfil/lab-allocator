@@ -31,7 +31,7 @@ db.once('connected', () => {
 /**
  * Returns all logs from the database
  */
-app.get("api/logs", async(req, res) => {
+app.get("/api/logs", async(req, res) => {
   res.setHeader('Content-Type', 'application/json');
   res.json(await Log.find());
 });
