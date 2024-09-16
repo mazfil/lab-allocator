@@ -1,12 +1,13 @@
 // server/index.js
 const Course = require("./models/CourseModel");
 const Timetable = require("./models/TimetableModel");
+const Log = require("./models/LogModel")
 
 const cors = require('cors');
 const express = require("express");
 const mongoose = require("mongoose");
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3002;
 
 const app = express();
 app.use(cors());
@@ -27,6 +28,26 @@ db.once('connected', () => {
   console.log("Connected to Database :-)");
 })
 
+/**
+ * Returns all logs from the database
+ */
+app.get("api/logs", async(req, res) => {
+  res.setHeader('Content-Type', 'application/json');
+  res.json(await Log.find());
+});
+
+/**
+ * Adds a log to the database
+ */
+app.post("/api/logs", async(req, res) => {
+  const body = req.body;
+  try{
+    await Log.create(body);
+    res.status(201)
+  }catch(error){
+    res.status(400).json({message: error.message});
+  }
+});
 
 /**
  * Get Request - Returns the data from a specified collection, and a specific course or timetable if specified.

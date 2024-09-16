@@ -264,3 +264,17 @@ export async function generateTimetable(raw_data){
 
   return(timetable_data)
 }
+
+
+
+
+
+export async function queryLogs(){
+  const query = databaseURL + "logs";
+  return(await fetch(query, {mode: "cors", method: "GET"}).then((e) => e.json()).then((json) => {return(json)}))
+}
+
+export async function createLog(log){
+  const query = databaseURL + "logs";
+  console.log(await fetch(query, {mode: "cors", method: "POST", headers: {'Content-Type':'application/json'}, body: JSON.stringify(data)}))
+}
