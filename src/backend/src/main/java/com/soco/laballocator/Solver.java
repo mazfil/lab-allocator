@@ -9,7 +9,7 @@ import java.util.Comparator;
 import java.util.Random;
 
 public class Solver {
-    final static int NUM_GENERATIONS = 5;   // TODO: only 5 for debugging, should be 20+
+    final static int NUM_GENERATIONS = 30;
 
     final static int POPULATION_SIZE = 5000;
 
@@ -128,7 +128,11 @@ public class Solver {
 
             if (population[population.length - 1].getFitness() > highestFitness) {
                 highestFitness = population[population.length - 1].getFitness();
-                //generation = 0;
+
+                /* Keep it going for a bit longer if we make an improvement */
+                if (generation > 10) {
+                    generation -= 10;
+                }
             }
 
             /*

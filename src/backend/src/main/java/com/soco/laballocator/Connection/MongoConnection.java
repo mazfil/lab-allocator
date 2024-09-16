@@ -52,6 +52,9 @@ public class MongoConnection {
                 ArrayList<Course.Lecture> lectures = new ArrayList<>();
 
                 JSONArray lecs = course.getJSONArray("lectures");
+
+                int earliestLectureGlobalIndex = Time.NUM_DAYS * Time.NUM_TIME_INDICES;
+
                 for (int j = 0; j < lecs.length(); ++j) {
                     JSONObject lectureDetails = lecs.getJSONObject(j);
                     int hour = lectureDetails.getInt("time");
@@ -63,7 +66,13 @@ public class MongoConnection {
                     lectures.add(new Course.Lecture(
                         new Time(day, hour, minute), lengthMinutes
                     ));
+
+                    int globalIndex = day.getIndex() * Time.NUM_TIME_INDICES + (hour - 8) * 2 + minute / 30;
+                    if (globalIndex < earliestLectureGlobalIndex) {
+                        earliestLectureGlobalIndex = globalIndex;
+                    }
                 }
+
 
                 /*
                  * There isn't explicit support for scheduling tutorials only on certain days.
@@ -107,6 +116,21 @@ public class MongoConnection {
                         lectures.add(new Course.Lecture(
                                 new Time(Time.Day.values()[j], endIndex), (Time.NUM_TIME_INDICES - endIndex) * 30
                         ));
+                    }
+                }
+
+                if (earliestLectureGlobalIndex < Time.NUM_DAYS * Time.NUM_TIME_INDICES && tut_properties.getBoolean("after_lecture")) {
+                    System.out.printf("Classes can start with course %s on or after global index %d\n",
+                            course.get("course_code").toString(), earliestLectureGlobalIndex
+                    );
+
+                    /*
+                     * Again, we use the same trick to prevent tutorials going before the first lecture, if requested.
+                     * No need to take lecture length into account, as the lecture itself is a lecture and thus blocks
+                     * out the time.
+                     */
+                    for (int j = 0; j < earliestLectureGlobalIndex; ++j) {
+                        lectures.add(new Course.Lecture(new Time(Time.Day.values()[j / Time.NUM_TIME_INDICES], j % Time.NUM_TIME_INDICES), 30));
                     }
                 }
 

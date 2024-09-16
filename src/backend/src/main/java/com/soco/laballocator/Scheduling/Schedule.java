@@ -214,10 +214,10 @@ public class Schedule {
                         availableSeats[i] += placeLabRandomly(random, course);
                     }
                 }
-                break;
+                return;
 
             } catch (Exception ignored) {
-
+                System.out.printf("FX: %s\n", ignored.getMessage());
             }
         }
 
