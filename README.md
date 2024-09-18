@@ -35,6 +35,13 @@ The end vision of the project will be to have a application that will adapt to n
 | u7556970 | Rachel Cao | COMP3500 | Backend and Admin | Decisions, Reflections, Frontend Support. |
 | u7230574 | Sineeha Kodwani | COMP3500 | Deputy Spokesperson | Frontend Development, User support. |
 
+## Team member contribution
+
+The best way to view the team member contribution would be to look at the Github Issues (Open and Closed) that are assigned to them. It should be noted though that a majority of the issues remained unassigned but were still actioned by the individual.
+
+Another way would be to look at meeting attendance in our meeting minutes.
+
+And lastly you can also view analytics for GitHub to see commit regularity, who commits, and what they have committed. It should be noted, that by default it shows the analytics for the "Main" branch, as most work has been done off main branch, in "dev" and other subsets, you will find more development in those branches as "Main" gets updated down the line.
 
 ## Statement of Work
 
