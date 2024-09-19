@@ -56,11 +56,15 @@ export default class Wiki extends Component {
 
                         <p>By default, it will show the entire timetable that has been generated.</p>
 
+                        <img src="/assets/images/manage_timetable_filter_room.png" alt="Filter by Room" className="wiki-image" />
+
                         <p>You can filter the timetable by clicking the <strong>room buttons</strong> above the timetable to disable rooms from view. This can help with readability by disabling the rooms that you don't want to view.</p>
 
-                        <p>You can also filter by the <strong>course code</strong> that you want to view using the <strong>dropdown</strong> at the top of the page. This dropdown dynamically updates as courses are added or removed from the timetable, allowing you to easily view the specific course you want.</p>
-
                         <p>It is important to note that the <strong>colours</strong> used in the timetable correspond to the <strong>rooms</strong> that the courses are allocated to.</p>
+                        
+                        <img src="/assets/images/manage_timetable_filter_course.png" alt="Filter by Course" className="wiki-image" />
+
+                        <p>You can also filter by the <strong>course code</strong> that you want to view using the <strong>dropdown</strong> at the top of the page. This dropdown dynamically updates as courses are added or removed from the timetable, allowing you to easily view the specific course you want.</p>
 
                         <p>To make changes to the timetable, you can move courses around by <strong>holding</strong> the left-click button and dragging the course timeslot to a new location. The system will prevent <strong>double-booking</strong> of a room at the same time.</p>
 
