@@ -77,29 +77,6 @@
     margin-right: 10px;
 }
 
-.add-button {
-    padding: 100px 100px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-transform: uppercase;
-}
-
-.add-button:hover {
-    background-color: #0056b3;
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
-    transform: translateY(-2px);
-}
-
 /* Search bar styling */
 .search-bar {
     display: flex;
@@ -279,7 +256,7 @@ fieldset {
     display: inline-block;
 }
 
-.add-button, .filter-button, .delete-button {
+.filter-button, .delete-button {
     padding: 10px 15px;
     color: #fff;
     background-color: #007bff;
@@ -389,27 +366,57 @@ fieldset {
     margin-top: 20px;
 }
 
-.add-button {
-    padding: 12px 28px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 50px;
+.add-course-data, .save-course-data, .clear-course-data{
+    padding: 8px;
+    margin: 8px;
+    width: 156px;
+    font-size: 1em;
     cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-transform: uppercase;
+    color: var(--white);
 }
 
-.add-button:hover {
-    background-color: #0056b3;
+.add-course-data:hover, .save-course-data:hover, .clear-course-data:hover{
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
     transform: translateY(-2px);
+}
+
+.add-course-data:disabled{
+    color: #777777;
+    background-color: #6eb4ff;
+    cursor: not-allowed;
+}
+
+.save-course-data:disabled{
+    color: #707070;
+    background-color: #b49962;
+    border: none;
+    cursor: not-allowed;
+}
+
+.add-course.data:disabled:hover{
+    color: #6eb4ff;
+    transition: none;
+}
+
+.save-course.data:disabled:hover{
+    color: #b49962;
+    transition: none;
+}
+  
+.clear-course-data{
+    background-color: #444444;
+    border-color: #222;
+}
+
+.add-course-data {
+    background-color: #007bff;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+
+.add-course-data:hover {
+    background-color: #0056b3;
 }
 
 .error-message {

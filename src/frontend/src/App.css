@@ -272,20 +272,6 @@ form{
   margin: auto;
 }
 
-
-.save-course-data, .clear-course-data{
-  padding: 8px;
-  margin: 8px;
-  width: 156px;
-  font-size: 1em;
-}
-
-.clear-course-data{
-  background-color: #444444;
-  color: var(--white);
-  border-color: #222;
-}
-
 .timetable-calendar{
   margin-top: 100px;
 

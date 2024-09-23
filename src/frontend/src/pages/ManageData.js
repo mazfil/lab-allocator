@@ -1,9 +1,8 @@
 import NavBar from '../components/nav/NavBar';
 import { useState } from 'react';
-import { collection, getDocs, addDoc, deleteDoc, doc } from 'firebase/firestore';
-import { database } from '../firebase';
 import { useEffect } from 'react';
 import './ManageData.css';
+import { deleteData, queryDatabase, uploadData, updateData } from '../utils/helperFunctions';
 
 
 function ManageData(props) {
@@ -31,9 +30,12 @@ function ManageData(props) {
     const [errorMessage, setErrorMessage] = useState('');
     const [showDetails, setShowDetails] = useState({});
 
+    const [acButtonEnabled, setacButton] = useState(false); //add course button
+    const [scButtonEnabled, setscButton] = useState(false); //save course button
+
+    //fetches the database, updating courseData and filteredData
     const fetchPost = async () => {
-        const querySnapshot = await getDocs(collection(database, "course_data"));
-        const newData = querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+        const newData = await queryDatabase("course_data");
         setCourseData(newData);
         setFilteredData(newData);
     };
@@ -46,6 +48,15 @@ function ManageData(props) {
             ...prevState,
             [name]: type === 'checkbox' ? checked : value
         }));
+        //if formData.course_code is in the list of courses, grey out box accordingly
+        const matchingCourse = courseData.find(course => course.course_code.toLowerCase() === formData.course_code.toLowerCase());
+        if(matchingCourse === undefined){ //if this course is not in the database
+            setacButton(true);
+            setscButton(false);
+        }else{ //if it already exists
+            setacButton(false);
+            setscButton(true);
+        }
     };
 
     const handleDaysChange = (event) => {
@@ -78,15 +89,7 @@ function ManageData(props) {
         return true;
     };
 
-    const handleAddCourse = async (event) => {
-        event.preventDefault();
-
-        if (!validateTutorialTime()) {
-            return;
-        }
-
-        await addDoc(collection(database, "course_data"), formData);
-        fetchPost();
+    const resetFormFields = () => {
         setFormFields({
             course_code: "",
             course_size: "",
@@ -105,10 +108,10 @@ function ManageData(props) {
             timerange_from: "",
             timerange_till: "",
         });
-    };
+    }
 
     const handleDeleteCourse = async (id) => {
-        await deleteDoc(doc(database, "course_data", id));
+        await deleteData("course_data", id);
         fetchPost();
     };
 
@@ -137,6 +140,72 @@ function ManageData(props) {
             [id]: !prevState[id]
         }));
     };
+
+    const handleAddCourse = async (event) => {
+        event.preventDefault();       
+
+        if (!validateTutorialTime()) {
+            return;
+        }
+        await uploadData("course_data", convertFormDataToSchema());
+        fetchPost();
+        //resetFormFields();        
+    };
+
+    const handleSaveCourse = async (event) => {
+        event.preventDefault();
+
+        if (!validateTutorialTime()) {
+            return;
+        }
+
+        const matchingCourse = courseData.find(course => course.course_code.toLowerCase() === formData.course_code.toLowerCase());
+        if (matchingCourse === undefined){
+            setErrorMessage("Error: could not find course in the database");
+        } else {
+            await updateData("course_data", matchingCourse.course_code, await convertFormDataToSchema());
+            fetchPost();
+            //resetFormFields();
+        }
+    }
+
+    const parseTime = (timeString) => {
+        if(timeString === undefined){
+            return 0;
+        }
+        const [time, modifier] = timeString.split(' ');
+        let [hours, minutes] = time.split(':').map(Number);
+
+        if (modifier === 'PM' && hours !== 12) {
+            hours += 12;
+        }
+
+        return hours + (minutes / 60);
+    }
+
+    const convertFormDataToSchema = async () => {
+        return {
+            course_code: formData.course_code,
+            est_size: formData.course_size,
+            lectures: [
+            {
+                day: formData.lec_day,
+                duration: formData.lec_duration,
+                time: parseTime(formData.lec_time)
+            }],
+            mix_cohorts: formData.mix_cohorts,
+            num_tutors: formData.tutors,
+            tutorial_properties: {
+                after_lecture: formData.after_lecture,
+                byod: formData.byod,
+                projector: formData.projector,
+                tut_days: formData.lab_days,
+                tut_duration: formData.lab_duration,
+                tut_start_time: parseTime(formData.timerange_from),
+                tut_end_time: parseTime(formData.timerange_till)
+            }
+        }
+    }
 
     return (
         <div className='manage-data-page'>
@@ -289,8 +358,19 @@ function ManageData(props) {
                     
                 </div>
                 <div className='course-data-buttons'>
-                <button className='save-course-data'>Save Course Data</button>
-                <button className='clear-course-data'>Clear</button>
+                <button 
+                    type="submit" 
+                    className='add-course-data' 
+                    onClick={handleAddCourse}
+                    disabled={!acButtonEnabled}
+                >Add Course</button>
+                <button 
+                    type="submit"
+                    className='save-course-data' 
+                    onClick={handleSaveCourse}
+                    disabled={!scButtonEnabled}
+                >Save Course</button>
+                <button className='clear-course-data' onClick={resetFormFields}>Clear</button>
                 </div>
                 
                 <div className='search-bar'>
@@ -343,16 +423,15 @@ function ManageData(props) {
                                             <button className='delete-button' onClick={() => handleDeleteCourse(course.id)}>
                                                 <i className="bi bi-trash"></i> Delete
                                             </button>
+                                            <button className='edit-button' onClick={() => setFormFields(course)}>
+                                                <i className="bi bi-pencil"></i> Edit
+                                            </button>
                                         </td>
                                     </tr>
                                 );
                             })}
                         </tbody>
                     </table>
-                </div>
-
-                <div className="button-container-bottom">
-                    <button type="submit" className='add-button' onClick={handleAddCourse}>Add Course</button>
                 </div>
             </div>
         </div>

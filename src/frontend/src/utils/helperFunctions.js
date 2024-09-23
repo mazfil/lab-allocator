@@ -207,7 +207,7 @@ export async function numToDay(data){
 }
 
 //The base URL which you query the data from. The URL is then generated into a query in the queryDatabase function
-const databaseURL = "http://laballoc-dev.cecs.anu.edu.au:3002/api/";
+const databaseURL = "http://laballoc-dev.cecs.anu.edu.au:3001/api/";
 
 
 /**
@@ -221,8 +221,10 @@ export async function queryDatabase(collection, target){
   return(await fetch(query, {mode: "cors", method: "GET"}).then((e) => e.json()).then((json) => {return(json)}))
 }
 
-export async function uploadData(collection, target, data){
-  const query = databaseURL + "upload?collection=" + collection + (target ? "&target=" + target : "")
+export async function uploadData(collection, data){
+  console.log("Data being sent to Mongo (add course):")
+  console.log(data);
+  const query = databaseURL + "upload?collection=" + collection
   console.log(await fetch(query, {mode: "cors", method: "POST", headers: {'Content-Type':'application/json'}, body: JSON.stringify(data)}))
 }
 
@@ -230,7 +232,6 @@ export async function updateData(collection, target, data){
   const query = databaseURL + "update?collection=" + collection + (target ? "&target=" + target : "")
   console.log(await fetch(query, {mode: "cors", method: "POST", headers: {'Content-Type':'application/json'}, body: JSON.stringify(data)}))
 }
-
 
 export async function deleteData(collection, target){
   const query = databaseURL + "delete?collection=" + collection + (target ? "&target=" + target : "")
