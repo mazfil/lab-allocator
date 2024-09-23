@@ -223,10 +223,10 @@ export async function queryDatabase(collection, target){
 }
 
 export async function uploadData(collection, data){
-  console.log("Data being sent to Mongo (add course):")
-  console.log(data);
+  const qqqq = JSON.stringify(data); //this prints out correctly, so i have no idea why it sends nothing
+  console.log(qqqq);
   const query = databaseURL + "upload?collection=" + collection
-  console.log(await fetch(query, {mode: "cors", method: "POST", headers: {'Content-Type':'application/json'}, body: JSON.stringify(data)}))
+  console.log(await fetch(query, {mode: "cors", method: "POST", headers: {'Content-Type':'application/json'}, body: qqqq}))
 }
 
 export async function updateData(collection, target, data){

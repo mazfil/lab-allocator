@@ -16,6 +16,7 @@ app.use(express.json())
 
 const DATABASE_URL = "mongodb://localhost:27017/laballocator";
 
+console.log("Attempting to connect to the database...")
 mongoose.connect(DATABASE_URL);
 const db = mongoose.connection;
 

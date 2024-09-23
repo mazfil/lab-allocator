@@ -112,7 +112,7 @@ function ManageData(props) {
 
     const handleDeleteCourse = async (id) => {
         await deleteData("course_data", id);
-        fetchPost();
+        await fetchPost();
     };
 
     const handleSearchChange = (event) => {
@@ -148,8 +148,8 @@ function ManageData(props) {
             return;
         }
         await uploadData("course_data", convertFormDataToSchema());
-        fetchPost();
-        //resetFormFields();        
+        await fetchPost();
+        //resetFormFields();       commented out for now so testing is easier (we don't have to keep refilling the fields)
     };
 
     const handleSaveCourse = async (event) => {
@@ -163,9 +163,9 @@ function ManageData(props) {
         if (matchingCourse === undefined){
             setErrorMessage("Error: could not find course in the database");
         } else {
-            await updateData("course_data", matchingCourse.course_code, await convertFormDataToSchema());
-            fetchPost();
-            //resetFormFields();
+            await updateData("course_data", matchingCourse.course_code, convertFormDataToSchema());
+            await fetchPost();
+            //resetFormFields(); 
         }
     }
 
@@ -183,7 +183,7 @@ function ManageData(props) {
         return hours + (minutes / 60);
     }
 
-    const convertFormDataToSchema = async () => {
+    const convertFormDataToSchema = () => {
         return {
             course_code: formData.course_code,
             est_size: formData.course_size,
