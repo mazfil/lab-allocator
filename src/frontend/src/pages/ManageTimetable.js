@@ -102,22 +102,26 @@ function ManageTimetable(props){
     // Changes the room for a tutorial after a room is selected on the changeRoom overlay
     // TODO: fix the clash check, overwrites existing tutorials when the room is the same
     const changeRoom = async (tutorial, room) => {
+      console.log(tutorial)
+      var current = await timetable.find(tut => tut.course_code === tutorial.event.title);
+      console.log(current)
         var clash = false;
-        var potentialClashes = timetable.filter(otherTutorial => { return otherTutorial.location == room }).filter(otherTutorial => (otherTutorial.daysOfWeek = tutorial.event.daysOfWeek))
+        var potentialClashes = await timetable.filter(otherTutorial => { return otherTutorial.location == room }).filter(otherTutorial => (otherTutorial.daysOfWeek == current.daysOfWeek))
+
         potentialClashes.forEach(potentialClash => {
-            console.log(tutorial.event)
-            console.log(potentialClash.location + " @ " + potentialClash.start + " - " + potentialClash.end)
-            if (!(tutorial.event.end <= potentialClash.start || potentialClash.end <= tutorial.event.start)){
+            if ((current.end <= potentialClash.start || potentialClash.end <= current.start)){
                 clash = true;
                 console.log("A CLASH")
             }
         });
         if (!clash){
-            Object.assign(timetable.find((tut) => {return tut.id === tutorial.event.id}), {location: room, title: tutorial.event.id+"\n"+room})
+            current.location = room
+            current.backgroundColor = helpers.room_colours[(current.location).replace(".", "").replace("/", "")]
             await setTimetable(timetable)
             await updateData(timetable, activeCourse);
             await toggleChangeRoom();
-            pendingRoomChange.event.setProp('title', tutorial.event.id+"\n"+room)
+            pendingRoomChange.event.setProp('title', current.title)
+            pendingRoomChange.event.setProp('backgroundColor', current.backgroundColor)
         }else{
             console.log("ERROR CLASH")
         }
@@ -161,13 +165,12 @@ function ManageTimetable(props){
         // SWITCH ONCE READY TO USE DATABASE
         //const data = await helpers.generateTimetable(await helpers.queryDatabase("timetable_data"))
         const data = await helpers.generateTimetable(fileData)
-        console.log(data)
         setTime(data.created)
         initData(data.timetable)
+        console.log(await data)
     }
     useEffect(() => {fetchPost();}, [])
     
-    console.log(filteredTimetable)
     return(
         <div className='manageTimetable'>
             {/* This conditionall renders the room change overlay. When a tutorial is clicked, 
