@@ -149,9 +149,10 @@ function ManageData(props) {
             return;
         }
         await uploadData("course_data", convertFormDataToSchema());
-        console.log("adding course");
         await fetchPost();
         resetFormFields();
+        setacButton(false);
+        setscButton(true);
     };
 
     const handleSaveCourse = async (event) => {
