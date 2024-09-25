@@ -90,8 +90,6 @@ footer {
     color: #777;
 }
 
-/* Add these styles for the side navigation */
-
 /* Container for the wiki and side navigation */
 .wiki-container {
     display: flex;
@@ -101,10 +99,10 @@ footer {
 /* Side navigation styling */
 .side-nav {
     position: fixed;
-    top: 0;
+    top: 100px; /* Adjust this value to match the height of the NavBar */
     left: 0;
     width: 220px;
-    height: 100vh; /* Full height of the viewport */
+    height: calc(100vh - 60px); /* Full height minus the navbar */
     background-color: #f9f9f9;
     border-right: 1px solid #ddd;
     padding: 20px;

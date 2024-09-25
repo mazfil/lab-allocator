@@ -196,7 +196,7 @@ function ManageTimetable(props){
             }
 
 
-            <NavBar navigate={props.navigate} tab={'manage-data'}></NavBar>
+            <NavBar navigate={props.navigate} tab={'manage-timetable'}></NavBar>
 
             {/* The filter which shows which course is displayed on the calendar
                         Gets all individual course codes from the data       */}

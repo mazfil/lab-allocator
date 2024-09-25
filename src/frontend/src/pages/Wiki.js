@@ -1,9 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
+import NavBar from '../components/nav/NavBar';
 import './styles.css';
 
-export default class Wiki extends Component {
-    render() {
-        return (
+function Wiki(props) {
+    return (
+        <div>
+            <NavBar navigate={props.navigate} tab={'wiki'} />
+
             <div className="wiki-container">
                 {/* Side Navigation */}
                 <nav className="side-nav">
@@ -72,53 +75,53 @@ export default class Wiki extends Component {
                     </section>
 
                     <section id="how-it-works">
-                        <h2>How Our Program Works</h2>
-                        <p>Our Algorithm contains several functions designed to generate and optimize lab allocation timetables. The core focus of these functions is to ensure that the schedule meets various constraints while aiming for efficiency and flexibility in room and time allocation.</p>
+                            <h2>How Our Program Works</h2>
+                            <p>Our Algorithm contains several functions designed to generate and optimize lab allocation timetables. The core focus of these functions is to ensure that the schedule meets various constraints while aiming for efficiency and flexibility in room and time allocation.</p>
 
-                        <section>
-                            <h2>Key Functions for Optimal Allocation</h2>
+                            <section>
+                                <h2>Key Functions for Optimal Allocation</h2>
 
-                            <h3>1. <code>getFitness()</code></h3>
-                            <p>This function calculates the overall fitness score of a schedule by evaluating various factors such as free space, time allocation, date variance, room variance, and more. A higher fitness score indicates a better schedule.</p>
+                                <h3>1. <code>getFitness()</code></h3>
+                                <p>This function calculates the overall fitness score of a schedule by evaluating various factors such as free space, time allocation, date variance, room variance, and more. A higher fitness score indicates a better schedule.</p>
 
-                            <h3>2. <code>aimForPercentWithin(int start, int end, double desiredPercent)</code></h3>
-                            <p>This function allocates a specific percentage of classes within a defined time window, contributing to the schedule's fitness score by aligning classes with desired times.</p>
+                                <h3>2. <code>aimForPercentWithin(int start, int end, double desiredPercent)</code></h3>
+                                <p>This function allocates a specific percentage of classes within a defined time window, contributing to the schedule's fitness score by aligning classes with desired times.</p>
 
-                            <h3>3. <code>aimForPercentBeforeTime(double desiredPercent, int before)</code></h3>
-                            <p>This function aims to allocate a specific percentage of classes before a certain time, helping to meet scheduling preferences.</p>
+                                <h3>3. <code>aimForPercentBeforeTime(double desiredPercent, int before)</code></h3>
+                                <p>This function aims to allocate a specific percentage of classes before a certain time, helping to meet scheduling preferences.</p>
 
-                            <h3>4. <code>aimForPercentAfterTime(double desiredPercent, int after)</code></h3>
-                            <p>Similar to the previous function, this one allocates a specific percentage of classes after a particular time, contributing to the fitness score based on time preferences.</p>
+                                <h3>4. <code>aimForPercentAfterTime(double desiredPercent, int after)</code></h3>
+                                <p>Similar to the previous function, this one allocates a specific percentage of classes after a particular time, contributing to the fitness score based on time preferences.</p>
 
-                            <h3>5. <code>getDateVariance()</code></h3>
-                            <p>This function calculates how well classes are distributed across the days of the week. Lower variance means a more balanced timetable.</p>
+                                <h3>5. <code>getDateVariance()</code></h3>
+                                <p>This function calculates how well classes are distributed across the days of the week. Lower variance means a more balanced timetable.</p>
 
-                            <h3>6. <code>getRoomVariance()</code></h3>
-                            <p>This function evaluates the distribution of classes across rooms to ensure efficient usage and reduce room clustering.</p>
+                                <h3>6. <code>getRoomVariance()</code></h3>
+                                <p>This function evaluates the distribution of classes across rooms to ensure efficient usage and reduce room clustering.</p>
 
-                            <h3>7. <code>getPercentageFree()</code></h3>
-                            <p>Calculates the percentage of free time available across all rooms, contributing to the fitness score by maximizing room usage while leaving flexibility.</p>
+                                <h3>7. <code>getPercentageFree()</code></h3>
+                                <p>Calculates the percentage of free time available across all rooms, contributing to the fitness score by maximizing room usage while leaving flexibility.</p>
 
-                            <h3>8. <code>getPercentDupes()</code></h3>
-                            <p>This function measures the percentage of duplicate time blocks (same class at the same time), with fewer duplicates improving flexibility for students.</p>
+                                <h3>8. <code>getPercentDupes()</code></h3>
+                                <p>This function measures the percentage of duplicate time blocks (same class at the same time), with fewer duplicates improving flexibility for students.</p>
 
-                            <h3>9. <code>alwaysRoomFree()</code></h3>
-                            <p>Ensures there is always at least one room free at any given time, promoting schedule flexibility.</p>
+                                <h3>9. <code>alwaysRoomFree()</code></h3>
+                                <p>Ensures there is always at least one room free at any given time, promoting schedule flexibility.</p>
 
-                            <h3>10. <code>repeatLabsSameRoom()</code></h3>
-                            <p>Ensures that repeat labs occur in the same room, optimizing the schedule for consistency and reducing room changes for students.</p>
+                                <h3>10. <code>repeatLabsSameRoom()</code></h3>
+                                <p>Ensures that repeat labs occur in the same room, optimizing the schedule for consistency and reducing room changes for students.</p>
 
-                            <h3>11. <code>placeLabRandomly()</code> and <code>placeCourseRandomly()</code></h3>
-                            <p>These functions handle the random placement of labs and courses into the schedule while respecting constraints like room availability and course length.</p>
+                                <h3>11. <code>placeLabRandomly()</code> and <code>placeCourseRandomly()</code></h3>
+                                <p>These functions handle the random placement of labs and courses into the schedule while respecting constraints like room availability and course length.</p>
 
-                            <h3>12. <code>mutate()</code> and <code>moveLabRandomly()</code></h3>
-                            <p>Introduce small, random changes to the schedule in order to explore new configurations that might yield better solutions.</p>
+                                <h3>12. <code>mutate()</code> and <code>moveLabRandomly()</code></h3>
+                                <p>Introduce small, random changes to the schedule in order to explore new configurations that might yield better solutions.</p>
 
-                            <h3>13. <code>crossover(Schedule a, Schedule b)</code></h3>
-                            <p>This function combines two parent schedules to create a new schedule, simulating a genetic algorithm to evolve the best possible solution.</p>
+                                <h3>13. <code>crossover(Schedule a, Schedule b)</code></h3>
+                                <p>This function combines two parent schedules to create a new schedule, simulating a genetic algorithm to evolve the best possible solution.</p>
+                            </section>
+                            {/* Rest of the content */}
                         </section>
-                        {/* Rest of the content */}
-                    </section>
 
                     <section id="faqs" className="faqs-section">
                         <h2>Frequently Asked Questions (FAQs)</h2>
@@ -130,6 +133,8 @@ export default class Wiki extends Component {
                     </footer>
                 </div>
             </div>
-        );
-    }
+        </div>
+    );
 }
+
+export default Wiki;
