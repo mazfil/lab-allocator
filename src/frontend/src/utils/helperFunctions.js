@@ -57,19 +57,6 @@ export async function readFileData(file){
   return;
 }
 
-
-/**
- * Uploads single course element to firebase
- * @param {Object} course - Object that is uploaded to course_data document
- */
-async function uploadCourse(course){
-  const course_code = course.course_code;
-  delete course[course_code]
-  await fetch();
-  await setDoc(doc(database, "course_data", course_code), course);
-}
-
-
 /**
  * Returns csv spreadsheet data as usable variable types.
  * @param {Value} value - The variable that is converted
@@ -223,10 +210,8 @@ export async function queryDatabase(collection, target){
 }
 
 export async function uploadData(collection, data){
-  const qqqq = JSON.stringify(data); //this prints out correctly, so i have no idea why it sends nothing
-  console.log(qqqq);
   const query = databaseURL + "upload?collection=" + collection
-  console.log(await fetch(query, {mode: "cors", method: "POST", headers: {'Content-Type':'application/json'}, body: qqqq}))
+  console.log(await fetch(query, {mode: "cors", method: "POST", headers: {'Content-Type':'application/json'}, body: JSON.stringify(data)}))
 }
 
 export async function updateData(collection, target, data){

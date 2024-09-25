@@ -10,10 +10,10 @@ function ManageData(props) {
     const [filteredData, setFilteredData] = useState([]);
     const [formData, setFormFields] = useState({
         course_code: "",
-        course_size: "",
+        est_size: "",
         cohorts: "",
         mix_cohorts: false,
-        tutors: "",
+        num_tutors: "",
         lecture_amount: "",
         lec_day: "",
         lec_time: "",
@@ -35,6 +35,7 @@ function ManageData(props) {
 
     //fetches the database, updating courseData and filteredData
     const fetchPost = async () => {
+        console.log("doing fetchpost");
         const newData = await queryDatabase("course_data");
         setCourseData(newData);
         setFilteredData(newData);
@@ -49,7 +50,7 @@ function ManageData(props) {
             [name]: type === 'checkbox' ? checked : value
         }));
         //if formData.course_code is in the list of courses, grey out box accordingly
-        const matchingCourse = courseData.find(course => course.course_code.toLowerCase() === formData.course_code.toLowerCase());
+        const matchingCourse = courseData.find(course => course.course_code.toString().toLowerCase() === formData.course_code.toString().toLowerCase());
         if(matchingCourse === undefined){ //if this course is not in the database
             setacButton(true);
             setscButton(false);
@@ -92,10 +93,10 @@ function ManageData(props) {
     const resetFormFields = () => {
         setFormFields({
             course_code: "",
-            course_size: "",
-            cohorts: "",
+            est_size: "",
+            num_cohorts: "",
             mix_cohorts: false,
-            tutors: "",
+            num_tutors: "",
             lecture_amount: "",
             lec_day: "",
             lec_time: "",
@@ -124,7 +125,7 @@ function ManageData(props) {
         if (searchTerm === '') {
             setFilteredData(courseData);
         } else {
-            const filtered = courseData.filter(course => course.course_code.toLowerCase().includes(searchTerm.toLowerCase()));
+            const filtered = courseData.filter(course => course.course_code.toString().toLowerCase().includes(searchTerm.toString().toLowerCase()));
             setFilteredData(filtered);
         }
     };
@@ -148,8 +149,9 @@ function ManageData(props) {
             return;
         }
         await uploadData("course_data", convertFormDataToSchema());
+        console.log("adding course");
         await fetchPost();
-        //resetFormFields();       commented out for now so testing is easier (we don't have to keep refilling the fields)
+        resetFormFields();
     };
 
     const handleSaveCourse = async (event) => {
@@ -159,17 +161,18 @@ function ManageData(props) {
             return;
         }
 
-        const matchingCourse = courseData.find(course => course.course_code.toLowerCase() === formData.course_code.toLowerCase());
+        const matchingCourse = courseData.find(course => course.course_code.toString().toLowerCase() === formData.course_code.toString().toLowerCase());
         if (matchingCourse === undefined){
             setErrorMessage("Error: could not find course in the database");
         } else {
             await updateData("course_data", matchingCourse.course_code, convertFormDataToSchema());
             await fetchPost();
-            //resetFormFields(); 
         }
+        resetFormFields();
     }
 
-    const parseTime = (timeString) => {
+    //Converts "xx:xx AM/PM" to a number representing the time in 24-hr time
+    const longToShortTime = (timeString) => {
         if(timeString === undefined){
             return 0;
         }
@@ -182,29 +185,74 @@ function ManageData(props) {
 
         return hours + (minutes / 60);
     }
+    
+    //Converts a number representing the time in 24-hrs to "xx:xx AM/PM"
+    const shortToLongTime = (time) => {
+        let morning = true;
+        let hours = Math.floor(time); const mins = (time - hours)*60;
+        if(hours > 11){ morning = false; }
+        if(hours > 12){ hours = (hours % 12); }
+        let result = hours.toString() + ":";
+        if(mins < 10){ result = result + "0";}
+        result = result + mins.toString();
+        morning ? result = result + " AM" : result = result + " PM";
+        return result;
+    }
+
+    //Converts a number of hours into a long string saying "x hours y minutes"
+    const shortToLongDuration = (numHours) => {
+        const hours = Math.floor(numHours); const mins = (numHours - hours)*60;
+        let output = hours.toString();
+        hours === 1 ? output = output + " hour " : output = output + " hours ";
+        if(mins === 0){ return output;}
+        output = output + mins.toString() + " minutes";
+        return output;
+    }
 
     const convertFormDataToSchema = () => {
         return {
             course_code: formData.course_code,
-            est_size: formData.course_size,
+            est_size: formData.est_size,
             lectures: [
             {
-                day: formData.lec_day,
+                day: (formData.lec_day.slice(0,3)).toString().toLowerCase(),
                 duration: formData.lec_duration,
-                time: parseTime(formData.lec_time)
+                time: longToShortTime(formData.lec_time)
             }],
             mix_cohorts: formData.mix_cohorts,
-            num_tutors: formData.tutors,
+            num_tutors: formData.num_tutors,
             tutorial_properties: {
                 after_lecture: formData.after_lecture,
                 byod: formData.byod,
                 projector: formData.projector,
-                tut_days: formData.lab_days,
+                tut_days: (formData.lab_days.slice(0,3)).toString().toLowerCase(),
                 tut_duration: formData.lab_duration,
-                tut_start_time: parseTime(formData.timerange_from),
-                tut_end_time: parseTime(formData.timerange_till)
+                tut_start_time: longToShortTime(formData.timerange_from),
+                tut_end_time: longToShortTime(formData.timerange_till)
             }
         }
+    }
+
+    const convertSchemaToFormData = (course) => {
+        setFormFields({
+            course_code: course.course_code,
+            est_size: course.est_size,
+            num_cohorts: course.num_cohorts,
+            mix_cohorts: course.mix_cohorts,
+            num_tutors: course.num_tutors,
+            lecture_amount: course.lectures.length,
+            lec_day: course.lectures[0].day,
+            lec_time: shortToLongTime(course.lectures[0].time),
+            lec_duration: course.lectures[0].duration,
+            after_lecture: course.tutorial_properties.after_lecture,
+            byod: course.tutorial_properties.byod,
+            lab_days: course.tutorial_properties.tut_days,
+            lab_duration: course.tutorial_properties.tut_duration,
+            projector: course.tutorial_properties.projector,
+            timerange_from: shortToLongTime(course.tutorial_properties.tut_start_time),
+            timerange_till: shortToLongTime(course.tutorial_properties.tut_end_time),
+        });
+        console.log(shortToLongTime(course.lectures[0].time));
     }
 
     return (
@@ -216,10 +264,10 @@ function ManageData(props) {
                         <fieldset>
                             <legend>Course Information</legend>
                             <label>Course Code: <input type="text" id="course_code" name="course_code" value={formData.course_code} onChange={handleInputChange}></input></label>
-                            <label>Course Size: <input type="number" id="course_size" name="course_size" value={formData.course_size} onChange={handleInputChange}></input></label>
-                            <label>Cohorts: <input type="number" id="cohorts" name="cohorts" value={formData.cohorts} onChange={handleInputChange}></input></label>
+                            <label>Course Size: <input type="number" id="est_size" name="est_size" value={formData.est_size} onChange={handleInputChange}></input></label>
+                            <label>Cohorts: <input type="number" id="num_cohorts" name="num_cohorts" value={formData.num_cohorts} onChange={handleInputChange}></input></label>
                             <label>Combine Cohorts: <input type="checkbox" id="mix_cohorts" name="mix_cohorts" checked={formData.mix_cohorts} onChange={handleInputChange}></input></label>
-                            <label>Number of Tutors: <input type="number" id="tutors" name="tutors" value={formData.tutors} onChange={handleInputChange}></input></label>
+                            <label>Number of Tutors: <input type="number" id="num_tutors" name="num_tutors" value={formData.num_tutors} onChange={handleInputChange}></input></label>
                         </fieldset>
 
                         <fieldset>
@@ -396,26 +444,26 @@ function ManageData(props) {
                                 return (
                                     <tr key={course.id}>
                                         <td>{course.course_code || ""}</td>
-                                        <td>{course.course_size || ""}</td>
-                                        <td>{Array.isArray(course.lab_days) ? course.lab_days.join(', ') : ""}</td>
-                                        <td>{course.lab_duration || ""}</td>
-                                        <td>{course.timerange_from && course.timerange_till ? `${course.timerange_from} - ${course.timerange_till}` : ""}</td>
+                                        <td>{course.est_size || ""}</td>
+                                        <td>{Array.isArray(course.tutorial_properties.tut_days) ? course.tutorial_properties.tut_days.join(', ') : ""}</td>
+                                        <td>{shortToLongDuration(course.tutorial_properties.tut_duration).toString() || ""}</td>
+                                        <td>{course.tutorial_properties.tut_start_time && course.tutorial_properties.tut_end_time ? (shortToLongTime(course.tutorial_properties.tut_start_time)).toString() + " - " + shortToLongTime(course.tutorial_properties.tut_end_time).toString() : ""}</td>
                                         <td className='action-column'>
                                             <button className='more-button' onClick={() => toggleMoreDetails(course.id)}>
                                                 <i className="bi bi-three-dots"></i> More
                                             </button>
                                             {showDetails[course.id] && (
                                                 <div className='more-details'>
-                                                    <p>Cohorts: {course.cohorts || ""}</p>
+                                                    <p>Cohorts: {course.num_cohorts || "N/A"}</p>
                                                     <p>Combining Cohorts: {course.mix_cohorts ? "Yes" : "No"}</p>
-                                                    <p>Number of Tutors: {course.tutors || ""}</p>
-                                                    <p>Lecture Amount: {course.lecture_amount || ""}</p>
-                                                    <p>Lecture Day: {course.lec_day || ""}</p>
-                                                    <p>Lecture Time: {course.lec_time || ""}</p>
-                                                    <p>Lecture Duration: {course.lec_duration || ""}</p>
-                                                    <p>After Lecture: {course.after_lecture ? "Yes" : "No"}</p>
-                                                    <p>BYOD: {course.byod ? "Yes" : "No"}</p>
-                                                    <p>Projector: {course.projector ? "Yes" : "No"}</p>
+                                                    <p>Number of Tutors: {course.num_tutors || ""}</p>
+                                                    <p>Lecture Amount: {course.lectures.day ? 1 : ""}</p>
+                                                    <p>Lecture Day: {Array.isArray(course.lectures) ? course.lectures.map(lect => lect.day).join(', ') : ""}</p>
+                                                    <p>Lecture Time: {Array.isArray(course.lectures) ? course.lectures.map(lect => lect.time) : ""}</p>
+                                                    <p>Lecture Duration: {Array.isArray(course.lectures) ? course.lectures.map(lect => shortToLongDuration(lect.duration).toString()) : ""}</p>
+                                                    <p>After Lecture: {course.tutorial_properties.after_lecture ? "Yes" : "No"}</p>
+                                                    <p>BYOD: {course.tutorial_properties.byod ? "Yes" : "No"}</p>
+                                                    <p>Projector: {course.tutorial_properties.projector ? "Yes" : "No"}</p>
                                                 </div>
                                             )}
                                         </td>
@@ -423,7 +471,7 @@ function ManageData(props) {
                                             <button className='delete-button' onClick={() => handleDeleteCourse(course.id)}>
                                                 <i className="bi bi-trash"></i> Delete
                                             </button>
-                                            <button className='edit-button' onClick={() => setFormFields(course)}>
+                                            <button className='edit-button' onClick={() => convertSchemaToFormData(course)}>
                                                 <i className="bi bi-pencil"></i> Edit
                                             </button>
                                         </td>

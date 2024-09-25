@@ -136,7 +136,7 @@ app.post("/api/delete", async(req, res) => {
           if(target === "ALL"){
             await Course.deleteMany({});
           }else{
-            await Course.delete({_id: target})
+            await Course.deleteOne({_id: target})
           }
         }else{
             throw new Error("");
