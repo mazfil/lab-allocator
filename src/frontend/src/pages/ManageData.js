@@ -1,7 +1,7 @@
 import NavBar from '../components/nav/NavBar';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import './ManageData.css';
+import './styles/ManageData.css';
 import { deleteData, queryDatabase, uploadData, updateData } from '../utils/helperFunctions';
 
 

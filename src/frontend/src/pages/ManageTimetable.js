@@ -1,4 +1,4 @@
-import './ManageTimetable.css';
+import './styles/ManageTimetable.css';
 import NavBar from '../components/nav/NavBar';
 import { useState } from 'react';
 import { useEffect } from 'react';

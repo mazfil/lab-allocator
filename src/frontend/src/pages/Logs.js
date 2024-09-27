@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import { useEffect } from 'react';
 import * as helpers from "../utils/helperFunctions.js";
+import './styles/Logs.css';
 
 
 function Logs(props){

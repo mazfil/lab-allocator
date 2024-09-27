@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import * as helpers from "../utils/helperFunctions.js";
 import { usePapaParse } from 'react-papaparse';
-
+import './styles/Dashboard.css';
 
 function Dashboard(props){
   const [dropBoxVisibility, setVisibility] = useState(false);

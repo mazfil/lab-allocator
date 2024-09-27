@@ -1,0 +1,75 @@
+.manageTimetable{
+  background-color: white;
+}
+
+
+.timetable-calendar{
+  margin-top: 100px;
+
+}
+
+.course-filter{
+  margin: 8px auto 32px auto;
+  justify-content: center;
+  text-align: center;
+}
+
+.timetable-save {
+  display: flex;
+  margin-right: 32px;
+  margin-left: auto;
+  font-size: 1.5em;
+  padding: 8px;
+  margin: 4px;
+}
+
+.tutorial-visibility > button {
+  font-size: 18pt;
+  margin: 8pt;
+  width: 96pt;
+}
+
+.manage-timetable-buttons{
+  width: 100%;
+  display: inline;
+}
+
+.created{
+  text-align: center;
+  margin-right: 8px;
+}
+
+.bottom-bar{
+  display: flex;
+}
+
+
+.change-room-overlay, .change-room{
+  z-index: 10000;
+  position: absolute;
+  display: flex;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+}
+
+.change-room-overlay{
+  width: 100vw;
+  height: 100vh;
+  background-color: #000000c0;
+}
+
+
+.change-room{
+  margin: auto;
+  display: flex;
+  background-color: var(--white);
+  width: 384px;
+  height: 128px;
+  padding: 32px;
+  border-radius: 16px;
+  border-style: dashed;
+  border-color: var(--gold);
+  transition: 5s;
+}

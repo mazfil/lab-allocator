@@ -30,7 +30,7 @@ const tutorialSchema = new mongoose.Schema({
     type: String
   }
 })
-
+  
 const lectureSchema = new mongoose.Schema({
   day: {
     required: true,

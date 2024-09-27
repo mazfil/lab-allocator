@@ -1,6 +1,6 @@
 import React from 'react';
 import NavBar from '../components/nav/NavBar';
-import './styles.css';
+import './styles/Wiki.css';
 
 function Wiki(props) {
     return (

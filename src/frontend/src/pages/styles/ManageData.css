@@ -1,3 +1,73 @@
+.manage-data-page{
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.manage-data-content{
+  margin: auto;
+}
+
+.data-table, .edit-data{
+  margin: auto;
+}
+
+table{
+  margin: auto;
+  height: fit-content;
+}
+
+table, th, td{
+  border: 1px solid;
+  border-collapse: collapse;
+  padding: 8px;
+}
+
+form{
+  display: flex;
+}
+
+fieldset{
+  width: fit-content;
+}
+
+input{
+  display: flex;
+}
+
+#lab_days{
+  display: inline;
+}
+
+.manageTimetable{
+  width: 100vw;
+  height: 100vh;
+}
+
+  .timetable-calendar{
+    width: 100%;
+    height: 80%;
+}
+
+
+.edit-data{
+  display: flex;
+  padding-bottom: 16px;
+}
+
+.course-data-buttons {
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  padding-bottom: 16px;
+}
+
+form{
+  margin: auto;
+}
+
+
+
 /* General styling for the page */
 .manage-data-page {
     font-family: 'Roboto', sans-serif;
