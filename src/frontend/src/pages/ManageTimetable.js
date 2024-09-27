@@ -1,3 +1,4 @@
+import './ManageTimetable.css';
 import NavBar from '../components/nav/NavBar';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -10,6 +11,10 @@ import { json2csv } from 'json-2-csv';
 import { create } from '@mui/material/styles/createTransitions.js';
 
 import fileData from "../TEMPDATA.json"
+
+const colorString = require('color-string')
+const Color = require('color');
+
 
 function ManageTimetable(props){
     // Tutorial data used by the calendar view. (applies filters to the timetable data)
@@ -102,9 +107,7 @@ function ManageTimetable(props){
     // Changes the room for a tutorial after a room is selected on the changeRoom overlay
     // TODO: fix the clash check, overwrites existing tutorials when the room is the same
     const changeRoom = async (tutorial, room) => {
-      console.log(tutorial)
-      var current = await timetable.find(tut => tut.course_code === tutorial.event.title);
-      console.log(current)
+      var current = await timetable.find(tut => tut.title === tutorial.event.title);
         var clash = false;
         var potentialClashes = await timetable.filter(otherTutorial => { return otherTutorial.location == room }).filter(otherTutorial => (otherTutorial.daysOfWeek == current.daysOfWeek))
 
@@ -122,6 +125,8 @@ function ManageTimetable(props){
             await toggleChangeRoom();
             pendingRoomChange.event.setProp('title', current.title)
             pendingRoomChange.event.setProp('backgroundColor', current.backgroundColor)
+            pendingRoomChange.event.setProp('textColor', (Color(colorString.get(current.backgroundColor).value).isDark() ? "#FFFFFF" : "#000000"))
+
         }else{
             console.log("ERROR CLASH")
         }
@@ -157,16 +162,16 @@ function ManageTimetable(props){
     // initData and fetchPost initialise the data when the page is opened.
     const initData = async (data) => {
         setTimetable(data)
-        setCourseList(["All", ...new Set(data.map(item => item.title.substring(0, item.title.indexOf('_'))))].slice(0, -1))
+        setCourseList(["All", ...new Set(data.map(item => item.course_code))].slice(0, -1))
         updateData(data, activeCourse)
     }
 
     const fetchPost = async () => {
         // SWITCH ONCE READY TO USE DATABASE
-        //const data = await helpers.generateTimetable(await helpers.queryDatabase("timetable_data"))
-        const data = await helpers.generateTimetable(fileData)
-        setTime(data.created)
-        initData(data.timetable)
+        const data = await helpers.generateTimetable(await helpers.queryDatabase("timetable_data"))
+        //const data = await helpers.generateTimetable(fileData)
+        setTime(await data.created)
+        initData(await data.timetable)
         console.log(await data)
     }
     useEffect(() => {fetchPost();}, [])

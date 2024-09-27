@@ -6,6 +6,7 @@ import { ObjectId } from "bson";
 
 const colorString = require('color-string')
 const Color = require('color');
+
 /**
  * Creates class objects from csv file uploads to firebase.
  * @param {csv} file 
@@ -13,6 +14,7 @@ const Color = require('color');
  * @returns 
  */
 export async function readFileData(file){
+
   await deleteData("course_data", "ALL");
   const parseOptions = {
     header: true,
@@ -236,18 +238,10 @@ export const room_colours = {
   N1156: "#626e85"
 };
 
-export async function updateColor(data){
-  var timetable_data = data;
-  timetable_data.timetable.forEach(tutorial => {
-    tutorial.backgroundColor = room_colours[(tutorial.location).replace(".", "").replace("/", "")]
-    //tutorial.textColor = Color(colorString.get(tutorial.backgroundColor)).isLight ? "#FFFFFF" : "#000000";
-  });
-
-  return(timetable_data)
-}
 
 export async function generateTimetable(raw_data){
   var timetable_data = raw_data;
+  console.log(await raw_data)
   timetable_data.timetable.forEach(tutorial => {
     tutorial.backgroundColor = room_colours[(tutorial.location).replace(".", "").replace("/", "")]
     tutorial.borderColor = "#000000"
@@ -256,7 +250,7 @@ export async function generateTimetable(raw_data){
     tutorial.overlap = true;
     tutorial.course_code = tutorial.title;
     tutorial.title = tutorial._id
-    //tutorial.textColor = Color(colorString.get(tutorial.backgroundColor)).isLight ? "#FFFFFF" : "#000000";
+    tutorial.textColor = (Color(colorString.get(tutorial.backgroundColor).value).isDark() ? "#FFFFFF" : "#000000");
   });
 
   return(timetable_data)

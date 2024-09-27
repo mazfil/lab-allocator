@@ -4,7 +4,7 @@ import './styles.css';
 
 function Wiki(props) {
     return (
-        <div>
+        <div className='wiki'>
             <NavBar navigate={props.navigate} tab={'wiki'} />
 
             <div className="wiki-container">
