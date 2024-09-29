@@ -1,15 +1,21 @@
 .manageTimetable{
-  background-color: white;
+  background-color: #ffffff;
+  width: 100%;
+  display: block;
 }
-
 
 .timetable-calendar{
   margin-top: 100px;
+  height: 825px;
 
 }
 
-.course-filter{
-  margin: 8px auto 32px auto;
+.calendar-view{
+  height: 700px;
+}
+
+.course-filter {
+  margin: 8px auto 8px auto;
   justify-content: center;
   text-align: center;
 }
@@ -23,10 +29,14 @@
   margin: 4px;
 }
 
+.tutorial-visibility {
+  text-align: center;
+}
 .tutorial-visibility > button {
   font-size: 18pt;
   margin: 8pt;
   width: 96pt;
+  border-color: #444444;
 }
 
 .manage-timetable-buttons{

@@ -174,7 +174,7 @@ function ManageTimetable(props){
         initData(await data.timetable)
         console.log(await data)
     }
-    useEffect(() => {fetchPost();}, [])
+    //useEffect(() => {fetchPost();}, [])
     
     return(
         <div className='manageTimetable'>
@@ -216,17 +216,50 @@ function ManageTimetable(props){
                     
                 </div>
                 <div className='tutorial-visibility'>
-                  <button onClick={() => toggleView("HN1.23")} style={activeView.includes("HN1.23") ? {backgroundColor: helpers.room_colours.HN123} : {backgroundColor: "#444444"}}>HN1.23</button>
-                  <button onClick={() => toggleView("HN1.24")} style={activeView.includes("HN1.24") ? {backgroundColor: helpers.room_colours.HN124} : {backgroundColor: "#444444"}}>HN1.24</button>
-                  <button onClick={() => toggleView("N109")} style={activeView.includes("N109") ? {backgroundColor: helpers.room_colours.N109} : {backgroundColor: "#444444"}}>N109</button>
-                  <button onClick={() => toggleView("N111")} style={activeView.includes("N111") ? {backgroundColor: helpers.room_colours.N111} : {backgroundColor: "#444444"}}>N111</button>
-                  <button onClick={() => toggleView("N112")} style={activeView.includes("N112") ? {backgroundColor: helpers.room_colours.N112} : {backgroundColor: "#444444"}}>N112</button>
-                  <button onClick={() => toggleView("N113")} style={activeView.includes("N113") ? {backgroundColor: helpers.room_colours.N113} : {backgroundColor: "#444444"}}>N113</button>
-                  <button onClick={() => toggleView("N114")} style={activeView.includes("N114") ? {backgroundColor: helpers.room_colours.N114} : {backgroundColor: "#444444"}}>N114</button>
-                  <button onClick={() => toggleView("N115/6")} style={activeView.includes("N115/6") ? {backgroundColor: helpers.room_colours.N1156} : {backgroundColor: "#444444"}}>N115/6</button>
+                  <button 
+                  onClick={() => toggleView("HN1.23")} 
+                  style={activeView.includes("HN1.23") ? {backgroundColor: helpers.room_colours.HN123, borderColor: helpers.room_colours.HN123, color: (Color(colorString.get(helpers.room_colours.HN123).value).isDark() ? "#FFFFFF" : "#000000")} : {backgroundColor: "#444444"}}>
+                    HN1.23</button>
+
+                  <button 
+                  onClick={() => toggleView("HN1.24")} 
+                  style={activeView.includes("HN1.24") ? {backgroundColor: helpers.room_colours.HN124, borderColor: helpers.room_colours.HN124, color: (Color(colorString.get(helpers.room_colours.HN124).value).isDark() ? "#FFFFFF" : "#000000")} : {backgroundColor: "#444444"}}>
+                    HN1.24</button>
+
+                  <button 
+                  onClick={() => toggleView("N109")} 
+                  style={activeView.includes("N109") ? {backgroundColor: helpers.room_colours.N109, borderColor: helpers.room_colours.N109, color: (Color(colorString.get(helpers.room_colours.N109).value).isDark() ? "#FFFFFF" : "#000000")} : {backgroundColor: "#444444"}}>
+                    N109</button>
+
+                  <button 
+                  onClick={() => toggleView("N111")} 
+                  style={activeView.includes("N111") ? {backgroundColor: helpers.room_colours.N111, borderColor: helpers.room_colours.N111, color: (Color(colorString.get(helpers.room_colours.N111).value).isDark() ? "#FFFFFF" : "#000000")} : {backgroundColor: "#444444"}}>
+                    N111</button>
+
+                  <button 
+                  onClick={() => toggleView("N112")} 
+                  style={activeView.includes("N112") ? {backgroundColor: helpers.room_colours.N112, borderColor: helpers.room_colours.N112, color: (Color(colorString.get(helpers.room_colours.N112).value).isDark() ? "#FFFFFF" : "#000000")} : {backgroundColor: "#444444"}}>
+                    N112</button>
+
+                  <button 
+                  onClick={() => toggleView("N113")}
+                  style={activeView.includes("N113") ? {backgroundColor: helpers.room_colours.N113, borderColor: helpers.room_colours.N113, color: (Color(colorString.get(helpers.room_colours.N113).value).isDark() ? "#FFFFFF" : "#000000")} : {backgroundColor: "#444444"}}>
+                    N113</button>
+
+                  <button 
+                  onClick={() => toggleView("N114")} 
+                  style={activeView.includes("N114") ? {backgroundColor: helpers.room_colours.N114, borderColor: helpers.room_colours.N114, color: (Color(colorString.get(helpers.room_colours.N114).value).isDark() ? "#FFFFFF" : "#000000")} : {backgroundColor: "#444444"}}>
+                    N114</button>
+
+                  <button 
+                  onClick={() => toggleView("N115/6")} 
+                  style={activeView.includes("N115/6") ? {backgroundColor: helpers.room_colours.N1156, borderColor: helpers.room_colours.N1156, color: (Color(colorString.get(helpers.room_colours.N1156).value).isDark() ? "#FFFFFF" : "#000000")} : {backgroundColor: "#444444"}}>
+                    N115/6</button>
+                    
                 </div>
-                {/* See https://fullcalendar.io/docs#toc for documentation of calendar view */}
-                <FullCalendar
+                <div className="calendar-view">
+              {/* See https://fullcalendar.io/docs#toc for documentation of calendar view */}
+              <FullCalendar
                 plugins={[ timeGridPlugin, interactionPlugin ]}
                 initialView="timeGridWeek"
                 weekends={false}
@@ -246,6 +279,8 @@ function ManageTimetable(props){
                 eventClick={function(event){triggerChangeRoom(event)}}
                 eventOverlap={function(still, moving){return !(still._def.extendedProps.location === moving._def.extendedProps.location)}}
                 />
+                </div>
+                
             </div>
             <div className='bottom-bar'>
                 <div className='manage-timetable-buttons'>

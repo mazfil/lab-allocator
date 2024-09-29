@@ -228,15 +228,29 @@ export async function deleteData(collection, target){
 
 
 export const room_colours = {
-  HN123: "#beb2b4",
-  HN124: "#a899a4",
-  N109: "#928293",
-  N111: "#655071",
-  N112: "#514b63",
-  N113: "#3e4454",
-  N114: "#4c5669",
-  N1156: "#626e85"
+  HN123: "#b4507f",
+  HN124: "#c65f5d",
+  N109: "#c67a2e",
+  N111: "#c3b122",
+  N112: "#6e9e2a",
+  N113: "#258c6a",
+  N114: "#3265b6",
+  N1156: "#6f4abe"
 };
+
+/* PASTEL SCHEME 
+export const room_colours = {
+  HN123: "#81D4FA",
+  HN124: "#FFCC80",
+  N109: "#CE93DE",
+  N111: "#FFAB91",
+  N112: "#B39DDB",
+  N113: "#80CBC4",
+  N114: "#FFCDD2",
+  N1156: "#FFECB3"
+};
+*/
+
 
 
 export async function generateTimetable(raw_data){

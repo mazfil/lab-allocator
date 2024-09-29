@@ -21,7 +21,7 @@
 }
 
 /* Header for the wiki */
-header {
+.wiki header {
   background-color: #be830e;
   color: white;
   padding: 10px 0;
@@ -29,13 +29,13 @@ header {
   border-radius: 8px 8px 0 0;
 }
 
-header h1 {
+.wiki header h1 {
   margin: 0;
   font-size: 28px;
 }
 
 /* Section headings */
-h2 {
+.wiki h2 {
   color: #000000;
   border-bottom: 2px solid #ddd;
   padding-bottom: 10px;
@@ -64,17 +64,17 @@ h2 {
 }
 
 /* Links styling */
-a {
+.wiki > a {
   color: #0066cc;
   text-decoration: none;
 }
 
-a:hover {
+.wiki > a:hover {
   text-decoration: underline;
 }
 
 /* Styling for code elements */
-code {
+.wiki code {
   background-color: #f4f4f4;
   padding: 2px 4px;
   border-radius: 4px;
@@ -83,7 +83,7 @@ code {
 }
 
 /* Footer */
-footer {
+.wiki footer {
   margin-top: 40px;
   text-align: center;
   font-size: 14px;
