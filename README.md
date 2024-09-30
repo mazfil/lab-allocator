@@ -47,12 +47,15 @@ And lastly you can also view analytics for GitHub to see commit regularity, who 
 
 [![Statement of Work](docs/assets/SoW.png)](docs/audit-documentation/(Current)%20TL-Lab%20Allocator%20-%20Statement%20of%20Work_Signed%20-%2019%20August%202024.pdf)
 
+See more by clicking the link below.
+
 [Statement of Work](docs/audit-documentation/(Current)%20TL-Lab%20Allocator%20-%20Statement%20of%20Work_Signed%20-%2019%20August%202024.pdf)
 
 ## Team Charter
 
-
 [![Team Charter](docs/assets/team-charter.png)](docs/audit-documentation/project-charter.pdf)
+
+See more by clicking the link below.
 
 [Team Charter](docs/audit-documentation/project-charter.pdf)
 
