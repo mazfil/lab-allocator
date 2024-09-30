@@ -194,7 +194,7 @@ public class MongoConnection {
                                     "location": "%s",
                                     "title": "%s_%d",
                                     "endTime": "%s",
-                                    "courseCode": "%s"
+                                    "course_code": "%s"
                                 }
                                 """.formatted(
                                         timeToDatabaseFormat(i),
