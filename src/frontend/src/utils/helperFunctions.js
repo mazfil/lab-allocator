@@ -15,7 +15,7 @@ const Color = require('color');
  */
 export async function readFileData(file){
 
-  await deleteData("course_data", "ALL");
+  //await deleteData("course_data", "ALL");
   const parseOptions = {
     header: true,
     dynamicTyping: true,
@@ -35,6 +35,8 @@ export async function readFileData(file){
       if(course.course_code == null){
         return;
       }
+      course.course_code = (course.course_code).toString()
+      delete course.drop_in_preferences
 
       // Nests lectures
       course.lectures = [];
@@ -51,7 +53,7 @@ export async function readFileData(file){
         course.tutorial_properties[property] = course[property]
         delete course[property]
       });
-      uploadData("course_data", course.course_code, course)
+      uploadData("course_data", course)
     });
   }
 
@@ -147,7 +149,7 @@ export async function getRoomTimetables(){
     tutorial.backgroundColor = "#585868";
     tutorial.durationEditable = false
     tutorial.borderColor = "#000000"
-    tutorial.title = tutorial.id + "\n" + tutorial.location
+    tutorial.title = tutorial.course_code + "\n" + tutorial.id
   });
 
   console.log(Date.now())
@@ -162,13 +164,7 @@ export async function getRoomTimetables(){
  * @param {Array of Objects} timetable 
  */
 export async function saveTimetable(timetable){
-  const time = Date.now()
-  const loc = "timetable/" + time  
-  timetable.forEach(tutorial => {
-    setDoc(doc(database, loc + "/tutorials", tutorial.id), tutorial);
-  });
-  const timetableRef = doc(database, "timetable", time.toString());
-  setDoc(timetableRef, {created: Timestamp.now()}, {merge: true});
+  uploadData("timetable_data", {timetable: timetable, created: new Date().toLocaleString()})
 }
 
 export async function numToDay(data){
@@ -256,15 +252,12 @@ export const room_colours = {
 
 export async function generateTimetable(raw_data){
   var timetable_data = raw_data;
-  console.log(await raw_data)
   timetable_data.timetable.forEach(tutorial => {
     tutorial.backgroundColor = room_colours[(tutorial.location).replace(".", "").replace("/", "")]
     tutorial.borderColor = "#000000"
     tutorial.durationEditable = false;
     tutorial.editable = true;
     tutorial.overlap = true;
-    tutorial.course_code = tutorial.title;
-    tutorial.title = tutorial._id
     tutorial.textColor = (Color(colorString.get(tutorial.backgroundColor).value).isDark() ? "#FFFFFF" : "#000000");
   });
 

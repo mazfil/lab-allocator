@@ -57,7 +57,7 @@ public class Course {
     public Course(int id, String courseCode, int numStudents, int numTutors, int labLengthMinutes, ArrayList<Lecture> lectures) {
         this.id = id;
         this.courseCode = courseCode;
-        this.tutorRatio = switch (courseCode.charAt(4)) {
+        this.tutorRatio = switch (courseCode.charAt(0)) {
             case '1' -> 15;
             case '2' -> 23;
             default  -> 26;

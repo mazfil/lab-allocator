@@ -9,7 +9,7 @@ const tutorialSchema = new mongoose.Schema({
     required: true,
     type: String
   },
-  id: {
+  course_code: {
     required: true,
     type: String
   },
@@ -24,8 +24,7 @@ const tutorialSchema = new mongoose.Schema({
   title: {
     required: true,
     type: String
-  },
-  
+  }
 })
 
 const timetableSchema = new mongoose.Schema({
