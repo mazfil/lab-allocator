@@ -4,11 +4,6 @@ We are keeping the reflection log as a Google Sheets for ease of writing them ou
 
 Reflections sourced from Team Discussions, Team Meetings, Audits, and Actions made by the team.
 
-Updated and kept as a log by Rachel Cao
+You can also find more decisions that are made in the Reflections Issue that was created for Semester 2, 2024. See ![Here](https://github.com/mazfil/lab-allocator/issues/92).
 
-Reflections to be added to the google sheets above:
-
-## Format
-|Date|Priority|Category|Feedback|Actions taken/needed|Source|Progress|Action|
-|-|-|-|-|-|-|-|-|
-|date|High/Medium/Low|Repository|Example feedback|Detailed explanation for action|Team|In-progress|Responsible Party Action|
+Updated and kept as a log by Rachel Cao and Edward Nivison

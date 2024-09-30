@@ -160,7 +160,7 @@ The IP of the solution will remain the property of the students in the group, so
 
 ## Problematisation Analysis
 
-[Problematisation Analysis](https://github.com/mazfil/lab-allocator/tree/main/docs/problematisation-analysis)
+[Problematisation Analysis](docs/audit-documentation/problematisation-analysis.md)
 
 ## Client's Vision and objectives
 
@@ -200,11 +200,11 @@ However we plan to minimise as much confusion as possible with relevant comments
 
 We have created a development checklist for how to manage GitHub issues, the github projects page, how to document decisions and reflections that are being made.
 
-[Development Checklist](https://github.com/mazfil/lab-allocator/blob/main/docs/development/development-checklist.md)
+[Development Checklist](docs/development-documentation/development-checklist.md)
 
 ## Technical Reports
 
-[Technical Reports](https://github.com/mazfil/lab-allocator/tree/main/docs/technical-reports)
+[Technical Reports](docs/audit-documentation/technical-reports)
 
 ## Logs
 
@@ -220,19 +220,19 @@ and implementations. This includes:
 - A new method of reporting any **decisions** through a GitHub Issue. You can reference this issue through commits, comments, pull requests, etc. This is so we can make the process of decision making easier and more appealing to do. We still will import all the decisions formally through to the decision log, but think of this as an intermediary stage of the decision making process. See issue [#93](https://github.com/mazfil/lab-allocator/issues/93)
 - A new method of reporting any **reflections** and actions in regards to the reflections through a GitHub Issue. This is so you can reference the issue in any commits, comments, pull requests, etc. This is so we can make the process of reflections easier and more convenient for our project members to complete. Think of this as an intermediary stage of the reflection process. We make sure that we reflection and create new issues in regards to any feedback and comments we receive from fellow project members, client, stakeholders, shadow team, and tutors. See issue [#92](https://github.com/mazfil/lab-allocator/issues/92)
 
-[Decision Logs](https://github.com/mazfil/lab-allocator/blob/main/docs/meetings/decision-log.md)
+[Decision Logs](docs/audit-documentation/logs/Decision-Log.md)
 
-[Audit Reflection Log](https://github.com/mazfil/lab-allocator/blob/main/docs/audit-reflection.md)
+[Audit Reflection Log](docs/audit-documentation/audit-reflection.md)
 
-[Reflection Log](https://github.com/mazfil/lab-allocator/blob/main/docs/reflection-log.md)
+[Reflection Log](docs/audit-documentation/logs/reflection-log.md)
 
-[Client Communication Log](https://github.com/mazfil/lab-allocator/blob/main/docs/client-communication-log.md)
+[Client Communication Log](docs/audit-documentation/logs/client-communication-log.md)
 
 ## Meeting Minutes
 
-- [Client Meetings](https://github.com/mazfil/lab-allocator/tree/main/docs/meetings/client-meetings)
-- [Team Meetings](https://github.com/mazfil/lab-allocator/tree/main/docs/meetings/team-meetings)
-- [Tutorial Meetings](https://github.com/mazfil/lab-allocator/tree/main/docs/meetings/tutorial-meetings)
+- [Client Meetings](docs/audit-documentation/meetings/client-meetings)
+- [Team Meetings](docs/audit-documentation/meetings/team-meetings)
+- [Tutorial Meetings](docs/audit-documentation/meetings/tutorial-meetings)
 
 ## Acknowledgements
 
