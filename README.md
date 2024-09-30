@@ -52,7 +52,7 @@ And lastly you can also view analytics for GitHub to see commit regularity, who 
 
 ## Project Schedule
 
-![Roadmap of project for period semester 2 2024](https://github.com/mazfil/lab-allocator/blob/main/docs/Roadmap%20-%20S2%202024.png)
+![Roadmap of project for period semester 2 2024](https://github.com/mazfil/lab-allocator/blob/main/docs/assets/Roadmap%20-%20S2%202024.png)
 
 ## Project Output
 
