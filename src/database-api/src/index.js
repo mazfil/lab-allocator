@@ -106,14 +106,14 @@ app.post("/api/upload", async(req, res) => {
  */
 app.post("/api/update", async(req, res) => {
     const collection = req.query.collection;
-    const body = JSON.stringify(req.body);
+    const body = req.body;
     const target = req.query.target;
 
     try{
         if(collection === "timetable_data"){
             await Timetable.findOneAndUpdate({_id: target}, body);
         }else if (collection === "course_data"){
-            await Course.findOneAndUpdate({_id: target}, body);
+            await Course.findOneAndUpdate({course_code: target}, body);
         }else{
             throw new Error("No Collection specified");
         }
