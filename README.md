@@ -45,9 +45,9 @@ And lastly you can also view analytics for GitHub to see commit regularity, who 
 
 ## Statement of Work
 
-![Statement of Work](docs/assets/SoW.png)
+[![Statement of Work](docs/assets/SoW.png)](https://github.com/mazfil/lab-allocator/blob/main/docs/client-documents/(Current)%20TL-Lab%20Allocator%20-%20Statement%20of%20Work_Signed%20-%2019%20August%202024.pdf)
 
-[Statement of Work](https://github.com/mazfil/lab-allocator/blob/main/docs/client-documents/TL-Lab%20Allocator%20-%20Statement%20of%20Work_Signed%20-%2019%20August%202024.pdf)
+[Statement of Work](https://github.com/mazfil/lab-allocator/blob/main/docs/client-documents/(Current)%20TL-Lab%20Allocator%20-%20Statement%20of%20Work_Signed%20-%2019%20August%202024.pdf)
 
 ## Team Charter
 [Team Charter](https://docs.google.com/document/d/12kc_D6P1VtMpLjGwUyhXKUmi2gxB9h6c)
