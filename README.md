@@ -6,22 +6,22 @@ The end vision of the project will be to have a application that will adapt to n
 
 ## Table of Contents
 
-- [Team Members and Roles](https://github.com/mazfil/lab-allocator/blob/main/README.md#team-members-and-roles)
-- [Statement of Work](https://github.com/mazfil/lab-allocator/blob/main/README.md#statement-of-work)
-- [Team Charter](https://github.com/mazfil/lab-allocator/blob/main/README.md#team-charter)
-- [Project Schedule](https://github.com/mazfil/lab-allocator/blob/main/README.md#project-schedule)
-- [Project Output](https://github.com/mazfil/lab-allocator/blob/main/README.md#project-output)
-- [Technical Constraints](https://github.com/mazfil/lab-allocator/blob/main/README.md#technical-constraints)
-- [Project Resources](https://github.com/mazfil/lab-allocator/blob/main/README.md#project-resources)
-- [Project NDA and IP status](https://github.com/mazfil/lab-allocator/blob/main/README.md#project-nda-and-ip-status)
-- [Problematisation Analysis](https://github.com/mazfil/lab-allocator/blob/main/README.md#problematisation-analysis)
-- [Client's Vision and objectives](https://github.com/mazfil/lab-allocator/blob/main/README.md#clients-vision-and-objectives)
-- [Stakeholder Analysis](https://github.com/mazfil/lab-allocator/blob/main/README.md#clients-vision-and-objectives)
-- [Handover Process / Development Checklist](https://github.com/mazfil/lab-allocator?tab=readme-ov-file#handover-process--development-checklist)
-- [Technical Reports](https://github.com/mazfil/lab-allocator/blob/main/README.md#technical-reports)
-- [Logs](https://github.com/mazfil/lab-allocator/blob/main/README.md#logs)
-- [Meeting Minutes](https://github.com/mazfil/lab-allocator/blob/main/README.md#meeting-minutes)
-- [Acknowledgements](https://github.com/mazfil/lab-allocator/blob/main/README.md#acknowledgements)
+- [Team Members and Roles](#team-members-and-roles)
+- [Statement of Work](#statement-of-work)
+- [Team Charter](#team-charter)
+- [Project Schedule](#project-schedule)
+- [Project Output](#project-output)
+- [Technical Constraints](#technical-constraints)
+- [Project Resources](#project-resources)
+- [Project NDA and IP status](#project-nda-and-ip-status)
+- [Problematisation Analysis](#problematisation-analysis)
+- [Client's Vision and objectives](#clients-vision-and-objectives)
+- [Stakeholder Analysis](#clients-vision-and-objectives)
+- [Handover Process / Development Checklist](#handover-process--development-checklist)
+- [Technical Reports](#technical-reports)
+- [Logs](#logs)
+- [Meeting Minutes](#meeting-minutes)
+- [Acknowledgements](#acknowledgements)
 
 ## Team Members and Roles
 
@@ -45,16 +45,20 @@ And lastly you can also view analytics for GitHub to see commit regularity, who 
 
 ## Statement of Work
 
-[![Statement of Work](docs/assets/SoW.png)](https://github.com/mazfil/lab-allocator/blob/main/docs/audit-documents/(Current)%20TL-Lab%20Allocator%20-%20Statement%20of%20Work_Signed%20-%2019%20August%202024.pdf)
+[![Statement of Work](docs/assets/SoW.png)](docs/audit-documentation/(Current)%20TL-Lab%20Allocator%20-%20Statement%20of%20Work_Signed%20-%2019%20August%202024.pdf)
 
-[Statement of Work](https://github.com/mazfil/lab-allocator/blob/main/docs/audit-documents/(Current)%20TL-Lab%20Allocator%20-%20Statement%20of%20Work_Signed%20-%2019%20August%202024.pdf)
+[Statement of Work](docs/audit-documentation/(Current)%20TL-Lab%20Allocator%20-%20Statement%20of%20Work_Signed%20-%2019%20August%202024.pdf)
 
 ## Team Charter
-[Team Charter](https://docs.google.com/document/d/12kc_D6P1VtMpLjGwUyhXKUmi2gxB9h6c)
+
+
+[![Team Charter](docs/assets/team-charter.png)](docs/audit-documentation/project-charter.pdf)
+
+[Team Charter](docs/audit-documentation/project-charter.pdf)
 
 ## Project Schedule
 
-![Roadmap of project for period semester 2 2024](https://github.com/mazfil/lab-allocator/blob/main/docs/assets/Roadmap%20-%20S2%202024.png)
+![Roadmap of project for period semester 2 2024](docs/assets/Roadmap%20-%20S2%202024.png)
 
 ## Project Output
 
@@ -64,7 +68,7 @@ You can look at the GitHub Projects as well (see the tab projects), you can see 
 
 What we have majorly done is improving the backend to fit some new criteria the client has made evident to us. The frontend has been running user testing and improving the look and feel of the program. We have also been working with the School of Computing Facility Team to get a backend server running where we have been developing an on-campus database. We have been working on transferring from the firebase to the new database, and we have been making documentation for the user and the developer.
 
-[Project output and descriptions on what is being done.](https://github.com/mazfil/lab-allocator/tree/main/docs/output)
+[Project output and descriptions on what is being done.](docs/audit-documentation/output)
 
 ## Technical constraints
 
@@ -232,6 +236,6 @@ and implementations. This includes:
 
 ## Acknowledgements
 
-Appreciation for the Lecturers, Convenors, Examiners, Tutors, and Speakers for the Australian National University course COMP3500 - Software Engineering Project, and its respective parallel courses being run. Thanks for everything you are doing to help us through our journey in Computer Science.\
-\
-*Insert some special acknowledgements here (e.g., tutors, shadow teams, etc. ).*
+Appreciation for the Lecturers, Convenors, Examiners, Tutors, and Speakers for the Australian National University course COMP3500 - Software Engineering Project, and its respective parallel courses being run. Thanks for everything you are doing to help us through our journey in Computer Science.
+
+We are also especially thankful to the School of Computing Facility team for setting up and hosting our project on-campus with one of their server solutions. For their assistance and patience we are eternally grateful for.
