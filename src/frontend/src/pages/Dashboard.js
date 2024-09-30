@@ -23,7 +23,7 @@ function Dashboard(props){
   }
 
   const startBackend = () => {
-    fetch("laballoc-dev.cecs.anu.edu.au:8080/start", {method: "GET"})
+    fetch("http://laballoc-dev.cecs.anu.edu.au:8080/start", {method: "GET"})
   }
 
 
@@ -67,7 +67,7 @@ function Dashboard(props){
             <button type="button" onClick={() =>props.navigate('About')}>About</button>
             <button type="button" id='help-supp' onClick={() =>props.navigate('Wiki')}>Help</button>
             <button type="button" onClick={() =>props.navigate('Logs')}>Logs</button>
-            <button type="button" onClick={() => startBackend()}>Generate</button>
+            <button type="button" onClick={() => startBackend}>Generate</button>
           </div>
         </div> 
         
