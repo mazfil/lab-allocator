@@ -27,7 +27,7 @@ function ManageTimetable(props){
     const [activeView, setView] = useState(['HN1.23', 'HN1.24', 'N109', 'N111', 'N112', 'N113', 'N114', 'N115/6'])
 
     // Displays either a specific course or all courses
-    const [activeCourse, setCourseFilter] = useState(["All"])
+    const [activeCourse, setCourseFilter] = useState("All")
 
     // The list of courses in the database
     const [courseList, setCourseList] = useState(["All"])
@@ -40,10 +40,11 @@ function ManageTimetable(props){
 
     // Filters the full course data based on rooms selected and which course has been selected
     const updateData = async (data, course) => {
-        if(course != "All"){
-            setFilteredData(data.filter((tut) => activeView.includes(tut.location)).filter((tut) => tut.title.includes(course)))
+        console.log(course)
+        if(course === "All"){
+            setFilteredData(await data.filter((tut) => activeView.includes(tut.location)))
         }else{
-            setFilteredData(data.filter((tut) => activeView.includes(tut.location)))
+            setFilteredData(await data.filter((tut) => activeView.includes(tut.location)).filter((tut) => tut.title.includes(course)))
         }
     }
 
@@ -74,8 +75,7 @@ function ManageTimetable(props){
     // updates a tutorial when dragged and dropped. Updates the time and day of tutorial.
     const updateTutorial = async (tutorial) => {
         console.log(tutorial)
-        var editedTutorial = await timetable.find((tuts) => tuts._id == tutorial.event.title)
-        console.log(editedTutorial)
+        var editedTutorial = await timetable.find((tuts) => tuts.title == tutorial.event.title)
         editedTutorial.startTime = tutorial.event.start.getHours() + ":" + (tutorial.event.start.getMinutes() == 0 ? "00" : "30")
         editedTutorial.endTime = tutorial.event.end.getHours() + ":" + (tutorial.event.end.getMinutes() == 0 ? "00" : "30")
         editedTutorial.daysOfWeek = tutorial.event.start.getDay().toString()
@@ -163,7 +163,8 @@ function ManageTimetable(props){
     const initData = async (data) => {
         setTimetable(data)
         setCourseList(["All", ...new Set(data.map(item => item.course_code))].slice(0, -1))
-        updateData(data, activeCourse)
+        updateData(data, "All")
+        console.log(data)
     }
 
     const fetchPost = async () => {
@@ -172,9 +173,9 @@ function ManageTimetable(props){
         //const data = await helpers.generateTimetable(fileData)
         setTime(await data.created)
         initData(await data.timetable)
-        console.log(await data)
+        console.log(data.timetable)
     }
-    //useEffect(() => {fetchPost();}, [])
+    useEffect(() => {fetchPost();}, [])
     
     return(
         <div className='manageTimetable'>
