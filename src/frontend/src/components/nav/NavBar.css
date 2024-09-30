@@ -1,0 +1,92 @@
+:root {
+  --black: #000000;
+  --dark-grey-1: #0D0D0D;
+  --dark-grey-2: #191919;
+  --white: #FFFFFF;
+  --light-grey-1: #E6E6E6;
+  --light-grey-2: #F2F2F2;
+  --gold: #BE830E;
+  --gold-tint: #F5EDDE;
+}
+
+.navbar {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  margin: auto;
+  justify-content: space-between;
+}
+
+.navbar-button-active {
+  background-color: var(--gold);
+}
+
+.navbar-button-inactive {
+  background-color: white;
+}
+
+.navbar, .navbar-logo, .navbar-logo > img {
+  height: 48px;
+  display: flex;
+}
+
+.navbar-logo {
+  float: left;
+}
+
+.navbar-tabs {
+  float: right;
+  height: 100%;
+  display: flex;
+}
+
+.navbar-tabs > button {
+  width: 128px;
+  height: 80%;
+  margin: auto;
+  margin-left: 16px;
+}
+
+/* Ensure the dropdown button has the same size as other buttons */
+.dropdown > button {
+  width: 128px;
+  height: 80%;
+  margin: auto;
+  margin-left: 16px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.navbar-button-active {
+  background-color: var(--gold);
+}
+
+/* Dropdown Styles */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-content {
+  position: absolute;
+  top: 48px; /* Same height as the navbar */
+  left: 0;
+  background-color: white;
+  border: 1px solid var(--light-grey-1);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  width: 128px; /* Same width as buttons */
+}
+
+.dropdown-content button {
+  background-color: var(--light-grey-2);
+  padding: 10px;
+  text-align: left;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown-content button:hover {
+  background-color: var(--light-grey-1);
+}
