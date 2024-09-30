@@ -155,6 +155,8 @@ We have identified any potential risks from our reflections and have actioned on
 
 The only expected costs for the project would be for the hardware for the server (i.e. a computer). During development/prototyping a student’s computer could be used, and the final system is expected to run on computers provided by the School of Computing / university at no cost. There should be no need for domain name registration as the system is expected to run on the internal university network.
 
+As we have an on-campus server up and running now, this is true. It is of no cost to us since our client is the School of Computing, we have access to a virtual machine server that is being hosted and maintained by the School of Computing Facility Team.
+
 The other resources required is data about labs, rooms and enrollments, which have been provided by the client.
 
 ## Project NDA and IP status
