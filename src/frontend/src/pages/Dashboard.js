@@ -18,12 +18,12 @@ function Dashboard(props){
 
   //Takes file input and sends to helper functions, uploads course data.
   const handleFile = async () => {
-    const hf = await helpers.readFileData(document.getElementById("df").files[0]).then(startBackend)
+    const hf = await helpers.readFileData(document.getElementById("df").files[0])
     toggleDropBox();
   }
 
   const startBackend = () => {
-    fetch("http://laballoc-dev.cecs.anu.edu.au:8080", {method: "GET"})
+    fetch("laballoc-dev.cecs.anu.edu.au:8080/start", {method: "GET"})
   }
 
 
@@ -65,7 +65,7 @@ function Dashboard(props){
           <div className='control-gap'></div>
           <div className='app-mgmt'>
             <button type="button" onClick={() =>props.navigate('About')}>About</button>
-            <button type="button" id='help-supp' onClick={() =>props.navigate('Wiki')}>Help & Support</button>
+            <button type="button" id='help-supp' onClick={() =>props.navigate('Wiki')}>Help</button>
             <button type="button" onClick={() =>props.navigate('Logs')}>Logs</button>
             <button type="button" onClick={() => startBackend()}>Generate</button>
           </div>

@@ -228,8 +228,8 @@ function ManageData(props) {
                 after_lecture: formData.after_lecture,
                 byod: formData.byod,
                 projector: formData.projector,
-                tut_days: formData.lab_days.map(day => day.toLowerCase()),
-                tut_duration: formData.lab_duration*60, //database stores this as minutes
+                tut_days: formData.lab_days,
+                tut_duration: formData.lab_duration, //database stores this as minutes
                 tut_start_time: formData.timerange_from,
                 tut_end_time: formData.timerange_till
             }
