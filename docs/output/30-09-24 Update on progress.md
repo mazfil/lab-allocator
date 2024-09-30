@@ -12,7 +12,7 @@ We are also doing storyboarding for the project video and the audit presentation
 
 **Audit Presentation Structure**
 
-![Project Video Structure](assets/project-video-structure.jpg)
+![Project Video Structure](assets/project-video-storyboard.jpg)
 
 **Project Video Structure**
 
