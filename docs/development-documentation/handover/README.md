@@ -1,0 +1,21 @@
+Here will be the contents page for the handover process. There will be multiple files such as:
+- Backend development
+  - Fitness Function
+  - Criteria
+  - Where to find important parts of the backend
+  - How to develop in the backend
+- Frontend development
+  - How to use the frontend
+  - Where to find important parts of the frontend
+  - How to develop in the frontend
+- On-Campus Server and Database
+  - How to access the on-campus server
+  - Who to contact when in trouble with the backend server
+  - How to develop using the database (e.g., how to use MongoDB)
+  - How to use and modify the Database API.
+- GitHub
+  - How to use the Github Projects
+  - How to use Github Issues
+  - How to run meetings
+- Audit
+  - How to do Audits.
