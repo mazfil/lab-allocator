@@ -30,7 +30,9 @@ function Wiki(props) {
                     <section id="dashboard">
                         <h2>Dashboard</h2>
                         <img src="/assets/images/dashboard_normal.png" alt="Dashboard" className="wiki-image" />
-                        <p>The <strong>Dashboard</strong> allows users to select functions for them to use...</p>
+                        <p>The <strong>Dashboard</strong> is the first page that you see when you access SoCo Lab Allocator.</p>
+                        <p>You can upload your data, manage the data that you upload, and manage the timetable that is generated.</p>
+                        <p>There is also this Wiki, and About to give you some help, if you ever have any extra issues that are not conveyed by the Wiki, please feel free to leave a GitHub Issue on the Repository linked in the About Page.</p>
                         {/* Rest of the content */}
                     </section>
 
@@ -48,7 +50,39 @@ function Wiki(props) {
                     <section id="manage-data">
                         <h2>Manage Data Page</h2>
                         <img src="/assets/images/manage_data_normal.png" alt="Manage Data" className="wiki-image" />
-                        <p>In the <strong>Manage Data Page</strong>, users can view and modify the data they previously entered...</p>
+                        <p>In the <strong>Manage Data Page</strong>, users can view and modify the data they previously entered via the upload data page.</p>
+                        <h3>Editing the Data</h3>
+                        <p>Looking at the <strong>Course Information</strong> section, you can add:</p>
+                        <ul>
+                            <li><strong>Course Code</strong>: This is the course code, usually formatted in either "COMP####" or just as "####"</li>
+                            <li><strong>Course Size</strong>: This is where you can input or edit the size (amount) of students in the course.</li>
+                            <li><strong>Cohorts</strong>: This is to designate how many cohorts there are for the course code. For example, COMP1100 and COMP1130 are two cohorts but share labs.</li>
+                            <li><strong>Combine Cohorts</strong>: This is for you to add the tag saying that the course is a combined cohort, this is not relevant to our algorithm, but is included for your benefit of understanding that the course is multiple cohorts.</li>
+                            <li><strong>Number of Tutors</strong>: This is to add the estimated amount of tutors that you would be running for the course.</li>
+                        </ul>
+                        <p>Looking at the <strong>Lecture Information</strong> section, you can add:</p>
+                        <ul>
+                            <li><strong>Number of Lectures</strong>: This is for you to add how many lectures that course might have</li>
+                            <li><strong>Day</strong>: This allows you to select the day that the lecture/s are on.</li>
+                            <li><strong>Time</strong>: This allows you to select the time that the lecture/s are at.</li>
+                            <li><strong>Duration</strong>: This allows you to select the duration of the lecture/s.</li>
+                        </ul>
+                        <p>Looking at the <strong>Lab Preferences</strong> section, you can add:</p>
+                        <ul>
+                            <li><strong>After Lecture</strong>: This variable allows you to schedule the labs only after the selected lecture time/s that you have done before. If you do not select "After Lecture", the lab can be scheduled anytime from 8am Monday to 8pm Friday.</li>
+                            <li><strong>BYOD</strong>: This means that the course is BYOD (Bring Your Own Device), this tags the course as BYOD and doesn't necessarily need lab computers.</li>
+                            <li><strong>Days</strong>: This allows you to select what days the lab is preferred to be allocated on. So if you select Tuesday, Wednesday, Thursday. It will only be allocated on those days.</li>
+                            <li><strong>Duration</strong>: This allows you to set the duration of the labs, it will be allocated in this size time.</li>
+                            <li><strong>Projector</strong>: This allows you to set the tag, saying that the lab requires a room with a projector.</li>
+                            <li><strong>Time Range</strong>: This allows you to select the starting time (from) and the ending time (till). This means that if the labs should only be scheduled between 9:00am and 5:00pm, this allows you to do so. And this will apply for all the days you selected above.</li>
+                        </ul>
+                        <img src="/assets/images/manage_data_actions.png" alt="Manage Data Actions" className="wiki-image" />
+                        <p>Here you can see all the data that you have in the database at the current time, your options are:</p>
+                        <ul>
+                            <li><strong>More</strong>: If you press this, you will see more of the course details</li>
+                            <li><strong>Edit</strong>: If you press this, it will carry all the information for that course to the top of the page, where you can edit some of the details.</li>
+                            <li><strong>Delete</strong>: If you press this, it will delete the course and its entries from the database. There is no recovering this.</li>
+                        </ul>
                         {/* Rest of the content */}
                     </section>
 
