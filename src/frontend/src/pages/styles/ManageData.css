@@ -454,28 +454,16 @@ fieldset {
     color: #777777;
     background-color: #6eb4ff;
     cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
 }
 
 .save-course-data:disabled{
     color: #707070;
     background-color: #b49962;
-    border: none;
     cursor: not-allowed;
-}
-
-.add-course.data:disabled:hover{
-    color: #6eb4ff;
-    transition: none;
-}
-
-.save-course.data:disabled:hover{
-    color: #b49962;
-    transition: none;
-}
-  
-.clear-course-data{
-    background-color: #444444;
-    border-color: #222;
+    box-shadow: none;
+    transform: none;
 }
 
 .add-course-data {
@@ -484,9 +472,22 @@ fieldset {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
 }
+  
+.clear-course-data{
+    background-color: #444444;
+    border-color: #222;
+}
 
 .add-course-data:hover {
-    background-color: #0056b3;
+    background-color: #007bff;
+}
+
+.save-course-data:hover{
+    background-color: #e6e6e6;
+}
+
+.clear-course-data:hover {
+    background-color: #222222;
 }
 
 .error-message {

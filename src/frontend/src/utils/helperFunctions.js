@@ -217,6 +217,7 @@ export async function uploadData(collection, data){
 }
 
 export async function updateData(collection, target, data){
+  console.log(JSON.stringify(data));
   const query = databaseURL + "update?collection=" + collection + (target ? "&target=" + target : "")
   console.log(await fetch(query, {mode: "cors", method: "POST", headers: {'Content-Type':'application/json'}, body: JSON.stringify(data)}))
 }
