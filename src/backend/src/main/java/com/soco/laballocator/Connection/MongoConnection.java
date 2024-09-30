@@ -200,9 +200,9 @@ public class MongoConnection {
                                         timeToDatabaseFormat(i),
                                         String.valueOf(day + 1),
                                         RoomTable.getInstance().getRoomFromId(room).toString().split(" ")[0],
-                                        code, labNum,
+                                        code.replace("COMP", ""), labNum,
                                         timeToDatabaseFormat(i + alloc.getCourse().getLengthInMinutes() / 30),
-                                        code
+                                        code.replace("COMP", "")
                         ));
                     }
                 }
