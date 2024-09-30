@@ -9,7 +9,7 @@ const tutorialSchema = new mongoose.Schema({
     required: true,
     type: String
   },
-  id: {
+  course_code: {
     required: true,
     type: String
   },
