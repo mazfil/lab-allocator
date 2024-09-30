@@ -22,8 +22,8 @@ function Dashboard(props){
     toggleDropBox();
   }
 
-  const startBackend = () => {
-    fetch("http://laballoc-dev.cecs.anu.edu.au:8080/start", {method: "GET"})
+  const startBackend = async () => {
+    await fetch("http://laballoc-dev.cecs.anu.edu.au:8080/start", {method: "GET"})
   }
 
 
