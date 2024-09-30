@@ -184,7 +184,7 @@ function ManageData(props) {
         setscButton(true);
     }
 
-    //converts e.g. 9.5 into "09:30:00"
+    //converts e.g. 9.5 into "09:30"
     //this and the next function are used because some times are stored as integers in the database
     const convertIntHourToFormal = (intHour) => {
         var result = ''
@@ -193,14 +193,14 @@ function ManageData(props) {
         }
         result = result + intHour.toString();
         if(Math.round(intHour) - intHour === 0){
-            result = result + ":00:00"
+            result = result + ":00"
         }else{
-            result = result + ":30:00"
+            result = result + ":30"
         }
         return result;
     }
 
-    //converts e.g. "09:30:00" to 9.5
+    //converts e.g. "09:30" to 9.5
     const convertFormaltoIntHour = (formalTime) => {
         var result = 0;
         formalTime = formalTime.slice(0,5);
@@ -218,7 +218,7 @@ function ManageData(props) {
             est_size: formData.est_size,
             lectures: [
             {
-                day: formData.lec_day,
+                day: formData.lec_day.toLowerCase(),
                 duration: formData.lec_duration,
                 time: convertFormaltoIntHour(formData.lec_time),
             }],
@@ -250,7 +250,7 @@ function ManageData(props) {
             after_lecture: course.tutorial_properties.after_lecture,
             byod: course.tutorial_properties.byod,
             lab_days: course.tutorial_properties.tut_days,
-            lab_duration: convertIntHourToFormal(course.tutorial_properties.tut_duration/60),
+            lab_duration: course.tutorial_properties.tut_duration,
             projector: course.tutorial_properties.projector,
             timerange_from: course.tutorial_properties.tut_start_time,
             timerange_till: course.tutorial_properties.tut_end_time
@@ -288,29 +288,29 @@ function ManageData(props) {
                             <label>Time: 
                                 <select id="lec_time" name="lec_time" value={formData.lec_time} onChange={handleInputChange}>
                                     <option value="">Select a time</option>
-                                    <option value="08:00:00">08:00</option>
-                                    <option value="08:30:00">08:30</option>
-                                    <option value="09:00:00">09:00</option>
-                                    <option value="09:30:00">09:30</option>
-                                    <option value="10:00:00">10:00</option>
-                                    <option value="10:30:00">10:30</option>
-                                    <option value="11:00:00">11:00</option>
-                                    <option value="11:30:00">11:30</option>
-                                    <option value="12:00:00">12:00</option>
-                                    <option value="12:30:00">12:30</option>
-                                    <option value="13:00:00">13:00</option>
-                                    <option value="13:30:00">13:30</option>
-                                    <option value="14:00:00">14:00</option>
-                                    <option value="14:30:00">14:30</option>
-                                    <option value="15:00:00">15:00</option>
-                                    <option value="15:30:00">15:30</option>
-                                    <option value="16:00:00">16:00</option>
-                                    <option value="16:30:00">16:30</option>
-                                    <option value="17:00:00">17:00</option>
-                                    <option value="17:30:00">17:30</option>
-                                    <option value="18:00:00">18:00</option>
-                                    <option value="18:30:00">18:30</option>
-                                    <option value="19:00:00">19:00</option>
+                                    <option value="08:00">08:00</option>
+                                    <option value="08:30">08:30</option>
+                                    <option value="09:00">09:00</option>
+                                    <option value="09:30">09:30</option>
+                                    <option value="10:00">10:00</option>
+                                    <option value="10:30">10:30</option>
+                                    <option value="11:00">11:00</option>
+                                    <option value="11:30">11:30</option>
+                                    <option value="12:00">12:00</option>
+                                    <option value="12:30">12:30</option>
+                                    <option value="13:00">13:00</option>
+                                    <option value="13:30">13:30</option>
+                                    <option value="14:00">14:00</option>
+                                    <option value="14:30">14:30</option>
+                                    <option value="15:00">15:00</option>
+                                    <option value="15:30">15:30</option>
+                                    <option value="16:00">16:00</option>
+                                    <option value="16:30">16:30</option>
+                                    <option value="17:00">17:00</option>
+                                    <option value="17:30">17:30</option>
+                                    <option value="18:00">18:00</option>
+                                    <option value="18:30">18:30</option>
+                                    <option value="19:00">19:00</option>
                                 </select>
                             </label>
                             <label>Duration: 
@@ -341,11 +341,11 @@ function ManageData(props) {
                             <label>Duration: 
                                 <select id="lab_duration" name="lab_duration" value={formData.lab_duration} onChange={handleInputChange}>
                                     <option value="">Select duration</option>
-                                    <option value="1">1 hour</option>
-                                    <option value="1.5">1 hour 30 minutes</option>
-                                    <option value="2">2 hours</option>
-                                    <option value="2.5">2 hours 30 minutes</option>
-                                    <option value="3">3 hours</option>
+                                    <option value="60">1 hour</option>
+                                    <option value="90">1 hour 30 minutes</option>
+                                    <option value="120">2 hours</option>
+                                    <option value="150">2 hours 30 minutes</option>
+                                    <option value="180">3 hours</option>
                                 </select>
                             </label>
                             <label>Projector: <input type="checkbox" id="projector" name="projector" checked={formData.projector} onChange={handleInputChange}></input></label>
@@ -353,61 +353,61 @@ function ManageData(props) {
                                 <label>From: 
                                     <select id="timerange_from" name="timerange_from" value={formData.timerange_from} onChange={handleInputChange}>
                                         <option value="">Select start time</option>
-                                        <option value="08:00:00">08:00</option>
-                                        <option value="08:30:00">08:30</option>
-                                        <option value="09:00:00">09:00</option>
-                                        <option value="09:30:00">09:30</option>
-                                        <option value="10:00:00">10:00</option>
-                                        <option value="10:30:00">10:30</option>
-                                        <option value="11:00:00">11:00</option>
-                                        <option value="11:30:00">11:30</option>
-                                        <option value="12:00:00">12:00</option>
-                                        <option value="12:30:00">12:30</option>
-                                        <option value="13:00:00">13:00</option>
-                                        <option value="13:30:00">13:30</option>
-                                        <option value="14:00:00">14:00</option>
-                                        <option value="14:30:00">14:30</option>
-                                        <option value="15:00:00">15:00</option>
-                                        <option value="15:30:00">15:30</option>
-                                        <option value="16:00:00">16:00</option>
-                                        <option value="16:30:00">16:30</option>
-                                        <option value="17:00:00">17:00</option>
-                                        <option value="17:30:00">17:30</option>
-                                        <option value="18:00:00">18:00</option>
-                                        <option value="18:30:00">18:30</option>
-                                        <option value="19:00:00">19:00</option>
-                                        <option value="19:30:00">19:30</option>
-                                        <option value="20:00:00">20:00</option>
+                                        <option value="08:00">08:00</option>
+                                        <option value="08:30">08:30</option>
+                                        <option value="09:00">09:00</option>
+                                        <option value="09:30">09:30</option>
+                                        <option value="10:00">10:00</option>
+                                        <option value="10:30">10:30</option>
+                                        <option value="11:00">11:00</option>
+                                        <option value="11:30">11:30</option>
+                                        <option value="12:00">12:00</option>
+                                        <option value="12:30">12:30</option>
+                                        <option value="13:00">13:00</option>
+                                        <option value="13:30">13:30</option>
+                                        <option value="14:00">14:00</option>
+                                        <option value="14:30">14:30</option>
+                                        <option value="15:00">15:00</option>
+                                        <option value="15:30">15:30</option>
+                                        <option value="16:00">16:00</option>
+                                        <option value="16:30">16:30</option>
+                                        <option value="17:00">17:00</option>
+                                        <option value="17:30">17:30</option>
+                                        <option value="18:00">18:00</option>
+                                        <option value="18:30">18:30</option>
+                                        <option value="19:00">19:00</option>
+                                        <option value="19:30">19:30</option>
+                                        <option value="20:00">20:00</option>
                                     </select>
                                 </label>
                                 <label>Till: 
                                     <select id="timerange_till" name="timerange_till" value={formData.timerange_till} onChange={handleInputChange}>
                                         <option value="">Select end time</option>
-                                        <option value="08:00:00">08:00</option>
-                                        <option value="08:30:00">08:30</option>
-                                        <option value="09:00:00">09:00</option>
-                                        <option value="09:30:00">09:30</option>
-                                        <option value="10:00:00">10:00</option>
-                                        <option value="10:30:00">10:30</option>
-                                        <option value="11:00:00">11:00</option>
-                                        <option value="11:30:00">11:30</option>
-                                        <option value="12:00:00">12:00</option>
-                                        <option value="12:30:00">12:30</option>
-                                        <option value="13:00:00">13:00</option>
-                                        <option value="13:30:00">13:30</option>
-                                        <option value="14:00:00">14:00</option>
-                                        <option value="14:30:00">14:30</option>
-                                        <option value="15:00:00">15:00</option>
-                                        <option value="15:30:00">15:30</option>
-                                        <option value="16:00:00">16:00</option>
-                                        <option value="16:30:00">16:30</option>
-                                        <option value="17:00:00">17:00</option>
-                                        <option value="17:30:00">17:30</option>
-                                        <option value="18:00:00">18:00</option>
-                                        <option value="18:30:00">18:30</option>
-                                        <option value="19:00:00">19:00</option>
-                                        <option value="19:30:00">19:30</option>
-                                        <option value="20:00:00">20:00</option>
+                                        <option value="08:00">08:00</option>
+                                        <option value="08:30">08:30</option>
+                                        <option value="09:00">09:00</option>
+                                        <option value="09:30">09:30</option>
+                                        <option value="10:00">10:00</option>
+                                        <option value="10:30">10:30</option>
+                                        <option value="11:00">11:00</option>
+                                        <option value="11:30">11:30</option>
+                                        <option value="12:00">12:00</option>
+                                        <option value="12:30">12:30</option>
+                                        <option value="13:00">13:00</option>
+                                        <option value="13:30">13:30</option>
+                                        <option value="14:00">14:00</option>
+                                        <option value="14:30">14:30</option>
+                                        <option value="15:00">15:00</option>
+                                        <option value="15:30">15:30</option>
+                                        <option value="16:00">16:00</option>
+                                        <option value="16:30">16:30</option>
+                                        <option value="17:00">17:00</option>
+                                        <option value="17:30">17:30</option>
+                                        <option value="18:00">18:00</option>
+                                        <option value="18:30">18:30</option>
+                                        <option value="19:00">19:00</option>
+                                        <option value="19:30">19:30</option>
+                                        <option value="20:00">20:00</option>
                                     </select>
                                 </label>
                             </label>
@@ -471,10 +471,10 @@ function ManageData(props) {
                                                     <p>Cohorts: {course.num_cohorts || "N/A"}</p>
                                                     <p>Combining Cohorts: {course.mix_cohorts ? "Yes" : "No"}</p>
                                                     <p>Number of Tutors: {course.num_tutors || ""}</p>
-                                                    <p>Lecture Amount: {course.lectures.day ? 1 : ""}</p>
+                                                    <p>Lecture Amount: {course.lectures.length}</p>
                                                     <p>Lecture Day: {Array.isArray(course.lectures) ? course.lectures.map(lect => lect.day).join(', ') : ""}</p>
-                                                    <p>Lecture Time: {Array.isArray(course.lectures) ? course.lectures.map(lect => lect.time).join(', ') : ""}</p>
-                                                    <p>Lecture Duration: {Array.isArray(course.lectures) ? course.lectures.map(lect => lect.duration + " minutes").join(', ') : ""}</p>
+                                                    <p>Lecture Time: {Array.isArray(course.lectures) ? course.lectures.map(lect => convertIntHourToFormal(lect.time)).join(', ') : ""}</p>
+                                                    <p>Lecture Duration: {Array.isArray(course.lectures) ? course.lectures.map(lect => lect.duration + " hours").join(', ') : ""}</p>
                                                     <p>After Lecture: {course.tutorial_properties.after_lecture ? "Yes" : "No"}</p>
                                                     <p>BYOD: {course.tutorial_properties.byod ? "Yes" : "No"}</p>
                                                     <p>Projector: {course.tutorial_properties.projector ? "Yes" : "No"}</p>
