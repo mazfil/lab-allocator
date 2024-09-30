@@ -202,7 +202,7 @@ public class MongoConnection {
                                         RoomTable.getInstance().getRoomFromId(room).toString().split(" ")[0],
                                         code, labNum,
                                         timeToDatabaseFormat(i + alloc.getCourse().getLengthInMinutes() / 30),
-                                        String.valueOf(alloc.getCourse().getId())
+                                        code
                         ));
                     }
                 }
