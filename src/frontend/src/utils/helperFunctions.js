@@ -164,13 +164,7 @@ export async function getRoomTimetables(){
  * @param {Array of Objects} timetable 
  */
 export async function saveTimetable(timetable){
-  const time = Date.now()
-  const loc = "timetable/" + time  
-  timetable.forEach(tutorial => {
-    setDoc(doc(database, loc + "/tutorials", tutorial.id), tutorial);
-  });
-  const timetableRef = doc(database, "timetable", time.toString());
-  setDoc(timetableRef, {created: Timestamp.now()}, {merge: true});
+  uploadData("timetable_data", {timetable: timetable, created: new Date().toLocaleString()})
 }
 
 export async function numToDay(data){

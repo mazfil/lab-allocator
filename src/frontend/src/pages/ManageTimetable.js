@@ -148,17 +148,6 @@ function ManageTimetable(props){
         })
     }
 
-    //-----------------------------------------------------------
-    // TEMP COMMENT TO DIFFERENTIATE NEW CODE FROM OLD CODE
-
-
-
-
-
-
-
-
-
     // initData and fetchPost initialise the data when the page is opened.
     const initData = async (data) => {
         setTimetable(data)
