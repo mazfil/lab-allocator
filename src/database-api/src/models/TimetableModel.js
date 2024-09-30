@@ -24,8 +24,7 @@ const tutorialSchema = new mongoose.Schema({
   title: {
     required: true,
     type: String
-  },
-  
+  }
 })
 
 const timetableSchema = new mongoose.Schema({
