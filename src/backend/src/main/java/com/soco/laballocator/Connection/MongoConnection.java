@@ -145,7 +145,8 @@ public class MongoConnection {
             }
 
         } catch (Exception e) {
-            System.out.printf("That's an error. %s\n", e.getMessage());
+            e.printStackTrace();
+            System.out.printf("That's an error. %s %s %s\n", e.getMessage());
             throw new RuntimeException(e);
         }
 
@@ -191,17 +192,17 @@ public class MongoConnection {
                                     "startTime": "%s",
                                     "daysOfWeek": "%s",
                                     "location": "%s",
-                                    "title": "%s",
+                                    "title": "%s_%d",
                                     "endTime": "%s",
-                                    "id": "%s"
+                                    "course_code": "%s"
                                 }
                                 """.formatted(
                                         timeToDatabaseFormat(i),
                                         String.valueOf(day + 1),
                                         RoomTable.getInstance().getRoomFromId(room).toString().split(" ")[0],
-                                        code,
+                                        code.replace("COMP", ""), labNum,
                                         timeToDatabaseFormat(i + alloc.getCourse().getLengthInMinutes() / 30),
-                                        String.valueOf(alloc.getCourse().getId())
+                                        code.replace("COMP", "")
                         ));
                     }
                 }

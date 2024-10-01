@@ -1,0 +1,3 @@
+Just an update that we have our first user testing tomorrow at 11:30am (23/08/2024) with key stakeholders and the client. We will be running a demo session for them to try out themselves, have a go, and ask any questions on it. We are mostly testing the functionality of the front-end, what isn't intuitative, and what we can include in any user documentation to use our product. We will be collecting feedback in a constructive manner towards the end and during the user testing. This is likely just one of many that we perform with key stakeholders over the coming weeks as per our scope of the project.
+
+You can follow the development of this through the relevant issue [#96](https://github.com/mazfil/lab-allocator/issues/96)

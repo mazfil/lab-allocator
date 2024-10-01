@@ -9,13 +9,9 @@ public class RoomTable {
     private final Room[] rooms;
 
     private RoomTable() {
-        /*
-         * TODO: later on we might want this to be loaded from disk/database, etc.
-         */
-
         rooms = new Room[]{
-            new Room(0, 40, "HN1.23"),      /* Make Room! */
-            new Room(1, 40, "HN1.24"),      /* Make Room! */
+            new Room(0, 40, "HN1.23"),
+            new Room(1, 40, "HN1.24"),
             new Room(2, 23, "N109"),
             new Room(3, 29, "N111"),
             new Room(4, 26, "N112"),
