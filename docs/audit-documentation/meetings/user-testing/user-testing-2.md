@@ -2,15 +2,16 @@
 
 - Should make the list of course in manage data sorted. Or show newly made courses with a different hue or something.
 - Automatically remove comp when saving the course.
-- Was too fast and didn't show anything that said that it was done and added.
-- If you press delete course, it caused a timeout with the server on Alex's computer.
+- When pressing the edit button, wasn't obvious that anything happened if you don't have the fields on the screen.
+- When adding/editing course, it doesn't save if all fields aren't filled out. This is fine, but it should display an error - currently it just resets the form without warning.
+- If you press delete course, it caused a timeout with the server on Alex's computer. (resolved itself after a few seconds)
 - Add a deselect/select all button for the manage timetable for the rooms.
 - Make the filter course dropdown sorted so it is easy to find course numbers.
 - Having the select all helps because if you are filtering by one course, you have to reselect all the rooms again if you want to view all the rooms for one course.
 - When changing rooms, there are room sizes. You need to check that and warn the user that they might need to make a second room or second tutorial.
 - When changing the rooms for a lab, it should warn saying that the rooms overlap with another lab. In our testing, there are two labs that are in the same room at the same time frame.
 - Maybe when changing the room, we change the colour of the buttons that would overlap with another lab. For example, you have two labs at the same time, but are currently at two different locations. One is N113, and one is N112. You want to change the room location of the N113 lab, when viewing the rooms to change to, it should block out, or change the colour to red, for the room N112. Saying that it is occupied at that time, they can still change it but there should be a warning saying that there are two labs in the same room at the same time.
-- First drag and drop for manage timetable didn't work. It could be user error. Just try and recreate it, if we can't recreate it, wait for it to happen again.
+- First drag and drop for manage timetable didn't work, most likely user error. Just try and recreate it, if we can't recreate it, wait for it to happen again.
 - Have some sort of indicator that the algorithm is running on all the pages. This is so they don't press it over and over again.
 - Have a timeout in the backend that won't accept multiple presses of generate the algorithm.
 - Have some warnings throughout the process of the program.
@@ -21,7 +22,7 @@
 
 - When exporting the csv, move the start and end time to be next to each other column-wise
 - We don't need the id and colour columns in the export.
-- When dragging the courses around, you can only drag them to the left, not to the right of the day.
+- When dragging the courses around, it only accepts if your mouse is over the left side of the column, not on the right.
 - If you move things around on the manage timetable and then change pages, it does not save, that is fine, but there should be an interrupt that tells the user that they have unsaved work.
 - there is an inconsistency with the start and end times where the exported data (at least that is where we can see it) have the time in either HH:MM or HH:MM:SS.
 
