@@ -11,7 +11,7 @@
 ---
 
 ## Dashboard
-![Dashboard](/images/dashboard_normal.png)
+![Dashboard](images/dashboard_normal.png)
 
 The **Dashboard** is the first page that you see when you access SoCo Lab Allocator.
 
@@ -22,7 +22,7 @@ There is also this Wiki, and About to give you some help. If you ever have any e
 ---
 
 ## Upload Data Page
-![Upload Data](/images/upload_data_normal.png)
+![Upload Data](images/upload_data_normal.png)
 
 The **Upload Data Page** allows the user to upload data formatted in a **CSV format**.
 
@@ -33,7 +33,7 @@ When the CSV file is uploaded, the algorithm will generate a timetable according
 ---
 
 ## Manage Data Page
-![Manage Data](/images/manage_data_normal.png)
+![Manage Data](images/manage_data_normal.png)
 
 In the **Manage Data Page**, users can view and modify the data they previously entered via the upload data page.
 
@@ -59,7 +59,7 @@ In the **Manage Data Page**, users can view and modify the data they previously 
 - **Projector**: Tag indicating that the lab requires a room with a projector.
 - **Time Range**: Set the time range (start and end) when labs can be scheduled, e.g., between 9:00 am and 5:00 pm.
 
-![Manage Data Actions](/images/manage_data_actions.png)
+![Manage Data Actions](images/manage_data_actions.png)
 
 You can:
 - **More**: View more of the course details.
@@ -69,19 +69,19 @@ You can:
 ---
 
 ## Manage Timetable Page
-![Manage Timetable](/images/manage_timetable_normal.png)
+![Manage Timetable](images/manage_timetable_normal.png)
 
 The **Manage Timetable Page** allows you to view the generated timetable and make adjustments as needed.
 
 By default, it shows the entire generated timetable.
 
-![Filter by Room](/images/manage_timetable_filter_room.png)
+![Filter by Room](images/manage_timetable_filter_room.png)
 
 You can filter the timetable by clicking the **room buttons** above the timetable to disable rooms from view. This can help with readability by hiding the rooms you don't want to see.
 
 The **colours** in the timetable correspond to the **rooms** that the courses are allocated to.
 
-![Filter by Course](/assets/images/manage_timetable_filter_course.png)
+![Filter by Course](images/manage_timetable_filter_course.png)
 
 You can also filter by **course code** using the **dropdown** at the top of the page. The dropdown updates dynamically as courses are added or removed.
 
