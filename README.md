@@ -11,6 +11,7 @@ The end vision of the project will be to have a application that will adapt to n
 - [Team Charter](#team-charter)
 - [Project Schedule](#project-schedule)
 - [Project Output](#project-output)
+- [User Documentation](#user-documentation)
 - [Technical Constraints](#technical-constraints)
 - [Project Resources](#project-resources)
 - [Project NDA and IP status](#project-nda-and-ip-status)
@@ -72,6 +73,11 @@ You can look at the GitHub Projects as well (see the tab projects), you can see 
 What we have majorly done is improving the backend to fit some new criteria the client has made evident to us. The frontend has been running user testing and improving the look and feel of the program. We have also been working with the School of Computing Facility Team to get a backend server running where we have been developing an on-campus database. We have been working on transferring from the firebase to the new database, and we have been making documentation for the user and the developer.
 
 [Project output and descriptions on what is being done.](docs/audit-documentation/output)
+
+
+## User Documentation
+
+Here you can find the Wiki that we have implemented into the actual product. It is accessible on all pages, and details what each element of the page does. This is just a clone of the wiki that we have on the GitHub Repository for Audit purposes, and if the user stumbles across it. You can find it ![here](https://github.com/mazfil/lab-allocator/tree/main/docs/user-documentation).
 
 ## Technical constraints
 
