@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import * as helpers from "../utils/helperFunctions.js";
 import { usePapaParse } from 'react-papaparse';
-
+import './styles/Dashboard.css';
 
 function Dashboard(props){
   const [dropBoxVisibility, setVisibility] = useState(false);
@@ -18,13 +18,15 @@ function Dashboard(props){
 
   //Takes file input and sends to helper functions, uploads course data.
   const handleFile = async () => {
-    const hf = await helpers.readFileData(document.getElementById("df").files[0]).then(startBackend)
+    const hf = await helpers.readFileData(document.getElementById("df").files[0])
     toggleDropBox();
   }
 
-  const startBackend = () => {
-    fetch("http://localhost:8080/start", {method: "GET"})
+  const startBackend = async () => {
+    await fetch("http://laballoc-dev.cecs.anu.edu.au:8080/start", {method: "GET"})
   }
+
+
 
   return(
     <div className='dashboard'>
@@ -40,7 +42,6 @@ function Dashboard(props){
         </div>
         : null
         }
-        
         <div className='main-logo'>
              <img src={process.env.PUBLIC_URL + '/ANU Primary Horizontal GoldBlack.svg'} alt='ANU Logo with Gold Crest and the words Australian National University ' />
           <h1>SoCo Lab Allocation System</h1>
@@ -63,9 +64,10 @@ function Dashboard(props){
           </div>
           <div className='control-gap'></div>
           <div className='app-mgmt'>
-            <button type="button" onClick={() =>this.props.navigate('About')}>About</button>
-            <button type="button" id='help-supp' onClick={() =>this.props.navigate('Support')}>Help & Support</button>
-            <button type="button">Status</button>
+            <button type="button" onClick={() =>props.navigate('About')}>About</button>
+            <button type="button" id='help-supp' onClick={() =>props.navigate('Wiki')}>Help</button>
+            <button type="button" onClick={() =>props.navigate('Logs')}>Logs</button>
+            <button type="button" onClick={() => startBackend}>Generate</button>
           </div>
         </div> 
         

@@ -29,16 +29,15 @@ public class Schedule {
     public record Preference(String name, Weighting weighting, int preference) {}
 
     Preference[] preferences = new Preference[]{
-        new Preference ("freeSpace", new Weighting(0, 0.5, 1, 2, 1), 4),
-        new Preference ("betweenTimes", new Weighting(0, 0.5, 1, 2, 1), 4),
-        new Preference ("earlyOpts", new Weighting(0, 0.5, 1, 2, 1), 4),
-        new Preference ("lateOpts", new Weighting(0, 0.5, 1, 2, 1), 4),
-        new Preference ("dateVariance", new Weighting(0, 0.5, 1, 2, 1), 4),
-        new Preference ("roomVariance", new Weighting(0, 0.5, 1, 2, 1), 4),
-        new Preference ("reduceDupes", new Weighting(0, 0.5, 1, 2, 1), 4),
-        new Preference ("alwaysFreeRoom", new Weighting(0, 0.5, 1, 2, 1), 4),
-        new Preference ("repeatLabsSameRoom", new Weighting(0, 0.5, 1, 2, 1), 4),
-        new Preference ("parallelClass", new Weighting(0, 0.5, 1, 2, 1), 4),
+        new Preference ("freeSpace",            new Weighting(0, 0.5, 1, 2, 1  ), 4),
+        new Preference ("betweenTimes",         new Weighting(0, 0.5, 1, 2, 1  ), 4),
+        new Preference ("earlyOpts",            new Weighting(0, 0.5, 1, 2, 1  ), 4),
+        new Preference ("lateOpts",             new Weighting(0, 0.5, 1, 2, 1  ), 4),
+        new Preference ("dateVariance",         new Weighting(0, 0.5, 1, 2, 1  ), 4),
+        new Preference ("roomVariance",         new Weighting(0, 0.5, 1, 2, 1  ), 4),
+        new Preference ("reduceDupes",          new Weighting(0, 0.5, 1, 2, 1  ), 4),
+        new Preference ("alwaysFreeRoom",       new Weighting(0, 0.5, 1, 2, 2  ), 4),       /* weight more heavily */
+        new Preference ("repeatLabsSameRoom",   new Weighting(0, 0.5, 1, 2, 1  ), 4)
     };
 
     //variables used for the fitness functions, which the user will eventually set
@@ -156,13 +155,36 @@ public class Schedule {
     /**
      * Creates a new, random lab schedule.
      */
+    public static long scheduleGenerationCount = 0;
+    public static long scheduleGenerationNumAttempts = 0;
+    public static long scheduleGenerationMaxAttempts   = 0;
+
     public Schedule() {
-        initialiseAllocationArray();
+        final int MAX_ATTEMPTS = 100000;
+        scheduleGenerationCount++;
 
-        Random rng = new Random();
+        for (int attempt = 0; attempt < MAX_ATTEMPTS; ++attempt) {
+            ++scheduleGenerationNumAttempts;
+            if (attempt > scheduleGenerationMaxAttempts) {
+                scheduleGenerationMaxAttempts = attempt;
+            }
 
-        for (int i = 0; i < CourseTable.getInstance().getTotalNumberOfCourses(); ++i) {
-            placeCourseRandomly(rng, i);
+            try {
+                initialiseAllocationArray();
+
+                Random rng = new Random();
+
+                for (int i = 0; i < CourseTable.getInstance().getTotalNumberOfCourses(); ++i) {
+                    placeCourseRandomly(rng, i);
+                }
+
+                break;
+
+            } catch (RuntimeException e) {
+                if (attempt == MAX_ATTEMPTS - 1) {
+                    throw e;
+                }
+            }
         }
     }
 
@@ -175,7 +197,7 @@ public class Schedule {
     public Schedule(Schedule a, Schedule b) {
         Random random = new Random();
 
-        while (true) {
+        for (int attempt = 0; attempt < 2000; ++attempt) {
             try {
                 initialiseAllocationArray();
                 int coursesNumber = CourseTable.getInstance().getTotalNumberOfCourses();
@@ -193,12 +215,17 @@ public class Schedule {
                         availableSeats[i] += placeLabRandomly(random, course);
                     }
                 }
-                break;
+                return;
 
             } catch (Exception ignored) {
 
             }
         }
+
+        /*
+         * In case we timeout
+         */
+        throw new RuntimeException("can't crossover");
     }
 
     /**

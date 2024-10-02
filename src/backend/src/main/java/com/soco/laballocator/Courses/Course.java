@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 public class Course {
-    class Lecture {
+    static public class Lecture {
         // need to import lecture data
         Time startTime;
         int lengthMinutes;
@@ -54,10 +54,10 @@ public class Course {
         return labLengthMinutes;
     }
 
-    public Course(int id, String courseCode, int numStudents, int numTutors, int labLengthMinutes) {
+    public Course(int id, String courseCode, int numStudents, int numTutors, int labLengthMinutes, ArrayList<Lecture> lectures) {
         this.id = id;
         this.courseCode = courseCode;
-        this.tutorRatio = switch (courseCode.charAt(4)) {
+        this.tutorRatio = switch (courseCode.charAt(0)) {
             case '1' -> 15;
             case '2' -> 23;
             default  -> 26;
@@ -66,7 +66,7 @@ public class Course {
         this.numStudents = numStudents;
         this.labLengthMinutes = labLengthMinutes;
         this.numTutors = numTutors;
-        this.lectures = new ArrayList<>();
+        this.lectures = lectures;
     }
 
     /**
@@ -78,9 +78,11 @@ public class Course {
         for (Lecture lec : lectures) {
             int lectureChunk = lec.lengthMinutes / 30;
             int labChunk = labLengthMinutes / 30;
-            for (int i = 1 - labChunk; i < lectureChunk; i++){
-                Time time = new Time(lec.startTime.getDay(),lec.startTime.getIndex() + i);
-                lecturesTime.add(time);
+            for (int i = 1 - labChunk; i < lectureChunk; i++) {
+                int idx = lec.startTime.getIndex() + i;
+                if (idx < 0 || idx >= Time.NUM_TIME_INDICES) continue;
+                Time tm = new Time(lec.startTime.getDay(), idx);
+                lecturesTime.add(tm);
             }
         }
         return lecturesTime;

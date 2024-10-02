@@ -8,6 +8,8 @@ export default class Support extends Component{
         return(
             // TODO: Code for Support Page
             <p>Help & Support</p>
+
+            // Been replaced by About.js and Wiki.js
         )
     }
 }
