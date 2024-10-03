@@ -2,24 +2,24 @@ We have made a lot of UI changes, some logic changes to the manage timetable, a 
 
 **Logs**
 
-![Logs](assets\02-10-24_Logs.png)
+![Logs](assets/02-10-24_Logs.png)
 
 **Updated Dashboard**
 
-![Updated Dashboard](assets\02-10-24_Updated_Dashboard.png)
+![Updated Dashboard](assets/02-10-24_Updated_Dashboard.png)
 
 **Updated Manage Data**
 
-![Updated Manage Data](assets\02-10-24_Updated_Dashboard.png)
+![Updated Manage Data](assets/02-10-24_Updated_Dashboard.png)
 
 **Updated Manage Timetable**
 
-![Updated Manage Timetable](assets\02-10-24_Updated_Manage_Timetable.png)
+![Updated Manage Timetable](assets/02-10-24_Updated_Manage_Timetable.png)
 
 **Updated Upload Data**
 
-![Updated Upload Data](assets\02-10-24_Updated_Upload_Data.png)
+![Updated Upload Data](assets/02-10-24_Updated_Upload_Data.png)
 
 **Updated Wiki**
 
-![Updated Wiki](assets\02-10-24_Updated_Wiki.png)
+![Updated Wiki](assets/02-10-24_Updated_Wiki.png)
