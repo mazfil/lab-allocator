@@ -110,7 +110,20 @@ Our algorithm contains several functions designed to generate and optimize lab a
 ---
 
 ## FAQs
-*(Content coming soon)*
+## Frequently Asked Questions (FAQs)
+
+### Are changes made by dragging saved automatically?
+No, if you move rooms around or change rooms, nothing is saved until you press the save button. So make sure you don't change off the page, otherwise you will lose your work.
+
+### Can I overwrite a course assignment in the same room?
+Yes, you can assign multiple labs or courses to the same room. However, you will receive a warning before proceeding to prevent unintentional conflicts.
+
+### Can I move a course or lab to a smaller room?
+Yes, you can move a course or lab to a smaller room. However, you will be given a warning if the selected room may not be able to accommodate all students effectively.
+
+### Can I modify the algorithm, such as the fitness function?
+No, you cannot directly edit the algorithm or its components through the interface. However, supporting documentation is available on GitHub ([GitHub link](https://github.com/mazfil/lab-allocator)), which allows for manual modifications. These changes should only be attempted by someone with technical knowledge of coding and programming.
+
 
 ---
 
