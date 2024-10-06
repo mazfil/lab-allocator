@@ -2,7 +2,15 @@
 
 Our aim for this project is to create a resource allocation application for SoCo computer labs. The app will make use of resources available and be adaptable to new entries to create a working timetable for the computing courses and the limited resources (Computer Lab rooms) whilst following a strict set of pre-defined constraints.
 
-The end vision of the project will be to have an application that will adapt to new entries and create the best layout of courses in a given week, based on the strict constraints.
+The end vision of the project will be to have an application that will adapt to new entries and create the best layout of courses in a given week based on the strict constraints.
+
+Our Program works by taking in the courses and their special requirements through a csv file that the School of Computing would create beforehand using our given template.
+
+When uploaded, the genetic algorithm will run and generate a timetable for the user to view.
+
+From there, they can view, manage the timetable, and manage the data in the system as well.
+
+The data can be exported in a similiar csv file that will make it easier for input into the next program for timetabling.
 
 ![Project Video Gif](docs/assets/project-video.gif)
 
