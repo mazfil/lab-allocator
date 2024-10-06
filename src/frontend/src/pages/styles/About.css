@@ -1,0 +1,57 @@
+/* General styling for the About page */
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #f4f4f4;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+/* Main container styling */
+div {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f5edde;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-radius: 8px;
+}
+
+/* Header styling for the About page */
+header {
+  background-color: #be830e;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+  border-radius: 8px 8px 0 0;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+/* Section heading styles */
+section h2 {
+  color: #000000;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
+  margin-top: 20px;
+}
+
+/* Paragraph styling */
+section p {
+  margin-top: 10px;
+  line-height: 1.6;
+}
+
+/* Link styling */
+a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
