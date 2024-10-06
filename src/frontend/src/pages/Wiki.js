@@ -159,7 +159,26 @@ function Wiki(props) {
 
                     <section id="faqs" className="faqs-section">
                         <h2>Frequently Asked Questions (FAQs)</h2>
-                        {/* FAQs content */}
+
+                        <div className="faq-item">
+                            <div className="faq-question">Are changes made by dragging saved automatically?</div>
+                            <p>No, if you move rooms around or change rooms, nothing is saved until you press the save button. So make sure you don't change off the page, otherwise you will lose your work.</p>
+                        </div>
+
+                        <div className="faq-item">
+                            <div className="faq-question">Can I overwrite a course assignment in the same room?</div>
+                            <p>Yes, you can assign multiple labs or courses to the same room. However, you will receive a warning before proceeding to prevent unintentional conflicts.</p>
+                        </div>
+
+                        <div className="faq-item">
+                            <div className="faq-question">Can I move a course or lab to a smaller room?</div>
+                            <p>Yes, you can move a course or lab to a smaller room. However, you will be given a warning if the selected room may not be able to accommodate all students effectively.</p>
+                        </div>
+
+                        <div className="faq-item">
+                            <div className="faq-question">Can I modify the algorithm, such as the fitness function?</div>
+                            <p>No, you cannot directly edit the algorithm or its components through the interface. However, supporting documentation is available on GitHub (<a href="https://github.com/mazfil/lab-allocator" target="_blank" rel="noopener noreferrer">GitHub link</a>), which allows for manual modifications. These changes should only be attempted by someone with technical knowledge of coding and programming.</p>
+                        </div>
                     </section>
 
                     <footer>
