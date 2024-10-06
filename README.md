@@ -68,7 +68,7 @@ See more by clicking the link below.
 
 ![Project Video Gif](docs/assets/project-video.gif)
 
-![(SoCo Lab Allocator)[docs/assets/soco-lab-allocator.png]](https://youtu.be/BdXsKz5AAuU)
+[![SoCo Lab Allocator](docs/assets/soco-lab-allocator.png)](https://youtu.be/BdXsKz5AAuU)
 
 You can find our Youtube Video for the Project Showcase ![here](https://youtu.be/BdXsKz5AAuU)!
 
