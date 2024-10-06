@@ -68,6 +68,10 @@ See more by clicking the link below.
 
 ![Project Video Gif](docs/assets/project-video.gif)
 
+![(SoCo Lab Allocator)[docs/assets/soco-lab-allocator.png]](https://youtu.be/BdXsKz5AAuU)
+
+You can find our Youtube Video for the Project Showcase ![here](https://youtu.be/BdXsKz5AAuU)!
+
 You can find our project output in the link below. It details some of our major outputs for the project. However, the best place you can find what is being done is the GitHub ![Issues](https://github.com/mazfil/lab-allocator/issues?q=label%3A%22Sem+2%22) that are relevant.
 
 You can look at the GitHub Projects as well (see the tab projects), you can see the Standup and the Roadmap to see what state the issue is in. There are archived completed issues as well (see the three-dots button in the top right, and view archived items).
