@@ -68,6 +68,10 @@ See more by clicking the link below.
 
 ![Project Video Gif](docs/assets/project-video.gif)
 
+### Our Project Showcase Poster and Youtube Video!
+
+![Soco Lab Allocator Showcase Poster](docs/assets/24-S1-2-C%20SoCo.pdf)
+
 [![SoCo Lab Allocator](docs/assets/soco-lab-allocator.png)](https://youtu.be/BdXsKz5AAuU)
 
 You can find our Youtube Video for the Project Showcase ![here](https://youtu.be/BdXsKz5AAuU)!
