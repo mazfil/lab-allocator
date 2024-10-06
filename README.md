@@ -1,8 +1,10 @@
 # SoCo - *Resource Maximisation Planning System for Labs*
 
-Our aim for this project is to create a resource allocation application for SoCo computer labs. The app will make use of resources available and be adaptable to new entries to create a working timetable for the Computing courses and the limited resources (Computer Lab rooms) whilst following a strict set of pre-defined constraints and restrictions.
+Our aim for this project is to create a resource allocation application for SoCo computer labs. The app will make use of resources available and be adaptable to new entries to create a working timetable for the computing courses and the limited resources (Computer Lab rooms) whilst following a strict set of pre-defined constraints.
 
-The end vision of the project will be to have a application that will adapt to new entries and create the best layout of courses in a given week based on the strict restrictions and constraints.
+The end vision of the project will be to have an application that will adapt to new entries and create the best layout of courses in a given week, based on the strict constraints.
+
+![Project Video Gif](docs/assets/project-video.gif)
 
 ## Table of Contents
 
@@ -65,8 +67,6 @@ See more by clicking the link below.
 ![Roadmap of project for period semester 2 2024](docs/assets/Roadmap%20-%20S2%202024.png)
 
 ## Project Output
-
-![Project Video Gif](docs/assets/project-video.gif)
 
 ### Our Project Showcase Poster and Youtube Video!
 
