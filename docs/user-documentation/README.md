@@ -109,7 +109,6 @@ Our algorithm contains several functions designed to generate and optimize lab a
 
 ---
 
-## FAQs
 ## Frequently Asked Questions (FAQs)
 
 ### Are changes made by dragging saved automatically?
