@@ -82,7 +82,7 @@ You can look at the GitHub Projects as well (see the tab projects), you can see 
 
 What we have majorly done is improving the backend to fit some new criteria the client has made evident to us. The frontend has been running user testing and improving the look and feel of the program. We have also been working with the School of Computing Facility Team to get a backend server running where we have been developing an on-campus database. We have been working on transferring from the firebase to the new database, and we have been making documentation for the user and the developer.
 
-[Project output and descriptions on what is being done.](docs/audit-documentation/output)
+[Short Reports about Project output and progress.](docs/audit-documentation/output)
 
 
 ## User Documentation
