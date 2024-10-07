@@ -99,31 +99,39 @@ export async function saveTimetable(timetable){
   uploadData("timetable_data", {timetable: timetable, created: new Date().toLocaleString()})
 }
 
-export async function numToDay(data){
-  const result = data
-  result.forEach(course => {
-    switch(course.daysOfWeek ){
+export function numToDay(value){
+    switch(value){
       case "1":
-        course.day = "Monday"
-        break;
+        return("Monday")
       case "2":
-        course.day = "Tuesday"
-        break;
+        return("Tuesday")
       case "3":
-        course.day = "Wednesday"
-        break;
+        return("Wednesday")
       case "4":
-        course.day = "Thursday"
-        break;
+        return("Thursday")
       case "5":
-        course.day = "Friday"
-        break;
+        return("Friday")
       default:
         throw new Error("Invalid Day")
     }
-    
-  });
-  return result
+}
+
+export async function prepCsv (data) {
+  const timetable = data
+  var csvData = []
+  timetable.forEach(tutorial => {
+    csvData.push({
+      course_code: tutorial.course_code,
+      title: tutorial.title, 
+      location: tutorial.location, 
+      startTime: tutorial.startTime, 
+      endTime: tutorial.endTime, 
+      day: numToDay(tutorial.daysOfWeek)
+    })
+  })
+  csvData.sort((courseA, courseB) => courseA.title.localeCompare(courseB.title))
+  return csvData
+  
 }
 
 //The base URL which you query the data from. The URL is then generated into a query in the queryDatabase function

@@ -86,7 +86,6 @@ function ManageTimetable(props){
 
     // updates a tutorial when dragged and dropped. Updates the time and day of tutorial.
     const updateTutorial = async (tutorial) => {
-        console.log(tutorial)
         var editedTutorial = await timetable.find((tuts) => tuts.title === tutorial.event.title)
         editedTutorial.startTime = tutorial.event.start.getHours() + ":" + (tutorial.event.start.getMinutes() === 0 ? "00" : "30")
         editedTutorial.endTime = tutorial.event.end.getHours() + ":" + (tutorial.event.end.getMinutes() === 0 ? "00" : "30")
@@ -144,10 +143,11 @@ function ManageTimetable(props){
         }
     }
 
+
     // Downloads the course data as a CSV
     const downloadFile = async () => {
-        await helpers.numToDay(timetable).then(data => {
-            var blob = new Blob([json2csv(data, {excludeKeys: ["backgroundColor", "durationEditable", "borderColor", "overlap", "editable", "daysOfWeek"]})], { type: "csv" });
+      await helpers.prepCsv(timetable).then(data => {
+            var blob = new Blob([json2csv(data, {excludeKeys: ["backgroundColor", "durationEditable", "borderColor", "overlap", "editable", "daysOfWeek", "_id", "textColor"]})], { type: "csv" });
             var a = document.createElement('a');
             a.download = "timetable.csv";
             a.href = URL.createObjectURL(blob);
@@ -182,7 +182,6 @@ function ManageTimetable(props){
         setTime(await data.created)
         initData(await data.timetable)
     }
-    console.log(storedTimetables)
     useEffect(() => {fetchPost();}, [])
     
     return(
