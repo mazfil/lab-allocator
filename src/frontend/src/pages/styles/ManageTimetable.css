@@ -47,6 +47,7 @@
 .created{
   text-align: center;
   margin-right: 8px;
+  width: fit-content;
 }
 
 .bottom-bar{
@@ -73,13 +74,23 @@
 
 .change-room{
   margin: auto;
-  display: flex;
   background-color: var(--white);
-  width: 384px;
-  height: 128px;
+  width: fit-content;
+  height: fit-content;
   padding: 32px;
   border-radius: 16px;
   border-style: dashed;
   border-color: var(--gold);
   transition: 5s;
+}
+
+.change-room-buttons {
+  display: inline-block;
+  
+}
+
+.change-room-buttons > button {
+  height: fit-content;
+  padding: 16px;
+  margin: 0px 4px 0px 4px;
 }
