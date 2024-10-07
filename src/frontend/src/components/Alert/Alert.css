@@ -1,0 +1,36 @@
+.alert{
+  position: absolute;
+  top: 16px;
+  left: auto;
+  right: 16px;
+  height: fit-content;
+  width: fit-content;
+  border-radius: 16px;
+}
+
+.alert-content{
+  
+  padding: 0px 16px 0px 16px;
+  display: flex;
+  align-items: center;
+}
+
+.alert-status, .alert p {
+  margin-right: 16px;
+}
+
+.alert-status {
+  font-size: 1.5em;
+}
+
+.close-alert{
+  background-color: transparent;
+  border: none;
+  font-size: large;
+  margin-right: 0px;
+}
+
+.close-alert:hover{
+  background-color: transparent;
+  color: gray;
+}

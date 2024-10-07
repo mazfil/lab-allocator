@@ -1,9 +1,16 @@
 import {useState} from 'react';
 import * as helpers from "../utils/helperFunctions.js";
 import './styles/Dashboard.css';
+import Alert from '../components/Alert/Alert.js';
 
 function Dashboard(props){
   const [dropBoxVisibility, setVisibility] = useState(false);
+
+  const toggleAlert = (status) => {
+      status.visibility = false
+      setAlertStatus(status)
+  }
+  const [alertStatus, setAlertStatus] = useState({visibility: false, toggle: toggleAlert, type:"None", message: "None"})
 
   // Hides or Shows the drop box data input.
   const toggleDropBox = () => {
@@ -23,12 +30,16 @@ function Dashboard(props){
 
   const startBackend = async () => {
     await fetch("http://laballoc-dev.cecs.anu.edu.au:8080/start", {method: "GET"})
+    .then(() => setAlertStatus({visibility: true, toggle: toggleAlert, type:"Success", message: "Timetable Generation has begun."}))
+    .catch((error) => setAlertStatus({visibility: true, toggle: toggleAlert, type:"Error", message: "Error Running Timetable Generation, check logs for details."}));
+
   }
 
 
 
   return(
     <div className='dashboard'>
+      <Alert status={alertStatus}></Alert>
       {dropBoxVisibility ? 
         <div className='file-drop-box-overlay' onClick={toggleDropBox}>
           <div className='file-drop-box' onClick={stopDBClose}>
@@ -66,7 +77,7 @@ function Dashboard(props){
             <button type="button" onClick={() =>props.navigate('About')}>About</button>
             <button type="button" id='help-supp' onClick={() =>props.navigate('Wiki')}>Help</button>
             <button type="button" onClick={() =>props.navigate('Logs')}>Logs</button>
-            <button type="button" onClick={() => startBackend}>Generate</button>
+            <button type="button" onClick={startBackend}>Generate</button>
           </div>
         </div> 
         
