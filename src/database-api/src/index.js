@@ -65,7 +65,7 @@ app.get("/api/data", async(req, res) => {
       if (target == "list"){
         data = await Timetable.find({}).select('_id')
       }else{
-        data = await target ? await Timetable.findById(target) : await Timetable.findOne().sort({created: -1})
+        data = await target ? await Timetable.findById(target) : await Timetable.findOne().sort({'_id': -1})
       }
     }else{
       throw new Error ("No collection specified.");
