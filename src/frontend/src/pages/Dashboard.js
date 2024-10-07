@@ -1,6 +1,5 @@
 import {useState} from 'react';
 import * as helpers from "../utils/helperFunctions.js";
-import { usePapaParse } from 'react-papaparse';
 import './styles/Dashboard.css';
 
 function Dashboard(props){
@@ -18,7 +17,7 @@ function Dashboard(props){
 
   //Takes file input and sends to helper functions, uploads course data.
   const handleFile = async () => {
-    const hf = await helpers.readFileData(document.getElementById("df").files[0])
+    await helpers.readFileData(document.getElementById("df").files[0])
     toggleDropBox();
   }
 

@@ -1,8 +1,5 @@
-import { doc, setDoc } from "firebase/firestore";
-import {collection, getDocs, Timestamp } from 'firebase/firestore'
-import {database} from '../firebase';
+
 import { parse } from 'papaparse';
-import { ObjectId } from "bson";
 
 const colorString = require('color-string')
 const Color = require('color');
@@ -10,7 +7,6 @@ const Color = require('color');
 /**
  * Creates class objects from csv file uploads to firebase.
  * @param {csv} file 
- * @param {database ref} db 
  * @returns 
  */
 export async function readFileData(file){
@@ -96,70 +92,6 @@ function convertData(value, header){
 
 
 /**
- * Returns the data of the specified document in the database
- * @param {String} document
- * @returns Array of Data
- */
-export async function getData(document){
-  return await getDocs(collection(database, document))
-            .then((querySnapshot)=>{               
-                return querySnapshot.docs.map((doc) => ({...doc.data(), id: doc.id}));
-            })
-}
-
-
-/**
- * Creates the array of tutorials for display on the fullcalendar
- * @returns Object with an array of tutorials in each room organised by their time
- */
-export async function getRoomTimetables(){
-  var timetable = (((await getData("timetable")).sort((a, b) => (a.created.seconds <= b.created.seconds) ? 1 : -1)))[0];
-  const timetable_created = timetable.created.seconds
-  const timetable_data = await getData("timetable/"+timetable.id+"/tutorials");
-  timetable_data.forEach(tutorial => {
-    /*var colour;
-    switch(tutorial.location){
-      case("HN1.23"):
-        colour = "#ea5545";
-        break;
-      case("HN1.24"):
-        colour = "#f46a9b";
-        break;
-      case("N109"):
-        colour = "#ef9b20";
-        break;
-      case("N111"):
-        colour = "#ede15b";
-        break;
-      case("N112"):
-        colour = "#bdcf32";
-        break;
-      case("N113"):
-        colour = "#87bc45";
-        break;
-      case("N114"):
-        colour = "#27aeef";
-        break;
-      case("N115/6"):
-        colour = "#b33dc6";
-        break;
-      default:
-        colour = '#333333'
-    }*/
-    tutorial.backgroundColor = "#585868";
-    tutorial.durationEditable = false
-    tutorial.borderColor = "#000000"
-    tutorial.title = tutorial.course_code + "\n" + tutorial.id
-  });
-
-  console.log(Date.now())
-  console.log(timetable_created*1000)
-  
-  return [timetable_data, new Date(timetable_created*1000).toLocaleString()];
-}
-
-
-/**
  * Uploads new timetable to firebase with timestamp
  * @param {Array of Objects} timetable 
  */
@@ -186,6 +118,8 @@ export async function numToDay(data){
       case "5":
         course.day = "Friday"
         break;
+      default:
+        throw new Error("Invalid Day")
     }
     
   });

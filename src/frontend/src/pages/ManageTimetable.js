@@ -6,25 +6,22 @@ import * as helpers from "../utils/helperFunctions.js";
 import FullCalendar from '@fullcalendar/react';
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
-import { mkConfig, generateCsv, download } from "export-to-csv";
 import { json2csv } from 'json-2-csv';
-import { create } from '@mui/material/styles/createTransitions.js';
-
-import fileData from "../TEMPDATA.json"
 
 const colorString = require('color-string')
 const Color = require('color');
 
-
 function ManageTimetable(props){
+    const rooms = ['HN1.23', 'HN1.24', 'N109', 'N111', 'N112', 'N113', 'N114', 'N115/6']
+
     // Tutorial data used by the calendar view. (applies filters to the timetable data)
     const [filteredTimetable, setFilteredData] = useState([]);
 
     // Full tutorial data from database
     const [timetable, setTimetable] = useState([]);
-
+    
     // Determines which rooms are displayed at any time
-    const [activeView, setView] = useState(['HN1.23', 'HN1.24', 'N109', 'N111', 'N112', 'N113', 'N114', 'N115/6'])
+    const [activeView, setView] = useState(rooms)
 
     // Displays either a specific course or all courses
     const [activeCourse, setCourseFilter] = useState("All")
@@ -32,15 +29,11 @@ function ManageTimetable(props){
     // The list of courses in the database
     const [courseList, setCourseList] = useState(["All"])
 
-    // config for downloading data
-    const csvConfig = mkConfig({ useKeysAsHeaders: true });
-
     // Time a specific timetable is created at when displayed
     const [createdTime, setTime] = useState(0);
 
     // Filters the full course data based on rooms selected and which course has been selected
     const updateData = async (data, course) => {
-        console.log(course)
         if(course === "All"){
             setFilteredData(await data.filter((tut) => activeView.includes(tut.location)))
         }else{
@@ -62,22 +55,32 @@ function ManageTimetable(props){
     // Toggles the viewable rooms
     const toggleView = (room) => {
         var viewable = activeView;
-        if(viewable.includes(room)){
-            const rem = viewable.indexOf(room);
-            viewable.splice(rem, 1)
+        if(room === "All"){
+          rooms.forEach(room => {
+            if(!viewable.includes(room)){
+              viewable.push(room)
+            }
+          });
+          setView(viewable)
+          updateData(timetable, activeCourse);
         }else{
-            viewable.push(room)
+          if(viewable.includes(room)){
+              const rem = viewable.indexOf(room);
+              viewable.splice(rem, 1)
+          }else{
+              viewable.push(room)
+          }
+          setView(viewable)
+          updateData(timetable, activeCourse);
         }
-        setView(viewable)
-        updateData(timetable, activeCourse);
     }
 
     // updates a tutorial when dragged and dropped. Updates the time and day of tutorial.
     const updateTutorial = async (tutorial) => {
         console.log(tutorial)
-        var editedTutorial = await timetable.find((tuts) => tuts.title == tutorial.event.title)
-        editedTutorial.startTime = tutorial.event.start.getHours() + ":" + (tutorial.event.start.getMinutes() == 0 ? "00" : "30")
-        editedTutorial.endTime = tutorial.event.end.getHours() + ":" + (tutorial.event.end.getMinutes() == 0 ? "00" : "30")
+        var editedTutorial = await timetable.find((tuts) => tuts.title === tutorial.event.title)
+        editedTutorial.startTime = tutorial.event.start.getHours() + ":" + (tutorial.event.start.getMinutes() === 0 ? "00" : "30")
+        editedTutorial.endTime = tutorial.event.end.getHours() + ":" + (tutorial.event.end.getMinutes() === 0 ? "00" : "30")
         editedTutorial.daysOfWeek = tutorial.event.start.getDay().toString()
         updateData(timetable, activeCourse)
     }
@@ -109,7 +112,7 @@ function ManageTimetable(props){
     const changeRoom = async (tutorial, room) => {
       var current = await timetable.find(tut => tut.title === tutorial.event.title);
         var clash = false;
-        var potentialClashes = await timetable.filter(otherTutorial => { return otherTutorial.location == room }).filter(otherTutorial => (otherTutorial.daysOfWeek == current.daysOfWeek))
+        var potentialClashes = await timetable.filter(otherTutorial => { return otherTutorial.location === room }).filter(otherTutorial => (otherTutorial.daysOfWeek === current.daysOfWeek))
 
         potentialClashes.forEach(potentialClash => {
             if ((current.end <= potentialClash.start || potentialClash.end <= current.start)){
@@ -134,7 +137,7 @@ function ManageTimetable(props){
 
     // Downloads the course data as a CSV
     const downloadFile = async () => {
-        const fileData = await helpers.numToDay(timetable).then(data => {
+        await helpers.numToDay(timetable).then(data => {
             var blob = new Blob([json2csv(data, {excludeKeys: ["backgroundColor", "durationEditable", "borderColor", "overlap", "editable", "daysOfWeek"]})], { type: "csv" });
             var a = document.createElement('a');
             a.download = "timetable.csv";
@@ -150,10 +153,16 @@ function ManageTimetable(props){
 
     // initData and fetchPost initialise the data when the page is opened.
     const initData = async (data) => {
+        
+        // Create the list of all course codes
+        var codes = [];
+        for (let course of new Set(data.map(item => item.course_code))){
+          codes.push(course);
+        }
+
         setTimetable(data)
-        setCourseList(["All", ...new Set(data.map(item => item.course_code))].slice(0, -1))
+        setCourseList(["All", ...codes.sort()])
         updateData(data, "All")
-        console.log(data)
     }
 
     const fetchPost = async () => {
@@ -245,7 +254,8 @@ function ManageTimetable(props){
                   onClick={() => toggleView("N115/6")} 
                   style={activeView.includes("N115/6") ? {backgroundColor: helpers.room_colours.N1156, borderColor: helpers.room_colours.N1156, color: (Color(colorString.get(helpers.room_colours.N1156).value).isDark() ? "#FFFFFF" : "#000000")} : {backgroundColor: "#444444"}}>
                     N115/6</button>
-                    
+                  
+                  <button onClick={() => toggleView("All")}>All</button>
                 </div>
                 <div className="calendar-view">
               {/* See https://fullcalendar.io/docs#toc for documentation of calendar view */}
