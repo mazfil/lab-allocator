@@ -86,11 +86,17 @@ function ManageTimetable(props){
 
     // updates a tutorial when dragged and dropped. Updates the time and day of tutorial.
     const updateTutorial = async (tutorial) => {
-        var editedTutorial = await timetable.find((tuts) => tuts.title === tutorial.event.title)
-        editedTutorial.startTime = tutorial.event.start.getHours() + ":" + (tutorial.event.start.getMinutes() === 0 ? "00" : "30")
-        editedTutorial.endTime = tutorial.event.end.getHours() + ":" + (tutorial.event.end.getMinutes() === 0 ? "00" : "30")
-        editedTutorial.daysOfWeek = tutorial.event.start.getDay().toString()
-        updateData(timetable, activeCourse)
+        if(tutorial.event.start.getHours() < 8 || tutorial.event.end.getHours() > 20){
+          console.log("EOROREORO")
+          tutorial.event = tutorial.oldEvent;
+        }else{
+          var editedTutorial = await timetable.find((tuts) => tuts.title === tutorial.event.title)
+          editedTutorial.startTime = tutorial.event.start.getHours() + ":" + (tutorial.event.start.getMinutes() === 0 ? "00" : "30")
+          editedTutorial.endTime = tutorial.event.end.getHours() + ":" + (tutorial.event.end.getMinutes() === 0 ? "00" : "30")
+          editedTutorial.daysOfWeek = tutorial.event.start.getDay().toString()
+          updateData(timetable, activeCourse)
+        }
+        
     }
 
     // Value for whether or not to render the room change overlay
@@ -282,6 +288,12 @@ function ManageTimetable(props){
                     center: '',
                     end: '' // will normally be on the right. if RTL, will be on the left
                 }}
+                businessHours={{
+                  daysOfWeek: [ 1, 2, 3, 4, 5 ],
+                  startTime: '08:00',
+                  endTime: '20:00'
+                }}
+                eventConstraint={"businessHours"}
                 allDaySlot={false}
                 events={filteredTimetable}
                 eventDrop={function(event){updateTutorial(event)}}
