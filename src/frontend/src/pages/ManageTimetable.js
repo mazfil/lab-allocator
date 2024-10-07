@@ -278,7 +278,7 @@ function ManageTimetable(props){
                 plugins={[ timeGridPlugin, interactionPlugin ]}
                 initialView="timeGridWeek"
                 weekends={false}
-                slotMinTime={"08:00:00"}
+                slotMinTime={"07:00:00"}
                 slotMaxTime={"21:00:00"}
                 initialDate={"2024-01-01"}
                 dayHeaderFormat={{ weekday: 'short' }}
