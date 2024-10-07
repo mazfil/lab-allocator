@@ -7,8 +7,6 @@ import About from './pages/About';
 import Login from './pages/Login';
 import Logs from './pages/Logs';
 import Wiki from './pages/Wiki';
-//import UploadData from './overlays/UploadData';
-//import Status from './overlays/Status';
 import {database} from './firebase';
 
 

@@ -47,6 +47,7 @@
 .created{
   text-align: center;
   margin-right: 8px;
+  width: fit-content;
 }
 
 .bottom-bar{

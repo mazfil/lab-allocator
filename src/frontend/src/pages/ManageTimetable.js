@@ -32,6 +32,9 @@ function ManageTimetable(props){
     // Time a specific timetable is created at when displayed
     const [createdTime, setTime] = useState(0);
 
+    // List of all Timetables id that have been created
+    const [storedTimetables, setTimetableList] = useState(['0'])
+
     // Filters the full course data based on rooms selected and which course has been selected
     const updateData = async (data, course) => {
         if(course === "All"){
@@ -50,6 +53,12 @@ function ManageTimetable(props){
     const filterByCourse = async (e) => {
         await setCourseFilter(e.target.value);
         updateData(timetable, e.target.value)
+    }
+
+    const changeTimetable = async (e) => {
+        const data = await helpers.generateTimetable(await helpers.queryDatabase("timetable_data", e.target.value))
+        setTime(await data.created)
+        initData(await data.timetable)
     }
 
     // Toggles the viewable rooms
@@ -166,13 +175,14 @@ function ManageTimetable(props){
     }
 
     const fetchPost = async () => {
-        // SWITCH ONCE READY TO USE DATABASE
         const data = await helpers.generateTimetable(await helpers.queryDatabase("timetable_data"))
+        setTimetableList((await helpers.queryDatabase("timetable_data", "list")).map(({ _id }) => _id))
+
         //const data = await helpers.generateTimetable(fileData)
         setTime(await data.created)
         initData(await data.timetable)
-        console.log(data.timetable)
     }
+    console.log(storedTimetables)
     useEffect(() => {fetchPost();}, [])
     
     return(
@@ -287,7 +297,18 @@ function ManageTimetable(props){
                     <button className='timetable-save' onClick={saveTimetable}>Save</button>
                     <button className='timetable-save' onClick={downloadFile}>Download</button>
                 </div>
-                <p className='created'><b>Timetable Created</b> {createdTime}</p>
+                <div>
+                  <p className='created'><b>Timetable Created</b> {createdTime}</p>
+                  <div className='timetable-filter'>
+                      <label for="timetable-filter">Edit Timetable: </label>
+                      <select id="filter-by-timetable" onChange={changeTimetable}>
+                          {storedTimetables.map((id) => (
+                            <option value={id}>{new Date(parseInt(id.substring(0, 8), 16)*1000).toLocaleString()}</option>
+                          ))}
+                      </select>
+                  </div>
+                </div>
+                
             </div>
         </div>
     );
