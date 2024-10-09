@@ -4,7 +4,7 @@ import './styles/About.css';
 
 function About(props) {
     return (
-        <div>
+        <div className='about'>
             <NavBar navigate={props.navigate} tab={'about'} />
             
             <header>
