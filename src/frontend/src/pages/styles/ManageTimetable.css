@@ -94,3 +94,7 @@
   padding: 16px;
   margin: 0px 4px 0px 4px;
 }
+
+.change-room {
+  display: inline;
+}

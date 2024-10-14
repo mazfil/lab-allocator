@@ -4,6 +4,17 @@ import { parse } from 'papaparse';
 const colorString = require('color-string')
 const Color = require('color');
 
+export const roomSizes = {
+  HN123: 40,
+  HN124: 40,
+  N109: 23,
+  N111: 29,
+  N112: 26,
+  N113: 26,
+  N114: 26,
+  N1156: 61
+}
+
 /**
  * Creates class objects from csv file uploads to firebase.
  * @param {csv} file 

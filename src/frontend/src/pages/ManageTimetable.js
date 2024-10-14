@@ -144,6 +144,15 @@ function ManageTimetable(props){
         
     }
 
+    const checkRoomSize = (tutorial, room) => {
+      console.log(tutorial)
+      if (helpers.roomSizes[(tutorial.event._def.extendedProps.location).replace(".", "").replace("/", "")] < helpers.roomSizes[(room).replace(".", "").replace("/", "")]){
+        return "#FF0000";
+      }else{
+        return "#FFFFFF";
+      }
+    }
+
     // Changes the room for a tutorial after a room is selected on the changeRoom overlay
     // TODO: fix the clash check, overwrites existing tutorials when the room is the same
     const changeRoom = async (tutorial, room) => {
@@ -220,20 +229,25 @@ function ManageTimetable(props){
                     the changeRoomVisibility is set to true and the overlay is displayed   */}
             {changeRoomVisibility ? 
                 <div className='change-room-overlay' onClick={toggleChangeRoom}>
-                    <div className='change-room' onClick={stopCRClose}>
-                        <h2>Move {pendingRoomChange.event.title} to</h2>
+                  <div className='change-room'>
+                    <div className='change-room-main' onClick={stopCRClose}>
+                        <h2>Move {pendingRoomChange.event.title} to: </h2><br />
                         <div className='change-room-buttons'>
-                            <button style={{backgroundColor: clashCheck(pendingRoomChange, "HN1.23")}} onClick={() => {changeRoom(pendingRoomChange, "HN1.23")}}>HN1.23</button>
-                            <button style={{backgroundColor: clashCheck(pendingRoomChange, "HN1.24")}} onClick={() => {changeRoom(pendingRoomChange, "HN1.24")}}>HN1.24</button>
-                            <button style={{backgroundColor: clashCheck(pendingRoomChange, "N109")}} onClick={() => {changeRoom(pendingRoomChange, "N109")}}>N109</button>
-                            <button style={{backgroundColor: clashCheck(pendingRoomChange, "N111")}} onClick={() => {changeRoom(pendingRoomChange, "N111")}}>N111</button>
-                            <button style={{backgroundColor: clashCheck(pendingRoomChange, "N112")}} onClick={() => {changeRoom(pendingRoomChange, "N112")}}>N112</button>
-                            <button style={{backgroundColor: clashCheck(pendingRoomChange, "N113")}} onClick={() => {changeRoom(pendingRoomChange, "N113")}}>N113</button>
-                            <button style={{backgroundColor: clashCheck(pendingRoomChange, "N114")}} onClick={() => {changeRoom(pendingRoomChange, "N114")}}>N114</button>
-                            <button style={{backgroundColor: clashCheck(pendingRoomChange, "N115/6")}} onClick={() => {changeRoom(pendingRoomChange, "N115/6")}}>N115/6</button>
+                            <button style={{backgroundColor: clashCheck(pendingRoomChange, "HN1.23"), borderColor: checkRoomSize(pendingRoomChange, "HN1.23"), borderWidth: "4px"}} onClick={() => {changeRoom(pendingRoomChange, "HN1.23")}}>HN1.23</button>
+                            <button style={{backgroundColor: clashCheck(pendingRoomChange, "HN1.24"), borderColor: checkRoomSize(pendingRoomChange, "HN1.24"), borderWidth: "4px"}} onClick={() => {changeRoom(pendingRoomChange, "HN1.24")}}>HN1.24</button>
+                            <button style={{backgroundColor: clashCheck(pendingRoomChange, "N109"), borderColor: checkRoomSize(pendingRoomChange, "N109"), borderWidth: "4px"}} onClick={() => {changeRoom(pendingRoomChange, "N109")}}>N109</button>
+                            <button style={{backgroundColor: clashCheck(pendingRoomChange, "N111"), borderColor: checkRoomSize(pendingRoomChange, "N111"), borderWidth: "4px"}} onClick={() => {changeRoom(pendingRoomChange, "N111")}}>N111</button>
+                            <button style={{backgroundColor: clashCheck(pendingRoomChange, "N112"), borderColor: checkRoomSize(pendingRoomChange, "N112"), borderWidth: "4px"}} onClick={() => {changeRoom(pendingRoomChange, "N112")}}>N112</button>
+                            <button style={{backgroundColor: clashCheck(pendingRoomChange, "N113"), borderColor: checkRoomSize(pendingRoomChange, "N113"), borderWidth: "4px"}} onClick={() => {changeRoom(pendingRoomChange, "N113")}}>N113</button>
+                            <button style={{backgroundColor: clashCheck(pendingRoomChange, "N114"), borderColor: checkRoomSize(pendingRoomChange, "N114"), borderWidth: "4px"}} onClick={() => {changeRoom(pendingRoomChange, "N114")}}>N114</button>
+                            <button style={{backgroundColor: clashCheck(pendingRoomChange, "N115/6"), borderColor: checkRoomSize(pendingRoomChange, "N115/6"), borderWidth: "4px"}} onClick={() => {changeRoom(pendingRoomChange, "N115/6")}}>N115/6</button>
                         </div>
                         
                     </div>
+                    <br />
+                    <p className="change-room-info"><i class="bi bi-info-circle"></i> Rooms with smaller capacities are outlined in Red.</p> 
+                  </div>
+                    
                 </div>
                 : null
             }
