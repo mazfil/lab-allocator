@@ -65,11 +65,22 @@ function ManageTimetable(props){
     const toggleView = (room) => {
         var viewable = activeView;
         if(room === "All"){
-          rooms.forEach(room => {
-            if(!viewable.includes(room)){
-              viewable.push(room)
-            }
-          });
+          if(viewable.length != 8){
+            rooms.forEach(room => {
+              if(!viewable.includes(room)){
+                viewable.push(room)
+              }
+            });
+          }else{
+            // Please note i have tried to just set viewable as [], but this does not trigger a re-render, 
+            // therefore an inefficient loop is used :(
+            rooms.forEach(room => {
+              if(viewable.includes(room)){
+                const rem = viewable.indexOf(room);
+                viewable.splice(rem, 1)
+              }
+            });
+          }
           setView(viewable)
           updateData(timetable, activeCourse);
         }else{
