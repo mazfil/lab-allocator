@@ -7,6 +7,7 @@ import FullCalendar from '@fullcalendar/react';
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import { json2csv } from 'json-2-csv';
+import { browserHistory } from 'react-router';
 
 const colorString = require('color-string')
 const Color = require('color');
@@ -157,7 +158,7 @@ function ManageTimetable(props){
 
     const checkRoomSize = (tutorial, room) => {
       console.log(tutorial)
-      if (helpers.roomSizes[(tutorial.event._def.extendedProps.location).replace(".", "").replace("/", "")] < helpers.roomSizes[(room).replace(".", "").replace("/", "")]){
+      if (helpers.roomSizes[(tutorial.event._def.extendedProps.location).replace(".", "").replace("/", "")] > helpers.roomSizes[(room).replace(".", "").replace("/", "")]){
         return "#FF0000";
       }else{
         return "#FFFFFF";
@@ -232,8 +233,27 @@ function ManageTimetable(props){
         setTime(await data.created)
         initData(await data.timetable)
     }
-    useEffect(() => {fetchPost();}, [])
+    useEffect(() => {
+      fetchPost();
+      window.addEventListener('beforeunload', (event) => {
+        event.preventDefault();
+      });
+
+    }, [])
+
+
+
+
     
+
+
+
+
+
+
+
+
+
     return(
         <div className='manageTimetable'>
             {/* This conditionall renders the room change overlay. When a tutorial is clicked, 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './NavBar.css';
+import { useEffect } from 'react';
 
 function NavBar(props) {
     const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -8,28 +9,34 @@ function NavBar(props) {
         setDropdownOpen(!dropdownOpen);
     };
 
+    const navigate = (destination) => {
+      if(window.confirm("Changes you made may not be saved.")){
+        props.navigate(destination)
+      }
+    }
+
     return (
         <div className='navbar'>
-            <div className='navbar-logo' onClick={() => props.navigate('/')}>
+            <div className='navbar-logo' onClick={() => {navigate('/')}}>
                 <img src={process.env.PUBLIC_URL + '/ANU Crest Inversed Gold.svg'} alt="Logo" />
                 <h2>SoCo Lab Allocator</h2>
             </div>
             <div className='navbar-tabs'>
                 <button
                     className={(props.tab === 'dashboard') ? 'navbar-button-active' : 'navbar-button-inactive'}
-                    onClick={() => props.navigate('/')}>
+                    onClick={() => navigate('/')}>
                     Dashboard
                 </button>
 
                 <button
                     className={(props.tab === 'manage-data') ? 'navbar-button-active' : 'navbar-button-inactive'}
-                    onClick={() => props.navigate('/Manage-Data')}>
+                    onClick={() => navigate('/Manage-Data')}>
                     Manage Data
                 </button>
 
                 <button
                     className={(props.tab === 'manage-timetable') ? 'navbar-button-active' : 'navbar-button-inactive'}
-                    onClick={() => props.navigate('/Manage-Timetable')}>
+                    onClick={() => navigate('/Manage-Timetable')}>
                     Manage Timetable
                 </button>
 
@@ -45,13 +52,13 @@ function NavBar(props) {
                         <div className="dropdown-content">
                             <button
                                 className={(props.tab === 'wiki') ? 'navbar-button-active' : 'navbar-button-inactive'}
-                                onClick={() => { props.navigate('/Wiki'); setDropdownOpen(false); }}>
+                                onClick={() => { navigate('/Wiki'); setDropdownOpen(false); }}>
                                 Wiki
                             </button>
 
                             <button
                                 className={(props.tab === 'about') ? 'navbar-button-active' : 'navbar-button-inactive'}
-                                onClick={() => { props.navigate('/About'); setDropdownOpen(false); }}>
+                                onClick={() => { navigate('/About'); setDropdownOpen(false); }}>
                                 About
                             </button>
                         </div>

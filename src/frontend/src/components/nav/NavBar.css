@@ -41,7 +41,7 @@
   display: flex;
 }
 
-.navbar-tabs > button {
+.navbar-tabs > button, .navbar-tabs > div {
   width: 128px;
   height: 80%;
   margin: auto;
@@ -51,9 +51,8 @@
 /* Ensure the dropdown button has the same size as other buttons */
 .dropdown > button {
   width: 128px;
-  height: 80%;
+  height: 100%;
   margin: auto;
-  margin-left: 16px;
   background-color: white;
   cursor: pointer;
 }
