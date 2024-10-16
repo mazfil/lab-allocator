@@ -6,8 +6,11 @@ import { deleteData, queryDatabase, uploadData, updateData } from '../utils/help
 
 
 function ManageData(props) {
+    //All course data
     const [courseData, setCourseData] = useState([]);
+    //Subset of all course data, that which shows up on the screen (as the user can filter it)
     const [filteredData, setFilteredData] = useState([]);
+    //Data in the user input fields
     const [formData, setFormFields] = useState({
         course_code: "",
         est_size: "",
@@ -30,10 +33,12 @@ function ManageData(props) {
     const [errorMessage, setErrorMessage] = useState('');
     const [showDetails, setShowDetails] = useState({});
 
-    const [acButtonEnabled, setacButton] = useState(false); //add course button
-    const [scButtonEnabled, setscButton] = useState(false); //save course button
+    //Whether the add course button is enabled
+    const [acButtonEnabled, setacButton] = useState(false);
+    //Whether the save course button is enabled
+    const [scButtonEnabled, setscButton] = useState(false);
 
-    //fetches the database, updating courseData and filteredData
+    //Fetches course data from the database, updating courseData and filteredData
     const fetchPost = async () => {
         const newData = await queryDatabase("course_data");
         setCourseData(newData);
@@ -42,23 +47,25 @@ function ManageData(props) {
 
     useEffect(() => { fetchPost(); }, []);
 
+    //Called when the user interacts with any of the text/checkbox input fields
     const handleInputChange = (event) => {
         const { name, value, type, checked } = event.target;
         setFormFields(prevState => ({
             ...prevState,
             [name]: type === 'checkbox' ? checked : value
         }));
-        //if formData.course_code is in the list of courses, grey out box accordingly
+        //depending on whether the user entered a course that already exists, grey out either the select course/add course button
         const matchingCourse = courseData.find(course => course.course_code.toString().toLowerCase() === formData.course_code.toString().toLowerCase());
-        if(matchingCourse === undefined){ //if this course is not in the database
+        if(matchingCourse === undefined){
             setacButton(true);
             setscButton(false);
-        }else{ //if it already exists
+        }else{
             setacButton(false);
             setscButton(true);
         }
     };
 
+    //Called when the user changes the input of either of the 'days' dropdowns
     const handleDaysChange = (event) => {
         const { options } = event.target;
         const selectedDays = [];
@@ -73,6 +80,7 @@ function ManageData(props) {
         }));
     };
 
+    //Validate that a tutorial doesn't clash with the lectures
     const validateTutorialTime = () => {
         const lectureStart = new Date(`01/01/2022 ${formData.lec_time}`);
         const lectureEnd = new Date(lectureStart.getTime() + formData.lec_duration * 60 * 60 * 1000);
@@ -212,6 +220,7 @@ function ManageData(props) {
         return result;
     }
 
+    //Converts the data as stored in the user input field to the schema used by the database
     const convertFormDataToSchema = () => {
         return {
             course_code: formData.course_code,
@@ -229,13 +238,14 @@ function ManageData(props) {
                 byod: formData.byod,
                 projector: formData.projector,
                 tut_days: formData.lab_days,
-                tut_duration: formData.lab_duration, //database stores this as minutes
+                tut_duration: formData.lab_duration*60, //database stores this as minutes
                 tut_start_time: formData.timerange_from,
                 tut_end_time: formData.timerange_till
             }
         }
     }
 
+    //Converts the data as stored in the database into the correct format for the user input fields (and sets it)
     const convertSchemaToFormDataAndSet = (course) => {
         setFormFields({
             course_code: course.course_code,
