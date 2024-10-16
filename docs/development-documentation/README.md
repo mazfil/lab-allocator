@@ -2,7 +2,7 @@
 
 The lab allocator project consists of three parts: a web interface, a backend algorithm, and a database. All three are hosted by one server physically at ANU and are accessible through HTTP.
 Their interaction is described in this image:
-![image]./images/structure.png
+![image](./images/structure.png)
 
 The web interface uses React and is how the user accesses the allocator.
 The backend is programmed in Java and its purpose is to be inputted course information, and output a generated timetable.
