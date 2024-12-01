@@ -1,7 +1,12 @@
 // server/index.js
+const {authenticator} = require('otplib');
+const { createHash } = require('crypto');
+
 const Course = require("./models/CourseModel");
 const Timetable = require("./models/TimetableModel");
-const Log = require("./models/LogModel")
+const Log = require("./models/LogModel");
+const OTP = require("./models/OtpModel");
+const Token = require("./models/TokenModel");
 
 const cors = require('cors');
 const express = require("express");
@@ -50,28 +55,46 @@ app.post("/api/logs", async(req, res) => {
   }
 });
 
+app.get("/api/login", async(req, res) => {
+  const password = req.query.password;
+  if(authenticator.check(password, await OTP.find({}).otp)){
+    console.log(password)
+    console.log("OTP VALID")
+    const newToken = createHash('sha256').update((Math.random() * Number.MAX_SAFE_INTEGER).toString()).digest('hex');
+    console.log("Token: ", token)
+    res.setHeader('Content-Type', 'application/json');
+    
+    res.json({});
+  }
+
+});
+
 /**
  * Get Request - Returns the data from a specified collection, and a specific course or timetable if specified.
  */
 app.get("/api/data", async(req, res) => {
-  const collection = req.query.collection;
-  const target = req.query.target;
-  var data;
-
+  const token = req.quert.token;
   try{
-    if(collection == "course_data"){
-      data = await target ? await Course.find({course_code: target}) : await Course.find()
-    }else if (collection == "timetable_data"){
-      if (target == "list"){
-        data = await Timetable.find({}).select('_id')
+    if (await Token.find({token: token})){
+      const collection = req.query.collection;
+      const target = req.query.target;
+      var data;
+
+      if(collection == "course_data"){
+        data = await target ? await Course.find({course_code: target}) : await Course.find()
+      }else if (collection == "timetable_data"){
+        if (target == "list"){
+          data = await Timetable.find({}).select('_id')
+        }else{
+          data = await target ? await Timetable.findById(target) : await Timetable.findOne().sort({'_id': -1})
+        }
       }else{
-        data = await target ? await Timetable.findById(target) : await Timetable.findOne().sort({'_id': -1})
+        throw new Error ("No collection specified.");
       }
-    }else{
-      throw new Error ("No collection specified.");
+      res.setHeader('Content-Type', 'application/json');
+      res.json(data);
     }
-    res.setHeader('Content-Type', 'application/json');
-    res.json(data);
+    
   }catch(error){
     res.status(400).json({message: error.message});
   }
