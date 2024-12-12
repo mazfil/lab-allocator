@@ -34,8 +34,13 @@ function Dashboard(props){
     .catch((error) => setAlertStatus({visibility: true, toggle: toggleAlert, type:"Error", message: "Error Running Timetable Generation, check logs for details."}));
 
   }
-
-
+  
+  const [password, setPassword] = useState("");
+  
+  const login = async (e) => {
+    e.preventDefault();
+    sessionStorage.setItem('token', password)
+  }
 
   return(
     <div className='dashboard'>
@@ -79,10 +84,13 @@ function Dashboard(props){
             <button type="button" onClick={() =>props.navigate('Logs')}>Logs</button>
             <button type="button" onClick={startBackend}>Generate</button>
           </div>
+          <div className='control-gap'></div>
+          <div className='app-mgmt login'>
+            <label>Password:</label>
+            <input type="text" id="password" onChange={(e) => setPassword(e.target.value)}></input>
+            <button type='submit' onClick={login}>login</button>
+          </div>
         </div> 
-        
-        
-        
     </div>
   
   )

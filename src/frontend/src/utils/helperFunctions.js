@@ -156,23 +156,23 @@ const databaseURL = "http://laballoc-dev.cecs.anu.edu.au:3001/api/";
  * @returns 
  */
 export async function queryDatabase(collection, target){
-  const query = databaseURL + "data?collection=" + collection + (target ? "&target=" + target : "")
+  const query = databaseURL + "data?collection=" + collection + (target ? "&target=" + target : "") + "&token=" + sessionStorage.getItem('token');
   return(await fetch(query, {mode: "cors", method: "GET"}).then((e) => e.json()).then((json) => {return(json)}))
 }
 
 export async function uploadData(collection, data){
-  const query = databaseURL + "upload?collection=" + collection
+  const query = databaseURL + "upload?collection=" + collection + "&token=" + sessionStorage.getItem('token');
   console.log(await fetch(query, {mode: "cors", method: "POST", headers: {'Content-Type':'application/json'}, body: JSON.stringify(data)}))
 }
 
 export async function updateData(collection, target, data){
   console.log(JSON.stringify(data));
-  const query = databaseURL + "update?collection=" + collection + (target ? "&target=" + target : "")
+  const query = databaseURL + "update?collection=" + collection + (target ? "&target=" + target : "") + "&token=" + sessionStorage.getItem('token');
   console.log(await fetch(query, {mode: "cors", method: "POST", headers: {'Content-Type':'application/json'}, body: JSON.stringify(data)}))
 }
 
 export async function deleteData(collection, target){
-  const query = databaseURL + "delete?collection=" + collection + (target ? "&target=" + target : "")
+  const query = databaseURL + "delete?collection=" + collection + (target ? "&target=" + target : "") + "&token=" + sessionStorage.getItem('token');
   return(await fetch(query, {mode: "cors", method: "POST"}))
 }
 
@@ -222,12 +222,12 @@ export async function generateTimetable(raw_data){
 
 
 export async function queryLogs(){
-  const query = databaseURL + "logs";
+  const query = databaseURL + "logs" + "&token=" + sessionStorage.getItem('token');
   return(await fetch(query, {mode: "cors", method: "GET"}).then((e) => e.json()).then((json) => {return(json)}))
 }
 
 export async function createLog(log_type, log_message){
   const log = {type: log_type, message: log_message}
-  const query = databaseURL + "logs";
+  const query = databaseURL + "logs" + "&token=" + sessionStorage.getItem('token');
   console.log(await fetch(query, {mode: "cors", method: "POST", headers: {'Content-Type':'application/json'}, body: JSON.stringify(log)}))
 }

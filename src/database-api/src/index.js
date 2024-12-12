@@ -10,6 +10,9 @@ const mongoose = require("mongoose");
 const PORT = process.env.PORT || 3001;
 
 const app = express();
+
+const PASSWORD = "";
+
 app.use(cors());
 app.use(express.json())
 
@@ -33,20 +36,26 @@ db.once('connected', () => {
  * Returns all logs from the database
  */
 app.get("/api/logs", async(req, res) => {
-  res.setHeader('Content-Type', 'application/json');
-  res.json(await Log.find());
+  const token = req.query.token;
+  if(token == PASSWORD){
+    res.setHeader('Content-Type', 'application/json');
+    res.json(await Log.find()); 
+  }
 });
 
 /**
  * Adds a log to the database
  */
 app.post("/api/logs", async(req, res) => {
-  const body = req.body;
-  try{
-    await Log.create(body);
-    res.status(201)
-  }catch(error){
-    res.status(400).json({message: error.message});
+  const token = req.query.token;
+  if(token == PASSWORD){
+    const body = req.body;
+    try{
+      await Log.create(body);
+      res.status(201)
+    }catch(error){
+      res.status(400).json({message: error.message});
+    }
   }
 });
 
@@ -54,26 +63,29 @@ app.post("/api/logs", async(req, res) => {
  * Get Request - Returns the data from a specified collection, and a specific course or timetable if specified.
  */
 app.get("/api/data", async(req, res) => {
-  const collection = req.query.collection;
-  const target = req.query.target;
-  var data;
-
-  try{
-    if(collection == "course_data"){
-      data = await target ? await Course.find({course_code: target}) : await Course.find()
-    }else if (collection == "timetable_data"){
-      if (target == "list"){
-        data = await Timetable.find({}).select('_id')
+  const token = req.query.token;
+  if(token == PASSWORD){
+    const collection = req.query.collection;
+    const target = req.query.target;
+    var data;
+  
+    try{
+      if(collection == "course_data"){
+        data = await target ? await Course.find({course_code: target}) : await Course.find()
+      }else if (collection == "timetable_data"){
+        if (target == "list"){
+          data = await Timetable.find({}).select('_id')
+        }else{
+          data = await target ? await Timetable.findById(target) : await Timetable.findOne().sort({'_id': -1})
+        }
       }else{
-        data = await target ? await Timetable.findById(target) : await Timetable.findOne().sort({'_id': -1})
+        throw new Error ("No collection specified.");
       }
-    }else{
-      throw new Error ("No collection specified.");
+      res.setHeader('Content-Type', 'application/json');
+      res.json(data);
+    }catch(error){
+      res.status(400).json({message: error.message});
     }
-    res.setHeader('Content-Type', 'application/json');
-    res.json(data);
-  }catch(error){
-    res.status(400).json({message: error.message});
   }
 });
 
@@ -82,25 +94,28 @@ app.get("/api/data", async(req, res) => {
  * Post Upload - Uploads data to the database
  */
 app.post("/api/upload", async(req, res) => {
-  const collection = req.query.collection;
-  const bulk = (req.query.collection ? true : false);
-  const body = req.body;
-
-  try{
-    if(collection === "timetable_data"){
-        await Timetable.create(body);
-    }else if (collection === "course_data"){
-        if (bulk){
-            Course.insertMany(body);
-        }else{
-            Course.create(body);
-        }
-    }else{
-        throw new Error("No Collection specified");
+  const token = req.query.token;
+  if(token == PASSWORD){
+    const collection = req.query.collection;
+    const bulk = (req.query.collection ? true : false);
+    const body = req.body;
+  
+    try{
+      if(collection === "timetable_data"){
+          await Timetable.create(body);
+      }else if (collection === "course_data"){
+          if (bulk){
+              Course.insertMany(body);
+          }else{
+              Course.create(body);
+          }
+      }else{
+          throw new Error("No Collection specified");
+      }
+      res.status(201)
+    }catch(error){
+      res.status(400).json({message: error.message});
     }
-    res.status(201)
-  }catch(error){
-    res.status(400).json({message: error.message});
   }
 });
 
@@ -109,6 +124,8 @@ app.post("/api/upload", async(req, res) => {
  * to update as this function updates EXISTING data.
  */
 app.post("/api/update", async(req, res) => {
+  const token = req.query.token;
+  if(token == PASSWORD){
     const collection = req.query.collection;
     const body = req.body;
     const target = req.query.target;
@@ -124,13 +141,16 @@ app.post("/api/update", async(req, res) => {
         res.status(204)
       }catch(error){
         res.status(400).json({message: error.message});
-      }
+    }
+  }
 });
 
 /**
  * Post Delete - Deletes a specified datapoint.
  */
 app.post("/api/delete", async(req, res) => {
+  const token = req.query.token;
+  if(token == PASSWORD){
     const collection = req.query.collection;
     const target = req.query.target;
     try{
@@ -149,6 +169,8 @@ app.post("/api/delete", async(req, res) => {
     }catch(error){
         res.status(400).json({message: error.message});
     }
+  }
+    
 });
 
 

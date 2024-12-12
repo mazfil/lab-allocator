@@ -77,6 +77,15 @@
   height: 2em;
 }
 
+.login{
+  justify-content: center;
+  button{
+    padding: 0;
+  }
+  *{
+    margin: 4px;
+  }
+}
 
 .file-drop-box-overlay, .file-drop-box{
   position: absolute;
